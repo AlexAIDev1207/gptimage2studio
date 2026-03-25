@@ -55,11 +55,73 @@ pnpm db:migrate         # 运行迁移
 - `internal-links.md` — 内链数量/位置/锚文本规则
 - `brand-cleanup.md` — 品牌清理检查清单
 
-### 迭代约定
+### Git 提交规则
 
-- 改 SOP 或 Rules → 评估是否通用 → 通用改进同步回 starter 仓库的 `sop-updates` 分支
-- 项目特有的调整 → 只改本项目，不同步
-- SOP 改动单独提交：`git add .claude/ && git commit -m "chore(SOP): xxx"`
+**核心纪律：`.claude/` 的改动和 `src/` 的改动必须在不同的 commit 中。**
+
+```bash
+# SOP 改动（.claude/ 目录）单独提交
+git add .claude/
+git commit -m "chore(SOP): {具体改了什么}"
+
+# 业务代码单独提交
+git add src/ content/ public/ ...
+git commit -m "feat(xxx): {功能描述}"
+```
+
+为什么：后续同步 SOP 改进回 starter 仓库时使用 cherry-pick，独立提交才能保证只带走 SOP 改动，不混入业务代码。
+
+### SOP 改进同步回 Starter
+
+当项目中优化了 SOP（改了 `.claude/` 下的文件），评估是否为通用改进。如果是，同步回 starter：
+
+```bash
+# 1. 切到 starter 仓库的 sop-updates 分支
+cd ../webdev-sop-starter
+git checkout sop-updates
+
+# 2. 把项目仓库注册为远程源（首次需要，后续跳过）
+git remote add {项目名} git@github.com:AlexAIDev1207/{项目名}.git
+
+# 3. 拉取项目的提交历史
+git fetch {项目名}
+
+# 4. 筛选项目中只改了 .claude/ 的提交
+git log {项目名}/main --oneline -- .claude/
+
+# 5. cherry-pick 需要的 SOP 提交（可多个）
+git cherry-pick {hash}
+
+# 6. 推送到 starter 的 sop-updates 分支
+git push origin sop-updates
+
+# 7. 在 GitHub 上创建 PR：sop-updates → main，审查后合并
+# 8. 清理临时 remote
+git remote remove {项目名}
+```
+
+### ShipAny 模板更新同步到 Starter
+
+当 ShipAny 官方发布新版本：
+
+```bash
+cd webdev-sop-starter
+git checkout main
+git fetch upstream
+git merge upstream/main    # .claude/ 不会冲突（官方模板没有这个目录）
+pnpm build                 # 验证合并结果
+git push origin main
+```
+
+### 已有项目获取最新 SOP
+
+```bash
+# 在老项目中
+git fetch starter
+git checkout starter/main -- .claude/rules/ .claude/skills/ .claude/sop-keyword-to-launch.md
+# 注意：不要 checkout .claude/sop-data/（那是项目特有数据）
+git commit -m "chore(SOP): 从 starter 同步最新 SOP"
+```
 
 ## 架构分层
 
