@@ -29,6 +29,31 @@ pnpm db:migrate         # 运行迁移
 
 本项目内置 `.claude/sop-keyword-to-launch.md` 建站 SOP。
 
+### 新项目执行顺序
+
+```
+1. /sop-research {种子关键词}     → 输出 3 份文档，确认关键词优先级
+2. /sop-align                    → 回答 8 个产品决策问题
+3. /sop-init                     → 模板配置 + 品牌清理 + 支付，项目可 pnpm dev
+4. /sop-tool-page {P0 工具词}    → 生成精品工具页（每个关键词执行一次，先做 P0）
+   ↳ 手动开发工具交互组件（翻译器/识别器等核心功能）
+5. /sop-blog                     → 规划博客主题矩阵
+   /sop-blog {slug}              → 逐篇写作（每篇执行一次）
+6. /sop-launch                   → 上线前验证，PageSpeed 4 项 ≥ 90 后部署
+7. /sop-refresh                  → 上线后定期执行，监测排名+内容更新
+```
+
+全程需要手动的环节：
+- Phase 0：确认关键词优先级
+- Phase 1：回答产品决策问题
+- Phase 2：提供 Logo/Favicon 素材、支付 API Key
+- Phase 3：开发工具交互组件（核心业务功能）
+- Phase 4：确认博客主题、审阅生成的文章
+- Phase 5：pagespeed.web.dev 测试、修复性能、执行部署
+- Phase 6：从 Search Console 导出排名数据
+
+随时输入 `/sop` 查看当前进度和下一步指引。
+
 ### 命令清单
 
 | 命令 | Phase | 作用 |
