@@ -7,6 +7,7 @@
 
 - [ ] package.json: name, description, author, repository
 - [ ] Footer: 移除模板品牌标识
+- [ ] Footer: `landing.json` 中设置 `"show_built_with": false`（隐藏 "Built with ❤️ ShipAny"）
 - [ ] Admin Sidebar: 替换品牌名
 - [ ] 所有页面中的模板占位文案
 - [ ] 示例内容/示例图片替换
