@@ -38,11 +38,41 @@ description: 执行 SOP Phase 4 博客内容体系。无参数时规划主题矩
 
 1. TD + H 层级设计 → 用户确认
 2. 正文写作：
-   - ≥ 1200 字，关键词密度 1-2%
+   - ≥ 1200 字，关键词密度 3-5%
    - 首 50 字回答核心问题
    - 句长 ≤ 20 字，段落 ≤ 5 行
 3. 内链：按映射表，首段/中段/末段各 1 条
 4. CTA 植入：按 product-brief.md 的 CTA 风格和 content-quality.md 的 CTA 矩阵
+
+### MDX frontmatter 规范
+
+```yaml
+---
+title: {SEO 标题，≤60 字符，含核心词}
+description: {SEO 描述，≤160 字符，含核心词}
+created_at: {YYYY-MM-DD}
+image: {封面图 URL，Unsplash 或本地路径}
+tags: ["tag1", "tag2", "tag3"]
+---
+```
+
+**⚠️ 不要包含以下字段（会导致页面显示丑陋的作者栏）：**
+- ❌ `author_name` — 移除，不需要显示作者名
+- ❌ `author_image` — 移除，不需要显示作者头像/Logo
+
+### 正文配图格式
+
+由于 ShipAny 的 Remark Image 插件不支持远程 Markdown 图片语法，**正文配图必须使用 HTML `<img>` 标签**：
+
+```html
+<!-- ✅ 正确：HTML img 标签，可使用远程 URL -->
+<img src="https://images.unsplash.com/photo-xxx?w=800&h=450&fit=crop" alt="描述含关键词" width="800" height="450" />
+
+<!-- ❌ 错误：Markdown 语法 + 远程 URL，构建会报错 -->
+![alt](https://images.unsplash.com/photo-xxx)
+```
+
+封面图在 frontmatter `image` 字段中使用远程 URL 是安全的（不经过 Remark 处理）。
 5. 配图（必须）：
    - **封面图**（1 张）：写入 frontmatter `image` 字段，显示在博客列表卡片上
      - 尺寸建议 1200×630（OG 比例）
