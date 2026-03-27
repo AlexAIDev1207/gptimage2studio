@@ -152,22 +152,24 @@ UGC（用户生成内容）：
 ```
 以下账号在 Phase 0 调研期间并行注册（总计约 1 小时）：
 
-必须（阻塞开发和上线）：
-  □ 域名注册（Namecheap / Cloudflare / 其他）
-  □ 数据库服务（Supabase / PlanetScale / 其他）→ 获取 DATABASE_URL
-  □ 部署平台（Vercel / Cloudflare Pages）→ 连接 GitHub 仓库
-  □ LLM API（OpenAI / OpenRouter / 其他）→ 获取 API Key（如工具依赖 AI）
+先通过 2 个问题判断需要哪些账号：
+  1. 工具是否依赖 AI/LLM API？→ 是：注册对应 API 服务
+  2. 是否需要付费功能？→ 是：注册 Stripe（⚠️ 激活审核需 1-3 天，确认后立即提交）
 
-按需（根据 Phase 1 产品决策启用）：
-  □ 支付平台（Stripe / PayPal）→ 注册并激活商户（Stripe 激活需 1-3 天审核，尽早提交）
-  □ OAuth 提供商（Google Cloud Console / GitHub Developer）→ 创建 OAuth App 获取 Client ID/Secret
-  □ 邮件服务（Resend / SendGrid）→ 获取 API Key（如需邮箱验证功能）
-  □ 分析工具（Google Analytics / PostHog）→ 创建 Property 获取 Measurement ID
+必须（所有项目）：
+  □ 域名注册（Namecheap / Cloudflare / 其他）
+  □ 部署平台（Vercel / Cloudflare Pages）→ 连接 GitHub 仓库
+
+按需（取决于上面的回答）：
+  □ 数据库服务 — 如需用户系统/数据存储 → Supabase / PlanetScale
+  □ LLM API — 如工具依赖 AI → OpenAI / OpenRouter
+  □ 支付平台 — 如需付费 → Stripe（⚠️ 激活审核需 1-3 天，确认需要后立即提交）
+  □ OAuth / 邮件 / 分析 — Phase 2 再配置即可，不阻塞
 
 特别提醒：
-  ⚠️ Stripe 商户激活需要填写商业信息、银行账户，可能需要 1-3 天审核
+  ⚠️ Stripe 商户激活需要填写商业信息、银行账户，审核周期不可控
   ⚠️ 如已有其他项目的 Stripe 账号，新项目仍需单独激活（Hobby 账号不支持协作者）
-  ⚠️ OAuth 回调 URL 需等域名确定后配置，但 Client ID/Secret 可先创建
+  ⚠️ 不需要的服务不要注册，避免增加管理成本
 ```
 
 ### 凭证保管

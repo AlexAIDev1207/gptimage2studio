@@ -47,17 +47,25 @@ Google Trends 操作：
 
 ### Pre-flight: 账号准备检查
 
-在开始调研前，检查第三方账号是否已准备就绪（这些注册可与调研并行）：
+在开始调研前，通过 AskUserQuestion 快速了解项目需求，**按需**准备账号（与调研并行）：
 
 ```
-通过 AskUserQuestion 逐项确认：
-  □ 域名是否已购买？（如未购买，建议现在注册，调研期间 DNS 可能需要传播时间）
-  □ 数据库服务是否已注册？（Supabase / PlanetScale / 其他）
-  □ 部署平台是否已注册并连接 GitHub？（Vercel / Cloudflare Pages）
-  □ 工具依赖的 API 是否已注册？（OpenAI / 其他 LLM，如工具需要 AI）
-  □ 支付平台是否已注册？（Stripe 商户激活需 1-3 天审核，建议尽早提交）
+先问用户 2 个关键问题（判断哪些账号需要提前注册）：
+  1. 这个工具是否依赖 AI/LLM API？→ 是：注册 OpenAI / OpenRouter
+  2. 是否需要付费功能？→ 是：注册 Stripe（⚠️ 商户激活审核需 1-3 天，确认需要后立即提交）
 
-如果有未注册的账号，建议用户在调研进行的同时并行注册。
+然后按需确认账号状态：
+
+必须（所有项目）：
+  □ 域名是否已购买？（DNS 传播需要时间，建议尽早）
+  □ 部署平台是否已注册并连接 GitHub？（Vercel / Cloudflare Pages）
+
+按需（取决于上面的回答）：
+  □ 数据库 — 如需用户系统/数据存储 → 注册 Supabase / PlanetScale
+  □ LLM API — 如工具依赖 AI → 注册 OpenAI / OpenRouter
+  □ 支付平台 — 如需付费功能 → 注册 Stripe 并立即提交商户激活
+  □ OAuth / 邮件 — Phase 2 再配置即可，不急
+
 不阻塞调研流程，但需记录到 progress.md 备注中。
 ```
 
