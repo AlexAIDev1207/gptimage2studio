@@ -45,6 +45,22 @@ Google Trends 操作：
 
 ## 执行流程
 
+### Pre-flight: 账号准备检查
+
+在开始调研前，检查第三方账号是否已准备就绪（这些注册可与调研并行）：
+
+```
+通过 AskUserQuestion 逐项确认：
+  □ 域名是否已购买？（如未购买，建议现在注册，调研期间 DNS 可能需要传播时间）
+  □ 数据库服务是否已注册？（Supabase / PlanetScale / 其他）
+  □ 部署平台是否已注册并连接 GitHub？（Vercel / Cloudflare Pages）
+  □ 工具依赖的 API 是否已注册？（OpenAI / 其他 LLM，如工具需要 AI）
+  □ 支付平台是否已注册？（Stripe 商户激活需 1-3 天审核，建议尽早提交）
+
+如果有未注册的账号，建议用户在调研进行的同时并行注册。
+不阻塞调研流程，但需记录到 progress.md 备注中。
+```
+
 读取 `.claude/sop-keyword-to-launch.md` 的 **Phase 0** 章节，按以下步骤执行：
 
 ### Step 0.1: 竞对产品速写 + SERP 分析
