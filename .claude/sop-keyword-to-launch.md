@@ -10,6 +10,11 @@
 输入：一个种子关键词（如 "LinkedIn Translator"）
                     ↓
 ┌─────────────────────────────────────────────────────────────┐
+│  Pre-flight: 账号准备                                        │
+│  第三方平台注册 + 凭证获取（与 Phase 0 并行）                   │
+└───────────────────────┬─────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────────────────┐
 │  Phase 0: 关键词调研与分类                                    │
 │  种子词 → 竞对速写 → 拓词 → 评估 → 分类为工具词 + 博客词       │
 │  ⭐ 建议新建 Skill: keyword-research                         │
@@ -129,6 +134,57 @@ UGC（用户生成内容）：
   → 扩展 P2 高竞争关键词
   → 增加聚合页面数量
   → 规模化外链投放
+```
+
+---
+
+## Pre-flight: 账号准备（与 Phase 0 并行）
+
+> **经验教训**：linkedinspeaktranslator 项目中，Stripe 激活和 API Key 配置被推迟到上线后才做，导致核心功能无法验证。
+> 这些账号注册不依赖关键词调研结果，应在 Phase 0 期间并行完成。
+
+### 目标
+
+提前注册所有第三方平台账号并获取凭证，避免后续 Phase 因等待账号审核而阻塞。
+
+### 账号注册清单
+
+```
+以下账号在 Phase 0 调研期间并行注册（总计约 1 小时）：
+
+先通过 2 个问题判断需要哪些账号：
+  1. 工具是否依赖 AI/LLM API？→ 是：注册对应 API 服务
+  2. 是否需要付费功能？→ 是：注册 Stripe（⚠️ 激活审核需 1-3 天，确认后立即提交）
+
+必须（所有项目）：
+  □ 域名注册（Namecheap / Cloudflare / 其他）
+  □ 部署平台（Vercel / Cloudflare Pages）→ 连接 GitHub 仓库
+
+按需（取决于上面的回答）：
+  □ 数据库服务 — 如需用户系统/数据存储 → Supabase / PlanetScale
+  □ LLM API — 如工具依赖 AI → OpenAI / OpenRouter
+  □ 支付平台 — 如需付费 → Stripe（⚠️ 激活审核需 1-3 天，确认需要后立即提交）
+  □ OAuth / 邮件 / 分析 — Phase 2 再配置即可，不阻塞
+
+特别提醒：
+  ⚠️ Stripe 商户激活需要填写商业信息、银行账户，审核周期不可控
+  ⚠️ 如已有其他项目的 Stripe 账号，新项目仍需单独激活（Hobby 账号不支持协作者）
+  ⚠️ 不需要的服务不要注册，避免增加管理成本
+```
+
+### 凭证保管
+
+```
+获取凭证后的处理方式：
+  1. 将所有凭证记录到本地 .env.development（不提交到 Git）
+  2. 生产凭证记录到密码管理器（1Password / Bitwarden），Phase 5 部署时填入部署平台
+  3. 运行 openssl rand -base64 32 生成 AUTH_SECRET
+
+⚠️ 安全红线：
+  ❌ 绝不将 .env.development（含真实密钥）提交到 Git
+  ❌ 绝不在代码中硬编码任何密钥
+  ✅ .gitignore 必须包含 .env*（除 .env.example）
+  ✅ .env.example 只包含变量名和注释，不含真实值
 ```
 
 ---
@@ -452,6 +508,36 @@ UGC（用户生成内容）：
 → 影响：Phase 2 .env 配置（DATABASE_PROVIDER）、依赖安装、Docker 配置
 ```
 
+##### 部署方案预验证（必做）
+
+> **经验教训**：linkedinspeaktranslator 在 Phase 5 才发现 Cloudflare Pages 与 Next.js SSR 深度不兼容，
+> 耗费 9 小时、12 个 commit 试错后被迫切换到 Vercel。应在此阶段提前验证。
+
+```
+确定部署方案后，立即执行一次空项目部署验证：
+
+验证步骤（30 分钟内完成，不通过则换方案）：
+  1. 用选定的 Next.js 版本 + 数据库驱动创建最小化项目
+  2. 添加一个 SSR 页面 + 一个 API Route + 一个数据库查询
+  3. 部署到选定平台，验证以下功能：
+     □ SSR 页面正常渲染
+     □ API Route 正常响应
+     □ 数据库连接正常
+     □ 中间件（middleware.ts）正常工作
+     □ 图片优化（next/image）正常
+  4. 不通过 → 立即切换到备选方案（Vercel 作为通用后备）
+
+已知兼容性问题（避坑清单）：
+  ⚠️ Cloudflare Pages + Next.js：middleware 限制、Node.js API 不完整、需 @opennextjs/cloudflare 适配
+  ⚠️ Cloudflare D1 + Drizzle：部分 SQL 功能不支持、迁移工具链不稳定
+  ⚠️ Next.js 降级（为适配平台）：可能引发依赖冲突、功能回退
+
+推荐默认方案：
+  Next.js SSR 项目 → Vercel + Supabase PostgreSQL（零配置，兼容性最好）
+  静态站 / 轻 API → Cloudflare Pages + D1（成本低，边缘计算快）
+  需要后台任务 → VPS Docker + Supabase（完全控制）
+```
+
 #### 7. 用户转化路径
 
 ```
@@ -615,10 +701,60 @@ Skill 自动完成：
 注意：密钥存储在 .env.production 或 admin panel，不要硬编码在代码中。
 ```
 
+#### Step 2.4: 环境变量完整性检查
+
+> **经验教训**：linkedinspeaktranslator 上线后发现 DATABASE_URL、AUTH_SECRET、OPENAI_API_KEY 均未配置到生产环境，
+> 导致数据库、认证、翻译功能全部不可用。应在初始化阶段就建立完整的变量清单。
+
+```
+检查流程：
+
+1. 盘点本项目所有必需的环境变量（基于 Phase 1 产品方案）：
+
+   基础设施（所有项目必须）：
+     □ NEXT_PUBLIC_APP_URL — 已配？值是否正确？
+     □ DATABASE_URL — 已配？数据库可连接？
+     □ AUTH_SECRET — 已生成？（openssl rand -base64 32）
+
+   AI/工具服务（按需）：
+     □ OPENAI_API_KEY / 其他 LLM API Key — 已配？配额充足？
+     □ 其他第三方 API Key（按项目需求）
+
+   支付（按需）：
+     □ STRIPE_SECRET_KEY — 已配？（先用 test key）
+     □ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — 已配？
+     □ STRIPE_SIGNING_SECRET — Webhook 配置后获取
+
+   认证（按需）：
+     □ GOOGLE_CLIENT_ID / SECRET — OAuth 登录用
+     □ GITHUB_CLIENT_ID / SECRET — OAuth 登录用
+     □ RESEND_API_KEY — 邮箱验证用
+
+   分析（Phase 5 前配好即可）：
+     □ GA_MEASUREMENT_ID — Google Analytics
+
+2. 环境分层检查：
+     □ .env.development — 开发环境全部填写（使用 test key）
+     □ .env.production — 标记必填项（值留空，上线前通过部署平台配置）
+     □ .env.example — 包含所有变量名 + 注释说明（不含真实值）
+
+3. 安全检查：
+     □ .gitignore 包含 .env*（除 .env.example）
+     □ git log 中无历史提交的密钥（如有，立即撤销并从历史清除）
+
+4. 本地验证：
+     □ pnpm dev 启动无报错
+     □ 数据库连接正常（访问需要数据库的页面验证）
+     □ 工具核心功能可用（如 AI 翻译、识别等）
+
+输出：.env.example 文件更新完成，所有必填变量有注释标记
+```
+
 ### 输出产物
 - 可运行的 ShipAny 项目（品牌已定制）
 - 基础 SEO metadata 已配置（Phase 3 会用深度 SEO 内容覆盖首页部分）
 - 支付系统已配置（如需要）
+- 环境变量清单完整（.env.example 已更新）
 
 ---
 
@@ -967,7 +1103,50 @@ Robots.txt：
   □ 指向 sitemap.xml
 ```
 
-### Step 5.2: 性能优化（PageSpeed Insights 交互式优化）
+### Step 5.2: 功能完整性验证
+
+> **经验教训**：linkedinspeaktranslator 完成了全站 SEO 验证和 PageSpeed 优化，但上线后发现翻译功能（API Key 未配）、
+> 支付功能（Stripe 未激活）、数据库（URL 未配）均不可用。SEO 验证不等于功能可用。
+
+```
+在部署前，逐项验证生产环境的功能完整性：
+
+核心工具功能（必须全部通过）：
+  □ 工具核心流程端到端可用（输入 → 处理 → 输出）
+  □ 工具限次逻辑正确（未登录限次 → 提示注册）
+  □ 工具错误处理友好（API 超时、输入异常等场景）
+
+用户系统（如启用）：
+  □ 邮箱注册 + 登录正常
+  □ OAuth 登录正常（Google / GitHub / 其他）
+  □ 邮箱验证流程正常（如启用）
+  □ 登出后状态正确清除
+
+支付系统（如启用）：
+  □ 定价页展示正确（产品名、价格、货币）
+  □ Stripe 产品/价格已在 Dashboard 创建，Price ID 已配置到项目
+  □ 支付流程端到端可用（选产品 → 跳转 Stripe → 支付成功 → 回调）
+  □ Webhook 回调正常（支付后用户权限/额度正确更新）
+  □ 建议用 Stripe test mode 的测试卡先验证，上线后再切 live mode
+
+生产环境变量（逐项确认已配置到部署平台）：
+  □ DATABASE_URL — 数据库可连接
+  □ AUTH_SECRET — 已生成且唯一
+  □ OPENAI_API_KEY — API 可调用且配额充足
+  □ STRIPE_SECRET_KEY — live key（或 test key 先验证）
+  □ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — 对应的公钥
+  □ STRIPE_SIGNING_SECRET — Webhook 签名密钥
+  □ 其他项目特有的环境变量
+
+多端验证：
+  □ 桌面浏览器正常
+  □ 移动端浏览器正常（响应式布局）
+  □ 不同网络环境正常（WiFi / 4G 模拟）
+```
+
+### Step 5.3: 性能优化（PageSpeed Insights 交互式优化）
+
+> 建议先在本地用 Lighthouse CLI 测试基准分数，避免「部署 → 测分 → 改码 → 重新部署」的低效循环。
 
 **工具**：https://pagespeed.web.dev/
 
@@ -1016,7 +1195,7 @@ Robots.txt：
   □ 1 篇博客页（抽检）
 ```
 
-### Step 5.3: 部署上线
+### Step 5.4: 部署上线
 
 ```
 部署前：

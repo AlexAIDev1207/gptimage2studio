@@ -69,19 +69,25 @@
 
 ### 提交规则
 
-**核心纪律：`.claude/` 的改动和 `src/` 的改动必须在不同的 commit 中。**
+**核心纪律：SOP 通用改进和业务代码必须在不同的 commit 中。**
 
 ```bash
-# SOP 改动单独提交
-git add .claude/
+# SOP 通用改进（可 cherry-pick 回 starter）单独提交
+# 仅包含 skills、rules 等可跨项目复用的改动
+git add .claude/skills/ .claude/rules/ .claude/GUIDE.md .claude/sop-keyword-to-launch.md
 git commit -m "chore(SOP): {具体改了什么}"
 
-# 业务代码单独提交
-git add src/ content/ public/ ...
+# 业务代码 + 项目数据单独提交
+# 包含 sop-data（本项目专属数据）和所有 src/ 改动
+git add .claude/sop-data/ src/ content/ public/ .env* package.json
 git commit -m "feat(xxx): {功能描述}"
 ```
 
-原因：同步 SOP 改进回 starter 时使用 cherry-pick，独立提交才能保证不混入业务代码。
+分类标准：
+- `.claude/skills/`、`.claude/rules/`、`.claude/GUIDE.md`、`.claude/sop-keyword-to-launch.md` → **SOP 通用**（跨项目复用）
+- `.claude/sop-data/` → **项目数据**（关键词矩阵、竞对分析、产品方案，归入业务 commit）
+
+原因：同步 SOP 改进回 starter 时使用 cherry-pick，独立提交才能保证只带走通用改进，不混入项目专属数据和业务代码。
 
 ### SOP 改进同步回 Starter
 

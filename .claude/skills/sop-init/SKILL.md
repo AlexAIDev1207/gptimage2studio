@@ -45,10 +45,31 @@ description: 执行 SOP Phase 2 项目初始化。调用 shipany-quick-start 完
 3. 创建产品和定价（对应 product-brief.md 变现模型）
 4. 提示用户测试支付流程
 
+### Step 2.4: 环境变量完整性检查
+
+按 SOP Phase 2 Step 2.4 的清单，逐项验证环境变量配置：
+
+```
+1. 盘点必需的环境变量（基于 product-brief.md）：
+   - 基础设施：NEXT_PUBLIC_APP_URL、DATABASE_URL、AUTH_SECRET
+   - AI/工具 API：OPENAI_API_KEY 或其他（按产品方案）
+   - 支付：STRIPE_SECRET_KEY、NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY（如需要）
+   - 认证 OAuth：GOOGLE_CLIENT_ID/SECRET、GITHUB_CLIENT_ID/SECRET（如需要）
+   - 邮件：RESEND_API_KEY（如启用邮箱验证）
+
+2. 检查 .env.development 所有必填项已填写
+3. 检查 .env.example 包含所有变量名（不含真实值）
+4. 检查 .gitignore 包含 .env*（安全）
+5. 本地 pnpm dev 启动无报错，核心功能可用
+
+通过 AskUserQuestion 逐项确认缺失的凭证，引导用户填写。
+```
+
 ## 输出
 
 - 可运行的项目（品牌已定制）
 - 基础 SEO metadata 已配置
 - 支付系统已配置（如需要）
+- 环境变量清单完整（.env.example 已更新）
 
 完成后更新 `.claude/sop-data/progress.md` Phase 2 状态为 ✅。
