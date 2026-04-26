@@ -45,6 +45,7 @@ import { capabilityCards, workbench } from './content';
 type Mode = 'text-to-image' | 'image-to-image';
 type ResolutionTier = '1K' | '2K' | '4K';
 type OutputCount = 1 | 2 | 4;
+type WorkbenchVariant = 'banana' | 'studio';
 
 interface GeneratedImage {
   id: string;
@@ -126,6 +127,58 @@ const RESOLUTION_OPTIONS: {
 
 const OUTPUT_COUNT_OPTIONS: OutputCount[] = [1, 2, 4];
 
+const WORKBENCH_THEMES: Record<
+  WorkbenchVariant,
+  {
+    promoBorder: string;
+    promoBg: string;
+    promoIcon: string;
+    primaryButton: string;
+    activeTab: string;
+    activeModel: string;
+    focusRing: string;
+    costPanel: string;
+    costText: string;
+    featurePill: string;
+    dot: string;
+    panelGlow: string;
+  }
+> = {
+  banana: {
+    promoBorder: 'border-emerald-400/25',
+    promoBg: 'bg-gradient-to-r from-emerald-500/[0.10] to-cyan-500/[0.08]',
+    promoIcon: 'border-emerald-400/30 bg-emerald-500/15 text-emerald-300',
+    primaryButton:
+      'bg-gradient-to-r from-emerald-500 to-cyan-400 text-zinc-950 hover:from-emerald-400 hover:to-cyan-300',
+    activeTab: 'data-[state=active]:bg-slate-700 data-[state=active]:text-white',
+    activeModel: 'border-emerald-400/50 bg-emerald-500/10 text-white',
+    focusRing: 'focus-visible:ring-emerald-400/40',
+    costPanel: 'border-emerald-400/30 bg-emerald-500/[0.08]',
+    costText: 'text-emerald-300',
+    featurePill:
+      'border-emerald-400/40 bg-emerald-500/25 text-emerald-100',
+    dot: 'bg-emerald-400',
+    panelGlow: 'shadow-emerald-950/30',
+  },
+  studio: {
+    promoBorder: 'border-violet-400/25',
+    promoBg: 'bg-gradient-to-r from-violet-500/[0.12] to-cyan-500/[0.08]',
+    promoIcon: 'border-violet-400/30 bg-violet-500/15 text-violet-300',
+    primaryButton:
+      'bg-gradient-to-r from-violet-500 via-blue-500 to-cyan-400 text-white hover:from-violet-400 hover:via-blue-400 hover:to-cyan-300',
+    activeTab: 'data-[state=active]:bg-violet-500/25 data-[state=active]:text-white',
+    activeModel: 'border-violet-400/50 bg-violet-500/15 text-white',
+    focusRing: 'focus-visible:ring-violet-400/40',
+    costPanel: 'border-violet-400/30 bg-violet-500/[0.09]',
+    costText: 'text-violet-200',
+    featurePill: 'border-violet-400/45 bg-violet-500/25 text-violet-100',
+    dot: 'bg-violet-400',
+    panelGlow: 'shadow-violet-950/30',
+  },
+};
+
+type WorkbenchTheme = (typeof WORKBENCH_THEMES)[WorkbenchVariant];
+
 function parseTaskResult(taskResult: string | null): any {
   if (!taskResult) return null;
   try {
@@ -162,9 +215,14 @@ function extractImageUrls(result: any): string[] {
   return [];
 }
 
-export default function Workbench() {
+export default function Workbench({
+  variant = 'banana',
+}: {
+  variant?: WorkbenchVariant;
+}) {
   const { user, isCheckSign, setIsShowSignModal, fetchUserCredits } =
     useAppContext();
+  const theme = WORKBENCH_THEMES[variant];
 
   const [mode, setMode] = useState<Mode>('text-to-image');
   const [modelKey, setModelKey] = useState<ModelKey>('gpt-image-2');
@@ -543,47 +601,53 @@ export default function Workbench() {
   return (
     <div className="mt-10">
       {/* Promo card */}
-      <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col items-start gap-4 rounded-2xl border border-emerald-400/40 bg-emerald-500/[0.06] p-4 shadow-[0_0_40px_-20px_rgba(16,185,129,0.6)] sm:flex-row sm:items-center sm:justify-between md:p-5">
+      <div className="mx-auto max-w-6xl">
+        <div
+          className={`flex flex-col items-start gap-4 rounded-2xl border ${theme.promoBorder} ${theme.promoBg} p-4 shadow-[0_0_60px_-28px_rgba(34,211,238,0.45)] sm:flex-row sm:items-center sm:justify-between md:p-5`}
+        >
           <div className="flex items-center gap-3">
-            <span className="inline-flex size-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-500/15 text-emerald-300">
+            <span
+              className={`inline-flex size-10 items-center justify-center rounded-xl border ${theme.promoIcon}`}
+            >
               <Gift className="size-5" />
             </span>
             <div>
               <h3 className="text-sm font-semibold text-white sm:text-base">
                 Get 20 Free Credits &amp; Try Pro
               </h3>
-              <p className="mt-0.5 text-xs text-emerald-200/80 sm:text-sm">
-                New accounts unlock 20 credits to test Pro features today.
+              <p className="mt-0.5 text-xs text-zinc-400 sm:text-sm">
+                Sign up now to test GPT Image 2 and Nano Banana workflows when access opens.
               </p>
             </div>
           </div>
           <a
             href="#pricing"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-emerald-400"
+            className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-bold transition ${theme.primaryButton}`}
           >
             Sign Up Free
+            <Sparkles className="size-4" />
           </a>
         </div>
       </div>
 
       {/* Workbench card */}
-      <div className="mt-6 grid overflow-hidden rounded-3xl border border-white/10 bg-[#101218]/90 shadow-2xl shadow-black/50 backdrop-blur lg:grid-cols-[0.95fr_1.05fr]">
+      <div
+        className={`mx-auto mt-7 grid max-w-6xl overflow-hidden rounded-[22px] border border-white/10 bg-[#17181D] shadow-2xl ${theme.panelGlow} backdrop-blur lg:grid-cols-[minmax(360px,0.38fr)_minmax(0,0.62fr)]`}
+      >
         {/* LEFT: form */}
-        <div className="border-b border-white/10 p-4 md:p-6 lg:border-r lg:border-b-0">
-          {/* Mode tabs */}
+        <div className="border-b border-white/10 bg-[#17181D] p-4 md:p-6 lg:border-r lg:border-b-0">
           <Tabs value={mode} onValueChange={(v) => setMode(v as Mode)}>
-            <TabsList className="grid w-full grid-cols-2 border-white/10 bg-[#0B0D12] p-1 text-zinc-400">
+            <TabsList className="grid h-12 w-full grid-cols-2 rounded-xl border border-white/10 bg-[#111827] p-1 text-zinc-400">
               <TabsTrigger
                 value="image-to-image"
-                className="gap-1.5 text-xs sm:text-sm data-[state=active]:bg-white/10 data-[state=active]:text-white"
+                className={`gap-1.5 rounded-lg text-xs font-semibold sm:text-sm ${theme.activeTab}`}
               >
                 <Pencil className="size-3.5" />
                 Image Edit
               </TabsTrigger>
               <TabsTrigger
                 value="text-to-image"
-                className="gap-1.5 text-xs sm:text-sm data-[state=active]:bg-white/10 data-[state=active]:text-white"
+                className={`gap-1.5 rounded-lg text-xs font-semibold sm:text-sm ${theme.activeTab}`}
               >
                 <Wand2 className="size-3.5" />
                 Text-to-Image
@@ -591,66 +655,87 @@ export default function Workbench() {
             </TabsList>
           </Tabs>
 
-          {/* Model select */}
           <div className="mt-5">
             <div className="flex items-center justify-between">
-              <label className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
                 Select Model
               </label>
               <a
                 href="#comparison"
-                className="text-[11px] font-semibold text-emerald-300 hover:text-emerald-200"
+                className="text-[11px] font-bold text-cyan-300 hover:text-cyan-200"
               >
                 Compare →
               </a>
             </div>
-            <Select
-              value={modelKey}
-              onValueChange={(v) => setModelKey(v as ModelKey)}
-            >
-              <SelectTrigger className="mt-2 h-auto w-full border-white/10 bg-[#0B0D12] py-2.5 text-left text-zinc-200 hover:bg-white/5">
-                <SelectValue placeholder="Select model" />
-              </SelectTrigger>
-              <SelectContent className="border-white/10 bg-[#101218] text-zinc-200">
-                {MODEL_OPTIONS.map((opt) => (
-                  <SelectItem
+            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              {MODEL_OPTIONS.map((opt) => {
+                const isActive = opt.key === modelKey;
+                return (
+                  <button
                     key={opt.key}
-                    value={opt.key}
-                    className="focus:bg-white/10"
+                    type="button"
+                    onClick={() => setModelKey(opt.key)}
+                    className={`flex min-h-16 items-center gap-2 rounded-xl border px-3 py-3 text-left transition ${
+                      isActive
+                        ? theme.activeModel
+                        : 'border-white/10 bg-[#0B0D12] text-zinc-300 hover:border-white/20 hover:bg-white/[0.04]'
+                    }`}
                   >
-                    <span className="flex items-center gap-2">
-                      <span className="text-base leading-none">
-                        {opt.emoji}
+                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-base">
+                      {opt.emoji}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold leading-tight text-white">
+                        {opt.label}
                       </span>
-                      <span className="flex flex-col leading-tight">
-                        <span className="text-sm font-semibold text-white">
-                          {opt.label}
-                        </span>
-                        <span className="text-[11px] text-zinc-400">
-                          {opt.tagline}
-                        </span>
+                      <span className="mt-0.5 block truncate text-[11px] text-zinc-400">
+                        {opt.tagline}
                       </span>
                     </span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Reference uploader (Image Edit only) */}
           {isImageEditMode && (
             <div className="mt-5">
-              <label className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-                Reference Images
-              </label>
-              <div className="mt-2">
+              <div className="flex items-center justify-between">
+                <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+                  Reference Images
+                </label>
+                <span className="text-[11px] text-zinc-500">
+                  Required for editing
+                </span>
+              </div>
+              <div className="mt-2 grid grid-cols-2 gap-3">
                 <ImageUploader
                   allowMultiple
                   maxImages={5}
-                  maxSizeMB={10}
-                  emptyHint="Upload up to 5 reference images (PNG/JPG, max 10MB each)"
+                  maxSizeMB={30}
+                  emptyHint=""
+                  uploadLabel="Add Image"
+                  uploadSubLabel="Max 30MB"
                   onChange={handleReferenceImagesChange}
+                  className="w-full [&>div:last-child]:grid [&>div:last-child]:grid-cols-1 [&>div:last-child]:gap-3 [&_.group]:w-full [&_.group]:rounded-2xl [&_.group]:border-white/15 [&_.group]:bg-[#080B10] [&_.group]:p-0 [&_.group]:shadow-none [&_.group]:hover:border-cyan-300/60 [&_button]:h-[118px] [&_button]:w-full [&_button]:gap-2.5 [&_button]:px-3 [&_button]:text-center [&_button_div]:h-11 [&_button_div]:w-11 [&_button_div]:border-white/30 [&_button_svg]:h-5 [&_button_svg]:w-5 [&_button_svg]:text-cyan-300 [&_img]:h-[118px] [&_img]:w-full [&_img]:rounded-2xl [&_span]:leading-none [&_span]:text-zinc-300 [&_span:first-of-type]:text-[13px] [&_span:first-of-type]:font-bold [&_span:last-child]:text-[11px] [&_span:last-child]:font-medium [&_span:last-child]:text-zinc-500"
                 />
+                <button
+                  type="button"
+                  onClick={() =>
+                    toast.message('Library picker will be connected after launch.')
+                  }
+                  className="flex h-[118px] w-full flex-col items-center justify-center gap-2.5 rounded-2xl border border-dashed border-white/15 bg-[#080B10] px-3 text-center transition hover:border-cyan-300/60 hover:bg-white/[0.04]"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-dashed border-white/30">
+                    <Images className="size-5 text-cyan-300" />
+                  </span>
+                  <span className="text-[13px] font-bold leading-none text-zinc-300">
+                    From Library
+                  </span>
+                  <span className="text-[11px] font-medium leading-none text-zinc-500">
+                    Saved refs
+                  </span>
+                </button>
               </div>
               {hasReferenceUploadError && (
                 <p className="mt-2 text-xs text-rose-400">
@@ -660,12 +745,11 @@ export default function Workbench() {
             </div>
           )}
 
-          {/* Prompt textarea */}
           <div className="mt-5">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="wb-prompt"
-                className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase"
+                className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase"
               >
                 Describe your idea
               </label>
@@ -681,11 +765,12 @@ export default function Workbench() {
               id="wb-prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              rows={6}
-              placeholder="Describe the image you want to create..."
-              className={`mt-2 min-h-[150px] resize-none rounded-xl border-white/10 bg-[#0B0D12] text-sm text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-emerald-400/30 ${
+              rows={7}
+              placeholder="Describe the effect you want, including style, color, composition and other details..."
+              className={`mt-2 min-h-[178px] resize-none rounded-xl border-[#252832] bg-[#050507] px-4 py-3 text-sm leading-relaxed text-zinc-200 shadow-inner shadow-black/30 placeholder:text-zinc-600 focus-visible:ring-2 ${theme.focusRing} ${
                 isPromptOverLimit ? 'border-rose-500/60' : ''
               }`}
+              style={{ backgroundColor: '#050507', color: '#e4e4e7' }}
             />
             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs text-zinc-500">
@@ -693,28 +778,27 @@ export default function Workbench() {
               </p>
               <a
                 href="#prompts"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-zinc-200 transition hover:bg-white/10"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-bold text-zinc-300 transition hover:bg-white/[0.07]"
               >
-                <Sparkles className="size-3.5" />
+                <Sparkles className="size-3.5 text-cyan-300" />
                 Browse Inspiration
               </a>
             </div>
           </div>
 
-          {/* Aspect / Resolution / Output */}
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
                 Aspect Ratio
               </label>
               <Select
                 value={aspectRatio}
                 onValueChange={(v) => setAspectRatio(v)}
               >
-                <SelectTrigger className="mt-2 w-full border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/5">
+                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
                   <span className="flex items-center gap-2">
                     {aspectRatio === 'auto' && (
-                      <span className="inline-flex size-1.5 rounded-full bg-emerald-400" />
+                      <span className="inline-flex size-3 rounded-sm bg-emerald-400" />
                     )}
                     <SelectValue placeholder="Auto" />
                   </span>
@@ -734,14 +818,14 @@ export default function Workbench() {
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
                 Resolution
               </label>
               <Select
                 value={resolution}
                 onValueChange={(v) => setResolution(v as ResolutionTier)}
               >
-                <SelectTrigger className="mt-2 w-full border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/5">
+                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
                   <span className="flex items-center gap-2">
                     <Monitor className="size-3.5 text-zinc-400" />
                     <SelectValue placeholder="2K" />
@@ -760,66 +844,62 @@ export default function Workbench() {
                 </SelectContent>
               </Select>
             </div>
-
-            <div>
-              <label className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-                Output Count
-              </label>
-              <Select
-                value={String(outputCount)}
-                onValueChange={(v) =>
-                  setOutputCount(Number(v) as OutputCount)
-                }
-              >
-                <SelectTrigger className="mt-2 w-full border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/5">
-                  <span className="flex items-center gap-2">
-                    <Images className="size-3.5 text-zinc-400" />
-                    <SelectValue placeholder="1" />
-                  </span>
-                </SelectTrigger>
-                <SelectContent className="border-white/10 bg-[#101218] text-zinc-200">
-                  {OUTPUT_COUNT_OPTIONS.map((n) => (
-                    <SelectItem
-                      key={n}
-                      value={String(n)}
-                      className="focus:bg-white/10"
-                    >
-                      {n} {n === 1 ? 'image' : 'images'}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
           </div>
 
-          {/* Credit cost pill */}
-          <div className="mt-5 flex items-center justify-between gap-3 rounded-full border border-emerald-400/30 bg-emerald-500/[0.06] px-4 py-2 text-xs">
-            <span className="font-semibold tracking-wider text-emerald-200/80 uppercase">
+          <div className="mt-3">
+            <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+              Output Count
+            </label>
+            <Select
+              value={String(outputCount)}
+              onValueChange={(v) => setOutputCount(Number(v) as OutputCount)}
+            >
+              <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
+                <span className="flex items-center gap-2">
+                  <Images className="size-3.5 text-zinc-400" />
+                  <SelectValue placeholder="1" />
+                </span>
+              </SelectTrigger>
+              <SelectContent className="border-white/10 bg-[#101218] text-zinc-200">
+                {OUTPUT_COUNT_OPTIONS.map((n) => (
+                  <SelectItem
+                    key={n}
+                    value={String(n)}
+                    className="focus:bg-white/10"
+                  >
+                    {n} {n === 1 ? 'image' : 'images'}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div
+            className={`mt-5 flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm ${theme.costPanel}`}
+          >
+            <span className="flex items-center gap-2 font-bold text-zinc-300">
+              <span className="inline-flex size-2 rounded-full bg-emerald-400" />
               Credit Cost
             </span>
-            <span className="font-semibold text-emerald-200">
+            <span className={`font-black tabular-nums ${theme.costText}`}>
               {costCredits} {costCredits === 1 ? 'credit' : 'credits'}
             </span>
           </div>
 
-          {/* Start Creation button */}
-          <div className="mt-3">
+          <div className="mt-5">
             {!isMounted ? (
               <Button
                 size="lg"
-                className="w-full rounded-full bg-emerald-500 text-zinc-950 hover:bg-emerald-400"
+                className={`h-14 w-full rounded-xl text-base font-black ${theme.primaryButton}`}
                 disabled
               >
                 <Wand2 className="mr-2 h-4 w-4" />
                 Start Creation
-                <span className="ml-2 inline-flex items-center rounded-full bg-zinc-950/20 px-2 py-0.5 text-[10px] font-bold tabular-nums text-zinc-900">
-                  {costCredits}
-                </span>
               </Button>
             ) : isCheckSign ? (
               <Button
                 size="lg"
-                className="w-full rounded-full bg-emerald-500 text-zinc-950 hover:bg-emerald-400"
+                className={`h-14 w-full rounded-xl text-base font-black ${theme.primaryButton}`}
                 disabled
               >
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -828,7 +908,7 @@ export default function Workbench() {
             ) : !user ? (
               <Button
                 size="lg"
-                className="w-full rounded-full bg-emerald-500 text-zinc-950 hover:bg-emerald-400"
+                className={`h-14 w-full rounded-xl text-base font-black ${theme.primaryButton}`}
                 onClick={() => setIsShowSignModal(true)}
               >
                 <UserIcon className="mr-2 h-4 w-4" />
@@ -837,7 +917,7 @@ export default function Workbench() {
             ) : remainingCredits < baseCost ? (
               <a
                 href="/pricing"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-emerald-400"
+                className={`inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl px-5 text-base font-black transition ${theme.primaryButton}`}
               >
                 <Wand2 className="size-4" />
                 Top up credits to continue
@@ -845,7 +925,7 @@ export default function Workbench() {
             ) : (
               <Button
                 size="lg"
-                className="w-full rounded-full bg-emerald-500 text-zinc-950 hover:bg-emerald-400 disabled:opacity-60"
+                className={`h-14 w-full rounded-xl text-base font-black disabled:opacity-60 ${theme.primaryButton}`}
                 onClick={handleGenerate}
                 disabled={startDisabled}
               >
@@ -858,7 +938,7 @@ export default function Workbench() {
                   <>
                     <Wand2 className="mr-2 h-4 w-4" />
                     Start Creation
-                    <span className="ml-2 inline-flex items-center rounded-full bg-zinc-950/20 px-2 py-0.5 text-[10px] font-bold tabular-nums text-zinc-900">
+                    <span className="ml-2 inline-flex items-center rounded-full bg-black/20 px-2 py-0.5 text-[11px] font-black tabular-nums">
                       {costCredits}
                     </span>
                   </>
@@ -875,7 +955,7 @@ export default function Workbench() {
         </div>
 
         {/* RIGHT: carousel / progress / results */}
-        <div className="bg-[#0B0D12] p-3 md:p-5">
+        <div className="bg-[#111318] p-3 md:p-5">
           {generatedImages.length > 0 ? (
             <ResultsPanel
               images={generatedImages}
@@ -889,6 +969,8 @@ export default function Workbench() {
             />
           ) : (
             <CarouselPanel
+              variant={variant}
+              theme={theme}
               activeIndex={activeWorkbenchFeature}
               onPrev={goPrev}
               onNext={goNext}
@@ -903,12 +985,16 @@ export default function Workbench() {
 }
 
 function CarouselPanel({
+  variant,
+  theme,
   activeIndex,
   onPrev,
   onNext,
   onSelect,
   activeFeature,
 }: {
+  variant: WorkbenchVariant;
+  theme: WorkbenchTheme;
   activeIndex: number;
   onPrev: () => void;
   onNext: () => void;
@@ -916,74 +1002,74 @@ function CarouselPanel({
   activeFeature: (typeof capabilityCards)[number];
 }) {
   return (
-    <div className="relative h-full">
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-        <div className="relative aspect-[16/11] w-full">
-          <Image
-            src={activeFeature.image}
-            alt={activeFeature.alt}
-            fill
-            priority={activeIndex === 0}
-            sizes="(min-width: 1024px) 680px, 100vw"
-            className="object-cover"
-          />
+    <div className="relative h-full min-h-[520px] lg:min-h-[690px]">
+      <div className="relative h-full min-h-[520px] overflow-hidden rounded-[18px] border border-white/10 bg-[#0B0D12] lg:min-h-[690px]">
+        <Image
+          src={activeFeature.image}
+          alt={activeFeature.alt}
+          fill
+          priority={activeIndex === 0}
+          sizes="(min-width: 1024px) 700px, 100vw"
+          className="object-cover"
+        />
 
-          {/* NEW RELEASE pill */}
-          <div className="pointer-events-none absolute inset-x-0 top-3 flex justify-center">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/20 px-3 py-1 text-[10px] font-bold tracking-widest text-emerald-200 uppercase backdrop-blur">
-              <Sparkles className="size-3" />
-              NEW RELEASE!
-            </span>
-          </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.22)_45%,rgba(0,0,0,0.88))]" />
 
-          {/* Prev / Next chevrons */}
-          <button
-            type="button"
-            onClick={onPrev}
-            aria-label="Previous slide"
-            className="absolute top-1/2 left-3 -translate-y-1/2 rounded-full border border-white/15 bg-black/55 p-2 text-white backdrop-blur transition hover:bg-black/75"
+        <div className="pointer-events-none absolute inset-x-0 top-4 flex justify-center">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-black tracking-widest uppercase backdrop-blur ${theme.featurePill}`}
           >
-            <ChevronLeft className="size-4" />
-          </button>
-          <button
-            type="button"
-            onClick={onNext}
-            aria-label="Next slide"
-            className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full border border-white/15 bg-black/55 p-2 text-white backdrop-blur transition hover:bg-black/75"
-          >
-            <ChevronRight className="size-4" />
-          </button>
+            <Sparkles className="size-3" />
+            {variant === 'studio'
+              ? 'New Release! GPT Image 2 Studio'
+              : 'New Release! GPT Image 2'}
+          </span>
+        </div>
 
-          {/* Bottom gradient + copy */}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-4 pb-10">
-            <span className="inline-flex rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-emerald-300 uppercase backdrop-blur">
-              {activeFeature.badge}
-            </span>
-            <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">
-              {activeFeature.title}
-            </h3>
-            <p className="mt-1 max-w-xl text-sm text-zinc-300">
-              {activeFeature.copy}
-            </p>
-          </div>
+        <button
+          type="button"
+          onClick={onPrev}
+          aria-label="Previous slide"
+          className="absolute top-1/2 left-4 -translate-y-1/2 rounded-full border border-white/15 bg-black/55 p-3 text-white shadow-lg backdrop-blur transition hover:bg-black/75"
+        >
+          <ChevronLeft className="size-4" />
+        </button>
+        <button
+          type="button"
+          onClick={onNext}
+          aria-label="Next slide"
+          className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full border border-white/15 bg-black/55 p-3 text-white shadow-lg backdrop-blur transition hover:bg-black/75"
+        >
+          <ChevronRight className="size-4" />
+        </button>
 
-          {/* Bottom dot indicators */}
-          <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
-            {capabilityCards.map((c, i) => (
-              <button
-                key={c.title}
-                type="button"
-                onClick={() => onSelect(i)}
-                aria-label={`Slide ${i + 1}: ${c.title}`}
-                aria-current={i === activeIndex}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === activeIndex
-                    ? 'w-6 bg-emerald-400'
-                    : 'w-1.5 bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
+        <div className="absolute inset-x-0 bottom-0 p-5 pb-12 md:p-8 md:pb-14">
+          <span className="inline-flex rounded-full border border-white/10 bg-black/55 px-3 py-1 text-[10px] font-black tracking-wider text-cyan-200 uppercase backdrop-blur">
+            {activeFeature.badge}
+          </span>
+          <h3 className="mt-3 max-w-xl text-3xl font-black tracking-tight text-white md:text-4xl">
+            {activeFeature.title}
+          </h3>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-200 md:text-base">
+            {activeFeature.copy}
+          </p>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2">
+          {capabilityCards.map((c, i) => (
+            <button
+              key={c.title}
+              type="button"
+              onClick={() => onSelect(i)}
+              aria-label={`Slide ${i + 1}: ${c.title}`}
+              aria-current={i === activeIndex}
+              className={`h-2 rounded-full transition-all ${
+                i === activeIndex
+                  ? `w-9 ${theme.dot}`
+                  : 'w-2 bg-white/35 hover:bg-white/60'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -998,7 +1084,7 @@ function ProgressPanel({
   statusLabel: string;
 }) {
   return (
-    <div className="flex h-full min-h-[360px] flex-col items-center justify-center gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6">
+    <div className="flex h-full min-h-[520px] flex-col items-center justify-center gap-4 rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 lg:min-h-[690px]">
       <span className="inline-flex size-12 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300">
         <Loader2 className="size-6 animate-spin" />
       </span>
@@ -1027,7 +1113,7 @@ function ResultsPanel({
 }) {
   if (images.length === 0) {
     return (
-      <div className="flex h-full min-h-[360px] flex-col items-center justify-center rounded-2xl border border-white/10 bg-[#101218] p-6 text-center">
+      <div className="flex h-full min-h-[520px] flex-col items-center justify-center rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 text-center lg:min-h-[690px]">
         <span className="mb-3 inline-flex size-12 items-center justify-center rounded-full bg-white/5 text-zinc-400">
           <ImageIcon className="size-6" />
         </span>
@@ -1049,7 +1135,7 @@ function ResultsPanel({
       {images.map((image) => (
         <div
           key={image.id}
-          className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#101218]"
+          className="group relative overflow-hidden rounded-[18px] border border-white/10 bg-[#0B0D12]"
         >
           <div className={single ? 'relative w-full' : 'relative aspect-square w-full'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

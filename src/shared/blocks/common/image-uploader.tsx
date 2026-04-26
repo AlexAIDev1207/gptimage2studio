@@ -24,6 +24,8 @@ interface ImageUploaderProps {
   maxSizeMB?: number;
   title?: string;
   emptyHint?: string;
+  uploadLabel?: string;
+  uploadSubLabel?: string;
   className?: string;
   defaultPreviews?: string[];
   onChange?: (items: ImageUploaderValue[]) => void;
@@ -70,6 +72,8 @@ export function ImageUploader({
   maxSizeMB = 10,
   title,
   emptyHint,
+  uploadLabel = 'Upload',
+  uploadSubLabel,
   className,
   defaultPreviews,
   onChange,
@@ -559,8 +563,10 @@ export function ImageUploader({
                 <div className="border-border flex h-10 w-10 items-center justify-center rounded-full border border-dashed">
                   <IconUpload className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-medium">Upload</span>
-                <span className="text-primary text-xs">Max {maxSizeMB}MB</span>
+                <span className="text-xs font-medium">{uploadLabel}</span>
+                <span className="text-primary text-xs">
+                  {uploadSubLabel ?? `Max ${maxSizeMB}MB`}
+                </span>
               </button>
             </div>
           </div>

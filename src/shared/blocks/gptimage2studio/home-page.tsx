@@ -265,7 +265,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
 
           {/* Workbench card: real generator (left form + right carousel/progress/results) */}
-          <Workbench />
+          <Workbench variant={variant === 'B' ? 'studio' : 'banana'} />
         </div>
       </section>
 

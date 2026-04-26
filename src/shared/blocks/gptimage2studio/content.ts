@@ -168,33 +168,33 @@ export const workbench = {
 
 export const capabilityCards = [
   {
-    title: 'Prompt-to-Image Creation',
-    copy: 'Turn structured prompts into product photos, campaign assets, educational visuals, UI concepts, and editorial graphics.',
-    image: '/imgs/gptimage2studio/webp/workbench-primary-hydra-glow-serum.webp',
-    alt: 'GPT Image 2 Studio product photo preview with readable label text.',
-    badge: 'Image #1',
-  },
-  {
-    title: 'Image Editing with References',
-    copy: 'Use reference images and natural-language instructions to adjust backgrounds, lighting, layout, objects, and visual style.',
-    image: '/imgs/gptimage2studio/webp/edit-demo-background-replacement.webp',
-    alt: 'Before and after reference image edit for product background replacement.',
-    badge: 'Edit #2',
-  },
-  {
-    title: 'Text-Rich Visuals',
-    copy: 'Create posters, menu boards, labels, app screens, infographics, and ads where short readable text matters.',
+    title: 'Clear Text Rendering',
+    copy: 'Create posters, product labels, menu boards, and thumbnails where short readable text is part of the final image.',
     image:
       '/imgs/gptimage2studio/webp/workbench-thumb-create-forward-poster.webp',
     alt: 'Create Forward poster preview with readable GPT Image 2 generated text.',
-    badge: 'Text #3',
+    badge: 'Text #1',
   },
   {
-    title: 'Multi-Model Studio Workflow',
-    copy: 'Compare GPT Image 2 and Nano Banana style workflows from one prompt-focused workspace as the product evolves.',
+    title: 'Product Photo Precision',
+    copy: 'Turn structured ecommerce prompts into clean studio product images with controlled lighting, shadows, labels, and material detail.',
+    image: '/imgs/gptimage2studio/webp/workbench-primary-hydra-glow-serum.webp',
+    alt: 'GPT Image 2 Studio product photo preview with readable label text.',
+    badge: 'Product #2',
+  },
+  {
+    title: 'Reference Image Editing',
+    copy: 'Upload a product or concept image, then use natural-language instructions to change backgrounds, lighting, objects, and layout.',
+    image: '/imgs/gptimage2studio/webp/edit-demo-background-replacement.webp',
+    alt: 'Before and after reference image edit for product background replacement.',
+    badge: 'Edit #3',
+  },
+  {
+    title: 'Structured Visuals',
+    copy: 'Draft infographics, UI screens, annotation graphics, and explainers with clear labels and reviewable composition.',
     image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-concepts.webp',
     alt: 'Infographic and UI concept previews for multi-model image workflows.',
-    badge: 'Flow #4',
+    badge: 'Visual #4',
   },
 ];
 
