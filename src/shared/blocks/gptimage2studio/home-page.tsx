@@ -18,6 +18,9 @@ import {
   X,
 } from 'lucide-react';
 
+import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
+import { useAppContext } from '@/shared/contexts/app';
+
 import {
   benefits,
   comparison,
@@ -73,6 +76,7 @@ const palettes: Record<
 
 export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const palette = palettes[variant];
+  const { user, setIsShowSignModal } = useAppContext();
 
   const [promoOpen, setPromoOpen] = useState(true);
   const [navOpen, setNavOpen] = useState(false);
@@ -139,34 +143,57 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/5 bg-[#09090B]/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-          <Link href="#" className="flex items-center gap-2">
-            <span
-              className={`inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br ${palette.accent} text-zinc-950 shadow-lg shadow-cyan-500/20`}
-            >
-              <Sparkles className="size-4" />
-            </span>
-            <span className="text-sm font-semibold text-white sm:text-base">
-              GPT Image 2 Studio
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-7 md:flex">
-            {nav.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm text-zinc-400 transition hover:text-white"
+          {/* Left: logo + nav */}
+          <div className="flex items-center gap-8">
+            <Link href="#" className="flex items-center gap-2">
+              <span
+                className={`inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br ${palette.accent} text-zinc-950 shadow-lg shadow-cyan-500/20`}
               >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <button
-            className="rounded-md p-2 text-zinc-300 hover:bg-white/10 md:hidden"
-            aria-label="Toggle navigation"
-            onClick={() => setNavOpen((v) => !v)}
-          >
-            {navOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+                <Sparkles className="size-4" />
+              </span>
+              <span className="text-sm font-semibold text-white sm:text-base">
+                GPT Image 2 Studio
+              </span>
+            </Link>
+            <nav className="hidden items-center gap-6 md:flex">
+              {nav.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm text-zinc-400 transition hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+          {/* Right: theme toggle + sign in */}
+          <div className="flex items-center gap-2">
+            <AnimatedThemeToggler className="inline-flex size-9 items-center justify-center rounded-md text-zinc-400 transition hover:bg-white/10 hover:text-white [&_svg]:size-4" />
+            {user ? (
+              <Link
+                href="/settings/profile"
+                className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
+              >
+                {user.name?.split(' ')[0] ?? 'Account'}
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsShowSignModal(true)}
+                className="hidden rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:inline-flex"
+              >
+                Sign In
+              </button>
+            )}
+            <button
+              className="rounded-md p-2 text-zinc-300 hover:bg-white/10 md:hidden"
+              aria-label="Toggle navigation"
+              onClick={() => setNavOpen((v) => !v)}
+            >
+              {navOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
         {navOpen && (
           <div className="border-t border-white/5 md:hidden">
@@ -181,6 +208,18 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   {item.label}
                 </a>
               ))}
+              {!user && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNavOpen(false);
+                    setIsShowSignModal(true);
+                  }}
+                  className="mt-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:hidden"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -887,7 +926,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Footer */}
       <footer className="bg-[#09090B]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+          <div className="grid gap-10 lg:grid-cols-[2fr_1fr_1fr]">
             <div className="max-w-md">
               <div className="flex items-center gap-2">
                 <span
@@ -911,7 +950,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               </p>
             </div>
             <FooterColumn title="Product" items={footer.product} />
-            <FooterColumn title="Resources" items={footer.resource} />
             <FooterColumn title="Legal" items={footer.legal} />
           </div>
           <div className="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
