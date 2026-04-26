@@ -53,19 +53,94 @@ export const hero = {
     'Use reusable prompts, model controls, and reference-image workflows to move from idea to usable visual faster.',
 };
 
+export type WorkbenchMode = {
+  value: 'text-to-image' | 'image-to-image';
+  label: string;
+  icon: 'wand' | 'pencil';
+};
+
+export type WorkbenchModelKey = 'gpt-image-2' | 'nano-banana';
+
+export type WorkbenchModel = {
+  value: WorkbenchModelKey;
+  label: string;
+  tagline: string;
+  emoji: string;
+  provider: string;
+  modelId: string;
+  editProvider: string;
+  editModelId: string;
+  badge?: string;
+};
+
+export type WorkbenchAspectRatio = {
+  value: string;
+  label: string;
+};
+
+export type WorkbenchResolution = {
+  tier: '1K' | '2K' | '4K';
+  label: string;
+  dim: string;
+  costMultiplier: number;
+};
+
 export const workbench = {
   title: 'Create Images with GPT Image 2 Studio',
   subcopy:
     'Start from a prompt or reference image, choose a model, and preview image ideas for product, marketing, and content workflows. The MVP interface is designed around reusable prompts, clear settings, and fast creative iteration.',
-  signupTitle: 'Get Early Access to GPT Image 2 Studio',
-  signupBody:
-    'Join the launch list to test GPT Image 2 and Nano Banana workflows when access opens.',
-  signupCta: 'Sign Up Free',
-  modes: ['Text-to-Image', 'Image Edit'],
-  models: ['GPT Image 2', 'Nano Banana'],
-  ratios: ['1:1', '4:5', '16:9', '9:16'],
-  resolutions: ['Standard', 'High'],
-  outputs: ['1', '2', '4'],
+  promoCard: {
+    icon: 'gift',
+    title: 'Get 20 Free Credits & Try Pro',
+    subtitle: 'New accounts unlock 20 credits to test Pro features today.',
+    cta: 'Sign Up Free',
+    href: '#pricing',
+  },
+  modes: [
+    { value: 'image-to-image', label: 'Image Edit', icon: 'pencil' },
+    { value: 'text-to-image', label: 'Text-to-Image', icon: 'wand' },
+  ] satisfies WorkbenchMode[],
+  models: [
+    {
+      value: 'gpt-image-2',
+      label: 'GPT Image 2',
+      tagline: 'Perfect text rendering · 4K resolution',
+      emoji: '✨',
+      provider: 'replicate',
+      modelId: 'bytedance/seedream-4',
+      editProvider: 'replicate',
+      editModelId: 'bytedance/seedream-4',
+    },
+    {
+      value: 'nano-banana',
+      label: 'Nano Banana',
+      tagline: 'Reference-driven editing · fast iteration',
+      emoji: '🍌',
+      provider: 'replicate',
+      modelId: 'google/nano-banana-pro',
+      editProvider: 'fal',
+      editModelId: 'fal-ai/nano-banana-pro/edit',
+    },
+  ] satisfies WorkbenchModel[],
+  aspectRatios: [
+    { value: 'auto', label: 'Auto · AI auto-decide' },
+    { value: '1:1', label: '1:1 · Square' },
+    { value: '4:5', label: '4:5 · Portrait' },
+    { value: '5:4', label: '5:4 · Landscape' },
+    { value: '3:4', label: '3:4 · Portrait' },
+    { value: '4:3', label: '4:3 · Landscape' },
+    { value: '16:9', label: '16:9 · Widescreen' },
+    { value: '9:16', label: '9:16 · Vertical' },
+    { value: '3:2', label: '3:2 · Photo' },
+    { value: '2:3', label: '2:3 · Photo Portrait' },
+    { value: '21:9', label: '21:9 · Cinematic' },
+  ] satisfies WorkbenchAspectRatio[],
+  resolutions: [
+    { tier: '1K', label: '1K (1024 × 1024)', dim: '1024x1024', costMultiplier: 1 },
+    { tier: '2K', label: '2K (2048 × 2048)', dim: '2048x2048', costMultiplier: 2 },
+    { tier: '4K', label: '4K (4096 × 4096)', dim: '4096x4096', costMultiplier: 4 },
+  ] satisfies WorkbenchResolution[],
+  outputCounts: [1, 2, 4] as const,
   defaultPrompt:
     'Create a clean studio product photo of a premium skincare serum bottle on a white marble surface. Soft daylight, realistic contact shadows, subtle reflection, minimal luxury background. The label must read "HYDRA GLOW SERUM". Commercial ecommerce photography, sharp product edges, natural glass texture, no extra text.',
   primaryAction: 'Start Creation',

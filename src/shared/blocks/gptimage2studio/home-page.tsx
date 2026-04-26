@@ -8,23 +8,18 @@ import {
   Check,
   ChevronDown,
   Copy,
-  Download,
   Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
-  Mail,
   Menu,
   Quote,
-  RefreshCw,
   Sparkles,
-  Upload,
   Wand2,
   X,
 } from 'lucide-react';
 
 import {
   benefits,
-  capabilityCards,
   comparison,
   coreFeatures,
   editDemos,
@@ -43,6 +38,7 @@ import {
   whatIsCards,
   workbench,
 } from './content';
+import Workbench from './workbench';
 
 type Variant = 'A' | 'B';
 
@@ -81,13 +77,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const [promoOpen, setPromoOpen] = useState(true);
   const [navOpen, setNavOpen] = useState(false);
 
-  const [mode, setMode] = useState(workbench.modes[0]);
-  const [model, setModel] = useState(workbench.models[0]);
-  const [ratio, setRatio] = useState(workbench.ratios[0]);
-  const [resolution, setResolution] = useState(workbench.resolutions[1]);
-  const [outputs, setOutputs] = useState(workbench.outputs[0]);
-  const [prompt, setPrompt] = useState(workbench.defaultPrompt);
-  const [activeWorkbenchFeature, setActiveWorkbenchFeature] = useState(0);
   const [activeEditDemo, setActiveEditDemo] = useState(0);
 
   const [filter, setFilter] = useState('All');
@@ -98,7 +87,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
     if (filter === 'All') return promptCards;
     return promptCards.filter((p) => p.category === filter);
   }, [filter]);
-  const activeFeature = capabilityCards[activeWorkbenchFeature];
   const activeEdit = editDemos[activeEditDemo];
 
   const handleCopy = async (text: string, key: string) => {
@@ -276,214 +264,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             <p className="mt-4 text-zinc-400">{workbench.subcopy}</p>
           </div>
 
-          {/* Workbench card: left = tool/prompt UI, right = model feature carousel that merges capability cards */}
-          <div className="mt-8 grid overflow-hidden rounded-3xl border border-white/10 bg-[#101218]/90 shadow-2xl shadow-black/50 backdrop-blur lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="border-b border-white/10 p-4 md:p-6 lg:border-r lg:border-b-0">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <SegmentedControl
-                    label="Mode"
-                    options={workbench.modes}
-                    value={mode}
-                    onChange={setMode}
-                    palette={palette}
-                  />
-                  <SegmentedControl
-                    label="Model"
-                    options={workbench.models}
-                    value={model}
-                    onChange={setModel}
-                    palette={palette}
-                  />
-                </div>
-                <button
-                  type="button"
-                  className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-dashed border-white/15 bg-white/5 px-3 text-xs text-zinc-300 transition hover:bg-white/10"
-                >
-                  <Upload className="size-3.5" />
-                  Reference image
-                </button>
-              </div>
-
-              <div className="mt-5">
-                <label
-                  htmlFor="hero-prompt"
-                  className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase"
-                >
-                  Prompt
-                </label>
-                <textarea
-                  id="hero-prompt"
-                  rows={8}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-[#0B0D12] p-3.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-white/30 focus:outline-none"
-                />
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <ChipGroup
-                  label="Aspect"
-                  options={workbench.ratios}
-                  value={ratio}
-                  onChange={setRatio}
-                  palette={palette}
-                />
-                <ChipGroup
-                  label="Quality"
-                  options={workbench.resolutions}
-                  value={resolution}
-                  onChange={setResolution}
-                  palette={palette}
-                />
-                <ChipGroup
-                  label="Outputs"
-                  options={workbench.outputs}
-                  value={outputs}
-                  onChange={setOutputs}
-                  palette={palette}
-                />
-              </div>
-
-              <div className="mt-5 rounded-2xl border border-white/10 bg-[#0B0D12] p-4">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h3 className="text-sm font-semibold text-white">
-                      {workbench.signupTitle}
-                    </h3>
-                    <p className="mt-1 text-xs text-zinc-500">
-                      {workbench.signupBody}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-white/10"
-                  >
-                    <Mail className="size-3.5" />
-                    {workbench.signupCta}
-                  </button>
-                </div>
-              </div>
-
-              <div className="mt-5 flex flex-col-reverse items-stretch gap-3 border-t border-white/5 pt-5 sm:flex-row sm:items-center sm:justify-between">
-                <span className="text-xs text-zinc-500">
-                  Credit cost shown before generation
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(prompt, 'hero-prompt')}
-                  className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
-                >
-                  <Wand2 className="size-4" />
-                  {workbench.primaryAction}
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-[#0B0D12] p-3 md:p-5">
-              <div className="flex items-center justify-between gap-3 px-1 pb-3">
-                <div className="flex items-center gap-2 text-xs">
-                  <span className="inline-flex size-1.5 rounded-full bg-emerald-400" />
-                  <span className="font-semibold text-zinc-200">
-                    Model feature carousel
-                  </span>
-                  <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
-                    {model}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
-                    aria-label="Regenerate preview"
-                  >
-                    <RefreshCw className="size-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
-                    aria-label="Download preview"
-                  >
-                    <Download className="size-3.5" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-                <div className="relative aspect-[16/11] w-full">
-                  <Image
-                    src={activeFeature.image}
-                    alt={activeFeature.alt}
-                    fill
-                    priority={activeWorkbenchFeature === 0}
-                    sizes="(min-width: 1024px) 680px, 100vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-4">
-                    <span
-                      className={`inline-flex rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase backdrop-blur ${palette.badgeText}`}
-                    >
-                      {activeFeature.badge}
-                    </span>
-                    <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">
-                      {activeFeature.title}
-                    </h3>
-                    <p className="mt-1 max-w-xl text-sm text-zinc-300">
-                      {activeFeature.copy}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-3 grid grid-cols-4 gap-2">
-                {capabilityCards.map((card, i) => (
-                  <button
-                    key={card.title}
-                    type="button"
-                    aria-label={`Show ${card.title}`}
-                    aria-pressed={activeWorkbenchFeature === i}
-                    onClick={() => setActiveWorkbenchFeature(i)}
-                    className={`group relative aspect-square overflow-hidden rounded-xl border transition ${
-                      activeWorkbenchFeature === i
-                        ? `border-white/40 ring-2 ${palette.accentRing}`
-                        : 'border-white/10 hover:border-white/25'
-                    }`}
-                  >
-                    <Image
-                      src={card.image}
-                      alt={card.alt}
-                      fill
-                      sizes="(min-width: 1024px) 140px, 25vw"
-                      className="object-cover transition group-hover:scale-105"
-                    />
-                    <span className="absolute inset-x-1 bottom-1 truncate rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-zinc-200 backdrop-blur">
-                      {card.title}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {workbench.thumbnails.map((thumb) => (
-                  <div
-                    key={thumb.label}
-                    className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-[#101218]"
-                  >
-                    <Image
-                      src={thumb.src}
-                      alt={thumb.alt}
-                      fill
-                      sizes="(min-width: 1024px) 180px, 33vw"
-                      className="object-cover transition group-hover:scale-105"
-                    />
-                    <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-zinc-200 backdrop-blur">
-                      {thumb.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          {/* Workbench card: real generator (left form + right carousel/progress/results) */}
+          <Workbench />
         </div>
       </section>
 
@@ -551,7 +333,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                         {card.category}
                       </span>
                       <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-zinc-400">
-                        {model}
+                        GPT Image 2
                       </span>
                     </div>
                     <h3 className="mt-2 text-sm font-semibold text-white">
@@ -1153,82 +935,6 @@ function SectionEyebrow({
       <span className="size-1 rounded-full bg-current" />
       {children}
     </span>
-  );
-}
-
-function SegmentedControl<T extends string>({
-  label,
-  options,
-  value,
-  onChange,
-  palette,
-}: {
-  label: string;
-  options: readonly T[] | T[];
-  value: T;
-  onChange: (v: T) => void;
-  palette: (typeof palettes)['A'];
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-        {label}
-      </span>
-      <div className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-[#0B0D12] p-1">
-        {options.map((opt) => (
-          <button
-            key={opt}
-            type="button"
-            onClick={() => onChange(opt)}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
-              value === opt
-                ? `bg-gradient-to-r ${palette.accent} text-zinc-950`
-                : 'text-zinc-300 hover:bg-white/5'
-            }`}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ChipGroup<T extends string>({
-  label,
-  options,
-  value,
-  onChange,
-  palette,
-}: {
-  label: string;
-  options: readonly T[] | T[];
-  value: T;
-  onChange: (v: T) => void;
-  palette: (typeof palettes)['A'];
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-        {label}
-      </span>
-      <div className="flex flex-wrap gap-1">
-        {options.map((opt) => (
-          <button
-            key={opt}
-            type="button"
-            onClick={() => onChange(opt)}
-            className={`rounded-md border px-2 py-1.5 text-[11px] font-semibold transition ${
-              value === opt
-                ? `border-transparent bg-gradient-to-r ${palette.accent} text-zinc-950`
-                : 'border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10'
-            }`}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-    </div>
   );
 }
 
