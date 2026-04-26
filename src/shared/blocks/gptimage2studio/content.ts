@@ -95,18 +95,31 @@ export const capabilityCards = [
   {
     title: 'Prompt-to-Image Creation',
     copy: 'Turn structured prompts into product photos, campaign assets, educational visuals, UI concepts, and editorial graphics.',
+    image: '/imgs/gptimage2studio/webp/workbench-primary-hydra-glow-serum.webp',
+    alt: 'GPT Image 2 Studio product photo preview with readable label text.',
+    badge: 'Image #1',
   },
   {
     title: 'Image Editing with References',
     copy: 'Use reference images and natural-language instructions to adjust backgrounds, lighting, layout, objects, and visual style.',
+    image: '/imgs/gptimage2studio/webp/edit-demo-background-replacement.webp',
+    alt: 'Before and after reference image edit for product background replacement.',
+    badge: 'Edit #2',
   },
   {
     title: 'Text-Rich Visuals',
     copy: 'Create posters, menu boards, labels, app screens, infographics, and ads where short readable text matters.',
+    image:
+      '/imgs/gptimage2studio/webp/workbench-thumb-create-forward-poster.webp',
+    alt: 'Create Forward poster preview with readable GPT Image 2 generated text.',
+    badge: 'Text #3',
   },
   {
     title: 'Multi-Model Studio Workflow',
     copy: 'Compare GPT Image 2 and Nano Banana style workflows from one prompt-focused workspace as the product evolves.',
+    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-concepts.webp',
+    alt: 'Infographic and UI concept previews for multi-model image workflows.',
+    badge: 'Flow #4',
   },
 ];
 
@@ -479,6 +492,72 @@ export const pricing = [
     body: 'Plan image workflows for teams, campaigns, ecommerce projects, and repeatable brand assets.',
     cta: 'Contact for Studio',
     featured: false,
+  },
+];
+
+export type Testimonial = {
+  name: string;
+  role: string;
+  handle: string;
+  initial: string;
+  color: string;
+  quote: string;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    name: 'Maya Chen',
+    role: 'Ecommerce Founder',
+    handle: '@mayabuilds',
+    initial: 'M',
+    color: 'from-cyan-500 to-blue-500',
+    quote:
+      'Generated three product photo variations for my skincare line in one afternoon. The label text actually stays readable, which never worked in older models.',
+  },
+  {
+    name: 'Diego Alvarez',
+    role: 'Brand Designer',
+    handle: '@diegodraws',
+    initial: 'D',
+    color: 'from-violet-500 to-fuchsia-500',
+    quote:
+      'I use it to draft launch posters with exact headlines before we book the photographer. The structured prompt approach saves a full day of mood-boarding.',
+  },
+  {
+    name: 'Priya Raman',
+    role: 'Content Marketer',
+    handle: '@priyawrites',
+    initial: 'P',
+    color: 'from-emerald-500 to-teal-500',
+    quote:
+      'Infographics used to take me hours in Figma. Now I draft a prompt with the four steps I want labeled and refine the result, instead of building from scratch.',
+  },
+  {
+    name: 'Theo Larsen',
+    role: 'Indie Product Builder',
+    handle: '@theobuilds',
+    initial: 'T',
+    color: 'from-amber-500 to-orange-500',
+    quote:
+      'GPT Image 2 finally gets UI mockups close enough to share with my dev team. We use it for early dashboard concepts before any real Figma work.',
+  },
+  {
+    name: 'Amélie Roux',
+    role: 'Packaging Designer',
+    handle: '@ameliestudio',
+    initial: 'A',
+    color: 'from-rose-500 to-pink-500',
+    quote:
+      'Multilingual packaging mockups are the killer feature for me. English plus Japanese label text rendered correctly on a tea can — that was the moment I switched workflows.',
+  },
+  {
+    name: 'Jordan Park',
+    role: 'YouTube Creator',
+    handle: '@jordanpark',
+    initial: 'J',
+    color: 'from-indigo-500 to-purple-500',
+    quote:
+      'Thumbnails with bold readable text used to mean Photoshop nights. I prompt the layout, copy the result, and iterate on the headline in minutes.',
   },
 ];
 

@@ -9,15 +9,14 @@ import {
   ChevronDown,
   Copy,
   Download,
-  Edit3,
   Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
   Mail,
   Menu,
+  Quote,
   RefreshCw,
   Sparkles,
-  Type,
   Upload,
   Wand2,
   X,
@@ -39,7 +38,7 @@ import {
   promoBar,
   promptCards,
   promptCategories,
-  publicSignals,
+  testimonials,
   useCases,
   whatIsCards,
   workbench,
@@ -88,6 +87,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const [resolution, setResolution] = useState(workbench.resolutions[1]);
   const [outputs, setOutputs] = useState(workbench.outputs[0]);
   const [prompt, setPrompt] = useState(workbench.defaultPrompt);
+  const [activeWorkbenchFeature, setActiveWorkbenchFeature] = useState(0);
+  const [activeEditDemo, setActiveEditDemo] = useState(0);
 
   const [filter, setFilter] = useState('All');
   const [copied, setCopied] = useState<string | null>(null);
@@ -97,6 +98,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
     if (filter === 'All') return promptCards;
     return promptCards.filter((p) => p.category === filter);
   }, [filter]);
+  const activeFeature = capabilityCards[activeWorkbenchFeature];
+  const activeEdit = editDemos[activeEditDemo];
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -203,7 +206,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         <div
           className={`pointer-events-none absolute -top-40 left-1/2 -z-10 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-[140px] ${palette.glow} opacity-60`}
         />
-        <div className="mx-auto max-w-6xl px-4 pt-10 pb-12 md:px-8 md:pt-16 md:pb-20">
+        <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 md:px-8 md:pt-16 md:pb-20">
           {/* Trust strip */}
           <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold tracking-wider uppercase">
             {hero.trustLabels.map((label, i) => (
@@ -264,207 +267,222 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             </a>
           </div>
 
-          {/* Centered workbench card */}
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/10 bg-[#101218]/85 p-4 shadow-2xl shadow-black/50 backdrop-blur md:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <SegmentedControl
-                  label="Mode"
-                  options={workbench.modes}
-                  value={mode}
-                  onChange={setMode}
-                  palette={palette}
-                />
-                <SegmentedControl
-                  label="Model"
-                  options={workbench.models}
-                  value={model}
-                  onChange={setModel}
-                  palette={palette}
-                />
-              </div>
-              <button
-                type="button"
-                className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-dashed border-white/15 bg-white/5 px-3 text-xs text-zinc-300 transition hover:bg-white/10"
-              >
-                <Upload className="size-3.5" />
-                Reference image
-              </button>
-            </div>
-
-            <div className="mt-4">
-              <label
-                htmlFor="hero-prompt"
-                className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase"
-              >
-                Prompt
-              </label>
-              <textarea
-                id="hero-prompt"
-                rows={4}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-[#0B0D12] p-3.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-white/30 focus:outline-none"
-              />
-            </div>
-
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              <ChipGroup
-                label="Aspect"
-                options={workbench.ratios}
-                value={ratio}
-                onChange={setRatio}
-                palette={palette}
-              />
-              <ChipGroup
-                label="Quality"
-                options={workbench.resolutions}
-                value={resolution}
-                onChange={setResolution}
-                palette={palette}
-              />
-              <ChipGroup
-                label="Outputs"
-                options={workbench.outputs}
-                value={outputs}
-                onChange={setOutputs}
-                palette={palette}
-              />
-            </div>
-
-            <div className="mt-4 flex flex-col-reverse items-stretch gap-3 border-t border-white/5 pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <span className="text-xs text-zinc-500">
-                Credit cost shown before generation
-              </span>
-              <button
-                type="button"
-                onClick={() => handleCopy(prompt, 'hero-prompt')}
-                className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
-              >
-                <Wand2 className="size-4" />
-                {workbench.primaryAction}
-              </button>
-            </div>
+          {/* Workbench section header (centered) */}
+          <div className="mx-auto mt-12 max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Workbench</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              {workbench.title}
+            </h2>
+            <p className="mt-4 text-zinc-400">{workbench.subcopy}</p>
           </div>
 
-          {/* Showcase grid below workbench (4 thumbnails: primary + 3 thumbs) */}
-          <div className="mx-auto mt-10 max-w-6xl">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs">
-                <span className="inline-flex size-1.5 rounded-full bg-emerald-400" />
-                <span className="font-semibold text-zinc-200">
-                  Result Preview
-                </span>
-                <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
-                  {model}
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
+          {/* Workbench card: left = tool/prompt UI, right = model feature carousel that merges capability cards */}
+          <div className="mt-8 grid overflow-hidden rounded-3xl border border-white/10 bg-[#101218]/90 shadow-2xl shadow-black/50 backdrop-blur lg:grid-cols-[0.92fr_1.08fr]">
+            <div className="border-b border-white/10 p-4 md:p-6 lg:border-r lg:border-b-0">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <SegmentedControl
+                    label="Mode"
+                    options={workbench.modes}
+                    value={mode}
+                    onChange={setMode}
+                    palette={palette}
+                  />
+                  <SegmentedControl
+                    label="Model"
+                    options={workbench.models}
+                    value={model}
+                    onChange={setModel}
+                    palette={palette}
+                  />
+                </div>
                 <button
                   type="button"
-                  className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
-                  aria-label="Regenerate"
+                  className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-dashed border-white/15 bg-white/5 px-3 text-xs text-zinc-300 transition hover:bg-white/10"
                 >
-                  <RefreshCw className="size-3.5" />
+                  <Upload className="size-3.5" />
+                  Reference image
                 </button>
+              </div>
+
+              <div className="mt-5">
+                <label
+                  htmlFor="hero-prompt"
+                  className="block text-[10px] font-semibold tracking-wider text-zinc-500 uppercase"
+                >
+                  Prompt
+                </label>
+                <textarea
+                  id="hero-prompt"
+                  rows={8}
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-[#0B0D12] p-3.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-white/30 focus:outline-none"
+                />
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <ChipGroup
+                  label="Aspect"
+                  options={workbench.ratios}
+                  value={ratio}
+                  onChange={setRatio}
+                  palette={palette}
+                />
+                <ChipGroup
+                  label="Quality"
+                  options={workbench.resolutions}
+                  value={resolution}
+                  onChange={setResolution}
+                  palette={palette}
+                />
+                <ChipGroup
+                  label="Outputs"
+                  options={workbench.outputs}
+                  value={outputs}
+                  onChange={setOutputs}
+                  palette={palette}
+                />
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-white/10 bg-[#0B0D12] p-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">
+                      {workbench.signupTitle}
+                    </h3>
+                    <p className="mt-1 text-xs text-zinc-500">
+                      {workbench.signupBody}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-white/10"
+                  >
+                    <Mail className="size-3.5" />
+                    {workbench.signupCta}
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-col-reverse items-stretch gap-3 border-t border-white/5 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-xs text-zinc-500">
+                  Credit cost shown before generation
+                </span>
                 <button
                   type="button"
-                  className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
-                  aria-label="Download"
+                  onClick={() => handleCopy(prompt, 'hero-prompt')}
+                  className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
                 >
-                  <Download className="size-3.5" />
+                  <Wand2 className="size-4" />
+                  {workbench.primaryAction}
                 </button>
               </div>
             </div>
-            <div className="mt-3 grid gap-3 sm:grid-cols-4">
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-xl shadow-black/40 sm:col-span-2 sm:row-span-2">
-                <div className="relative aspect-[4/5] w-full">
-                  <Image
-                    src={workbench.primaryImage}
-                    alt={workbench.primaryAlt}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 540px, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold text-zinc-200 backdrop-blur">
-                  Hydra Glow Serum · 4:5
-                </div>
-              </div>
-              {workbench.thumbnails.map((thumb) => (
-                <div
-                  key={thumb.label}
-                  className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-[#101218]"
-                >
-                  <Image
-                    src={thumb.src}
-                    alt={thumb.alt}
-                    fill
-                    sizes="(min-width: 1024px) 250px, 50vw"
-                    className="object-cover transition group-hover:scale-105"
-                  />
-                  <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-zinc-200 backdrop-blur">
-                    {thumb.label}
+
+            <div className="bg-[#0B0D12] p-3 md:p-5">
+              <div className="flex items-center justify-between gap-3 px-1 pb-3">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="inline-flex size-1.5 rounded-full bg-emerald-400" />
+                  <span className="font-semibold text-zinc-200">
+                    Model feature carousel
+                  </span>
+                  <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
+                    {model}
                   </span>
                 </div>
-              ))}
-            </div>
-            <p className="mt-3 text-center text-xs text-zinc-500">
-              Prompt result example: ecommerce product photo with readable label text.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Workbench section header + sign-up CTA */}
-      <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-end">
-            <div>
-              <SectionEyebrow palette={palette}>Workbench</SectionEyebrow>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                {workbench.title}
-              </h2>
-              <p className="mt-4 max-w-2xl text-zinc-400">
-                {workbench.subcopy}
-              </p>
-            </div>
-            <aside
-              className={`rounded-2xl border border-white/10 bg-gradient-to-br ${palette.accentSoft} p-6`}
-            >
-              <h3 className="text-lg font-semibold text-white">
-                {workbench.signupTitle}
-              </h3>
-              <p className="mt-2 text-sm text-zinc-300">{workbench.signupBody}</p>
-              <button
-                type="button"
-                className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
-              >
-                <Mail className="size-4" />
-                {workbench.signupCta}
-              </button>
-            </aside>
-          </div>
-
-          {/* Capability cards */}
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilityCards.map((card, i) => (
-              <div
-                key={card.title}
-                className="group rounded-2xl border border-white/10 bg-[#101218] p-5 transition hover:border-white/20 hover:bg-[#151821]"
-              >
-                <div
-                  className={`inline-flex size-10 items-center justify-center rounded-xl bg-gradient-to-br ${palette.accent} text-zinc-950`}
-                >
-                  {[<Wand2 key="0" className="size-5" />, <Edit3 key="1" className="size-5" />, <Type key="2" className="size-5" />, <Layers key="3" className="size-5" />][i]}
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
+                    aria-label="Regenerate preview"
+                  >
+                    <RefreshCw className="size-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-md p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white"
+                    aria-label="Download preview"
+                  >
+                    <Download className="size-3.5" />
+                  </button>
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-white">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400">{card.copy}</p>
               </div>
-            ))}
+
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+                <div className="relative aspect-[16/11] w-full">
+                  <Image
+                    src={activeFeature.image}
+                    alt={activeFeature.alt}
+                    fill
+                    priority={activeWorkbenchFeature === 0}
+                    sizes="(min-width: 1024px) 680px, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-4">
+                    <span
+                      className={`inline-flex rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase backdrop-blur ${palette.badgeText}`}
+                    >
+                      {activeFeature.badge}
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">
+                      {activeFeature.title}
+                    </h3>
+                    <p className="mt-1 max-w-xl text-sm text-zinc-300">
+                      {activeFeature.copy}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-3 grid grid-cols-4 gap-2">
+                {capabilityCards.map((card, i) => (
+                  <button
+                    key={card.title}
+                    type="button"
+                    aria-label={`Show ${card.title}`}
+                    aria-pressed={activeWorkbenchFeature === i}
+                    onClick={() => setActiveWorkbenchFeature(i)}
+                    className={`group relative aspect-square overflow-hidden rounded-xl border transition ${
+                      activeWorkbenchFeature === i
+                        ? `border-white/40 ring-2 ${palette.accentRing}`
+                        : 'border-white/10 hover:border-white/25'
+                    }`}
+                  >
+                    <Image
+                      src={card.image}
+                      alt={card.alt}
+                      fill
+                      sizes="(min-width: 1024px) 140px, 25vw"
+                      className="object-cover transition group-hover:scale-105"
+                    />
+                    <span className="absolute inset-x-1 bottom-1 truncate rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-zinc-200 backdrop-blur">
+                      {card.title}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {workbench.thumbnails.map((thumb) => (
+                  <div
+                    key={thumb.label}
+                    className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-[#101218]"
+                  >
+                    <Image
+                      src={thumb.src}
+                      alt={thumb.alt}
+                      fill
+                      sizes="(min-width: 1024px) 180px, 33vw"
+                      className="object-cover transition group-hover:scale-105"
+                    />
+                    <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-zinc-200 backdrop-blur">
+                      {thumb.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -472,26 +490,24 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Prompt waterfall */}
       <section id="prompts" className="border-b border-white/5">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <SectionEyebrow palette={palette}>Prompt Library</SectionEyebrow>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                GPT Image 2 Prompts for Real Projects
-              </h2>
-              <p className="mt-4 text-zinc-400">
-                Browse prompt patterns for product photos, posters, social ads, UI mockups, infographics, and editable image workflows. Copy a prompt, adjust the details, and turn it into a reusable creative brief.
-              </p>
-            </div>
+          <div className="flex flex-col items-center text-center">
+            <SectionEyebrow palette={palette}>Prompt Library</SectionEyebrow>
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
+              GPT Image 2 Prompts for Real Projects
+            </h2>
+            <p className="mt-4 max-w-2xl text-zinc-400">
+              Browse prompt patterns for product photos, posters, social ads, UI mockups, infographics, and editable image workflows. Copy a prompt, adjust the details, and turn it into a reusable creative brief.
+            </p>
             <a
               href="#prompts"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               Explore All Prompts
               <ArrowRight className="size-3.5" />
             </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
             {promptCategories.map((cat) => (
               <button
                 key={cat}
@@ -572,13 +588,17 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Use cases */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Use Cases</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            What You Can Create with GPT Image 2 Studio
-          </h2>
-          <p className="mt-4 max-w-3xl text-zinc-400">
-            GPT Image 2 Studio is built for practical creative work: product visuals, marketing assets, educational graphics, UI concepts, and prompt libraries that can be reused across campaigns.
-          </p>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Use Cases</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              What You Can Create with GPT Image 2 Studio
+            </h2>
+            <p className="mt-4 text-zinc-400">
+              GPT Image 2 Studio is built for practical creative work: product
+              visuals, marketing assets, educational graphics, UI concepts, and
+              prompt libraries that can be reused across campaigns.
+            </p>
+          </div>
           <div className="mt-12 flex flex-col gap-16 md:gap-24">
             {useCases.map((u, i) => {
               const reverse = i % 2 === 1;
@@ -630,128 +650,187 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         </div>
       </section>
 
-      {/* Editing demo */}
+      {/* Editing demo — image-driven tab switcher (cross-fade between scenarios) */}
       <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Editing</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Edit Images with GPT Image 2 Studio
-          </h2>
-          <p className="mt-4 max-w-3xl text-zinc-400">
-            Use natural-language edits to change backgrounds, relight scenes, replace objects, and refine text-heavy layouts without rebuilding the image from scratch.
-          </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:px-8 md:py-20">
+          <div className="flex flex-col items-center text-center">
+            <SectionEyebrow palette={palette}>Editing</SectionEyebrow>
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Edit Images with GPT Image 2 Studio
+            </h2>
+            <p className="mt-4 max-w-3xl text-zinc-400">
+              Use natural-language edits to change backgrounds, relight scenes, replace objects, and refine text-heavy layouts without rebuilding the image from scratch.
+            </p>
+          </div>
+
+          {/* Tab buttons */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             {editDemos.map((d, i) => (
-              <article
+              <button
                 key={d.title}
-                className="overflow-hidden rounded-2xl border border-white/10 bg-[#101218]"
+                type="button"
+                onClick={() => setActiveEditDemo(i)}
+                aria-pressed={activeEditDemo === i}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition sm:text-sm ${
+                  activeEditDemo === i
+                    ? `border-transparent bg-gradient-to-r ${palette.accent} text-zinc-950`
+                    : 'border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10'
+                }`}
               >
-                <div className="relative aspect-[16/9] w-full">
+                {d.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Active tab — large image with cross-fade + 1-line copy + monospace prompt */}
+          <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
+            <div className="relative aspect-[16/9] w-full">
+              {editDemos.map((d, i) => (
+                <div
+                  key={d.title}
+                  className={`absolute inset-0 transition-opacity duration-500 ${
+                    i === activeEditDemo ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  aria-hidden={i !== activeEditDemo}
+                >
                   <Image
                     src={d.image}
                     alt={d.title}
                     fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    loading="lazy"
+                    sizes="(min-width: 1024px) 1100px, 100vw"
+                    loading={i === 0 ? 'eager' : 'lazy'}
                     className="object-cover"
                   />
                 </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-zinc-500 uppercase">
-                    <span>Demo 0{i + 1}</span>
-                    <span className="size-1 rounded-full bg-zinc-600" />
-                    <span className={palette.badgeText}>{d.title}</span>
-                  </div>
-                  <p className="mt-3 text-sm text-zinc-300">{d.copy}</p>
-                  <div className="mt-4 rounded-lg border border-white/10 bg-[#0B0D12] p-3 font-mono text-[12px] text-zinc-300">
-                    {d.prompt}
-                  </div>
-                </div>
-              </article>
-            ))}
+              ))}
+              <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-zinc-100 backdrop-blur">
+                <span className={palette.badgeText}>
+                  Demo {String(activeEditDemo + 1).padStart(2, '0')}
+                </span>
+                <span className="size-1 rounded-full bg-zinc-500" />
+                <span>{activeEdit.title}</span>
+              </div>
+            </div>
+            <div className="border-t border-white/10 bg-[#0B0D12] p-5 md:p-6">
+              <p className="text-sm text-zinc-300">{activeEdit.copy}</p>
+              <div className="mt-3 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-[12px] leading-relaxed text-zinc-300">
+                {activeEdit.prompt}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What is + Comparison */}
+      {/* What Is + Comparison (stacked, centered) */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <SectionEyebrow palette={palette}>About</SectionEyebrow>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                What Is GPT Image 2 Studio?
-              </h2>
-              <p className="mt-4 text-zinc-400">
-                GPT Image 2 Studio is an independent AI image generator and editor workspace built around GPT Image 2, Nano Banana, and reusable prompt workflows. It helps creators start from a text prompt or reference image, choose the right model for the job, and create visuals for ecommerce, marketing, education, UI concepts, and text-rich design tasks.
-              </p>
-              <p className="mt-3 rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-400">
-                GPT Image 2 Studio is an independent product and is not an official OpenAI or Google website.
-              </p>
+          {/* What Is */}
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>About</SectionEyebrow>
+            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+              What Is GPT Image 2 Studio?
+            </h2>
+            <p className="mt-4 text-zinc-400">
+              GPT Image 2 Studio is an independent AI image generator and
+              editor workspace built around GPT Image 2, Nano Banana, and
+              reusable prompt workflows. It helps creators start from a text
+              prompt or reference image, choose the right model for the job,
+              and create visuals for ecommerce, marketing, education, UI
+              concepts, and text-rich design tasks.
+            </p>
+            <p className="mx-auto mt-4 max-w-2xl rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-400">
+              GPT Image 2 Studio is an independent product and is not an
+              official OpenAI or Google website.
+            </p>
+          </div>
 
-              <div className="mt-6 grid gap-3">
-                {whatIsCards.map((c, i) => (
-                  <div
-                    key={c.title}
-                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-[#101218] p-4"
-                  >
-                    <span
-                      className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${palette.accent} text-xs font-bold text-zinc-950`}
-                    >
-                      {i + 1}
-                    </span>
-                    <div>
-                      <h3 className="text-sm font-semibold text-white">
-                        {c.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-zinc-400">{c.copy}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <SectionEyebrow palette={palette}>Comparison</SectionEyebrow>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                GPT Image 2 Studio vs Nano Banana
-              </h2>
-              <p className="mt-4 text-zinc-400">
-                GPT Image 2 Studio is the workflow layer. GPT Image 2 and Nano Banana are model options that can be used for different image tasks. This comparison helps users choose a starting point, not to rank one model as universally better.
-              </p>
-              <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-                <div className="grid grid-cols-[1fr_1.2fr_1.2fr] border-b border-white/10 bg-white/5 text-[11px] font-semibold tracking-wide uppercase">
-                  <div className="px-3 py-3 text-zinc-300">Dimension</div>
-                  <div className={`px-3 py-3 ${palette.badgeText}`}>
-                    GPT Image 2 Studio
-                  </div>
-                  <div className="px-3 py-3 text-zinc-400">Nano Banana</div>
-                </div>
-                {comparison.map((row, i) => (
-                  <div
-                    key={row.dimension}
-                    className={`grid grid-cols-[1fr_1.2fr_1.2fr] gap-2 px-3 py-3 text-xs sm:text-sm ${
-                      i !== comparison.length - 1
-                        ? 'border-b border-white/5'
-                        : ''
-                    }`}
-                  >
-                    <div className="font-semibold text-zinc-300">
-                      {row.dimension}
-                    </div>
-                    <div className="text-zinc-200">{row.studio}</div>
-                    <div className="text-zinc-400">{row.nano}</div>
-                  </div>
-                ))}
-              </div>
-              <a
-                href="#prompts"
-                className={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${palette.badgeText} hover:underline`}
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {whatIsCards.map((c, i) => (
+              <div
+                key={c.title}
+                className="rounded-2xl border border-white/10 bg-[#101218] p-5"
               >
-                Compare Prompt Workflows
-                <ArrowRight className="size-3.5" />
-              </a>
+                <span
+                  className={`inline-flex size-9 items-center justify-center rounded-lg bg-gradient-to-br ${palette.accent} text-xs font-bold text-zinc-950`}
+                >
+                  {i + 1}
+                </span>
+                <h3 className="mt-4 text-base font-semibold text-white">
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">
+                  {c.copy}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Comparison */}
+          <div className="mx-auto mt-20 max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Comparison</SectionEyebrow>
+            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+              GPT Image 2 Studio vs Nano Banana
+            </h2>
+            <p className="mt-4 text-zinc-400">
+              GPT Image 2 Studio is the workflow layer. GPT Image 2 and Nano
+              Banana are model options that can be used for different image
+              tasks. This comparison helps users choose a starting point, not
+              to rank one model as universally better.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+            <div className="hidden grid-cols-[0.8fr_1.2fr_1.2fr] border-b border-white/10 bg-white/5 text-[11px] font-semibold tracking-wide uppercase md:grid">
+              <div className="px-4 py-3 text-zinc-300">Dimension</div>
+              <div className={`px-4 py-3 ${palette.badgeText}`}>
+                GPT Image 2 Studio
+              </div>
+              <div className="px-4 py-3 text-zinc-400">Nano Banana</div>
             </div>
+            {comparison.map((row, i) => (
+              <div
+                key={row.dimension}
+                className={`grid gap-3 px-4 py-4 text-sm md:grid-cols-[0.8fr_1.2fr_1.2fr] ${
+                  i !== comparison.length - 1 ? 'border-b border-white/5' : ''
+                }`}
+              >
+                <div>
+                  <span className="text-[10px] font-semibold tracking-wider text-zinc-600 uppercase md:hidden">
+                    Dimension
+                  </span>
+                  <p className="mt-1 font-semibold text-zinc-200 md:mt-0">
+                    {row.dimension}
+                  </p>
+                </div>
+                <div>
+                  <span
+                    className={`text-[10px] font-semibold tracking-wider uppercase md:hidden ${palette.badgeText}`}
+                  >
+                    GPT Image 2 Studio
+                  </span>
+                  <p className="mt-1 leading-6 text-zinc-300 md:mt-0">
+                    {row.studio}
+                  </p>
+                </div>
+                <div>
+                  <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
+                    Nano Banana
+                  </span>
+                  <p className="mt-1 leading-6 text-zinc-400 md:mt-0">
+                    {row.nano}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex justify-center">
+            <a
+              href="#prompts"
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold ${palette.badgeText} hover:underline`}
+            >
+              Compare Prompt Workflows
+              <ArrowRight className="size-3.5" />
+            </a>
           </div>
         </div>
       </section>
@@ -815,10 +894,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Core Features */}
       <section className="border-b border-white/5">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Core Features</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Core Features for AI Image Workflows
-          </h2>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Core Features</SectionEyebrow>
+            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Core Features of GPT Image 2
+            </h2>
+          </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {coreFeatures.map((f, i) => (
               <div
@@ -899,32 +980,53 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         </div>
       </section>
 
-      {/* Public Signals */}
+      {/* Testimonials — creator quotes */}
       <section className="border-b border-white/5">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Public Signals</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            What Creators Are Exploring
-          </h2>
-          <p className="mt-4 max-w-3xl text-zinc-400">
-            Early GPT Image 2 and Nano Banana discussions consistently focus on practical image tasks: readable text, product mockups, UI screens, infographics, and structured prompt patterns.
-          </p>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {publicSignals.map((s, i) => (
-              <div
-                key={s.title}
-                className="rounded-2xl border border-white/10 bg-[#101218] p-6"
+          <div className="flex flex-col items-center text-center">
+            <SectionEyebrow palette={palette}>Creator Voices</SectionEyebrow>
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
+              What Creators Are Exploring
+            </h2>
+            <p className="mt-4 max-w-3xl text-zinc-400">
+              Early users of GPT Image 2 and Nano Banana share how they fold AI image workflows into product launches, marketing campaigns, packaging, UI concepts, and content production.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <figure
+                key={t.handle}
+                className="relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/20"
               >
-                <span className="text-xs font-mono tracking-wider text-zinc-500">
-                  Insight 0{i + 1}
-                </span>
-                <h3 className="mt-2 text-lg font-semibold text-white">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400">{s.copy}</p>
-              </div>
+                <Quote
+                  className={`size-6 ${palette.badgeText} opacity-70`}
+                  aria-hidden="true"
+                />
+                <blockquote className="text-sm leading-relaxed text-zinc-200">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-auto flex items-center gap-3 border-t border-white/5 pt-4">
+                  <span
+                    aria-hidden="true"
+                    className={`inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br ${t.color} text-sm font-bold text-white`}
+                  >
+                    {t.initial}
+                  </span>
+                  <div className="leading-tight">
+                    <div className="text-sm font-semibold text-white">
+                      {t.name}
+                    </div>
+                    <div className="text-xs text-zinc-400">
+                      {t.role} · <span className="text-zinc-500">{t.handle}</span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
             ))}
           </div>
+          <p className="mt-6 text-center text-xs text-zinc-500">
+            Quotes are illustrative creator personas reflecting public discussions about GPT Image 2 and Nano Banana workflows.
+          </p>
         </div>
       </section>
 
