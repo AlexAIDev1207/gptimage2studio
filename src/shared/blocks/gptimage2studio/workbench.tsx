@@ -102,17 +102,17 @@ const MODEL_OPTIONS: ModelOption[] = [
 ];
 
 const ASPECT_RATIO_OPTIONS: { value: string; label: string }[] = [
-  { value: 'auto', label: 'Auto · AI auto-decide' },
-  { value: '1:1', label: '1:1 · Square' },
-  { value: '4:5', label: '4:5 · Portrait' },
-  { value: '5:4', label: '5:4 · Landscape' },
-  { value: '3:4', label: '3:4 · Portrait' },
-  { value: '4:3', label: '4:3 · Landscape' },
-  { value: '16:9', label: '16:9 · Widescreen' },
-  { value: '9:16', label: '9:16 · Vertical' },
-  { value: '3:2', label: '3:2 · Photo' },
-  { value: '2:3', label: '2:3 · Photo Portrait' },
-  { value: '21:9', label: '21:9 · Cinematic' },
+  { value: 'auto', label: 'Auto' },
+  { value: '1:1', label: '1:1 Square' },
+  { value: '4:5', label: '4:5 Portrait' },
+  { value: '5:4', label: '5:4 Landscape' },
+  { value: '3:4', label: '3:4 Portrait' },
+  { value: '4:3', label: '4:3 Landscape' },
+  { value: '16:9', label: '16:9 Wide' },
+  { value: '9:16', label: '9:16 Vertical' },
+  { value: '3:2', label: '3:2 Photo' },
+  { value: '2:3', label: '2:3 Photo' },
+  { value: '21:9', label: '21:9 Cinema' },
 ];
 
 const RESOLUTION_OPTIONS: {
@@ -599,9 +599,9 @@ export default function Workbench({
     (isImageEditMode && referenceImageUrls.length === 0);
 
   return (
-    <div className="mt-10">
+    <div className="mt-9">
       {/* Promo card */}
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1280px]">
         <div
           className={`flex flex-col items-start gap-4 rounded-2xl border ${theme.promoBorder} ${theme.promoBg} p-4 shadow-[0_0_60px_-28px_rgba(34,211,238,0.45)] sm:flex-row sm:items-center sm:justify-between md:p-5`}
         >
@@ -632,7 +632,7 @@ export default function Workbench({
 
       {/* Workbench card */}
       <div
-        className={`mx-auto mt-7 grid max-w-6xl overflow-hidden rounded-[22px] border border-white/10 bg-[#17181D] shadow-2xl ${theme.panelGlow} backdrop-blur lg:grid-cols-[minmax(360px,0.38fr)_minmax(0,0.62fr)]`}
+        className={`mx-auto mt-7 grid max-w-[1280px] overflow-hidden rounded-[22px] border border-white/10 bg-[#17181D] shadow-2xl ${theme.panelGlow} backdrop-blur lg:grid-cols-[minmax(440px,0.38fr)_minmax(0,0.62fr)]`}
       >
         {/* LEFT: form */}
         <div className="border-b border-white/10 bg-[#17181D] p-4 md:p-6 lg:border-r lg:border-b-0">
@@ -657,7 +657,7 @@ export default function Workbench({
 
           <div className="mt-5">
             <div className="flex items-center justify-between">
-              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
                 Select Model
               </label>
               <a
@@ -667,7 +667,7 @@ export default function Workbench({
                 Compare →
               </a>
             </div>
-            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+            <div className="mt-2 grid gap-2">
               {MODEL_OPTIONS.map((opt) => {
                 const isActive = opt.key === modelKey;
                 return (
@@ -675,7 +675,7 @@ export default function Workbench({
                     key={opt.key}
                     type="button"
                     onClick={() => setModelKey(opt.key)}
-                    className={`flex min-h-16 items-center gap-2 rounded-xl border px-3 py-3 text-left transition ${
+                    className={`flex min-h-[68px] items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition ${
                       isActive
                         ? theme.activeModel
                         : 'border-white/10 bg-[#0B0D12] text-zinc-300 hover:border-white/20 hover:bg-white/[0.04]'
@@ -688,7 +688,7 @@ export default function Workbench({
                       <span className="block text-sm font-bold leading-tight text-white">
                         {opt.label}
                       </span>
-                      <span className="mt-0.5 block truncate text-[11px] text-zinc-400">
+                      <span className="mt-0.5 block text-[11px] leading-snug text-zinc-400">
                         {opt.tagline}
                       </span>
                     </span>
@@ -701,10 +701,10 @@ export default function Workbench({
           {isImageEditMode && (
             <div className="mt-5">
               <div className="flex items-center justify-between">
-                <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+                <label className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
                   Reference Images
                 </label>
-                <span className="text-[11px] text-zinc-500">
+                <span className="text-[11px] text-zinc-400">
                   Required for editing
                 </span>
               </div>
@@ -749,7 +749,7 @@ export default function Workbench({
             <div className="flex items-center justify-between">
               <label
                 htmlFor="wb-prompt"
-                className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase"
+                className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase"
               >
                 Describe your idea
               </label>
@@ -765,9 +765,9 @@ export default function Workbench({
               id="wb-prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              rows={7}
+              rows={6}
               placeholder="Describe the effect you want, including style, color, composition and other details..."
-              className={`mt-2 min-h-[178px] resize-none rounded-xl border-[#252832] bg-[#050507] px-4 py-3 text-sm leading-relaxed text-zinc-200 shadow-inner shadow-black/30 placeholder:text-zinc-600 focus-visible:ring-2 ${theme.focusRing} ${
+              className={`mt-2 min-h-[154px] resize-none rounded-xl border-[#252832] bg-[#050507] px-4 py-3 text-sm leading-relaxed text-zinc-200 shadow-inner shadow-black/30 placeholder:text-zinc-600 focus-visible:ring-2 ${theme.focusRing} ${
                 isPromptOverLimit ? 'border-rose-500/60' : ''
               }`}
               style={{ backgroundColor: '#050507', color: '#e4e4e7' }}
@@ -788,14 +788,14 @@ export default function Workbench({
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
                 Aspect Ratio
               </label>
               <Select
                 value={aspectRatio}
                 onValueChange={(v) => setAspectRatio(v)}
               >
-                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
+                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
                   <span className="flex items-center gap-2">
                     {aspectRatio === 'auto' && (
                       <span className="inline-flex size-3 rounded-sm bg-emerald-400" />
@@ -818,14 +818,14 @@ export default function Workbench({
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+              <label className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
                 Resolution
               </label>
               <Select
                 value={resolution}
                 onValueChange={(v) => setResolution(v as ResolutionTier)}
               >
-                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
+                <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
                   <span className="flex items-center gap-2">
                     <Monitor className="size-3.5 text-zinc-400" />
                     <SelectValue placeholder="2K" />
@@ -847,14 +847,14 @@ export default function Workbench({
           </div>
 
           <div className="mt-3">
-            <label className="block text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+            <label className="block text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
               Output Count
             </label>
             <Select
               value={String(outputCount)}
               onValueChange={(v) => setOutputCount(Number(v) as OutputCount)}
             >
-              <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04]">
+              <SelectTrigger className="mt-2 w-full rounded-xl border-white/10 bg-[#0B0D12] text-zinc-200 hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
                 <span className="flex items-center gap-2">
                   <Images className="size-3.5 text-zinc-400" />
                   <SelectValue placeholder="1" />
@@ -1002,8 +1002,8 @@ function CarouselPanel({
   activeFeature: (typeof capabilityCards)[number];
 }) {
   return (
-    <div className="relative h-full min-h-[520px] lg:min-h-[690px]">
-      <div className="relative h-full min-h-[520px] overflow-hidden rounded-[18px] border border-white/10 bg-[#0B0D12] lg:min-h-[690px]">
+    <div className="relative h-full min-h-[560px] lg:min-h-[700px]">
+      <div className="relative h-full min-h-[560px] overflow-hidden rounded-[18px] border border-white/10 bg-[#0B0D12] lg:min-h-[700px]">
         <Image
           src={activeFeature.image}
           alt={activeFeature.alt}
@@ -1047,7 +1047,7 @@ function CarouselPanel({
           <span className="inline-flex rounded-full border border-white/10 bg-black/55 px-3 py-1 text-[10px] font-black tracking-wider text-cyan-200 uppercase backdrop-blur">
             {activeFeature.badge}
           </span>
-          <h3 className="mt-3 max-w-xl text-3xl font-black tracking-tight text-white md:text-4xl">
+          <h3 className="mt-3 max-w-xl text-2xl font-black tracking-tight text-white md:text-3xl">
             {activeFeature.title}
           </h3>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-200 md:text-base">
@@ -1084,7 +1084,7 @@ function ProgressPanel({
   statusLabel: string;
 }) {
   return (
-    <div className="flex h-full min-h-[520px] flex-col items-center justify-center gap-4 rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 lg:min-h-[690px]">
+    <div className="flex h-full min-h-[560px] flex-col items-center justify-center gap-4 rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 lg:min-h-[700px]">
       <span className="inline-flex size-12 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300">
         <Loader2 className="size-6 animate-spin" />
       </span>
@@ -1113,7 +1113,7 @@ function ResultsPanel({
 }) {
   if (images.length === 0) {
     return (
-      <div className="flex h-full min-h-[520px] flex-col items-center justify-center rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 text-center lg:min-h-[690px]">
+      <div className="flex h-full min-h-[560px] flex-col items-center justify-center rounded-[18px] border border-white/10 bg-[#0B0D12] p-6 text-center lg:min-h-[700px]">
         <span className="mb-3 inline-flex size-12 items-center justify-center rounded-full bg-white/5 text-zinc-400">
           <ImageIcon className="size-6" />
         </span>

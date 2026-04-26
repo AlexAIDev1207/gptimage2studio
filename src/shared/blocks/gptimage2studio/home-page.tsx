@@ -54,12 +54,12 @@ const palettes: Record<
   }
 > = {
   A: {
-    accent: 'from-sky-400 via-cyan-400 to-violet-500',
-    accentSoft: 'from-sky-500/20 via-cyan-500/15 to-violet-500/20',
-    accentRing: 'ring-cyan-400/40',
-    accentBg: 'bg-cyan-400 hover:bg-cyan-300 text-zinc-950',
-    badgeText: 'text-cyan-300',
-    glow: 'bg-cyan-500/20',
+    accent: 'from-emerald-400 via-teal-400 to-cyan-400',
+    accentSoft: 'from-emerald-500/20 via-teal-500/15 to-cyan-500/20',
+    accentRing: 'ring-emerald-400/40',
+    accentBg: 'bg-emerald-500 hover:bg-emerald-400 text-zinc-950',
+    badgeText: 'text-emerald-300',
+    glow: 'bg-emerald-500/20',
   },
   B: {
     accent: 'from-fuchsia-400 via-violet-500 to-indigo-500',
@@ -187,14 +187,11 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       </header>
 
       {/* Hero + Workbench (centered, single column to match nanobanana) */}
-      <section
-        id="workbench"
-        className="relative overflow-hidden border-b border-white/5"
-      >
+      <section className="relative overflow-hidden border-b border-white/5">
         <div
           className={`pointer-events-none absolute -top-40 left-1/2 -z-10 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-[140px] ${palette.glow} opacity-60`}
         />
-        <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 md:px-8 md:pt-16 md:pb-20">
+        <div className="mx-auto max-w-7xl px-4 pt-8 pb-12 md:px-8 md:pt-12 md:pb-20">
           {/* Trust strip */}
           <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold tracking-wider uppercase">
             {hero.trustLabels.map((label, i) => (
@@ -225,7 +222,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
 
           {/* H1 centered */}
-          <h1 className="mt-5 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
             <span
               className={`bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`}
             >
@@ -256,7 +253,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
 
           {/* Workbench section header (centered) */}
-          <div className="mx-auto mt-12 max-w-3xl text-center">
+          <div id="workbench" className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center">
             <SectionEyebrow palette={palette}>Workbench</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               {workbench.title}
@@ -620,10 +617,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* Benefits */}
       <section className="border-b border-white/5">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Benefits</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Why Choose GPT Image 2 Studio
-          </h2>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Benefits</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Why Choose GPT Image 2 Studio
+            </h2>
+          </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {benefits.map((b, i) => (
               <div
@@ -648,10 +647,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* How to use */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>How To Use</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            How to Use GPT Image 2 Studio
-          </h2>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>How To Use</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              How to Use GPT Image 2 Studio
+            </h2>
+          </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {howToUse.map((s) => (
               <div
@@ -711,13 +712,15 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         className="border-b border-white/5 bg-[#0B0D12]"
       >
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Simple Plans for GPT Image 2 Studio
-          </h2>
-          <p className="mt-4 max-w-3xl text-zinc-400">
-            Choose a plan for testing prompts, generating campaign visuals, and building repeatable image workflows. Final credits, pricing, and limits will be shown before launch.
-          </p>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Simple Plans for GPT Image 2 Studio
+            </h2>
+            <p className="mt-4 text-zinc-400">
+              Choose a plan for testing prompts, generating campaign visuals, and building repeatable image workflows. Final credits, pricing, and limits will be shown before launch.
+            </p>
+          </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {pricing.map((p) => (
               <div
@@ -815,10 +818,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       {/* FAQ */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
         <div className="mx-auto max-w-4xl px-4 py-14 md:px-8 md:py-20">
-          <SectionEyebrow palette={palette}>FAQ</SectionEyebrow>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Frequently Asked Questions
-          </h2>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow palette={palette}>FAQ</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
           <div className="mt-8 divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
             {faqs.map((f, i) => {
               const isOpen = openFaq === i;
