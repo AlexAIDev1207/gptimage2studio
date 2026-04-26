@@ -184,7 +184,7 @@ export const capabilityCards = [
   {
     title: 'Structured Visuals',
     copy: 'Draft infographics, UI screens, annotation graphics, and explainers with clear labels and reviewable composition.',
-    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-concepts.webp',
+    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-mockups.webp',
     alt: 'Infographic and UI concept previews for multi-model image workflows.',
     badge: 'Visual #3',
   },
@@ -381,32 +381,40 @@ export const promptCards: PromptCard[] = [
 
 export const useCases: UseCase[] = [
   {
-    title: 'Ecommerce Product Photos',
-    image: '/imgs/gptimage2studio/webp/usecase-ecommerce-product-photos.webp',
-    copy: 'Create clean product shots, lifestyle scenes, packaging mockups, and before/after product edits from structured prompts. GPT Image 2 Studio is useful when you need consistent ecommerce visuals without setting up a photo shoot for every product angle or campaign idea. Start with the product, define the setting, lock the label text, and generate a result that feels ready for a store page, landing page, or ad creative.',
-    cta: 'Try Product Photo Prompts',
+    title: 'Product Photos & Packaging Mockups',
+    image: '/imgs/gptimage2studio/webp/usecase-product-photos-mockup-hero.webp',
+    copy: 'Generate ecommerce-ready product shots and 3D packaging mockups in one prompt — used by DTC founders, Shopify sellers, and brand designers. GPT Image 2 nails label text, material textures, and contact shadows so visuals look ready for product pages without retouching.',
+    cta: 'Start Creating',
     snippet:
       'Create a premium ecommerce photo of a skincare serum bottle on a marble surface with readable label text and soft daylight.',
-    href: '#prompts',
+    href: '#workbench',
   },
   {
-    title: 'Marketing Posters & Social Ads',
-    image:
-      '/imgs/gptimage2studio/webp/usecase-marketing-posters-social-ads.webp',
-    copy: 'Turn campaign ideas into posters, story ads, thumbnails, banners, and launch visuals. Use short exact text, format-specific prompts, and visual hierarchy to create assets for product launches, newsletters, social media, events, and paid creative testing. The best prompts define the headline, subtitle, CTA, format, composition, and negative constraints in one reusable brief.',
-    cta: 'Explore Marketing Prompts',
+    title: 'Posters & Banners with Perfect Text',
+    image: '/imgs/gptimage2studio/webp/usecase-posters-banners-text.webp',
+    copy: "Design launch posters, event banners, and print-ready visuals where every headline stays sharp and on-brand. GPT Image 2's text rendering hits 99% accuracy across English, Japanese, Korean, and Chinese, so creative drafts ship without manual fixes.",
+    cta: 'Try It Now',
     snippet:
       'Design a launch poster with headline "CREATE FORWARD", subtitle "AI Design Summit 2026", bold typography, and blue-black geometric shapes.',
-    href: '#prompts',
+    href: '#workbench',
   },
   {
-    title: 'Infographics and UI Concepts',
-    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-concepts.webp',
-    copy: 'Create explainers, product annotations, dashboard concepts, app screenshots, funnel diagrams, and visual drafts for content or product teams. These assets work best when the prompt specifies the exact labels, layout structure, number of sections, and visual style. Use GPT Image 2 Studio to turn rough communication ideas into structured visuals that are easier to review, rewrite, and refine.',
-    cta: 'Browse UI and Infographic Prompts',
+    title: 'Social Ads & Creator Thumbnails',
+    image: '/imgs/gptimage2studio/webp/usecase-social-ads-thumbnails.webp',
+    copy: 'Spin up TikTok ads, Instagram covers, and YouTube thumbnails with bold readable text and vertical-ratio layouts. Use GPT Image 2 prompts to test multiple ad creatives a day instead of waiting on a designer.',
+    cta: 'Experience It',
     snippet:
-      'Create a launch funnel infographic with four steps: Visit, Sign Up, Create, Share, beside a clean SaaS dashboard concept.',
-    href: '#prompts',
+      'Vertical 9:16 social ad for a Spring Drop sneaker launch. Energetic motion, retail styling, headline "Spring Drop -20%", clear "Shop Now" CTA.',
+    href: '#workbench',
+  },
+  {
+    title: 'Infographics & UI Mockups',
+    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-mockups.webp',
+    copy: "Draft labeled infographics, dashboard concepts, app screenshots, and explainer diagrams from a single structured prompt. GPT Image 2's reasoning model plans the layout before rendering, keeping labels, arrows, and steps coherent.",
+    cta: 'Generate Yours',
+    snippet:
+      'SaaS analytics dashboard mockup with sidebar, line chart, four metric cards, readable labels for "StudioMetrics".',
+    href: '#workbench',
   },
 ];
 
@@ -442,110 +450,176 @@ export const editDemos: EditDemo[] = [
   },
 ];
 
+export const whatIsIntro =
+  "GPT Image 2 Studio is a web workspace for AI image creation. Bring a prompt or a reference image, pick GPT Image 2 or Nano Banana, and walk away with product photos, posters, social ads, infographics, and UI mockups in minutes — no design software, no API setup.";
+
 export const whatIsCards = [
   {
-    title: 'Generate from Prompts',
-    copy: 'Write structured prompts for product shots, ads, posters, thumbnails, dashboards, and infographics.',
+    title: 'Two Top Models, One Workspace',
+    copy: "GPT Image 2 Studio is a prompt-first web workspace for generating and editing images with OpenAI's GPT Image 2 and Google's Nano Banana side by side. Bring a prompt or reference image, pick the model that fits the task, and ship the result in minutes — no separate API keys or accounts.",
   },
   {
-    title: 'Edit with Reference Images',
-    copy: 'Use existing images as starting points for background changes, object swaps, lighting fixes, and layout improvements.',
+    title: 'Built for Creators Who Ship',
+    copy: 'DTC founders, brand designers, content creators, marketers, and educators use the Studio for product photos, social ads, posters, infographics, and UI mockups — anywhere ready-to-publish AI images matter more than tinkering with raw API parameters.',
   },
   {
-    title: 'Reuse Prompt Templates',
-    copy: 'Save repeatable prompt patterns for ecommerce, marketing, education, UI, brand, and content workflows.',
+    title: 'Independent of OpenAI and Google',
+    copy: 'GPT Image 2 Studio is an independent product and is not affiliated with, endorsed by, or sponsored by OpenAI or Google. We provide a workflow layer on top of their public model APIs, with our own UI, prompt library, and editing experience.',
   },
 ];
+
+export const comparisonIntro =
+  "GPT Image 2 and Nano Banana are two of the strongest image models available today, but they're built around different strengths. GPT Image 2 leads on text rendering, layout reasoning, and production speed; Nano Banana leads on portrait realism and multi-reference character consistency. Use this side-by-side to pick the right starting point for your task — not to declare a winner.";
+
+export const comparisonHero = {
+  src: '/imgs/gptimage2studio/webp/vs-gpt-image-2-vs-nano-banana-hero.webp',
+  alt: 'Side-by-side example comparing GPT Image 2 and Nano Banana outputs from a similar creative brief.',
+};
+
+export const comparisonCta = {
+  label: 'Try Both Models',
+  href: '#workbench',
+};
 
 export const comparison = [
   {
-    dimension: 'Product role',
-    studio:
-      'Prompt-first web studio for generating, editing, organizing, and reusing image workflows.',
-    nano: 'Image model/workflow option known for image generation and editing use cases.',
+    dimension: 'Core strength',
+    gptImage2:
+      "OpenAI's reasoning-first image model — plans the layout before rendering, strong on instruction-heavy briefs and text-rich visuals.",
+    nanoBanana:
+      'Google Gemini-based model focused on character consistency and reference-driven editing, with strong portrait realism.',
   },
   {
-    dimension: 'Best fit',
-    studio:
-      'Product photos, posters, social ads, text-rich visuals, prompt templates, and reusable creative briefs.',
-    nano: 'Reference-image workflows, creative exploration, and image editing scenarios where it performs well.',
+    dimension: 'Text in image',
+    gptImage2:
+      'Renders headlines, labels, and UI text with around 99% accuracy in English, plus solid Japanese, Korean, Chinese, Hindi, and Bengali.',
+    nanoBanana:
+      'Solid multilingual text rendering, strongest on logos, posters, and short overlays.',
   },
   {
-    dimension: 'User workflow',
-    studio:
-      'Start with a prompt, choose model/settings, preview results, copy prompts, and move between examples and guides.',
-    nano: 'Used as one model choice inside a broader creative workflow.',
+    dimension: 'Reference & multi-image input',
+    gptImage2:
+      'Standard image-to-image plus multi-turn editing; supports up to 16 reference images per edit.',
+    nanoBanana:
+      'Accepts up to 14 reference images and multi-character composition — convenient for character locking and brand consistency.',
   },
   {
-    dimension: 'SEO value',
-    studio:
-      'Gives users a landing page, prompt library, blog, examples, and use cases around GPT Image 2 workflows.',
-    nano: 'Supports comparison and multi-model content, especially for users searching Nano Banana prompts.',
+    dimension: 'Resolution & output',
+    gptImage2:
+      'Up to 4K with flexible aspect ratios from ultra-wide 3:1 to vertical 1:3, plus 1–8 image batching per prompt.',
+    nanoBanana:
+      '2K and 4K outputs with quick reformatting for multiple ad sizes.',
+  },
+  {
+    dimension: 'Speed',
+    gptImage2:
+      'Instant mode generates in roughly 3 seconds; thinking mode takes longer on layout-heavy briefs.',
+    nanoBanana:
+      'Generation typically takes around 10–15 seconds per image.',
+  },
+  {
+    dimension: 'Best for',
+    gptImage2:
+      'Posters, packaging, UI mockups, infographics, and any brief where text accuracy and layout reasoning matter.',
+    nanoBanana:
+      'Portraits, lifestyle imagery, and reference-driven edits where pore-level realism or multi-character consistency matters.',
   },
 ];
+
+export const whyChooseSubtitle =
+  "OpenAI's GPT Image 2 leads on text rendering, layout reasoning, and production speed — here's what that means for the briefs you actually ship.";
+
+export const whyChooseCta = {
+  label: 'Try GPT Image 2 Now',
+  href: '#workbench',
+};
 
 export const benefits = [
   {
-    title: 'One Studio for Prompt-First Image Work',
-    copy: 'Keep generation, editing, examples, prompts, and model choices in one workflow instead of jumping between disconnected tools and notes.',
+    title: 'Perfect Text in Every Language',
+    copy: 'Around 99% character accuracy in English plus solid Japanese, Korean, Chinese, Hindi, and Bengali. Build print-ready menus, posters, UI mockups, and brand assets without post-edit fixes.',
   },
   {
-    title: 'Built Around Real Project Scenarios',
-    copy: 'Use prompts for ecommerce, ads, thumbnails, infographics, UI mockups, brand visuals, and content assets that real teams need.',
+    title: 'Thinks Before It Generates',
+    copy: "GPT Image 2 is OpenAI's first image model with native reasoning. It plans the composition, verifies the layout, and follows multi-constraint briefs in a single prompt — fewer \"almost right\" generations, less iteration.",
   },
   {
-    title: 'Prompt Library Connected to Every Workflow',
-    copy: 'Every example is designed to become a prompt page, blog guide, internal link, and reusable starting point for future projects.',
+    title: 'Production-Ready, Out of the Box',
+    copy: 'Native 4K output, 1–8 image batching with consistent characters and props, and noticeably faster generation than the previous model. Skip upscaling, skip retouching, ship the result.',
   },
 ];
 
-export const howToUse = [
+export type HowToStep = {
+  step: string;
+  title: string;
+  copy: string;
+  image: string;
+  alt: string;
+};
+
+export const howToUseSubtitle =
+  'From blank prompt to publish-ready visual in four steps — same workspace, two models, no API setup.';
+
+export const howToUseCta = {
+  label: 'Open the Workbench',
+  href: '#workbench',
+};
+
+export const howToUse: HowToStep[] = [
   {
     step: '01',
-    title: 'Choose GPT Image 2 or Nano Banana',
-    copy: 'Pick the model workflow that best matches your task, such as product imagery, text-rich design, editing, or reference-driven visuals.',
+    title: 'Pick GPT Image 2 or Nano Banana',
+    copy: 'Choose GPT Image 2 for text-rich design, posters, packaging, and UI mockups. Choose Nano Banana when reference images, portrait realism, or multi-character consistency matter most. Switch between them per task — no separate accounts.',
+    image: '/imgs/gptimage2studio/webp/howto-step-01-pick-model.webp',
+    alt: 'GPT Image 2 Studio model picker showing GPT Image 2 selected and Nano Banana available to switch.',
   },
   {
     step: '02',
-    title: 'Add a Prompt or Reference Image',
-    copy: 'Write a structured prompt, paste a prompt template, or upload a reference image when the task starts from an existing visual.',
+    title: 'Drop a Prompt or Reference Image',
+    copy: 'Type a prompt, paste a template from the prompt library, or upload a reference image. Structured briefs — subject, text, layout, style, and constraints — outperform one-line prompts in both models.',
+    image: '/imgs/gptimage2studio/webp/howto-step-02-prompt-or-reference.webp',
+    alt: 'Studio input area showing a structured prompt, an attached reference image, and a prompt library link.',
   },
   {
     step: '03',
-    title: 'Set Ratio, Quality, and Output Count',
-    copy: 'Choose the image format that matches your final use case, from square product cards to vertical ads and widescreen UI concepts.',
+    title: 'Set Aspect Ratio, Resolution, and Quality',
+    copy: 'Pick the aspect ratio first (square 1:1, vertical 9:16, widescreen 16:9, ultra-wide 21:9), then resolution (1K, 2K, or 4K) and output count (1–8 images). The Studio adapts model parameters behind the scenes.',
+    image: '/imgs/gptimage2studio/webp/howto-step-03-ratio-resolution-quality.webp',
+    alt: 'Studio controls for aspect ratio, resolution, and output count, with 9:16 vertical, 4K, and 4 outputs selected.',
   },
   {
     step: '04',
-    title: 'Generate, Refine, and Download',
-    copy: 'Review the output, edit the prompt, improve details, and save the result for campaigns, product pages, social posts, or content.',
+    title: 'Generate, Iterate, and Export',
+    copy: 'Generate, review the output grid, and refine the prompt without losing your reference image. Export the result as PNG, JPEG, or WebP — sized for product pages, ads, social posts, or print.',
+    image: '/imgs/gptimage2studio/webp/howto-step-04-generate-export.webp',
+    alt: 'Studio output grid showing four generated images with PNG, JPEG, and WebP export options.',
   },
 ];
 
 export const coreFeatures = [
   {
-    title: 'Text-to-Image Generator',
-    copy: 'Create new visuals from structured prompts for product, marketing, education, UI, brand, and editorial workflows.',
+    title: 'Text-in-Image Rendering',
+    copy: 'Build posters, packaging, menu boards, UI screens, and infographics where the text inside the image stays sharp and on-brand. Multilingual support across English, Japanese, Korean, Chinese, Hindi, and Bengali.',
   },
   {
     title: 'Reference Image Editing',
-    copy: 'Start with an uploaded image and describe the edit you want, such as background replacement, object changes, or lighting adjustment.',
+    copy: 'Upload a PNG, JPG, or WebP and describe the change — background swap, lighting adjustment, object replacement, or layout cleanup. Reference-based edits stay faithful to the original structure and details.',
   },
   {
-    title: 'Readable Text Layouts',
-    copy: 'Build prompts for posters, packaging, menu boards, infographics, thumbnails, and UI mockups where short text needs to be visible.',
+    title: 'Multi-Turn Editing',
+    copy: 'Iterate on the same image across multiple prompts without breaking the rest. Add, subtract, recolor, or refine specific elements while everything else stays intact across passes.',
   },
   {
-    title: 'Ecommerce Product Visuals',
-    copy: 'Generate product shots, lifestyle scenes, comparison panels, and annotation graphics for stores, ads, and landing pages.',
+    title: 'Multi-Image Consistency',
+    copy: 'Generate 1 to 8 images in a single prompt, with consistent characters, props, and color palettes across the set. Useful for storyboards, multi-panel ads, product variations, and brand systems.',
   },
   {
-    title: 'Prompt Library and Templates',
-    copy: 'Use ready-made prompt patterns and long-tail prompt pages to start faster and keep image workflows consistent.',
+    title: '4K Output & Flexible Aspect Ratios',
+    copy: 'Native resolution up to 4K with aspect ratios from ultra-wide 3:1 to vertical 1:3, plus standard 1:1, 4:5, 16:9, and 9:16. Pick the ratio first, generate at the size your channel actually uses.',
   },
   {
-    title: 'Format and Quality Controls',
-    copy: 'Choose aspect ratio, output count, and quality settings before generation so each result fits the target channel.',
+    title: 'Instant & Thinking Modes',
+    copy: 'Instant mode generates in seconds for fast iteration. Thinking mode plans the layout, verifies the output, and handles multi-constraint briefs better — useful for posters, infographics, and dense compositions.',
   },
 ];
 
@@ -574,65 +648,106 @@ export type Testimonial = {
   name: string;
   role: string;
   handle: string;
+  source: 'X' | 'Reddit';
+  verified: boolean;
+  url: string;
+  engagement: string;
+  date: string;
   initial: string;
   color: string;
   quote: string;
 };
 
+export const testimonialsIntro =
+  'These are real posts from creators on X and Reddit testing GPT Image 2 — designers, builders, educators, and AI enthusiasts sharing what they’re shipping in the first weeks after launch.';
+
+export const testimonialsDisclaimer =
+  'Quotes link to the original public posts on X and Reddit. Engagement counts captured at time of indexing — see each post for current state.';
+
 export const testimonials: Testimonial[] = [
   {
-    name: 'Maya Chen',
-    role: 'Ecommerce Founder',
-    handle: '@mayabuilds',
-    initial: 'M',
+    name: 'Hewar',
+    role: 'Brand Designer',
+    handle: '@hewarsaber',
+    source: 'X',
+    verified: true,
+    url: 'https://x.com/hewarsaber/status/2046707411335966796',
+    engagement: '2.6K likes · 598K views',
+    date: 'Apr 22, 2026',
+    initial: 'H',
     color: 'from-cyan-500 to-blue-500',
     quote:
-      'Generated three product photo variations for my skincare line in one afternoon. The label text actually stays readable, which never worked in older models.',
+      "GPT Image 2 is insane for branding. Designers, we're cooked.",
   },
   {
-    name: 'Diego Alvarez',
-    role: 'Brand Designer',
-    handle: '@diegodraws',
-    initial: 'D',
+    name: 'WY',
+    role: 'Education / Content',
+    handle: '@akokoi1',
+    source: 'X',
+    verified: true,
+    url: 'https://x.com/akokoi1/status/2044800630771134677',
+    engagement: '2K likes · 430K views',
+    date: 'Apr 16, 2026',
+    initial: 'W',
     color: 'from-violet-500 to-fuchsia-500',
     quote:
-      'I use it to draft launch posters with exact headlines before we book the photographer. The structured prompt approach saves a full day of mood-boarding.',
+      'I declare, GPT-image-2 has killed the competition. Generate textbooks, demos, test papers — you can directly storm into the education industry. (translated from Chinese)',
   },
   {
-    name: 'Priya Raman',
-    role: 'Content Marketer',
-    handle: '@priyawrites',
-    initial: 'P',
+    name: 'INK',
+    role: 'Indie Game Dev',
+    handle: '@0xInk_',
+    source: 'X',
+    verified: true,
+    url: 'https://x.com/0xInk_/status/2047648944004755679',
+    engagement: '1.6K likes · 106K views',
+    date: 'Apr 24, 2026',
+    initial: 'I',
     color: 'from-emerald-500 to-teal-500',
     quote:
-      'Infographics used to take me hours in Figma. Now I draft a prompt with the four steps I want labeled and refine the result, instead of building from scratch.',
+      'GPT Image 2 + Seedance 2 is an insane combo. The fact that you can get really high detail and animate it is so satisfying — this is the future of game development.',
   },
   {
-    name: 'Theo Larsen',
-    role: 'Indie Product Builder',
-    handle: '@theobuilds',
-    initial: 'T',
+    name: 'Min Zhou',
+    role: 'Builder / Developer',
+    handle: '@fMinZhou',
+    source: 'X',
+    verified: true,
+    url: 'https://x.com/fMinZhou/status/2047214663721681288',
+    engagement: '4.3K likes · 326K views',
+    date: 'Apr 23, 2026',
+    initial: 'M',
     color: 'from-amber-500 to-orange-500',
     quote:
-      'GPT Image 2 finally gets UI mockups close enough to share with my dev team. We use it for early dashboard concepts before any real Figma work.',
+      'GPT Image 2 is insanely good... I generated a 360° equirectangular panorama with just a skill + prompt.',
   },
   {
-    name: 'Amélie Roux',
-    role: 'Packaging Designer',
-    handle: '@ameliestudio',
-    initial: 'A',
+    name: 'Min Choi',
+    role: 'AI Influencer',
+    handle: '@minchoi',
+    source: 'X',
+    verified: true,
+    url: 'https://x.com/minchoi/status/2040419534507512306',
+    engagement: '793 likes · 264K views',
+    date: 'Apr 4, 2026',
+    initial: 'M',
     color: 'from-rose-500 to-pink-500',
     quote:
-      'Multilingual packaging mockups are the killer feature for me. English plus Japanese label text rendered correctly on a tea can — that was the moment I switched workflows.',
+      'Holy smokes... leaked OpenAI GPT-Image-2 on Arena is wild. This is 100% AI.',
   },
   {
-    name: 'Jordan Park',
-    role: 'YouTube Creator',
-    handle: '@jordanpark',
-    initial: 'J',
+    name: 'r/singularity',
+    role: 'Reddit Community',
+    handle: 'r/singularity',
+    source: 'Reddit',
+    verified: false,
+    url: 'https://www.reddit.com/r/singularity/comments/1sry7k9/gpt_image_2_has_the_biggest_jump_in_quality_ever/',
+    engagement: 'Top comment · 1.2K-vote thread',
+    date: 'Apr 2026',
+    initial: 'R',
     color: 'from-indigo-500 to-purple-500',
     quote:
-      'Thumbnails with bold readable text used to mean Photoshop nights. I prompt the layout, copy the result, and iterate on the headline in minutes.',
+      'Open AI really cooked with this one. Nothing compares even remotely.',
   },
 ];
 
@@ -653,32 +768,40 @@ export const publicSignals = [
 
 export const faqs = [
   {
-    q: 'What is GPT Image 2 Studio?',
-    a: 'GPT Image 2 Studio is an independent AI image generator and editor workspace for creating product photos, posters, ads, infographics, UI mockups, and text-rich visuals from prompts and reference images.',
+    q: 'What is GPT Image 2?',
+    a: "GPT Image 2 is OpenAI's state-of-the-art image generation and editing model, released in April 2026. It's the first OpenAI image model with native reasoning — meaning it plans the layout and verifies the output before rendering. GPT Image 2 Studio gives you access to this model through a prompt-first web workspace.",
+  },
+  {
+    q: 'How is GPT Image 2 different from DALL-E 3?',
+    a: 'GPT Image 2 replaces DALL-E 3 with sharper text rendering, native 4K support, 1–8 image consistency in a single prompt, and reasoning-based layout planning. For most professional design briefs — posters, packaging, UI mockups, infographics — GPT Image 2 produces usable output without manual cleanup, where DALL-E 3 frequently required post-editing.',
+  },
+  {
+    q: 'How is GPT Image 2 different from Nano Banana?',
+    a: "Both are top-tier image models, but they're built around different strengths. GPT Image 2 leads on text rendering, layout reasoning, and production speed. Nano Banana leads on portrait realism and multi-reference character consistency (up to 14 reference images). Use GPT Image 2 for text-rich design and posters, Nano Banana for portraits and reference-driven edits.",
+  },
+  {
+    q: 'How accurate is GPT Image 2 at generating text in images?',
+    a: 'Around 99% character accuracy in English, with strong performance in Japanese, Korean, Chinese, Hindi, and Bengali. This is the biggest practical jump from previous models and makes posters, menu boards, packaging, and infographics shippable without post-edit fixes.',
+  },
+  {
+    q: 'Can GPT Image 2 generate 4K images?',
+    a: "Yes. GPT Image 2 supports native resolution up to 4K (4096×4096) with flexible aspect ratios from ultra-wide 3:1 to vertical 1:3, plus standard 1:1, 16:9, 9:16, and 4:5. Pick the ratio first, then resolution, in the Studio's settings panel.",
+  },
+  {
+    q: 'Does GPT Image 2 support multilingual text in posters and packaging?',
+    a: 'Yes. GPT Image 2 has strong multilingual text rendering across English, Japanese, Korean, Chinese, Hindi, and Bengali. It can render packaging labels, posters, menus, UI strings, and short captions in multiple scripts within the same image when prompted.',
   },
   {
     q: 'Is GPT Image 2 Studio free to use?',
-    a: 'The MVP can include a free or early-access entry point, but final plan details, credits, and usage limits should be shown in the pricing section before launch.',
+    a: 'GPT Image 2 Studio offers a Free tier for trying core prompts plus Pro and Studio plans for higher-volume creators and teams. See the Pricing section above for current credits and limits.',
   },
   {
     q: 'Can I use Nano Banana inside GPT Image 2 Studio?',
-    a: 'The planned workflow includes GPT Image 2 and Nano Banana as model options. Availability depends on the final model integrations used in the product.',
-  },
-  {
-    q: 'Can GPT Image 2 Studio generate text inside images?',
-    a: 'GPT Image 2 Studio is designed for text-rich visual workflows such as posters, packaging, menu boards, infographics, thumbnails, and UI mockups. For best results, prompts should use short quoted text and clear layout instructions.',
-  },
-  {
-    q: 'Can I edit existing images?',
-    a: 'The planned editing workflow supports reference-image tasks such as background replacement, lighting adjustment, object replacement, and layout refinement. Exact behavior depends on the model and integration used.',
+    a: "Yes. The Studio's model picker lets you switch between GPT Image 2 and Nano Banana per task. You can run the same prompt through both, compare results side by side, or pick the model that fits the brief best — without switching accounts or services.",
   },
   {
     q: 'What prompts work best for GPT Image 2?',
-    a: 'The best prompts describe the asset type, subject, exact text, layout, lighting, style, aspect ratio, and constraints. For example, a product photo prompt should name the product, surface, label text, lighting, camera style, and things to avoid.',
-  },
-  {
-    q: 'Is GPT Image 2 Studio good for ecommerce and marketing?',
-    a: 'Yes, the homepage workflow is focused on ecommerce and marketing use cases such as product photos, social ads, posters, landing page visuals, product annotations, and reusable prompt templates.',
+    a: "Structured prompts outperform one-line prompts. The strongest briefs describe subject, exact text in quotes, layout and composition, lighting, style or camera reference, aspect ratio, and constraints (what to avoid). Browse the Studio's prompt library for ready-to-use templates.",
   },
 ];
 

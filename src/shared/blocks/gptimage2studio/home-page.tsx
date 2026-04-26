@@ -8,7 +8,6 @@ import {
   Check,
   ChevronDown,
   Copy,
-  Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
   Menu,
@@ -24,6 +23,9 @@ import { useAppContext } from '@/shared/contexts/app';
 import {
   benefits,
   comparison,
+  comparisonCta,
+  comparisonHero,
+  comparisonIntro,
   coreFeatures,
   editDemos,
   faqs,
@@ -31,14 +33,21 @@ import {
   footer,
   hero,
   howToUse,
+  howToUseCta,
+  howToUseSubtitle,
   nav,
   pricing,
   promoBar,
   promptCards,
   promptCategories,
   testimonials,
+  testimonialsDisclaimer,
+  testimonialsIntro,
   useCases,
   whatIsCards,
+  whatIsIntro,
+  whyChooseCta,
+  whyChooseSubtitle,
   workbench,
 } from './content';
 import Workbench from './workbench';
@@ -409,12 +418,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Use Cases</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              What You Can Create with GPT Image 2 Studio
+              What You Can Create with GPT Image 2
             </h2>
             <p className="mt-4 text-zinc-400">
-              GPT Image 2 Studio is built for practical creative work: product
-              visuals, marketing assets, educational graphics, UI concepts, and
-              prompt libraries that can be reused across campaigns.
+              From clean ecommerce product shots to multilingual posters,
+              vertical social ads, and labeled UI mockups — these are the
+              most common briefs creators bring to GPT Image 2 today.
             </p>
           </div>
           <div className="mt-12 flex flex-col gap-16 md:gap-24">
@@ -548,18 +557,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
               What Is GPT Image 2 Studio?
             </h2>
-            <p className="mt-4 text-zinc-400">
-              GPT Image 2 Studio is an independent AI image generator and
-              editor workspace built around GPT Image 2, Nano Banana, and
-              reusable prompt workflows. It helps creators start from a text
-              prompt or reference image, choose the right model for the job,
-              and create visuals for ecommerce, marketing, education, UI
-              concepts, and text-rich design tasks.
-            </p>
-            <p className="mx-auto mt-4 max-w-2xl rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-zinc-400">
-              GPT Image 2 Studio is an independent product and is not an
-              official OpenAI or Google website.
-            </p>
+            <p className="mt-4 text-zinc-400">{whatIsIntro}</p>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -587,21 +585,29 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="mx-auto mt-20 max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Comparison</SectionEyebrow>
             <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-              GPT Image 2 Studio vs Nano Banana
+              GPT Image 2 vs Nano Banana
             </h2>
-            <p className="mt-4 text-zinc-400">
-              GPT Image 2 Studio is the workflow layer. GPT Image 2 and Nano
-              Banana are model options that can be used for different image
-              tasks. This comparison helps users choose a starting point, not
-              to rank one model as universally better.
-            </p>
+            <p className="mt-4 text-zinc-400">{comparisonIntro}</p>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+            <div className="relative aspect-[16/9] w-full">
+              <Image
+                src={comparisonHero.src}
+                alt={comparisonHero.alt}
+                fill
+                sizes="(min-width: 1024px) 960px, 100vw"
+                loading="lazy"
+                className="object-cover"
+              />
+            </div>
           </div>
 
           <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
             <div className="hidden grid-cols-[0.8fr_1.2fr_1.2fr] border-b border-white/10 bg-white/5 text-[11px] font-semibold tracking-wide uppercase md:grid">
               <div className="px-4 py-3 text-zinc-300">Dimension</div>
               <div className={`px-4 py-3 ${palette.badgeText}`}>
-                GPT Image 2 Studio
+                GPT Image 2
               </div>
               <div className="px-4 py-3 text-zinc-400">Nano Banana</div>
             </div>
@@ -624,10 +630,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   <span
                     className={`text-[10px] font-semibold tracking-wider uppercase md:hidden ${palette.badgeText}`}
                   >
-                    GPT Image 2 Studio
+                    GPT Image 2
                   </span>
                   <p className="mt-1 leading-6 text-zinc-300 md:mt-0">
-                    {row.studio}
+                    {row.gptImage2}
                   </p>
                 </div>
                 <div>
@@ -635,7 +641,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     Nano Banana
                   </span>
                   <p className="mt-1 leading-6 text-zinc-400 md:mt-0">
-                    {row.nano}
+                    {row.nanoBanana}
                   </p>
                 </div>
               </div>
@@ -643,10 +649,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
           <div className="mt-6 flex justify-center">
             <a
-              href="#prompts"
+              href={comparisonCta.href}
               className={`inline-flex items-center gap-1.5 text-sm font-semibold ${palette.badgeText} hover:underline`}
             >
-              Compare Prompt Workflows
+              {comparisonCta.label}
               <ArrowRight className="size-3.5" />
             </a>
           </div>
@@ -659,8 +665,9 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Benefits</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Why Choose GPT Image 2 Studio
+              Why Choose GPT Image 2
             </h2>
+            <p className="mt-4 text-zinc-400">{whyChooseSubtitle}</p>
           </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {benefits.map((b, i) => (
@@ -671,7 +678,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 <span
                   className={`inline-flex size-10 items-center justify-center rounded-xl bg-gradient-to-br ${palette.accent} text-zinc-950`}
                 >
-                  {[<LayoutIcon key="0" className="size-5" />, <ImageIcon key="1" className="size-5" />, <Layers key="2" className="size-5" />][i]}
+                  {[<LayoutIcon key="0" className="size-5" />, <Sparkles key="1" className="size-5" />, <Layers key="2" className="size-5" />][i]}
                 </span>
                 <h3 className="mt-5 text-lg font-semibold text-white">
                   {b.title}
@@ -679,6 +686,15 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 <p className="mt-2 text-sm text-zinc-400">{b.copy}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10 flex justify-center">
+            <a
+              href={whyChooseCta.href}
+              className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:opacity-90`}
+            >
+              {whyChooseCta.label}
+              <ArrowRight className="size-4" />
+            </a>
           </div>
         </div>
       </section>
@@ -691,24 +707,44 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               How to Use GPT Image 2 Studio
             </h2>
+            <p className="mt-4 text-zinc-400">{howToUseSubtitle}</p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-12 md:gap-16">
             {howToUse.map((s) => (
-              <div
+              <article
                 key={s.step}
-                className="relative rounded-2xl border border-white/10 bg-[#101218] p-5"
+                className="flex flex-col items-center text-center"
               >
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
+                  <Image
+                    src={s.image}
+                    alt={s.alt}
+                    fill
+                    sizes="(min-width: 768px) 720px, 100vw"
+                    loading="lazy"
+                    className="object-cover"
+                  />
+                </div>
                 <span
-                  className={`text-3xl font-bold bg-gradient-to-br ${palette.accent} bg-clip-text text-transparent`}
+                  className={`mt-6 text-3xl font-bold bg-gradient-to-br ${palette.accent} bg-clip-text text-transparent`}
                 >
                   {s.step}
                 </span>
-                <h3 className="mt-4 text-base font-semibold text-white">
+                <h3 className="mt-3 text-xl font-semibold text-white md:text-2xl">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-sm text-zinc-400">{s.copy}</p>
-              </div>
+                <p className="mt-3 max-w-2xl text-zinc-400">{s.copy}</p>
+              </article>
             ))}
+          </div>
+          <div className="mt-12 flex justify-center">
+            <a
+              href={howToUseCta.href}
+              className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:opacity-90`}
+            >
+              {howToUseCta.label}
+              <ArrowRight className="size-4" />
+            </a>
           </div>
         </div>
       </section>
@@ -813,22 +849,33 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               What Creators Are Exploring
             </h2>
             <p className="mt-4 max-w-3xl text-zinc-400">
-              Early users of GPT Image 2 and Nano Banana share how they fold AI image workflows into product launches, marketing campaigns, packaging, UI concepts, and content production.
+              {testimonialsIntro}
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t) => (
-              <figure
-                key={t.handle}
-                className="relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/20"
+              <a
+                key={t.url}
+                href={t.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821]"
               >
-                <Quote
-                  className={`size-6 ${palette.badgeText} opacity-70`}
-                  aria-hidden="true"
-                />
+                <div className="flex items-center justify-between">
+                  <Quote
+                    className={`size-6 ${palette.badgeText} opacity-70`}
+                    aria-hidden="true"
+                  />
+                  <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-zinc-300 uppercase">
+                    {t.source}
+                  </span>
+                </div>
                 <blockquote className="text-sm leading-relaxed text-zinc-200">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
+                <div className="text-xs text-zinc-500">
+                  {t.engagement} · {t.date}
+                </div>
                 <figcaption className="mt-auto flex items-center gap-3 border-t border-white/5 pt-4">
                   <span
                     aria-hidden="true"
@@ -837,30 +884,53 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     {t.initial}
                   </span>
                   <div className="leading-tight">
-                    <div className="text-sm font-semibold text-white">
+                    <div className="flex items-center gap-1 text-sm font-semibold text-white">
                       {t.name}
+                      {t.verified && (
+                        <Check
+                          className={`size-3.5 ${palette.badgeText}`}
+                          aria-label="Verified account"
+                        />
+                      )}
                     </div>
                     <div className="text-xs text-zinc-400">
                       {t.role} · <span className="text-zinc-500">{t.handle}</span>
                     </div>
                   </div>
                 </figcaption>
-              </figure>
+              </a>
             ))}
           </div>
           <p className="mt-6 text-center text-xs text-zinc-500">
-            Quotes are illustrative creator personas reflecting public discussions about GPT Image 2 and Nano Banana workflows.
+            {testimonialsDisclaimer}
           </p>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: faqs.map((f) => ({
+                '@type': 'Question',
+                name: f.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: f.a,
+                },
+              })),
+            }),
+          }}
+        />
         <div className="mx-auto max-w-4xl px-4 py-14 md:px-8 md:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>FAQ</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Frequently Asked Questions
+              Frequently Asked Questions About GPT Image 2
             </h2>
           </div>
           <div className="mt-8 divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
