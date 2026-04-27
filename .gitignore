@@ -63,3 +63,9 @@ src/config/db/migrations*
 .source
 
 .chats
+
+# 本地调研数据
+research/
+
+# Claude Code 本地状态
+.claude/scheduled_tasks.lock
