@@ -48,6 +48,77 @@ pre {
   @apply border-border border p-3;
 }
 
+html:not(.dark) .gpt-studio-page {
+  background: #f8fafc;
+  color: #334155;
+}
+
+html:not(.dark) .gpt-studio-page header,
+html:not(.dark) .gpt-studio-page footer,
+html:not(.dark) .gpt-studio-page [class*='bg-[#09090B]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#0B0D12]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#111318]'] {
+  background-color: #f8fafc;
+}
+
+html:not(.dark) .gpt-studio-page header {
+  background-color: rgb(255 255 255 / 0.86);
+}
+
+html:not(.dark) .gpt-studio-page [class*='bg-[#101218]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#15161B]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#151821]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#17181D]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#111827]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#080B10]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#050507]'] {
+  background-color: #ffffff;
+}
+
+html:not(.dark) .gpt-studio-page [class*='bg-white/5'],
+html:not(.dark) .gpt-studio-page [class*='bg-white/[0.03]'],
+html:not(.dark) .gpt-studio-page [class*='bg-white/[0.04]'],
+html:not(.dark) .gpt-studio-page [class*='bg-white/[0.07]'],
+html:not(.dark) .gpt-studio-page [class*='bg-white/10'],
+html:not(.dark) .gpt-studio-page [class*='bg-white/15'] {
+  background-color: rgb(15 23 42 / 0.045);
+}
+
+html:not(.dark) .gpt-studio-page [class*='border-white/5'],
+html:not(.dark) .gpt-studio-page [class*='border-white/10'],
+html:not(.dark) .gpt-studio-page [class*='border-white/15'],
+html:not(.dark) .gpt-studio-page [class*='border-white/20'],
+html:not(.dark) .gpt-studio-page [class*='border-white/30'] {
+  border-color: rgb(15 23 42 / 0.12);
+}
+
+html:not(.dark) .gpt-studio-page .text-white,
+html:not(.dark) .gpt-studio-page [class*='text-zinc-100'],
+html:not(.dark) .gpt-studio-page [class*='text-zinc-200'],
+html:not(.dark) .gpt-studio-page [class*='text-zinc-300'] {
+  color: #0f172a;
+}
+
+html:not(.dark) .gpt-studio-page [class*='text-zinc-400'],
+html:not(.dark) .gpt-studio-page [class*='text-zinc-500'],
+html:not(.dark) .gpt-studio-page [class*='text-zinc-600'] {
+  color: #475569;
+}
+
+html:not(.dark) .gpt-studio-page [class*='from-black'] .text-white,
+html:not(.dark) .gpt-studio-page [class*='from-black'] [class*='text-zinc-100'],
+html:not(.dark) .gpt-studio-page [class*='from-black'] [class*='text-zinc-200'],
+html:not(.dark) .gpt-studio-page [class*='bg-black'] .text-white,
+html:not(.dark) .gpt-studio-page [class*='bg-black'] [class*='text-zinc-100'],
+html:not(.dark) .gpt-studio-page [class*='bg-black'] [class*='text-zinc-200'],
+html:not(.dark) .gpt-studio-page [class*='from-violet'][class*='text-white'] {
+  color: #ffffff;
+}
+
+html:not(.dark) .gpt-studio-page [class*='shadow-black'] {
+  --tw-shadow-color: rgb(15 23 42 / 0.12);
+}
+
 @theme inline {
   --animate-grid: grid 15s linear infinite;
   @keyframes grid {

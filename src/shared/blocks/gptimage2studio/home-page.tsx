@@ -139,7 +139,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090B] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
+    <div className="gpt-studio-page min-h-screen bg-[#09090B] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
       {/* Promo bar */}
       {promoOpen && (
         <div
@@ -179,7 +179,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
           {/* Left: logo + nav */}
           <div className="flex items-center gap-8">
-            <Link href="#" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <span
                 className={`inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br ${palette.accent} text-zinc-950 shadow-lg shadow-cyan-500/20`}
               >
@@ -1064,14 +1064,17 @@ function SectionEyebrow({
   );
 }
 
-function FooterColumn({ title, items }: { title: string; items: string[] }) {
-  const itemHrefs: Record<string, string> = {
-    Generator: '/#workbench',
-    Prompts: '/prompts',
-    Blog: '/blog',
-    Pricing: '/#pricing',
-  };
+const footerLinkHrefs: Record<string, string> = {
+  Generator: '/#workbench',
+  Prompts: '/prompts',
+  Blog: '/blog',
+  Pricing: '/pricing',
+  'Privacy Policy': '/privacy-policy',
+  'Terms of Service': '/terms-of-service',
+  'Refund Policy': '/refund-policy',
+};
 
+function FooterColumn({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <h4 className="text-xs font-semibold tracking-wider text-zinc-300 uppercase">
@@ -1081,7 +1084,7 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <li key={item}>
             <a
-              href={itemHrefs[item] ?? '#'}
+              href={footerLinkHrefs[item] ?? '/'}
               className="text-zinc-400 transition hover:text-white"
             >
               {item}
