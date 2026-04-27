@@ -376,6 +376,207 @@ export const promptCards: PromptCard[] = [
     fullPrompt:
       'Fictional football match day poster with a double exposure profile silhouette, an action pose inside, headline "MATCH DAY", date, and venue text.',
   },
+  {
+    title: 'AI Action Figure Box',
+    category: 'Product',
+    image: '/imgs/gptimage2studio/prompts/ai-action-figure-box.png',
+    prompt:
+      'Collectible blister-pack action figure with AI-themed accessories, retail packaging, and clear product labels.',
+    href: '/prompts/ai-action-figure-box',
+    fullPrompt:
+      'Photo of a collectible action figure in a retail blister pack. The figure is an AI character with miniature accessories (laptop, headset, sticker sheet). Front of pack reads "PROMPT HERO · LIMITED EDITION". Studio lighting, sharp plastic shrink wrap, eye-level product photography, clean white seamless background.',
+  },
+  {
+    title: 'Anime Cyber Hero Concept Sheet',
+    category: 'Brand',
+    image: '/imgs/gptimage2studio/prompts/anime-cyber-hero-sheet.png',
+    prompt:
+      'Original anime cyber hero character sheet with front view, side view, expressions, and gear callouts.',
+    href: '/prompts/anime-cyber-hero-sheet',
+    fullPrompt:
+      'Original anime-style cyber hero character concept sheet. Three-quarter front view, side view, back view; expression panel with neutral / focused / smirk; weapon and gear callouts labeled. Cel-shaded line art, neon cyan + magenta accents, dark teal background grid.',
+  },
+  {
+    title: 'Basketball Street Poster',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/basketball-street-poster.png',
+    prompt:
+      'Streetwear basketball poster with bold headline, action silhouette, and gritty urban backdrop.',
+    href: '/prompts/basketball-street-poster',
+    fullPrompt:
+      'Streetwear basketball poster. Bold headline "RUN THE COURT" at top, action silhouette of a player mid-dunk, gritty asphalt backdrop with chain-link fence, orange + black palette, halftone print texture, vertical 9:16 composition.',
+  },
+  {
+    title: 'Cinematic Beauty Mirror Selfie',
+    category: 'Social',
+    image: '/imgs/gptimage2studio/prompts/cinematic-beauty-mirror-selfie.png',
+    prompt:
+      'Cinematic mirror selfie with soft warm light, beauty product reflection, and editorial framing.',
+    href: '/prompts/cinematic-beauty-mirror-selfie',
+    fullPrompt:
+      'Cinematic mirror selfie editorial. Soft warm tungsten light, model holding a beauty product visible in the mirror reflection, vintage gold-frame mirror, gentle film grain, 4:5 ratio, magazine-quality skin texture.',
+  },
+  {
+    title: 'Cute Pet Action Figure',
+    category: 'Product',
+    image: '/imgs/gptimage2studio/prompts/cute-pet-action-figure.png',
+    prompt:
+      'Boxed pet action figure with toy accessories, retail packaging, and a cute mascot illustration.',
+    href: '/prompts/cute-pet-action-figure',
+    fullPrompt:
+      'Boxed action figure of a cute corgi mascot with mini accessories (bone, ball, sticker sheet). Retail blister pack with cartoon brand illustration, headline "BARKVERSE EP.01", studio product photo on a soft pastel gradient background.',
+  },
+  {
+    title: 'Cyberpunk Car Ad',
+    category: 'Social',
+    image: '/imgs/gptimage2studio/prompts/cyberpunk-car-ad.png',
+    prompt:
+      'Cyberpunk hero car ad with rain-slicked street, neon reflections, and bold product headline.',
+    href: '/prompts/cyberpunk-car-ad',
+    fullPrompt:
+      'Cyberpunk hero car ad. Sleek concept EV on a rain-slicked Tokyo street at night, neon shop signs reflecting on wet asphalt, headline "DRIVE THE FUTURE", subtitle "EV-X · 2027", widescreen 16:9 cinematic framing, deep teal + magenta palette.',
+  },
+  {
+    title: 'Fashion Editorial Neon Portrait',
+    category: 'Brand',
+    image:
+      '/imgs/gptimage2studio/prompts/fashion-editorial-neon-portrait.png',
+    prompt:
+      'Editorial neon portrait with high-contrast color gels, sharp wardrobe styling, and clean negative space.',
+    href: '/prompts/fashion-editorial-neon-portrait',
+    fullPrompt:
+      'Editorial fashion portrait lit with two opposing color gels (magenta key, cyan rim). Tailored oversized blazer, minimal makeup, sharp expression, clean black studio backdrop, vertical 4:5 composition, 35mm look with controlled grain.',
+  },
+  {
+    title: 'Fashion Magazine Cover',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/fashion-magazine-cover.png',
+    prompt:
+      'High-end fashion magazine cover with masthead, cover lines, and editorial portrait.',
+    href: '/prompts/fashion-magazine-cover',
+    fullPrompt:
+      'High-end fashion magazine cover. Masthead "VANTAGE" top-left in serif caps, three cover lines along the right edge, editorial three-quarter portrait of a model in a tailored coat, color palette: ivory + black + one accent. 4:5 cover crop, clean print typography.',
+  },
+  {
+    title: 'Fitness Transformation Poster',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/fitness-transformation-poster.png',
+    prompt:
+      'Before/after fitness transformation poster with bold headline, split frame, and program tagline.',
+    href: '/prompts/fitness-transformation-poster',
+    fullPrompt:
+      'Before/after fitness transformation poster. Vertical split frame: left "Week 0", right "Week 12"; bold headline "30 MINUTES A DAY"; subtitle "real clients · no filters"; high-contrast gym lighting; black + lime green palette; 9:16 vertical for Instagram story.',
+  },
+  {
+    title: 'Future City Infographic',
+    category: 'Infographic',
+    image: '/imgs/gptimage2studio/prompts/future-city-infographic.png',
+    prompt:
+      'Future smart city infographic with five labeled districts, callout arrows, and clean isometric layout.',
+    href: '/prompts/future-city-infographic',
+    fullPrompt:
+      'Future smart city infographic in isometric perspective. Five labeled districts: Energy / Mobility / Housing / Greenspace / Data. Callout arrows from each district to a short descriptor. Clean editorial illustration, blue-teal palette, soft shadows, 16:9 layout, sans-serif labels.',
+  },
+  {
+    title: 'K-Pop Album Cover Concept',
+    category: 'Brand',
+    image: '/imgs/gptimage2studio/prompts/kpop-album-cover-concept.png',
+    prompt:
+      'K-pop album cover concept with bilingual title text, color-blocked portrait, and edition tag.',
+    href: '/prompts/kpop-album-cover-concept',
+    fullPrompt:
+      'K-pop album cover concept. Bilingual title "EVER AFTER · 영원히" in stylized type, three-quarter portrait of a stylized member silhouette, color-blocked background (peach + lavender), edition tag "VOL.03 · LIMITED" bottom-right, square 1:1 cover format, glossy print finish.',
+  },
+  {
+    title: 'Luxury Perfume Beauty Ad',
+    category: 'Product',
+    image: '/imgs/gptimage2studio/prompts/luxury-perfume-beauty-ad.png',
+    prompt:
+      'Luxury perfume hero ad with crystal bottle, soft focus florals, and condensed brand wordmark.',
+    href: '/prompts/luxury-perfume-beauty-ad',
+    fullPrompt:
+      'Luxury perfume hero ad. Crystal bottle on a marble pedestal, soft-focus florals in the background, brand wordmark "ÉCLAT NOIR" in condensed serif at bottom, golden honey light, 4:5 portrait crop, premium fragrance campaign feel.',
+  },
+  {
+    title: 'Luxury Sneaker Liquid Chrome',
+    category: 'Product',
+    image: '/imgs/gptimage2studio/prompts/luxury-sneaker-liquid-chrome.png',
+    prompt:
+      'Liquid chrome luxury sneaker product shot with reflective surface and minimal product label.',
+    href: '/prompts/luxury-sneaker-liquid-chrome',
+    fullPrompt:
+      'Luxury sneaker product shot in liquid chrome material. Single side profile, mirrored chrome upper, sole reading "AURA · 01", suspended on a glossy black acrylic stage with subtle ripple reflection, studio strobe lighting, 1:1 square ecommerce hero shot.',
+  },
+  {
+    title: 'Match Day Red Poster',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/match-day-red-poster.png',
+    prompt:
+      'Bold red match day poster with tournament headline, date, and stadium silhouette.',
+    href: '/prompts/match-day-red-poster',
+    fullPrompt:
+      'Bold red match day poster. Headline "MATCH DAY", subtitle "FINAL · MAY 18 · CITY ARENA", stadium silhouette in distress halftone behind the text, deep red + cream palette, vintage sports print feel, vertical 9:16 social-friendly crop.',
+  },
+  {
+    title: 'Movie Storyboard Grid',
+    category: 'Brand',
+    image: '/imgs/gptimage2studio/prompts/movie-storyboard-grid.png',
+    prompt:
+      'Six-panel movie storyboard grid with shot numbers, action notes, and consistent character framing.',
+    href: '/prompts/movie-storyboard-grid',
+    fullPrompt:
+      'Six-panel movie storyboard grid (3×2). Each frame shows the same protagonist in a different shot — wide / over-shoulder / close-up / insert / two-shot / hero — with shot numbers (S01–S06) and one-line action notes underneath. Pencil-on-paper rendering, 16:9 frame ratio per panel.',
+  },
+  {
+    title: 'Night Street UGC Fashion',
+    category: 'Social',
+    image: '/imgs/gptimage2studio/prompts/night-street-ugc-fashion.png',
+    prompt:
+      'Authentic night-street UGC fashion shot with mixed light sources and casual posing.',
+    href: '/prompts/night-street-ugc-fashion',
+    fullPrompt:
+      'Authentic night-street UGC fashion shot. Subject in oversized denim and a graphic tee, leaning on a railing under a mix of sodium street lights and a passing car headlamp, mild handheld blur, vertical 9:16 phone format, looks like a friend\'s casual photo, slight ISO grain.',
+  },
+  {
+    title: 'Polaroid Travel Memory Wall',
+    category: 'Brand',
+    image: '/imgs/gptimage2studio/prompts/polaroid-travel-memory-wall.png',
+    prompt:
+      'Pinned polaroid travel memory wall with handwritten captions and varied snapshot moments.',
+    href: '/prompts/polaroid-travel-memory-wall',
+    fullPrompt:
+      'Pinned polaroid travel memory wall. Twelve polaroid prints arranged on cork board, each with a handwritten city + date caption ("Lisbon · 03.18", "Kyoto · 04.02", etc.), warm faded film tones, soft natural daylight from the side, 4:3 wide composition.',
+  },
+  {
+    title: 'Travel Poster Kyoto Night',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/travel-poster-kyoto-night.png',
+    prompt:
+      'Vintage Kyoto night travel poster with pagoda silhouette, lantern glow, and Japanese typography.',
+    href: '/prompts/travel-poster-kyoto-night',
+    fullPrompt:
+      'Vintage Kyoto night travel poster. Pagoda silhouette against a deep indigo sky, warm lantern glow along the path, Japanese typography "京都の夜" + English headline "KYOTO BY NIGHT", subtle paper grain, 1930s-style limited color print feel, vertical 2:3 crop.',
+  },
+  {
+    title: 'Viral Food Poster: Ramen',
+    category: 'Poster',
+    image: '/imgs/gptimage2studio/prompts/viral-food-poster-ramen.png',
+    prompt:
+      'Top-down viral food poster of ramen with bold caption, splash effect, and high-saturation styling.',
+    href: '/prompts/viral-food-poster-ramen',
+    fullPrompt:
+      'Top-down viral food poster of a steaming bowl of tonkotsu ramen. Bold headline "SLURP SEASON", chopsticks lifting noodles with a frozen broth splash, soft-boiled egg cross-section visible, high-saturation styling, 1:1 square crop optimized for Instagram.',
+  },
+  {
+    title: 'Viral YouTube AI Faceoff',
+    category: 'Social',
+    image: '/imgs/gptimage2studio/prompts/viral-youtube-ai-faceoff.png',
+    prompt:
+      'Viral YouTube thumbnail with two AI faces facing off, large readable headline, and bold contrast.',
+    href: '/prompts/viral-youtube-ai-faceoff',
+    fullPrompt:
+      'Viral YouTube thumbnail. Two stylized AI character faces in a left/right faceoff, large readable headline "WHICH AI WINS?" between them, lightning split down the center, bright high-contrast palette (red vs blue), 16:9 thumbnail crop, eye-friendly text size at 1280×720.',
+  },
 ];
 
 export const useCases: UseCase[] = [
