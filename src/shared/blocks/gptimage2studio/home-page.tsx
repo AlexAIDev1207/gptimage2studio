@@ -441,7 +441,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
 
           <div className="mt-10 flex justify-center">
             <Link
-              href="/showcases"
+              href="/prompts"
               className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               Explore All Prompts

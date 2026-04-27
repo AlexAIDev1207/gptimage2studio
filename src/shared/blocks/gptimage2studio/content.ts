@@ -213,25 +213,6 @@ export const capabilityCards = [
   },
 ];
 
-export const promptCategories = [
-  'All',
-  'Portrait',
-  'Fashion',
-  'Sports',
-  'Fitness',
-  '3D',
-  'Product',
-  'Social',
-  'Thumbnail',
-  'Character',
-  'Creative',
-  'Infographic',
-  'Music',
-  'Food',
-  'Automotive',
-  'Travel',
-];
-
 export const promptCards: PromptCard[] = [
   {
     title: 'Neon Fashion Editorial Portrait',
