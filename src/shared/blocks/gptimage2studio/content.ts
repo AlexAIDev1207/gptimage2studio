@@ -24,16 +24,16 @@ export type EditDemo = {
 };
 
 export const promoBar = {
-  text: 'Launch offer: early users get priority access to GPT Image 2 Studio workflows.',
-  cta: 'View Plans',
-  href: '#pricing',
+  text: "Congrats! You've unlocked a limited-time exclusive 50% OFF!",
+  cta: 'Grab Now',
+  href: '/pricing#plans',
 };
 
 export const nav = [
   { label: 'Generator', href: '#workbench' },
   { label: 'Prompts', href: '/prompts' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'Pricing', href: '/pricing' },
 ];
 
 export const hero = {
@@ -94,7 +94,7 @@ export const workbench = {
     title: 'Get 20 Free Credits & Try Pro',
     subtitle: 'New accounts unlock 20 credits to test Pro features today.',
     cta: 'Sign Up Free',
-    href: '#pricing',
+    href: '/pricing',
   },
   modes: [
     { value: 'image-to-image', label: 'Image Edit', icon: 'pencil' },
@@ -653,24 +653,383 @@ export const coreFeatures = [
   },
 ];
 
+export const launchOffer = {
+  endsAt: '2026-05-04T23:59:59Z',
+  eyebrow: 'Launch offer',
+  title: '50% OFF',
+  description:
+    "Congrats! You've unlocked special pricing for GPT Image 2 Studio.",
+  cta: 'Claim Special Pricing',
+};
+
+export type PricingBilling = 'monthly' | 'yearly' | 'packs';
+
+export type PricingPlan = {
+  name: string;
+  description: string;
+  price: string;
+  originalPrice?: string;
+  annualPrice?: string;
+  discountLabel?: string;
+  unit: string;
+  billingNote: string;
+  credits: string;
+  creditValue: string;
+  cta: string;
+  productId?: string;
+  amount?: number;
+  interval?: 'one-time' | 'month' | 'year';
+  validDays?: number;
+  featured?: boolean;
+  badge?: string;
+  href?: string;
+  icon?: 'bolt' | 'crown';
+  features: string[];
+};
+
+const starterMonthlyPlan: PricingPlan = {
+  name: 'Starter',
+  description:
+    'Perfect for trying out AI image generation and small projects.',
+  price: '$14.99',
+  unit: '/ mo',
+  billingNote: 'Billed monthly. Cancel anytime.',
+  credits: '350 credits / month',
+  creditValue: '100 credits ≈ $4.28',
+  cta: 'Buy Now',
+  productId: 'starter-monthly',
+  amount: 1499,
+  interval: 'month',
+  validDays: 30,
+  icon: 'bolt',
+  features: [
+    '350 monthly generation credits',
+    'GPT Image 2 and Nano Banana model picker',
+    'Text-to-image and image edit workflows',
+    '1K, 2K, and 4K output options',
+    'Prompt library access',
+    'Commercial usage for generated assets',
+  ],
+};
+
+const proMonthlyPlan: PricingPlan = {
+  name: 'Pro',
+  description:
+    'Ideal for creators, designers, and content professionals.',
+  price: '$39.99',
+  originalPrice: '$69',
+  unit: '/ mo',
+  billingNote: 'Billed monthly. Cancel anytime.',
+  credits: '1,600 credits / month',
+  creditValue: '100 credits ≈ $2.50',
+  cta: 'Buy Now',
+  productId: 'pro-monthly',
+  amount: 3999,
+  interval: 'month',
+  validDays: 30,
+  featured: true,
+  badge: 'Most Popular',
+  icon: 'crown',
+  features: [
+    '1,600 AI generation credits per month',
+    'GPT Image 2 and Nano Banana workflows',
+    'Up to 4K resolution',
+    'Up to 10 reference images per edit',
+    'Batch output for campaign variations',
+    'Priority processing speed',
+    'Commercial usage for generated assets',
+  ],
+};
+
+const premiumMonthlyPlan: PricingPlan = {
+  name: 'Premium',
+  description:
+    'For teams, agencies, and high-volume commercial use.',
+  price: '$119',
+  originalPrice: '$187',
+  unit: '/ mo',
+  billingNote: 'Billed monthly. Built for repeat production.',
+  credits: '5,500 credits / month',
+  creditValue: '100 credits ≈ $2.16',
+  cta: 'Buy Now',
+  productId: 'premium-monthly',
+  amount: 11900,
+  interval: 'month',
+  validDays: 30,
+  icon: 'bolt',
+  features: [
+    '5,500 AI generation credits per month',
+    'Everything in Pro',
+    'Fastest generation queue',
+    'Permanent project history',
+    'Reusable brand and campaign workflows',
+    'Priority customer support',
+    'Commercial usage for client work',
+  ],
+};
+
+export const pricingPlansByBilling: Record<
+  Exclude<PricingBilling, 'packs'>,
+  PricingPlan[]
+> = {
+  monthly: [starterMonthlyPlan, proMonthlyPlan, premiumMonthlyPlan],
+  yearly: [
+    {
+      ...starterMonthlyPlan,
+      price: '$10.49',
+      originalPrice: '$14.99',
+      annualPrice: '$126.00/ Year',
+      discountLabel: 'Save 30%',
+      billingNote: 'One yearly payment. Cancel anytime.',
+      credits: '4,200 credits / year',
+      productId: 'starter-yearly',
+      amount: 12600,
+      interval: 'year',
+      validDays: 365,
+      creditValue: '100 credits ≈ $3.00',
+    },
+    {
+      ...proMonthlyPlan,
+      price: '$19.99',
+      originalPrice: '$39.99',
+      annualPrice: '$239.94/ Year',
+      discountLabel: 'Save 50%',
+      billingNote: 'One yearly payment. Cancel anytime.',
+      credits: '19,200 credits / year',
+      productId: 'pro-yearly',
+      amount: 23994,
+      interval: 'year',
+      validDays: 365,
+      creditValue: '100 credits ≈ $1.25',
+    },
+    {
+      ...premiumMonthlyPlan,
+      price: '$59.5',
+      originalPrice: '$119',
+      annualPrice: '$714.00/ Year',
+      discountLabel: 'Save 50%',
+      billingNote: 'One yearly payment. Built for repeat production.',
+      credits: '66,000 credits / year',
+      productId: 'premium-yearly',
+      amount: 71400,
+      interval: 'year',
+      validDays: 365,
+      creditValue: '100 credits ≈ $1.08',
+    },
+  ],
+};
+
+export const creditPacks: PricingPlan[] = [
+  {
+    name: 'Starter Credits Pack',
+    description:
+      'One-time purchase, credits valid for 1 year.',
+    price: '$29.99',
+    originalPrice: '$40',
+    unit: '',
+    billingNote: 'One-time purchase, credits valid for 1 year',
+    credits: '1,000 credits',
+    creditValue: '100 credits ≈ $3.00',
+    cta: 'Buy Now',
+    productId: 'credits-1000',
+    amount: 2999,
+    interval: 'one-time',
+    validDays: 365,
+    icon: 'bolt',
+    features: [
+      'Use with GPT Image 2 or Nano Banana',
+      'Text-to-image and image edit workflows',
+      'Works alongside subscription credits',
+      'No subscription upgrade required',
+    ],
+  },
+  {
+    name: 'Professional Credits Pack',
+    description:
+      'One-time purchase, credits valid for 1 year.',
+    price: '$99.99',
+    originalPrice: '$120',
+    unit: '',
+    billingNote: 'One-time purchase, credits valid for 1 year',
+    credits: '4,000 credits',
+    creditValue: '100 credits ≈ $2.50',
+    cta: 'Buy Now',
+    productId: 'credits-4000',
+    amount: 9999,
+    interval: 'one-time',
+    validDays: 365,
+    featured: true,
+    badge: 'Most Popular',
+    icon: 'crown',
+    features: [
+      'Use with GPT Image 2 or Nano Banana',
+      'Enough for 1,000 text-to-image generations at 2K',
+      'Good for ads, thumbnails, and poster batches',
+      'Works alongside subscription credits',
+    ],
+  },
+  {
+    name: 'Premium Credits Pack',
+    description:
+      'One-time purchase, credits valid for 1 year, perfect for professional designers.',
+    price: '$230',
+    originalPrice: '$400',
+    unit: '',
+    billingNote: 'One-time purchase, credits valid for 1 year',
+    credits: '10,000 credits',
+    creditValue: '100 credits ≈ $2.30',
+    cta: 'Buy Now',
+    productId: 'credits-10000',
+    amount: 23000,
+    interval: 'one-time',
+    validDays: 365,
+    icon: 'bolt',
+    features: [
+      'Use with GPT Image 2 or Nano Banana',
+      'Enough for 2,500 text-to-image generations at 2K',
+      'Good for high-volume campaign iteration',
+      'Works alongside subscription credits',
+    ],
+  },
+];
+
 export const pricing = [
   {
-    name: 'Free',
-    body: 'Explore the studio, test starter workflows, and try core prompt examples.',
-    cta: 'Start Free',
+    name: 'Starter',
+    body: 'Perfect for trying out AI image generation and small projects.',
+    price: '$14.99',
+    originalPrice: '',
+    unit: '/ mo',
+    annualPrice: '',
+    discountLabel: '',
+    credits: '350 credits / month',
+    creditValue: '100 credits ≈ $4.28',
+    cta: 'Buy Now',
+    href: '/pricing',
     featured: false,
   },
   {
     name: 'Pro',
-    body: 'Create more images, iterate faster, and use prompt templates for product, marketing, and content workflows.',
-    cta: 'Upgrade to Pro',
+    body: 'Ideal for creators, designers, and content professionals.',
+    price: '$39.99',
+    originalPrice: '$69',
+    unit: '/ mo',
+    annualPrice: '',
+    discountLabel: '',
+    credits: '1,600 credits / month',
+    creditValue: '100 credits ≈ $2.50',
+    cta: 'Buy Now',
+    href: '/pricing',
     featured: true,
   },
   {
-    name: 'Studio',
-    body: 'Plan image workflows for teams, campaigns, ecommerce projects, and repeatable brand assets.',
-    cta: 'Contact for Studio',
+    name: 'Premium',
+    body: 'For teams, agencies, and high-volume commercial use.',
+    price: '$119',
+    originalPrice: '$187',
+    unit: '/ mo',
+    annualPrice: '',
+    discountLabel: '',
+    credits: '5,500 credits / month',
+    creditValue: '100 credits ≈ $2.16',
+    cta: 'Buy Now',
+    href: '/pricing',
     featured: false,
+  },
+];
+
+export const pricingCreditUsage = [
+  {
+    mode: 'Text-to-image',
+    values: ['1K: 2 credits', '2K: 4 credits', '4K: 8 credits'],
+  },
+  {
+    mode: 'Image edit',
+    values: ['1K: 4 credits', '2K: 8 credits', '4K: 16 credits'],
+  },
+];
+
+export const pricingComparisonGroups = [
+  {
+    title: 'Usage',
+    rows: [
+      ['Included credits', '350 / month', '1,600 / month', '5,500 / month'],
+      ['Generation speed', 'Standard queue', 'Priority queue', 'Fastest queue'],
+      ['Batch output', 'Small projects', 'Campaign variations', 'High-volume sets'],
+    ],
+  },
+  {
+    title: 'Models',
+    rows: [
+      ['GPT Image 2', 'Included', 'Included', 'Included'],
+      ['Nano Banana Pro', 'Included', 'Included', 'Included'],
+      ['4K output', 'Limited by credits', 'Included', 'Included'],
+    ],
+  },
+  {
+    title: 'Workflow',
+    rows: [
+      ['Reference images', 'Basic uploads', 'Up to 10 references', 'Up to 10 references'],
+      ['Prompt templates', 'Included', 'Included', 'Included'],
+      ['Project history', 'Recent tasks', 'Saved history', 'Permanent history'],
+    ],
+  },
+  {
+    title: 'License',
+    rows: [
+      ['Commercial usage', 'Generated assets', 'Generated assets', 'Client work'],
+      ['Private workspace', 'Account only', 'Account only', 'Team-ready workflows'],
+    ],
+  },
+  {
+    title: 'Support',
+    rows: [
+      ['Support level', 'Community updates', 'Priority support', 'Priority support'],
+      ['Best for', 'Small projects', 'Active creators', 'Agencies and teams'],
+    ],
+  },
+];
+
+export const pricingFaqs = [
+  {
+    q: 'What payment methods are supported?',
+    a: 'We support the payment methods enabled in checkout, including major cards and available third-party payment options. All payments are processed through secure payment providers; GPT Image 2 Studio does not store your card details.',
+  },
+  {
+    q: 'What are annual, monthly subscriptions, and credit packs?',
+    a: 'Monthly subscriptions renew and refill credits every month. Annual subscriptions are paid once per year and unlock the discounted yearly credit allocation. Credit packs are one-time top-ups that do not create a subscription.',
+  },
+  {
+    q: 'How do GPT Image 2 Studio credits work?',
+    a: 'Credits are consumed when you generate or edit images. Text-to-image starts at 2 credits for 1K, while image editing starts at 4 credits for 1K. Higher resolution and more outputs use more credits before the job starts.',
+  },
+  {
+    q: 'Do credits expire?',
+    a: 'Subscription credits are intended for the current billing period. Credit packs are valid for 1 year from purchase and can be used alongside subscription credits.',
+  },
+  {
+    q: 'Can I use generated images commercially?',
+    a: 'Paid plans include commercial usage for generated assets, as long as your use complies with the model providers, applicable law, and third-party rights.',
+  },
+  {
+    q: 'Does GPT Image 2 Studio include Nano Banana?',
+    a: 'Yes. The model picker lets you switch between GPT Image 2 and Nano Banana per task, so you can choose the best model for product shots, portraits, posters, reference edits, and campaign variations.',
+  },
+  {
+    q: 'Can I cancel anytime?',
+    a: 'Yes. Monthly and yearly subscriptions can be managed from account billing after purchase. Cancellation stops future renewals and does not remove credits already issued for the paid period.',
+  },
+  {
+    q: 'How do I buy more credits?',
+    a: 'Choose Credits Packs on this pricing page when you need extra generations without changing your subscription. Packs are useful for launches, client batches, and short-term creative spikes.',
+  },
+  {
+    q: 'What happens if payment fails?',
+    a: 'No credits are added until the payment provider confirms the transaction. You can retry checkout or choose a different payment method if available.',
+  },
+  {
+    q: 'Is GPT Image 2 Studio built for teams?',
+    a: 'Premium is designed for agencies, ecommerce teams, and repeat campaign workflows. Team seat management can be added later without changing the current credit model.',
   },
 ];
 
@@ -828,7 +1187,7 @@ export const faqs = [
   },
   {
     q: 'Is GPT Image 2 Studio free to use?',
-    a: 'GPT Image 2 Studio offers a Free tier for trying core prompts plus Pro and Studio plans for higher-volume creators and teams. See the Pricing section above for current credits and limits.',
+    a: 'GPT Image 2 Studio offers a Free tier for trying core prompts plus Pro and Studio plans for higher-volume creators and teams. See the pricing page for current credits and limits.',
   },
   {
     q: 'Can I use Nano Banana inside GPT Image 2 Studio?',
@@ -845,7 +1204,7 @@ export const finalCta = {
   subcopy:
     'Experience production-grade AI image generation. Bring a prompt — walk away with assets your team can ship.',
   primary: { label: 'Try GPT Image 2 Now', href: '#workbench' },
-  secondary: { label: 'View Plans', href: '#pricing' },
+  secondary: { label: 'View Plans', href: '/pricing' },
 };
 
 export const footer = {
