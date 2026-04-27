@@ -8,12 +8,17 @@ import {
   Check,
   ChevronDown,
   Copy,
+  Crown,
+  Flame,
+  Gift,
+  Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
   Menu,
   Sparkles,
   Wand2,
   X,
+  Zap,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -27,6 +32,7 @@ import {
   comparisonHero,
   comparisonIntro,
   coreFeatures,
+  creditPacks,
   editDemos,
   faqs,
   finalCta,
@@ -35,7 +41,7 @@ import {
   howToUse,
   howToUseSubtitle,
   nav,
-  pricing,
+  pricingPlansByBilling,
   promoBar,
   promptCards,
   testimonials,
@@ -47,6 +53,7 @@ import {
   whyChooseCta,
   whyChooseSubtitle,
   workbench,
+  type PricingBilling,
   type PromptCard,
   type Testimonial,
 } from './content';
@@ -84,6 +91,16 @@ const palettes: Record<
   },
 };
 
+const pricingBillingOptions: {
+  value: PricingBilling;
+  label: string;
+  note?: string;
+}[] = [
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly', note: 'Save 50%' },
+  { value: 'packs', label: 'Credits Packs' },
+];
+
 export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const palette = palettes[variant];
   const { user, setIsShowSignModal } = useAppContext();
@@ -96,8 +113,14 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const [copied, setCopied] = useState<string | null>(null);
   const [selectedPrompt, setSelectedPrompt] = useState<PromptCard | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [pricingBilling, setPricingBilling] =
+    useState<PricingBilling>('yearly');
 
   const activeEdit = editDemos[activeEditDemo];
+  const visiblePricingPlans =
+    pricingBilling === 'packs'
+      ? creditPacks
+      : pricingPlansByBilling[pricingBilling];
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -142,35 +165,29 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
     <div className="gpt-studio-page min-h-screen bg-[#09090B] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
       {/* Promo bar */}
       {promoOpen && (
-        <div
-          className={`relative border-b border-white/5 bg-gradient-to-r ${palette.accentSoft}`}
-        >
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 text-xs sm:text-sm md:px-8">
-            <div className="flex items-center gap-2 truncate">
-              <span
-                className={`inline-flex h-5 items-center rounded-full border border-white/10 bg-white/5 px-2 text-[10px] font-semibold tracking-wider uppercase ${palette.badgeText}`}
-              >
-                Launch
+        <div className="relative border-b border-amber-300/70 bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 text-zinc-950 shadow-[0_8px_24px_rgba(250,204,21,0.18)]">
+          <Link
+            href={promoBar.href}
+            className="block pr-10 transition hover:brightness-105 focus-visible:ring-2 focus-visible:ring-zinc-950/40 focus-visible:outline-none"
+          >
+            <div className="mx-auto flex min-h-11 max-w-7xl items-center justify-center px-4 py-2 text-xs font-bold leading-5 sm:text-sm md:px-8">
+              <span className="text-center">
+                <Gift className="mr-1 inline-block size-4 align-[-3px] text-amber-800 sm:size-5" />
+                {promoBar.text}{' '}
+                <span className="inline-flex min-h-7 items-center gap-1 rounded-full bg-zinc-950 px-3 py-1 text-xs font-black text-amber-100 align-middle">
+                  {promoBar.cta}
+                  <ArrowRight className="size-3" />
+                </span>
               </span>
-              <span className="truncate text-zinc-300">{promoBar.text}</span>
             </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <a
-                href={promoBar.href}
-                className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-zinc-950 transition hover:bg-zinc-200"
-              >
-                {promoBar.cta}
-                <ArrowRight className="size-3" />
-              </a>
-              <button
-                aria-label="Close promo bar"
-                onClick={() => setPromoOpen(false)}
-                className="rounded-full p-1 text-zinc-400 hover:bg-white/10 hover:text-white"
-              >
-                <X className="size-3.5" />
-              </button>
-            </div>
-          </div>
+          </Link>
+          <button
+            aria-label="Close promo bar"
+            onClick={() => setPromoOpen(false)}
+            className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-zinc-700/70 hover:bg-zinc-950/10 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-zinc-950/40 focus-visible:outline-none"
+          >
+            <X className="size-3.5" />
+          </button>
         </div>
       )}
 
@@ -189,7 +206,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 GPT Image 2 Studio
               </span>
             </Link>
-            <nav className="hidden items-center gap-6 md:flex">
+            <nav className="hidden items-center gap-6 lg:flex">
               {nav.map((item) => (
                 <a
                   key={item.label}
@@ -206,10 +223,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             <AnimatedThemeToggler className="inline-flex size-9 items-center justify-center rounded-md text-zinc-400 transition hover:bg-white/10 hover:text-white [&_svg]:size-4" />
             {user ? (
               <Link
-                href="/settings/profile"
+                href="/pricing"
                 className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
               >
-                {user.name?.split(' ')[0] ?? 'Account'}
+                Top Up Credits
               </Link>
             ) : (
               <button
@@ -217,11 +234,11 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 onClick={() => setIsShowSignModal(true)}
                 className="hidden rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:inline-flex"
               >
-                Sign In
+                Get 20 Free Credits
               </button>
             )}
             <button
-              className="rounded-md p-2 text-zinc-300 hover:bg-white/10 md:hidden"
+              className="rounded-md p-2 text-zinc-300 hover:bg-white/10 lg:hidden"
               aria-label="Toggle navigation"
               onClick={() => setNavOpen((v) => !v)}
             >
@@ -230,7 +247,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
         </div>
         {navOpen && (
-          <div className="border-t border-white/5 md:hidden">
+          <div className="border-t border-white/5 lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
               {nav.map((item) => (
                 <a
@@ -794,56 +811,155 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Simple Plans for GPT Image 2 Studio
+              GPT Image 2 Studio pricing
             </h2>
             <p className="mt-4 text-zinc-400">
-              Choose a plan for testing prompts, generating campaign visuals,
-              and building repeatable image workflows. Final credits, pricing,
-              and limits will be shown before launch.
+              Choose the perfect plan for your AI image creation needs.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {pricing.map((p) => (
+
+          <div className="mx-auto mt-8 flex w-full max-w-2xl rounded-xl border border-emerald-400/20 bg-[#081915]/80 p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
+            {pricingBillingOptions.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                aria-pressed={pricingBilling === option.value}
+                onClick={() => setPricingBilling(option.value)}
+                className={`relative flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg px-2 text-sm font-bold transition focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:outline-none md:text-base ${
+                  pricingBilling === option.value
+                    ? `bg-gradient-to-r ${palette.accent} text-white shadow-lg shadow-cyan-950/40`
+                    : 'text-zinc-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <span>{option.label}</span>
+                {option.note && (
+                  <span className="hidden items-center gap-1 rounded-md bg-gradient-to-r from-red-500 to-orange-600 px-2 py-1 text-xs font-black text-amber-100 shadow-lg shadow-orange-950/40 lg:inline-flex">
+                    <Flame className="size-3 fill-amber-200 text-amber-200" />
+                    {option.note}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <span className="inline-flex items-center gap-2 text-base font-semibold text-white">
+              <span className="size-1.5 rounded-full bg-emerald-400" />
+              Cancel anytime
+            </span>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {visiblePricingPlans.map((p) => (
               <div
                 key={p.name}
-                className={`relative flex flex-col rounded-2xl border p-6 transition ${
+                className={`relative flex min-h-[520px] flex-col rounded-2xl border p-6 transition ${
                   p.featured
-                    ? `border-white/30 bg-[#151821] ring-1 ${palette.accentRing}`
-                    : 'border-white/10 bg-[#101218]'
+                    ? 'border-emerald-500/50 bg-[#0b2517] shadow-2xl shadow-emerald-950/25 ring-1 ring-emerald-400/25'
+                    : 'border-white/10 bg-[#090e1a] hover:border-white/20'
                 }`}
               >
                 {p.featured && (
                   <span
-                    className={`absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center rounded-full bg-gradient-to-r ${palette.accent} px-3 py-1 text-[10px] font-bold tracking-wider text-zinc-950 uppercase`}
+                    className={`absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-lg bg-gradient-to-r ${palette.accent} px-3 py-1 text-[10px] font-bold tracking-wider text-white uppercase`}
                   >
-                    Recommended
+                    <Crown className="size-3" />
+                    Most Popular
                   </span>
                 )}
-                <h3 className="text-lg font-semibold text-white">{p.name}</h3>
-                <p className="mt-2 text-sm text-zinc-400">{p.body}</p>
-                <div className="mt-5 flex items-baseline gap-1.5">
-                  <span className="text-3xl font-bold text-white">—</span>
-                  <span className="text-xs text-zinc-500">
-                    Plan details TBA
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`inline-flex size-12 shrink-0 items-center justify-center rounded-xl ${
+                      p.featured
+                        ? 'bg-gradient-to-br from-emerald-500 to-cyan-500 text-white'
+                        : 'bg-emerald-500/15 text-emerald-400'
+                    }`}
+                  >
+                    {p.featured ? (
+                      <Crown className="size-6" />
+                    ) : (
+                      <Zap className="size-6" />
+                    )}
                   </span>
+                  <h3 className="text-xl font-black text-white">{p.name}</h3>
                 </div>
-                <button
-                  type="button"
-                  className={`mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition ${
+
+                <div className="mt-8">
+                  <div className="flex flex-wrap items-baseline gap-2">
+                    {p.originalPrice && (
+                      <span className="text-base font-black text-zinc-500 line-through">
+                        {p.originalPrice}
+                      </span>
+                    )}
+                    <span
+                      className={`text-4xl font-black tracking-tight ${
+                        p.featured
+                          ? `bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`
+                          : 'text-white'
+                      }`}
+                    >
+                      {p.price}
+                    </span>
+                    <span className="text-base font-bold text-zinc-400">
+                      {p.unit}
+                    </span>
+                  </div>
+                  {(p.annualPrice || p.discountLabel) && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {p.annualPrice && (
+                        <span className="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-black text-emerald-300">
+                          {p.annualPrice}
+                        </span>
+                      )}
+                      {p.discountLabel && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-red-500 to-orange-600 px-3 py-1 text-xs font-black text-amber-100">
+                          <Flame className="size-3 fill-amber-200 text-amber-200" />
+                      {p.discountLabel}
+                    </span>
+                  )}
+                </div>
+              )}
+                  <p className="mt-5 text-sm font-semibold text-zinc-400 underline decoration-dotted underline-offset-4">
+                    {p.creditValue}
+                  </p>
+                </div>
+                <p className="mt-5 min-h-16 text-sm leading-6 text-zinc-400">
+                  {p.description}
+                </p>
+                <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                  <p className={`text-sm font-black ${palette.badgeText}`}>
+                    {p.credits}
+                  </p>
+                  <p className="mt-1 text-xs font-medium text-zinc-500">
+                    {p.billingNote}
+                  </p>
+                </div>
+                <Link
+                  href="/pricing"
+                  className={`mt-6 inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-black transition ${
                     p.featured
-                      ? palette.accentBg
-                      : 'border border-white/15 bg-white/5 text-white hover:bg-white/10'
+                      ? `bg-gradient-to-r ${palette.accent} text-white hover:brightness-110`
+                      : 'border border-zinc-300/30 bg-zinc-100 text-zinc-950 hover:bg-white'
                   }`}
                 >
                   {p.cta}
-                </button>
+                  <Zap className="size-4 fill-current" />
+                </Link>
+
+                <ul className="mt-6 space-y-3 text-sm">
+                  {p.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-zinc-300"
+                    >
+                      <Check className="mt-0.5 size-4 shrink-0 text-emerald-300" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-zinc-500">
-            Plan details are placeholders for the MVP and should be replaced
-            before paid launch.
-          </p>
         </div>
       </section>
 
@@ -996,12 +1112,12 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               <Wand2 className="size-4" />
               {finalCta.primary.label}
             </a>
-            <a
+            <Link
               href={finalCta.secondary.href}
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
             >
               {finalCta.secondary.label}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

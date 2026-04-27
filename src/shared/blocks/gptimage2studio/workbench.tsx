@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   ChevronLeft,
   ChevronRight,
@@ -671,21 +672,20 @@ export default function Workbench({
             </span>
             <div>
               <h3 className="text-sm font-semibold text-white sm:text-base">
-                Get 20 Free Credits &amp; Try Pro
+                {workbench.promoCard.title}
               </h3>
               <p className="mt-0.5 text-xs text-zinc-400 sm:text-sm">
-                Sign up now to test GPT Image 2 and Nano Banana workflows when
-                access opens.
+                {workbench.promoCard.subtitle}
               </p>
             </div>
           </div>
-          <a
-            href="#pricing"
+          <Link
+            href={workbench.promoCard.href}
             className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-bold transition ${theme.primaryButton}`}
           >
-            Sign Up Free
+            {workbench.promoCard.cta}
             <Sparkles className="size-4" />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -977,13 +977,13 @@ export default function Workbench({
                 Sign in to start
               </Button>
             ) : remainingCredits < baseCost ? (
-              <a
+              <Link
                 href="/pricing"
                 className={`inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl px-5 text-base font-black transition ${theme.primaryButton}`}
               >
                 <Wand2 className="size-4" />
                 Top up credits to continue
-              </a>
+              </Link>
             ) : (
               <Button
                 size="lg"
