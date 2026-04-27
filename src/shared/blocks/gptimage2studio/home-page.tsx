@@ -11,7 +11,6 @@ import {
   Layers,
   Layout as LayoutIcon,
   Menu,
-  Quote,
   Sparkles,
   Wand2,
   X,
@@ -33,7 +32,6 @@ import {
   footer,
   hero,
   howToUse,
-  howToUseCta,
   howToUseSubtitle,
   nav,
   pricing,
@@ -43,6 +41,7 @@ import {
   testimonials,
   testimonialsDisclaimer,
   testimonialsIntro,
+  type Testimonial,
   useCases,
   whatIsCards,
   whatIsIntro,
@@ -447,27 +446,16 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <span
-                      className={`inline-flex w-fit items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-wider uppercase ${palette.badgeText}`}
-                    >
-                      Use case 0{i + 1}
-                    </span>
-                    <h3 className="mt-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
+                    <h3 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
                       {u.title}
                     </h3>
                     <p className="mt-4 text-zinc-400">{u.copy}</p>
-                    <div className="mt-5 rounded-xl border border-white/10 bg-[#0B0D12] p-4 text-sm text-zinc-300">
-                      <span className="font-mono text-[10px] tracking-wider text-zinc-500 uppercase">
-                        Prompt snippet
-                      </span>
-                      <p className="mt-2 text-zinc-300">{u.snippet}</p>
-                    </div>
                     <a
                       href={u.href}
-                      className={`mt-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10`}
+                      className={`mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:opacity-90`}
                     >
                       {u.cta}
-                      <ArrowRight className="size-3.5" />
+                      <ArrowRight className="size-4" />
                     </a>
                   </div>
                 </article>
@@ -483,10 +471,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="flex flex-col items-center text-center">
             <SectionEyebrow palette={palette}>Editing</SectionEyebrow>
             <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Edit Images with GPT Image 2 Studio
+              Edit Images with GPT Image 2
             </h2>
             <p className="mt-4 max-w-3xl text-zinc-400">
-              Use natural-language edits to change backgrounds, relight scenes, replace objects, and refine text-heavy layouts without rebuilding the image from scratch.
+              Upload an image, describe the change. The Studio handles the rest.
             </p>
           </div>
 
@@ -530,17 +518,9 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   />
                 </div>
               ))}
-              <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-zinc-100 backdrop-blur">
-                <span className={palette.badgeText}>
-                  Demo {String(activeEditDemo + 1).padStart(2, '0')}
-                </span>
-                <span className="size-1 rounded-full bg-zinc-500" />
-                <span>{activeEdit.title}</span>
-              </div>
             </div>
             <div className="border-t border-white/10 bg-[#0B0D12] p-5 md:p-6">
-              <p className="text-sm text-zinc-300">{activeEdit.copy}</p>
-              <div className="mt-3 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-[12px] leading-relaxed text-zinc-300">
+              <div className="rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-[12px] leading-relaxed text-zinc-300">
                 {activeEdit.prompt}
               </div>
             </div>
@@ -709,18 +689,18 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             </h2>
             <p className="mt-4 text-zinc-400">{howToUseSubtitle}</p>
           </div>
-          <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-12 md:gap-16">
+          <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-12 md:gap-16">
             {howToUse.map((s) => (
               <article
                 key={s.step}
                 className="flex flex-col items-center text-center"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
                   <Image
                     src={s.image}
                     alt={s.alt}
                     fill
-                    sizes="(min-width: 768px) 720px, 100vw"
+                    sizes="(min-width: 768px) 880px, 100vw"
                     loading="lazy"
                     className="object-cover"
                   />
@@ -736,15 +716,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 <p className="mt-3 max-w-2xl text-zinc-400">{s.copy}</p>
               </article>
             ))}
-          </div>
-          <div className="mt-12 flex justify-center">
-            <a
-              href={howToUseCta.href}
-              className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:opacity-90`}
-            >
-              {howToUseCta.label}
-              <ArrowRight className="size-4" />
-            </a>
           </div>
         </div>
       </section>
@@ -840,35 +811,39 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         </div>
       </section>
 
-      {/* Testimonials — creator quotes */}
+      {/* Testimonials — creator quotes (auto-scrolling marquee, constrained to max-w-7xl) */}
       <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 pt-14 md:px-8 md:pt-20">
           <div className="flex flex-col items-center text-center">
             <SectionEyebrow palette={palette}>Creator Voices</SectionEyebrow>
             <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-              What Creators Are Exploring
+              What Creators Say About GPT Image 2
             </h2>
             <p className="mt-4 max-w-3xl text-zinc-400">
               {testimonialsIntro}
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
+        </div>
+
+        <div className="group relative mx-auto mt-10 max-w-7xl overflow-hidden px-4 md:px-8">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#0B0D12] to-transparent md:w-20" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#0B0D12] to-transparent md:w-20" />
+
+          <div
+            className="flex w-max gap-6 will-change-transform [animation:testimonial-scroll_60s_linear_infinite] motion-reduce:[animation:none] group-hover:[animation-play-state:paused]"
+            aria-label="Creator testimonials"
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
               <a
-                key={t.url}
+                key={`${t.url}-${i}`}
                 href={t.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821]"
+                aria-hidden={i >= testimonials.length}
+                className="relative flex w-[300px] flex-shrink-0 flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821] sm:w-[360px]"
               >
                 <div className="flex items-center justify-between">
-                  <Quote
-                    className={`size-6 ${palette.badgeText} opacity-70`}
-                    aria-hidden="true"
-                  />
-                  <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-zinc-300 uppercase">
-                    {t.source}
-                  </span>
+                  <SocialLogo source={t.source} className="size-5 text-white" />
                 </div>
                 <blockquote className="text-sm leading-relaxed text-zinc-200">
                   &ldquo;{t.quote}&rdquo;
@@ -877,12 +852,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   {t.engagement} · {t.date}
                 </div>
                 <figcaption className="mt-auto flex items-center gap-3 border-t border-white/5 pt-4">
-                  <span
-                    aria-hidden="true"
-                    className={`inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br ${t.color} text-sm font-bold text-white`}
-                  >
-                    {t.initial}
-                  </span>
+                  <TestimonialAvatar testimonial={t} />
                   <div className="leading-tight">
                     <div className="flex items-center gap-1 text-sm font-semibold text-white">
                       {t.name}
@@ -901,10 +871,20 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               </a>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-zinc-500">
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 pb-14 md:px-8 md:pb-20">
+          <p className="mt-10 text-center text-xs text-zinc-500">
             {testimonialsDisclaimer}
           </p>
         </div>
+
+        <style>{`
+          @keyframes testimonial-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-50% - 0.75rem)); }
+          }
+        `}</style>
       </section>
 
       {/* FAQ */}
@@ -965,7 +945,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
 
       {/* Final CTA */}
       <section
-        id="blog"
+        id="get-started"
         className={`relative overflow-hidden border-b border-white/5 bg-gradient-to-br ${palette.accentSoft}`}
       >
         <div className="mx-auto max-w-4xl px-4 py-16 text-center md:px-8 md:py-24">
@@ -1070,5 +1050,61 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
         ))}
       </ul>
     </div>
+  );
+}
+
+function SocialLogo({
+  source,
+  className,
+}: {
+  source: 'X' | 'Reddit';
+  className?: string;
+}) {
+  if (source === 'X') {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        aria-label="X"
+        className={className}
+        fill="currentColor"
+      >
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+      </svg>
+    );
+  }
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-label="Reddit"
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" />
+    </svg>
+  );
+}
+
+function TestimonialAvatar({ testimonial }: { testimonial: Testimonial }) {
+  const [errored, setErrored] = useState(false);
+  const showFallback = errored || !testimonial.avatarUrl;
+
+  if (showFallback) {
+    return (
+      <span
+        aria-hidden="true"
+        className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.color} text-sm font-bold text-white`}
+      >
+        {testimonial.initial}
+      </span>
+    );
+  }
+  return (
+    <img
+      src={testimonial.avatarUrl}
+      alt={testimonial.name}
+      onError={() => setErrored(true)}
+      className="size-10 shrink-0 rounded-full border border-white/10 object-cover"
+      loading="lazy"
+    />
   );
 }

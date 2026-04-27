@@ -32,7 +32,7 @@ export const promoBar = {
 export const nav = [
   { label: 'Generator', href: '#workbench' },
   { label: 'Prompts', href: '#prompts' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: '#pricing' },
 ];
 
@@ -168,33 +168,32 @@ export const workbench = {
 
 export const capabilityCards = [
   {
-    title: 'Product Photo Precision',
-    copy: 'Turn structured ecommerce prompts into clean studio product images with controlled lighting, shadows, labels, and material detail.',
-    image: '/imgs/gptimage2studio/webp/workbench-primary-hydra-glow-serum.webp',
-    alt: 'GPT Image 2 Studio product photo preview with readable label text.',
-    badge: 'Product #1',
+    title: 'Reasoning-Powered Layout',
+    copy: 'GPT Image 2 plans the composition before rendering. Multi-element briefs come out coherent — every callout, label, and dimension reasoned in context.',
+    image: '/imgs/gptimage2studio/webp/carousel-reasoning-rocket.webp',
+    alt: 'Saturn V rocket launch with engineering annotations demonstrating GPT Image 2 reasoning and real-world knowledge.',
+    badge: 'Reasoning #1',
   },
   {
-    title: 'Reference Image Editing',
-    copy: 'Upload a product or concept image, then use natural-language instructions to change backgrounds, lighting, objects, and layout.',
-    image: '/imgs/gptimage2studio/webp/edit-demo-background-replacement.webp',
-    alt: 'Before and after reference image edit for product background replacement.',
-    badge: 'Edit #2',
+    title: 'Perfect Text in 6 Languages',
+    copy: 'Around 99% character accuracy across English, Japanese, Korean, Chinese, Hindi, and Bengali — usable for posters, packaging, and brand assets without post-edit fixes.',
+    image: '/imgs/gptimage2studio/webp/carousel-multilingual-typography.webp',
+    alt: 'Six gallery posters showing the word DESIGN rendered in English, Japanese, Korean, Chinese, Hindi, and Bengali.',
+    badge: 'Multilingual #2',
   },
   {
-    title: 'Structured Visuals',
-    copy: 'Draft infographics, UI screens, annotation graphics, and explainers with clear labels and reviewable composition.',
-    image: '/imgs/gptimage2studio/webp/usecase-infographics-ui-mockups.webp',
-    alt: 'Infographic and UI concept previews for multi-model image workflows.',
-    badge: 'Visual #3',
+    title: 'Multi-Image Consistency',
+    copy: 'Generate 1 to 8 images in a single prompt — same character, same props, same palette across every panel. Storyboards, ad sets, and brand systems in one pass.',
+    image: '/imgs/gptimage2studio/webp/carousel-character-consistency.webp',
+    alt: 'Eight-panel storyboard showing the same character across cafe, podcast, beach, mountain, coding, conference, garden, and spacecraft scenes with full visual consistency.',
+    badge: 'Consistency #3',
   },
   {
-    title: 'Clear Text Rendering',
-    copy: 'Create posters, product labels, menu boards, and thumbnails where short readable text is part of the final image.',
-    image:
-      '/imgs/gptimage2studio/webp/workbench-thumb-create-forward-poster.webp',
-    alt: 'Create Forward poster preview with readable GPT Image 2 generated text.',
-    badge: 'Text #4',
+    title: 'Any Aspect Ratio, Native 4K',
+    copy: 'From 1:1 Instagram squares to 21:9 cinema banners — generate the same brief in any ratio your channel needs, all at native 4K fidelity.',
+    image: '/imgs/gptimage2studio/webp/carousel-4k-detail-frames.webp',
+    alt: 'The same MORNI coffee campaign rendered as four ad mockups in 1:1 Instagram, 9:16 TikTok, 16:9 YouTube, and 21:9 cinema formats.',
+    badge: 'Formats #4',
   },
 ];
 
@@ -558,41 +557,36 @@ export type HowToStep = {
 };
 
 export const howToUseSubtitle =
-  'From blank prompt to publish-ready visual in four steps — same workspace, two models, no API setup.';
-
-export const howToUseCta = {
-  label: 'Open the Workbench',
-  href: '#workbench',
-};
+  'Transform your idea into a finished visual in four steps:';
 
 export const howToUse: HowToStep[] = [
   {
     step: '01',
-    title: 'Pick GPT Image 2 or Nano Banana',
-    copy: 'Choose GPT Image 2 for text-rich design, posters, packaging, and UI mockups. Choose Nano Banana when reference images, portrait realism, or multi-character consistency matter most. Switch between them per task — no separate accounts.',
-    image: '/imgs/gptimage2studio/webp/howto-step-01-pick-model.webp',
-    alt: 'GPT Image 2 Studio model picker showing GPT Image 2 selected and Nano Banana available to switch.',
+    title: 'Start with GPT Image 2',
+    copy: 'Bring a prompt or reference image — text or visual, the Studio handles both. From a brief mood board to a polished editorial shot in one prompt.',
+    image: '/imgs/gptimage2studio/webp/howto-step-01-start-prompt.webp',
+    alt: 'A designer brief becoming a finished editorial fashion portrait, demonstrating GPT Image 2 text-to-image creation.',
   },
   {
     step: '02',
-    title: 'Drop a Prompt or Reference Image',
-    copy: 'Type a prompt, paste a template from the prompt library, or upload a reference image. Structured briefs — subject, text, layout, style, and constraints — outperform one-line prompts in both models.',
-    image: '/imgs/gptimage2studio/webp/howto-step-02-prompt-or-reference.webp',
-    alt: 'Studio input area showing a structured prompt, an attached reference image, and a prompt library link.',
+    title: 'Edit with GPT Image 2',
+    copy: 'Describe the change in plain words. Edit text, swap colors, replace objects — no layers, no masks, no manual selections.',
+    image: '/imgs/gptimage2studio/webp/howto-step-02-direct-edit.webp',
+    alt: 'A cream sweater turning emerald and English mug text translating to Japanese, all from a single natural-language prompt.',
   },
   {
     step: '03',
-    title: 'Set Aspect Ratio, Resolution, and Quality',
-    copy: 'Pick the aspect ratio first (square 1:1, vertical 9:16, widescreen 16:9, ultra-wide 21:9), then resolution (1K, 2K, or 4K) and output count (1–8 images). The Studio adapts model parameters behind the scenes.',
-    image: '/imgs/gptimage2studio/webp/howto-step-03-ratio-resolution-quality.webp',
-    alt: 'Studio controls for aspect ratio, resolution, and output count, with 9:16 vertical, 4K, and 4 outputs selected.',
+    title: 'Iterate with GPT Image 2',
+    copy: 'Refine the same image across multiple turns without breaking the rest. Multi-turn editing keeps the character, props, and identity intact.',
+    image: '/imgs/gptimage2studio/webp/howto-step-03-iterate-refine.webp',
+    alt: 'The same model and outfit moving from a studio to a Tokyo café across two editing turns, with character consistency preserved.',
   },
   {
     step: '04',
-    title: 'Generate, Iterate, and Export',
-    copy: 'Generate, review the output grid, and refine the prompt without losing your reference image. Export the result as PNG, JPEG, or WebP — sized for product pages, ads, social posts, or print.',
-    image: '/imgs/gptimage2studio/webp/howto-step-04-generate-export.webp',
-    alt: 'Studio output grid showing four generated images with PNG, JPEG, and WebP export options.',
+    title: 'Perfect with GPT Image 2',
+    copy: 'Export at native 4K in 1:1, 9:16, 16:9, or 21:9 — the same brief reflows for any channel you ship to, every time.',
+    image: '/imgs/gptimage2studio/webp/howto-step-04-ship-formats.webp',
+    alt: 'The same fashion shot delivered as Instagram square, TikTok story, YouTube banner, and cinema poster mockups.',
   },
 ];
 
@@ -653,6 +647,7 @@ export type Testimonial = {
   url: string;
   engagement: string;
   date: string;
+  avatarUrl?: string;
   initial: string;
   color: string;
   quote: string;
@@ -674,6 +669,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://x.com/hewarsaber/status/2046707411335966796',
     engagement: '2.6K likes · 598K views',
     date: 'Apr 22, 2026',
+    avatarUrl: 'https://unavatar.io/twitter/hewarsaber',
     initial: 'H',
     color: 'from-cyan-500 to-blue-500',
     quote:
@@ -688,6 +684,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://x.com/akokoi1/status/2044800630771134677',
     engagement: '2K likes · 430K views',
     date: 'Apr 16, 2026',
+    avatarUrl: 'https://unavatar.io/twitter/akokoi1',
     initial: 'W',
     color: 'from-violet-500 to-fuchsia-500',
     quote:
@@ -702,6 +699,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://x.com/0xInk_/status/2047648944004755679',
     engagement: '1.6K likes · 106K views',
     date: 'Apr 24, 2026',
+    avatarUrl: 'https://unavatar.io/twitter/0xInk_',
     initial: 'I',
     color: 'from-emerald-500 to-teal-500',
     quote:
@@ -716,6 +714,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://x.com/fMinZhou/status/2047214663721681288',
     engagement: '4.3K likes · 326K views',
     date: 'Apr 23, 2026',
+    avatarUrl: 'https://unavatar.io/twitter/fMinZhou',
     initial: 'M',
     color: 'from-amber-500 to-orange-500',
     quote:
@@ -730,6 +729,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://x.com/minchoi/status/2040419534507512306',
     engagement: '793 likes · 264K views',
     date: 'Apr 4, 2026',
+    avatarUrl: 'https://unavatar.io/twitter/minchoi',
     initial: 'M',
     color: 'from-rose-500 to-pink-500',
     quote:
@@ -806,10 +806,10 @@ export const faqs = [
 ];
 
 export const finalCta = {
-  title: 'Start Creating with GPT Image 2 Studio',
+  title: 'Transform Your Creative Workflow with GPT Image 2',
   subcopy:
-    'Use prompts, references, and model controls to turn image ideas into product visuals, ads, explainers, and text-rich creative assets.',
-  primary: { label: 'Start Creating', href: '#workbench' },
+    'Experience production-grade AI image generation. Bring a prompt — walk away with assets your team can ship.',
+  primary: { label: 'Try GPT Image 2 Now', href: '#workbench' },
   secondary: { label: 'View Plans', href: '#pricing' },
 };
 

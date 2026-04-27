@@ -1010,19 +1010,19 @@ function CarouselPanel({
           fill
           priority={activeIndex === 0}
           sizes="(min-width: 1024px) 700px, 100vw"
-          className="object-cover"
+          className="object-cover object-top"
         />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_28%),linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.22)_45%,rgba(0,0,0,0.88))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0)_60%,rgba(0,0,0,0.55)_82%,rgba(0,0,0,0.92)_100%)]" />
 
-        <div className="pointer-events-none absolute inset-x-0 top-4 flex justify-center">
+        <div className="pointer-events-none absolute top-3 right-3 z-10">
           <span
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-black tracking-widest uppercase backdrop-blur ${theme.featurePill}`}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-black tracking-widest uppercase backdrop-blur ${theme.featurePill}`}
           >
             <Sparkles className="size-3" />
             {variant === 'studio'
-              ? 'New Release! GPT Image 2 Studio'
-              : 'New Release! GPT Image 2'}
+              ? 'New · GPT Image 2 Studio'
+              : 'New · GPT Image 2'}
           </span>
         </div>
 
@@ -1044,10 +1044,7 @@ function CarouselPanel({
         </button>
 
         <div className="absolute inset-x-0 bottom-0 p-5 pb-12 md:p-8 md:pb-14">
-          <span className="inline-flex rounded-full border border-white/10 bg-black/55 px-3 py-1 text-[10px] font-black tracking-wider text-cyan-200 uppercase backdrop-blur">
-            {activeFeature.badge}
-          </span>
-          <h3 className="mt-3 max-w-xl text-2xl font-black tracking-tight text-white md:text-3xl">
+          <h3 className="max-w-xl text-2xl font-black tracking-tight text-white md:text-3xl">
             {activeFeature.title}
           </h3>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-200 md:text-base">
