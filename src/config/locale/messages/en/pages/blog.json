@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "title": "Blog",
-    "description": "Read latest product features, solutions, and updates."
+    "title": "GPT Image 2 Blogs",
+    "description": "Read GPT Image 2 prompts, image editing guides, product photo workflows, poster ideas, ad creative tips, infographic examples, and model comparisons."
   },
   "page": {
-    "title": "ShipAny Blog",
+    "title": "GPT Image 2 Blogs",
     "sections": {
       "blog": {
         "id": "blog",
-        "title": "Blog",
-        "description": "Read latest product features, solutions, and updates."
+        "title": "GPT Image 2 Blogs",
+        "description": "Practical long-tail guides for GPT Image 2 prompts, image editing, product photos, posters, ads, infographics, and creator workflows."
       }
     }
   },

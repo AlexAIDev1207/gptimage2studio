@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import { Calendar } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/core/i18n/navigation';
@@ -11,6 +10,8 @@ import {
 } from '@/shared/types/blocks/blog';
 import { Tab } from '@/shared/types/blocks/common';
 import { Section } from '@/shared/types/blocks/landing';
+
+import { BlogShellFooter, BlogShellHeader } from './blog-shell';
 
 export function Blog({
   section,
@@ -40,100 +41,90 @@ export function Blog({
   });
 
   return (
-    <section
-      id={section.id}
-      className={cn('py-24 md:py-36', section.className, className)}
-    >
-      <div className="mx-auto mb-12 text-center">
-        {section.sr_only_title && (
-          <h1 className="sr-only">{section.sr_only_title}</h1>
+    <div className="dark min-h-screen bg-[#09090B] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
+      <BlogShellHeader />
+      <section
+        id={section.id}
+        className={cn(
+          'relative overflow-hidden px-4 py-20 md:px-8 md:py-28',
+          section.className,
+          className
         )}
-        <h2 className="mb-6 text-3xl font-bold text-pretty lg:text-4xl">
-          {section.title}
-        </h2>
-        <p className="text-muted-foreground mb-4 max-w-xl lg:max-w-none lg:text-lg">
-          {section.description}
-        </p>
-      </div>
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent" />
+        <div className="mx-auto mb-12 max-w-4xl text-center">
+          {section.sr_only_title && (
+            <h1 className="sr-only">{section.sr_only_title}</h1>
+          )}
+          <span className="mb-5 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold tracking-normal text-emerald-300 uppercase">
+            Creator guides
+          </span>
+          <h2 className="mb-5 text-4xl font-semibold text-pretty text-white md:text-5xl">
+            {section.title}
+          </h2>
+          <p className="mx-auto max-w-3xl text-base leading-7 text-zinc-400 md:text-lg">
+            {section.description}
+          </p>
+        </div>
 
-      <div className="container flex flex-col items-center gap-8 lg:px-16">
-        {categories && categories.length > 0 && (
-          <div className="mb-2 flex flex-wrap items-center justify-center gap-4">
-            <Tabs tabs={tabs} />
-          </div>
-        )}
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-8">
+          {categories && categories.length > 1 && (
+            <div className="mb-2 flex flex-wrap items-center justify-center gap-4">
+              <Tabs tabs={tabs} />
+            </div>
+          )}
 
-        {posts && posts.length > 0 ? (
-          <div className="flex w-full flex-wrap items-start">
-            {posts?.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.url || ''}
-                target={item.target || '_self'}
-                className="w-full p-4 md:w-1/3"
-              >
-                <div className="border-border flex flex-col overflow-clip rounded-xl border">
-                  {item.image && (
-                    <div>
-                      <img
-                        src={item.image}
-                        alt={item.title || ''}
-                        className="aspect-16/9 h-full w-full object-cover object-center"
-                      />
-                    </div>
-                  )}
-                  <div className="px-4 py-4 md:px-4 md:py-4 lg:px-4 lg:py-4">
-                    <h3 className="mb-3 text-lg font-semibold md:mb-4 md:text-xl lg:mb-6">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-3 md:mb-4 lg:mb-6">
-                      {item.description}
-                    </p>
+          {posts && posts.length > 0 ? (
+            <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {posts?.map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={item.url || ''}
+                  target={item.target || '_self'}
+                  className="group block min-w-0 rounded-lg focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+                >
+                  <article className="flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-white/[0.03] shadow-xl shadow-black/20 transition duration-200 group-hover:-translate-y-1 group-hover:border-cyan-300/30 group-hover:bg-white/[0.06]">
+                    {item.image && (
+                      <div className="border-b border-white/10 bg-white/5">
+                        <img
+                          src={item.image}
+                          alt={item.title || ''}
+                          className="aspect-video h-full w-full object-cover object-center"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-5">
+                      <div className="mb-4 flex items-center gap-2 text-xs text-zinc-500">
+                        {item.created_at && (
+                          <span className="inline-flex items-center gap-2">
+                            <Calendar className="size-4" />
+                            {item.created_at}
+                          </span>
+                        )}
+                      </div>
 
-                    <div className="text-muted-foreground flex items-center text-xs">
-                      {item.created_at && (
-                        <div className="flex items-center gap-2">
-                          <Calendar className="size-4" />
-                          {item.created_at}
-                        </div>
-                      )}
-                      <div className="flex-1"></div>
-                      {(item.author_name || item.author_image) && (
-                        <div className="flex items-center gap-2">
-                          {item.author_image && (
-                            <Avatar>
-                              <AvatarImage
-                                src={item.author_image || ''}
-                                alt={item.author_name || ''}
-                                className="size-6 rounded-full"
-                              />
-                              <AvatarFallback>
-                                {item.author_name?.charAt(0) || 'U'}
-                              </AvatarFallback>
-                            </Avatar>
-                          )}
-                          {item.author_name}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* {blog.readMoreText && (
-                      <p className="flex items-center hover:underline">
-                        {blog.readMoreText}
-                        <ArrowRight className="ml-2 size-4" />
+                      <h3 className="text-xl leading-snug font-semibold text-pretty text-white">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 line-clamp-4 flex-1 text-sm leading-6 text-zinc-400">
+                        {item.description}
                       </p>
-                    )} */}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-muted-foreground text-md py-8">
-            {t('no_content')}
-          </div>
-        )}
-      </div>
-    </section>
+
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300">
+                        Read guide
+                        <ArrowRight className="size-4 transition group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-md py-8 text-zinc-400">{t('no_content')}</div>
+          )}
+        </div>
+      </section>
+      <BlogShellFooter />
+    </div>
   );
 }

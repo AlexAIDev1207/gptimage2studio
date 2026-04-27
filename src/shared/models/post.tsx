@@ -6,6 +6,7 @@ import moment from 'moment';
 import { db } from '@/core/db';
 import { logsSource, pagesSource, postsSource } from '@/core/docs/source';
 import { generateTOC } from '@/core/docs/toc';
+import { envConfigs } from '@/config';
 import { post } from '@/config/db/schema';
 import { MarkdownContent } from '@/shared/blocks/common/markdown-content';
 import {
@@ -30,6 +31,12 @@ export enum PostStatus {
   PENDING = 'pending', // pending review by admin
   DRAFT = 'draft', // draft and not visible to the public
   ARCHIVED = 'archived', // archived means deleted
+}
+
+function shouldQueryDatabase() {
+  return (
+    envConfigs.database_provider === 'd1' || Boolean(envConfigs.database_url)
+  );
 }
 
 export async function addPost(data: NewPost) {
@@ -153,42 +160,46 @@ export async function getPost({
 }): Promise<BlogPostType | null> {
   let post: BlogPostType | null = null;
 
-  try {
-    // get post from database
-    const postData = await findPost({ slug, status: PostStatus.PUBLISHED });
-    if (postData) {
-      // post exist in database
-      const content = postData.content || '';
+  if (shouldQueryDatabase()) {
+    try {
+      // get post from database
+      const postData = await findPost({ slug, status: PostStatus.PUBLISHED });
+      if (postData) {
+        // post exist in database
+        const content = postData.content || '';
 
-      // Convert markdown content to MarkdownContent component
-      const body = content ? <MarkdownContent content={content} /> : undefined;
+        // Convert markdown content to MarkdownContent component
+        const body = content ? (
+          <MarkdownContent content={content} />
+        ) : undefined;
 
-      // Generate TOC from content
-      const toc = content ? generateTOC(content) : undefined;
+        // Generate TOC from content
+        const toc = content ? generateTOC(content) : undefined;
 
-      post = {
-        id: postData.id,
-        slug: postData.slug,
-        title: postData.title || '',
-        description: postData.description || '',
-        content: '',
-        body: body,
-        toc: toc,
-        created_at:
-          getPostDate({
-            created_at: postData.createdAt.toISOString(),
-            locale,
-          }) || '',
-        author_name: postData.authorName || '',
-        author_image: postData.authorImage || '',
-        author_role: '',
-        url: `${postPrefix}${postData.slug}`,
-      };
+        post = {
+          id: postData.id,
+          slug: postData.slug,
+          title: postData.title || '',
+          description: postData.description || '',
+          content: '',
+          body: body,
+          toc: toc,
+          created_at:
+            getPostDate({
+              created_at: postData.createdAt.toISOString(),
+              locale,
+            }) || '',
+          author_name: postData.authorName || '',
+          author_image: postData.authorImage || '',
+          author_role: '',
+          url: `${postPrefix}${postData.slug}`,
+        };
 
-      return post;
+        return post;
+      }
+    } catch (e) {
+      console.log('get post from database failed:', e);
     }
-  } catch (e) {
-    console.log('get post from database failed:', e);
   }
 
   // get post from locale file
@@ -386,6 +397,15 @@ export async function getRemotePostsAndCategories({
 }) {
   const dbPostsList: BlogPostType[] = [];
   const dbCategoriesList: BlogCategoryType[] = [];
+
+  if (!shouldQueryDatabase()) {
+    return {
+      posts: [],
+      postsCount: 0,
+      categories: [],
+      categoriesCount: 0,
+    };
+  }
 
   try {
     // get posts from database
