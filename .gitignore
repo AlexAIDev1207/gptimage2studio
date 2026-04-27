@@ -69,3 +69,7 @@ research/
 
 # Claude Code 本地状态
 .claude/scheduled_tasks.lock
+
+# OpenAI Codex / 其它 Agent 工具的本地配置
+.agents/
+AGENTS.md
