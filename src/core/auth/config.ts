@@ -5,13 +5,13 @@ import { getLocale } from 'next-intl/server';
 import { db } from '@/core/db';
 import { envConfigs } from '@/config';
 import * as schema from '@/config/db/schema';
-import { isCloudflareWorker } from '@/shared/lib/env';
 import { VerifyEmail } from '@/shared/blocks/email/verify-email';
 import {
   getCookieFromCtx,
   getHeaderValue,
   guessLocaleFromAcceptLanguage,
 } from '@/shared/lib/cookie';
+import { isCloudflareWorker } from '@/shared/lib/env';
 import { getUuid } from '@/shared/lib/hash';
 import { getClientIp } from '@/shared/lib/ip';
 import { grantCreditsForNewUser } from '@/shared/models/credit';
@@ -80,12 +80,14 @@ export async function getAuthOptions(configs: Record<string, string>) {
     ...authOptions,
     // Add database connection only when actually needed (runtime)
     // D1 is only available inside Cloudflare Workers runtime (not during build)
-    database: (envConfigs.database_url || (envConfigs.database_provider === 'd1' && isCloudflareWorker))
-      ? drizzleAdapter(db(), {
-          provider: getDatabaseProvider(envConfigs.database_provider),
-          schema: schema,
-        })
-      : null,
+    database:
+      envConfigs.database_url ||
+      (envConfigs.database_provider === 'd1' && isCloudflareWorker)
+        ? drizzleAdapter(db(), {
+            provider: getDatabaseProvider(envConfigs.database_provider),
+            schema: schema,
+          })
+        : null,
     databaseHooks: {
       user: {
         create: {
@@ -204,7 +206,9 @@ export async function getAuthOptions(configs: Record<string, string>) {
       : {}),
     socialProviders: await getSocialProviders(configs),
     plugins:
-      configs.google_client_id && configs.google_one_tap_enabled === 'true'
+      configs.google_auth_enabled === 'true' &&
+      configs.google_client_id &&
+      configs.google_one_tap_enabled === 'true'
         ? [oneTap()]
         : [],
   };
@@ -215,7 +219,11 @@ export async function getSocialProviders(configs: Record<string, string>) {
   const providers: any = {};
 
   // google auth
-  if (configs.google_client_id && configs.google_client_secret) {
+  if (
+    configs.google_auth_enabled === 'true' &&
+    configs.google_client_id &&
+    configs.google_client_secret
+  ) {
     providers.google = {
       clientId: configs.google_client_id,
       clientSecret: configs.google_client_secret,
@@ -223,7 +231,11 @@ export async function getSocialProviders(configs: Record<string, string>) {
   }
 
   // github auth
-  if (configs.github_client_id && configs.github_client_secret) {
+  if (
+    configs.github_auth_enabled === 'true' &&
+    configs.github_client_id &&
+    configs.github_client_secret
+  ) {
     providers.github = {
       clientId: configs.github_client_id,
       clientSecret: configs.github_client_secret,

@@ -120,7 +120,11 @@ function getAuthPlugins(configs: Record<string, string>) {
   const authPlugins = [];
 
   // google one tap plugin
-  if (configs.google_client_id && configs.google_one_tap_enabled === 'true') {
+  if (
+    configs.google_auth_enabled === 'true' &&
+    configs.google_client_id &&
+    configs.google_one_tap_enabled === 'true'
+  ) {
     authPlugins.push(
       oneTapClient({
         clientId: configs.google_client_id,
