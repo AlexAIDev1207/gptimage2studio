@@ -1,0 +1,36 @@
+name = "gptimage2studio"
+main = ".open-next/worker.js"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+# Optional direct binding. The included R2Provider currently uses the S3-compatible API
+# with R2_ACCOUNT_ID/R2_ACCESS_KEY/R2_SECRET_KEY, but binding is useful for future Worker-native code.
+[[r2_buckets]]
+binding = "GPTIMAGE2_IMAGES"
+bucket_name = "gptimage2studio-images"
+
+# Recommended if your Postgres host supports Cloudflare Hyperdrive.
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "replace_with_hyperdrive_id"
+localConnectionString = "postgresql://USER:PASSWORD@HOST:5432/DB?sslmode=require"
+
+[vars]
+NEXT_PUBLIC_APP_URL = "https://gptimage2studio.com"
+NEXT_PUBLIC_APP_NAME = "GPT Image 2 Studio"
+NEXT_PUBLIC_DEFAULT_LOCALE = "en"
+DATABASE_PROVIDER = "postgresql"
+DB_SCHEMA = "public"
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+OPENAI_CUSTOM_STORAGE = "true"
+GPTIMAGE2_TEXT_TO_IMAGE_BASE_CREDITS = "6"
+GPTIMAGE2_IMAGE_TO_IMAGE_BASE_CREDITS = "8"
+DEFAULT_PAYMENT_PROVIDER = "stripe"
+STRIPE_ENABLED = "true"
+R2_BUCKET_NAME = "gptimage2studio-images"
+R2_UPLOAD_PATH = "uploads"
+R2_DOMAIN = "https://images.gptimage2studio.com"

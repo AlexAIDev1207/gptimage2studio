@@ -1,5 +1,11 @@
 import { sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import {
+  index,
+  integer,
+  sqliteTable,
+  text,
+  uniqueIndex,
+} from 'drizzle-orm/sqlite-core';
 
 // SQLite has no schema concept like Postgres. Keep a `table` alias to minimize diff with pg schema.
 const table = sqliteTable;
@@ -598,5 +604,58 @@ export const chatMessage = table(
   (table) => [
     index('idx_chat_message_chat_id').on(table.chatId, table.status),
     index('idx_chat_message_user_id').on(table.userId, table.status),
+  ]
+);
+
+export const imageAsset = table(
+  'image_asset',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    aiTaskId: text('ai_task_id').references(() => aiTask.id, {
+      onDelete: 'set null',
+    }),
+    source: text('source').notNull().default('ai-output'),
+    provider: text('provider'),
+    model: text('model'),
+    prompt: text('prompt'),
+    imageUrl: text('image_url').notNull(),
+    sourceUrl: text('source_url'),
+    storageProvider: text('storage_provider').notNull().default('r2'),
+    storageBucket: text('storage_bucket'),
+    storageKey: text('storage_key'),
+    storageStatus: text('storage_status').notNull().default('external'),
+    storageError: text('storage_error'),
+    mimeType: text('mime_type'),
+    width: integer('width'),
+    height: integer('height'),
+    sizeBytes: integer('size_bytes'),
+    visibility: text('visibility').notNull().default('private'),
+    status: text('status').notNull().default('active'),
+    metadata: text('metadata'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .$onUpdate(() => new Date())
+      .notNull(),
+    deletedAt: integer('deleted_at', { mode: 'timestamp_ms' }),
+  },
+  (table) => [
+    index('idx_image_asset_user_status_created').on(
+      table.userId,
+      table.status,
+      table.createdAt
+    ),
+    index('idx_image_asset_user_source').on(table.userId, table.source),
+    index('idx_image_asset_ai_task').on(table.aiTaskId),
+    uniqueIndex('idx_image_asset_user_source_url').on(
+      table.userId,
+      table.sourceUrl
+    ),
+    index('idx_image_asset_storage_status').on(table.storageStatus),
   ]
 );

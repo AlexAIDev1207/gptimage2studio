@@ -1,5 +1,14 @@
-import { md5 } from '@/shared/lib/hash';
+import { md5, getUuid } from '@/shared/lib/hash';
 import { respData, respErr } from '@/shared/lib/resp';
+import {
+  createImageAsset,
+  findImageAssetByUrl,
+  ImageAssetSource,
+  ImageAssetStatus,
+  ImageAssetStorageStatus,
+  ImageAssetVisibility,
+} from '@/shared/models/image_asset';
+import { getUserInfo } from '@/shared/models/user';
 import { getStorageService } from '@/shared/services/storage';
 
 const extFromMime = (mimeType: string) => {
@@ -14,6 +23,7 @@ const extFromMime = (mimeType: string) => {
     'image/heic': 'heic',
     'image/heif': 'heif',
   };
+
   return map[mimeType] || '';
 };
 
@@ -22,38 +32,26 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const files = formData.getAll('files') as File[];
 
-    console.log('[API] Received files:', files.length);
-    files.forEach((file, i) => {
-      console.log(`[API] File ${i}:`, {
-        name: file.name,
-        type: file.type,
-        size: file.size,
-      });
-    });
-
     if (!files || files.length === 0) {
       return respErr('No files provided');
     }
 
     const storageService = await getStorageService();
+    const user = await getUserInfo().catch(() => null);
     const uploadResults = [];
 
     for (const file of files) {
-      // Validate file type
       if (!file.type.startsWith('image/')) {
         return respErr(`File ${file.name} is not an image`);
       }
 
-      // Convert file to buffer
       const arrayBuffer = await file.arrayBuffer();
       const body = new Uint8Array(arrayBuffer);
-
       const digest = md5(body);
       const ext = extFromMime(file.type) || file.name.split('.').pop() || 'bin';
-      const key = `${digest}.${ext}`;
+      const userFolder = user?.id || 'anonymous';
+      const key = `${userFolder}/${digest}.${ext}`;
 
-      // If the same image already exists, reuse its URL to save storage space.
-      // (Still depends on provider supporting signed HEAD + public url generation.)
       const exists = await storageService.exists({ key });
       if (exists) {
         const publicUrl = storageService.getPublicUrl({ key });
@@ -64,14 +62,51 @@ export async function POST(req: Request) {
             filename: file.name,
             deduped: true,
           });
+
+          if (user?.id) {
+            const existingAsset = await findImageAssetByUrl({
+              userId: user.id,
+              imageUrl: publicUrl,
+            });
+
+            if (!existingAsset) {
+              await createImageAsset({
+                id: getUuid(),
+                userId: user.id,
+                aiTaskId: null,
+                source: ImageAssetSource.UPLOAD,
+                provider: null,
+                model: null,
+                prompt: null,
+                imageUrl: publicUrl,
+                sourceUrl: publicUrl,
+                storageProvider: 'r2',
+                storageBucket: null,
+                storageKey: key,
+                storageStatus: ImageAssetStorageStatus.STORED,
+                storageError: null,
+                mimeType: file.type,
+                width: null,
+                height: null,
+                sizeBytes: file.size,
+                visibility: ImageAssetVisibility.PRIVATE,
+                status: ImageAssetStatus.ACTIVE,
+                metadata: JSON.stringify({
+                  originalFilename: file.name,
+                  digest,
+                  deduped: true,
+                }),
+              });
+            }
+          }
+
           continue;
         }
       }
 
-      // Upload to storage
       const result = await storageService.uploadFile({
         body,
-        key: key,
+        key,
         contentType: file.type,
         disposition: 'inline',
       });
@@ -81,20 +116,50 @@ export async function POST(req: Request) {
         return respErr(result.error || 'Upload failed');
       }
 
-      console.log('[API] Upload success:', result.url);
-
       uploadResults.push({
         url: result.url,
         key: result.key,
         filename: file.name,
         deduped: false,
       });
-    }
 
-    console.log(
-      '[API] All uploads complete. Returning URLs:',
-      uploadResults.map((r) => r.url)
-    );
+      if (user?.id && result.url) {
+        const existingAsset = await findImageAssetByUrl({
+          userId: user.id,
+          imageUrl: result.url,
+        });
+
+        if (!existingAsset) {
+          await createImageAsset({
+            id: getUuid(),
+            userId: user.id,
+            aiTaskId: null,
+            source: ImageAssetSource.UPLOAD,
+            provider: null,
+            model: null,
+            prompt: null,
+            imageUrl: result.url,
+            sourceUrl: result.url,
+            storageProvider: result.provider,
+            storageBucket: result.bucket || null,
+            storageKey: result.key || key,
+            storageStatus: ImageAssetStorageStatus.STORED,
+            storageError: null,
+            mimeType: file.type,
+            width: null,
+            height: null,
+            sizeBytes: file.size,
+            visibility: ImageAssetVisibility.PRIVATE,
+            status: ImageAssetStatus.ACTIVE,
+            metadata: JSON.stringify({
+              originalFilename: file.name,
+              digest,
+              uploadPath: result.uploadPath,
+            }),
+          });
+        }
+      }
+    }
 
     return respData({
       urls: uploadResults.map((r) => r.url),

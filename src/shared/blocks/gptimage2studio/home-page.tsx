@@ -57,6 +57,7 @@ import {
   type PromptCard,
   type Testimonial,
 } from './content';
+import ImageLibrary from './image-library';
 import { PromptDetailDialog } from './prompt-detail-dialog';
 import Workbench from './workbench';
 
@@ -356,6 +357,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
 
           {/* Workbench card: real generator (left form + right carousel/progress/results) */}
           <Workbench variant={variant === 'B' ? 'studio' : 'banana'} />
+          <ImageLibrary />
         </div>
       </section>
 

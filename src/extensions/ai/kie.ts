@@ -1,379 +1,282 @@
-import { nanoid } from 'nanoid';
-
 import { getUuid } from '@/shared/lib/hash';
 
-import { saveFiles } from '.';
 import {
   AIConfigs,
-  AIFile,
   AIGenerateParams,
   AIImage,
   AIMediaType,
   AIProvider,
-  AISong,
   AITaskResult,
   AITaskStatus,
-  AIVideo,
 } from './types';
 
 /**
- * Kie configs
- * @docs https://kie.ai/
+ * Kie.ai configs.
+ * Docs: https://docs.kie.ai/
  */
 export interface KieConfigs extends AIConfigs {
   apiKey: string;
-  customStorage?: boolean; // use custom storage to save files
+  baseUrl?: string;
+  /**
+   * Keep false for GPT Image 2 UX: return Kie result URLs immediately, then mirror to R2
+   * through callback or /api/images/mirror without blocking the user's first preview.
+   */
+  customStorage?: boolean;
+}
+
+type KieResolution = '1K' | '2K' | '4K';
+type KieAspectRatio = 'auto' | '1:1' | '9:16' | '16:9' | '4:3' | '3:4';
+
+const KIE_GPT_IMAGE_2_TEXT_MODEL = 'gpt-image-2-text-to-image';
+const KIE_GPT_IMAGE_2_EDIT_MODEL = 'gpt-image-2-image-to-image';
+const SUPPORTED_ASPECT_RATIOS = new Set<KieAspectRatio>([
+  'auto',
+  '1:1',
+  '9:16',
+  '16:9',
+  '4:3',
+  '3:4',
+]);
+
+function normalizeResolution(value: unknown): KieResolution {
+  if (value === '4K' || value === '2K' || value === '1K') return value;
+  return '1K';
+}
+
+function nearestSupportedAspectRatio(value: unknown): KieAspectRatio {
+  if (typeof value === 'string' && SUPPORTED_ASPECT_RATIOS.has(value as KieAspectRatio)) {
+    return value as KieAspectRatio;
+  }
+
+  // Map unsupported frontend ratios to Kie-supported ratios instead of failing the task.
+  if (value === '4:5' || value === '2:3') return '3:4';
+  if (value === '5:4' || value === '3:2' || value === '21:9') return '16:9';
+
+  return 'auto';
+}
+
+function normalizeAspectRatio(value: unknown, resolution: KieResolution): KieAspectRatio {
+  let aspectRatio = nearestSupportedAspectRatio(value);
+
+  // Kie GPT Image 2 notes: auto / unspecified aspect ratio only creates 1K images.
+  if (resolution !== '1K' && aspectRatio === 'auto') {
+    aspectRatio = '16:9';
+  }
+
+  // Kie GPT Image 2 notes: 1:1 cannot be converted to 4K.
+  if (resolution === '4K' && aspectRatio === '1:1') {
+    aspectRatio = '16:9';
+  }
+
+  return aspectRatio;
+}
+
+function getImageInputs(options: any): string[] {
+  const candidates = options?.input_urls || options?.image_input || options?.image_urls;
+  if (!Array.isArray(candidates)) return [];
+
+  return candidates
+    .filter((url: unknown): url is string => typeof url === 'string' && url.length > 0)
+    .slice(0, 16);
+}
+
+function parseJsonString<T = any>(value: unknown): T | null {
+  if (!value) return null;
+  if (typeof value === 'object') return value as T;
+  if (typeof value !== 'string') return null;
+
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return null;
+  }
+}
+
+function extractResultUrls(data: any): string[] {
+  const resultJson = parseJsonString<any>(data?.resultJson);
+
+  const candidates = [
+    resultJson?.resultUrls,
+    resultJson?.result_urls,
+    resultJson?.images,
+    resultJson?.imageUrls,
+    data?.resultUrls,
+    data?.result_urls,
+    data?.info?.resultUrls,
+    data?.info?.result_urls,
+    data?.info?.result_urls,
+  ];
+
+  for (const candidate of candidates) {
+    if (Array.isArray(candidate)) {
+      return candidate.filter((url: unknown): url is string => typeof url === 'string' && url.length > 0);
+    }
+    if (typeof candidate === 'string' && candidate.length > 0) {
+      return [candidate];
+    }
+  }
+
+  return [];
+}
+
+function mapImageTaskStatus(status: string): AITaskStatus {
+  switch (status) {
+    case 'waiting':
+    case 'queuing':
+      return AITaskStatus.PENDING;
+    case 'generating':
+      return AITaskStatus.PROCESSING;
+    case 'success':
+      return AITaskStatus.SUCCESS;
+    case 'fail':
+      return AITaskStatus.FAILED;
+    default:
+      throw new Error(`unknown Kie task status: ${status}`);
+  }
 }
 
 /**
- * Kie provider
- * @docs https://kie.ai/
+ * Kie.ai image provider for GPT Image 2.
+ *
+ * - Text to image model: gpt-image-2-text-to-image
+ * - Image to image model: gpt-image-2-image-to-image
+ * - Create task: POST /api/v1/jobs/createTask
+ * - Query task: GET /api/v1/jobs/recordInfo?taskId=...
  */
 export class KieProvider implements AIProvider {
-  // provider name
   readonly name = 'kie';
-  // provider configs
   configs: KieConfigs;
 
-  // api base url
-  private baseUrl = 'https://api.kie.ai/api/v1';
-
-  // init provider
   constructor(configs: KieConfigs) {
     this.configs = configs;
   }
 
-  async generateMusic({
-    params,
-  }: {
-    params: AIGenerateParams;
-  }): Promise<AITaskResult> {
-    const apiUrl = `${this.baseUrl}/generate`;
-    const headers = {
+  private getBaseUrl() {
+    return (this.configs.baseUrl || 'https://api.kie.ai/api/v1').replace(/\/$/, '');
+  }
+
+  private getHeaders() {
+    return {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.configs.apiKey}`,
     };
+  }
 
-    // todo: check model
-    if (!params.model) {
-      params.model = 'V5';
+  private isGptImage2Model(model?: string) {
+    return model === KIE_GPT_IMAGE_2_TEXT_MODEL || model === KIE_GPT_IMAGE_2_EDIT_MODEL;
+  }
+
+  async generateImage({ params }: { params: AIGenerateParams }): Promise<AITaskResult> {
+    const { model, prompt, callbackUrl, options = {} } = params;
+
+    if (!model) throw new Error('model is required');
+    if (!prompt) throw new Error('prompt is required');
+    if (!this.isGptImage2Model(model)) {
+      throw new Error(`unsupported Kie image model: ${model}`);
     }
 
-    // build request params
-    let payload: any = {
-      prompt: params.prompt,
-      model: params.model,
-      callBackUrl: params.callbackUrl,
+    const resolution = normalizeResolution(options.resolution || options.image_size);
+    const aspectRatio = normalizeAspectRatio(options.aspect_ratio || 'auto', resolution);
+    const imageInputs = getImageInputs(options);
+
+    if (model === KIE_GPT_IMAGE_2_EDIT_MODEL && imageInputs.length === 0) {
+      throw new Error('input_urls are required for gpt-image-2-image-to-image');
+    }
+
+    const input: Record<string, any> = {
+      prompt,
+      aspect_ratio: aspectRatio,
+      resolution,
     };
 
-    if (params.options && params.options.customMode) {
-      // custom mode
-      payload.customMode = true;
-      payload.title = params.options.title;
-      payload.style = params.options.style;
-      payload.instrumental = params.options.instrumental;
-      if (!params.options.instrumental) {
-        // not instrumental, lyrics is used as prompt
-        payload.prompt = params.options.lyrics;
-      }
-    } else {
-      // not custom mode
-      payload.customMode = false;
-      payload.prompt = params.prompt;
-      payload.instrumental = params.options?.instrumental;
+    if (model === KIE_GPT_IMAGE_2_EDIT_MODEL) {
+      input.input_urls = imageInputs;
     }
 
-    // const params = {
-    //   customMode: false,
-    //   instrumental: false,
-    //   style: "",
-    //   title: "",
-    //   prompt: prompt || "",
-    //   model: model || "V4_5",
-    //   callBackUrl,
-    //   negativeTags: "",
-    //   vocalGender: "m", // m or f
-    //   styleWeight: 0.65,
-    //   weirdnessConstraint: 0.65,
-    //   audioWeight: 0.65,
-    // };
+    const payload: Record<string, any> = {
+      model,
+      input,
+    };
 
-    const resp = await fetch(apiUrl, {
+    if (callbackUrl) {
+      payload.callBackUrl = callbackUrl;
+    }
+
+    const resp = await fetch(`${this.getBaseUrl()}/jobs/createTask`, {
       method: 'POST',
-      headers,
+      headers: this.getHeaders(),
       body: JSON.stringify(payload),
     });
+
+    const body = await resp.json().catch(() => ({}));
     if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
+      throw new Error(body?.msg || body?.message || `Kie request failed with status: ${resp.status}`);
     }
 
-    const { code, msg, data } = await resp.json();
-
+    const { code, msg, data } = body;
     if (code !== 200) {
-      throw new Error(`generate music failed: ${msg}`);
+      throw new Error(`Kie image task creation failed: ${msg || code}`);
     }
-
-    if (!data || !data.taskId) {
-      throw new Error(`generate music failed: no taskId`);
+    if (!data?.taskId) {
+      throw new Error('Kie image task creation failed: no taskId returned');
     }
 
     return {
       taskStatus: AITaskStatus.PENDING,
       taskId: data.taskId,
-      taskInfo: {},
-      taskResult: data,
-    };
-  }
-
-  async generateImage({
-    params,
-  }: {
-    params: AIGenerateParams;
-  }): Promise<AITaskResult> {
-    const apiUrl = `${this.baseUrl}/jobs/createTask`;
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.configs.apiKey}`,
-    };
-
-    if (!params.model) {
-      throw new Error('model is required');
-    }
-
-    if (!params.prompt) {
-      throw new Error('prompt is required');
-    }
-
-    // build request params
-    let payload: any = {
-      model: params.model,
-      callBackUrl: params.callbackUrl,
-      input: {
-        prompt: params.prompt,
+      taskInfo: {
+        status: 'waiting',
+        images: [],
+        createTime: new Date(),
+      },
+      taskResult: {
+        provider: this.name,
+        request: payload,
+        response: body,
       },
     };
-
-    if (params.options) {
-      const options = params.options;
-      if (options.image_input && Array.isArray(options.image_input)) {
-        payload.input.image_input = options.image_input;
-      }
-      if (options.aspect_ratio) {
-        payload.input.aspect_ratio = options.aspect_ratio;
-      }
-      if (options.resolution) {
-        payload.input.resolution = options.resolution;
-      }
-      if (options.output_format) {
-        payload.input.output_format = options.output_format;
-      }
-    }
-
-    const resp = await fetch(apiUrl, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
-    });
-    if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
-    }
-
-    const { code, msg, data } = await resp.json();
-
-    if (code !== 200) {
-      throw new Error(`generate image failed: ${msg}`);
-    }
-
-    if (!data || !data.taskId) {
-      throw new Error(`generate image failed: no taskId`);
-    }
-
-    return {
-      taskStatus: AITaskStatus.PENDING,
-      taskId: data.taskId,
-      taskInfo: {},
-      taskResult: data,
-    };
   }
 
-  async generateVideo({
-    params,
-  }: {
-    params: AIGenerateParams;
-  }): Promise<AITaskResult> {
-    const apiUrl = `${this.baseUrl}/jobs/createTask`;
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.configs.apiKey}`,
-    };
-
-    if (!params.model) {
-      throw new Error('model is required');
+  async generate({ params }: { params: AIGenerateParams }): Promise<AITaskResult> {
+    if (params.mediaType !== AIMediaType.IMAGE) {
+      throw new Error(`KieProvider in this bundle supports image generation only, got: ${params.mediaType}`);
     }
 
-    // build request params
-    let payload: any = {
-      model: params.model,
-      callBackUrl: params.callbackUrl,
-      input: {
-        aspect_ratio: 'landscape',
-        n_frames: '10',
-        size: 'standard',
-      },
-    };
-
-    if (params.prompt) {
-      payload.input.prompt = params.prompt;
-    }
-
-    if (params.options) {
-      const options = params.options;
-      // text-to-video: use prompt
-      // image-to-video: use image_input
-      // video-to-video: use video_input
-      if (options.image_input && Array.isArray(options.image_input)) {
-        payload.input.image_urls = options.image_input;
-      }
-      if (options.aspect_ratio) {
-        payload.input.aspect_ratio = options.aspect_ratio;
-      }
-      if (options.duration) {
-        payload.input.n_frames = options.duration;
-      }
-      if (!payload.input.n_frames) {
-        payload.input.n_frames = '10';
-      }
-    }
-
-    console.log('kie input', apiUrl, payload);
-
-    const resp = await fetch(apiUrl, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
-    });
-    if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
-    }
-
-    const { code, msg, data } = await resp.json();
-
-    if (code !== 200) {
-      throw new Error(`generate video failed: ${msg}`);
-    }
-
-    if (!data || !data.taskId) {
-      throw new Error(`generate video failed: no taskId`);
-    }
-
-    return {
-      taskStatus: AITaskStatus.PENDING,
-      taskId: data.taskId,
-      taskInfo: {},
-      taskResult: data,
-    };
-  }
-
-  // generate task
-  async generate({
-    params,
-  }: {
-    params: AIGenerateParams;
-  }): Promise<AITaskResult> {
-    if (
-      ![AIMediaType.MUSIC, AIMediaType.IMAGE, AIMediaType.VIDEO].includes(
-        params.mediaType
-      )
-    ) {
-      throw new Error(`mediaType not supported: ${params.mediaType}`);
-    }
-
-    if (params.mediaType === AIMediaType.MUSIC) {
-      return this.generateMusic({ params });
-    } else if (params.mediaType === AIMediaType.IMAGE) {
-      return this.generateImage({ params });
-    } else if (params.mediaType === AIMediaType.VIDEO) {
-      return this.generateVideo({ params });
-    }
-
-    throw new Error(`mediaType not supported: ${params.mediaType}`);
+    return this.generateImage({ params });
   }
 
   async queryImage({ taskId }: { taskId: string }): Promise<AITaskResult> {
-    const apiUrl = `${this.baseUrl}/jobs/recordInfo?taskId=${taskId}`;
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.configs.apiKey}`,
-    };
-
-    const resp = await fetch(apiUrl, {
+    const resp = await fetch(`${this.getBaseUrl()}/jobs/recordInfo?taskId=${encodeURIComponent(taskId)}`, {
       method: 'GET',
-      headers,
+      headers: this.getHeaders(),
     });
+
+    const body = await resp.json().catch(() => ({}));
     if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
+      throw new Error(body?.msg || body?.message || `Kie query failed with status: ${resp.status}`);
     }
 
-    const { code, msg, data } = await resp.json();
-
+    const { code, msg, data } = body;
     if (code !== 200) {
-      throw new Error(msg);
+      throw new Error(msg || `Kie query failed: ${code}`);
+    }
+    if (!data?.state) {
+      throw new Error('Kie query failed: missing task state');
     }
 
-    if (!data || !data.state) {
-      throw new Error(`query failed`);
-    }
+    const taskStatus = mapImageTaskStatus(data.state);
+    const resultUrls = extractResultUrls(data);
+    const createTime = data.createTime ? new Date(data.createTime) : new Date();
 
-    let images: AIImage[] | undefined = undefined;
-
-    if (data.resultJson) {
-      const resultJson = JSON.parse(data.resultJson);
-      const resultUrls = resultJson.resultUrls;
-      if (Array.isArray(resultUrls)) {
-        images = resultUrls.map((image: any) => ({
-          id: '',
-          createTime: new Date(data.createTime),
-          imageUrl: image,
-        }));
-      }
-    }
-
-    const taskStatus = this.mapImageStatus(data.state);
-
-    // use custom storage to save images
-    if (
-      taskStatus === AITaskStatus.SUCCESS &&
-      images &&
-      images.length > 0 &&
-      this.configs.customStorage
-    ) {
-      const filesToSave: AIFile[] = [];
-      images.forEach((image, index) => {
-        if (image.imageUrl) {
-          filesToSave.push({
-            url: image.imageUrl,
-            contentType: 'image/png',
-            key: `kie/image/${getUuid()}.png`,
-            index: index,
-            type: 'image',
-          });
-        }
-      });
-
-      if (filesToSave.length > 0) {
-        const uploadedFiles = await saveFiles(filesToSave);
-        if (uploadedFiles) {
-          uploadedFiles.forEach((file: AIFile) => {
-            if (file && file.url && images && file.index !== undefined) {
-              const image = images[file.index];
-              if (image) {
-                image.imageUrl = file.url;
-              }
-            }
-          });
-        }
-      }
-    }
+    const images: AIImage[] = resultUrls.map((url) =>
+      ({
+        id: getUuid(),
+        createTime,
+        imageUrl: url,
+        providerUrl: url,
+        storageStatus: 'external',
+      }) as AIImage
+    );
 
     return {
       taskId,
@@ -383,265 +286,17 @@ export class KieProvider implements AIProvider {
         status: data.state,
         errorCode: data.failCode,
         errorMessage: data.failMsg,
-        createTime: new Date(data.createTime),
+        createTime,
       },
-      taskResult: data,
+      taskResult: body?.data || body,
     };
   }
 
-  async queryVideo({ taskId }: { taskId: string }): Promise<AITaskResult> {
-    const apiUrl = `${this.baseUrl}/jobs/recordInfo?taskId=${taskId}`;
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.configs.apiKey}`,
-    };
-
-    const resp = await fetch(apiUrl, {
-      method: 'GET',
-      headers,
-    });
-    if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
+  async query({ taskId, mediaType }: { taskId: string; mediaType?: string; model?: string }): Promise<AITaskResult> {
+    if (mediaType && mediaType !== AIMediaType.IMAGE) {
+      throw new Error(`KieProvider in this bundle supports image query only, got: ${mediaType}`);
     }
 
-    const { code, msg, data } = await resp.json();
-
-    if (code !== 200) {
-      throw new Error(msg);
-    }
-
-    if (!data || !data.state) {
-      throw new Error(`query failed`);
-    }
-
-    let videos: AIVideo[] | undefined = undefined;
-
-    if (data.resultJson) {
-      const resultJson = JSON.parse(data.resultJson);
-      const resultUrls = resultJson.resultUrls;
-      if (Array.isArray(resultUrls)) {
-        videos = resultUrls.map((video: any) => ({
-          id: '',
-          createTime: new Date(data.createTime),
-          videoUrl: video,
-        }));
-      }
-    }
-
-    const taskStatus = this.mapImageStatus(data.state);
-
-    // use custom storage to save videos
-    if (
-      taskStatus === AITaskStatus.SUCCESS &&
-      videos &&
-      videos.length > 0 &&
-      this.configs.customStorage
-    ) {
-      const filesToSave: AIFile[] = [];
-      videos.forEach((video, index) => {
-        if (video.videoUrl) {
-          filesToSave.push({
-            url: video.videoUrl,
-            contentType: 'video/mp4',
-            key: `kie/video/${getUuid()}.mp4`,
-            index: index,
-            type: 'video',
-          });
-        }
-      });
-
-      if (filesToSave.length > 0) {
-        const uploadedFiles = await saveFiles(filesToSave);
-        if (uploadedFiles) {
-          uploadedFiles.forEach((file: AIFile) => {
-            if (file && file.url && videos && file.index !== undefined) {
-              const video = videos[file.index];
-              if (video) {
-                video.videoUrl = file.url;
-              }
-            }
-          });
-        }
-      }
-    }
-
-    return {
-      taskId,
-      taskStatus,
-      taskInfo: {
-        videos,
-        status: data.state,
-        errorCode: data.failCode,
-        errorMessage: data.failMsg,
-        createTime: new Date(data.createTime),
-      },
-      taskResult: data,
-    };
-  }
-
-  // query task
-  async query({
-    taskId,
-    mediaType,
-  }: {
-    taskId: string;
-    mediaType?: AIMediaType;
-  }): Promise<AITaskResult> {
-    if (mediaType === AIMediaType.IMAGE) {
-      return this.queryImage({ taskId });
-    }
-
-    if (mediaType === AIMediaType.VIDEO) {
-      return this.queryVideo({ taskId });
-    }
-
-    const apiUrl = `${this.baseUrl}/generate/record-info?taskId=${taskId}`;
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.configs.apiKey}`,
-    };
-
-    const resp = await fetch(apiUrl, {
-      method: 'GET',
-      headers,
-    });
-    if (!resp.ok) {
-      throw new Error(`request failed with status: ${resp.status}`);
-    }
-
-    const { code, msg, data } = await resp.json();
-
-    if (code !== 200) {
-      throw new Error(msg);
-    }
-
-    if (!data || !data.status) {
-      throw new Error(`query failed`);
-    }
-
-    const songs: AISong[] = data?.response?.sunoData?.map((song: any) => ({
-      id: song.id,
-      createTime: new Date(song.createTime),
-      audioUrl: song.audioUrl,
-      imageUrl: song.imageUrl,
-      duration: song.duration,
-      prompt: song.prompt,
-      title: song.title,
-      tags: song.tags,
-      style: song.style,
-      model: song.modelName,
-      artist: song.artist,
-      album: song.album,
-    }));
-
-    const taskStatus = this.mapStatus(data.status);
-
-    // save files if custom storage is enabled
-    if (
-      taskStatus === AITaskStatus.SUCCESS &&
-      songs &&
-      songs.length > 0 &&
-      this.configs.customStorage
-    ) {
-      const audioFilesToSave: AIFile[] = [];
-      const imageFilesToSave: AIFile[] = [];
-
-      songs.forEach((song, index) => {
-        if (song.audioUrl) {
-          audioFilesToSave.push({
-            url: song.audioUrl,
-            contentType: 'audio/mpeg',
-            key: `kie/audio/${getUuid()}.mp3`,
-            index: index,
-            type: 'audio',
-          });
-        }
-        if (song.imageUrl) {
-          imageFilesToSave.push({
-            url: song.imageUrl,
-            contentType: 'image/png',
-            key: `kie/image/${getUuid()}.png`,
-            index: index,
-            type: 'image',
-          });
-        }
-      });
-
-      if (audioFilesToSave.length > 0) {
-        const uploadedFiles = await saveFiles(audioFilesToSave);
-        if (uploadedFiles) {
-          uploadedFiles.forEach((file: AIFile) => {
-            if (file && file.url && songs && file.index !== undefined) {
-              const song = songs[file.index];
-              song.audioUrl = file.url;
-            }
-          });
-        }
-      }
-
-      if (imageFilesToSave.length > 0) {
-        const uploadedFiles = await saveFiles(imageFilesToSave);
-        if (uploadedFiles) {
-          uploadedFiles.forEach((file: AIFile) => {
-            if (file && file.url && songs && file.index !== undefined) {
-              const song = songs[file.index];
-              song.imageUrl = file.url;
-            }
-          });
-        }
-      }
-    }
-
-    return {
-      taskId,
-      taskStatus,
-      taskInfo: {
-        songs,
-        status: data.status,
-        errorCode: data.errorCode,
-        errorMessage: data.errorMessage,
-        createTime: new Date(data.createTime),
-      },
-      taskResult: data,
-    };
-  }
-
-  // map image task status
-  private mapImageStatus(status: string): AITaskStatus {
-    switch (status) {
-      case 'waiting':
-        return AITaskStatus.PENDING;
-      case 'queuing':
-        return AITaskStatus.PENDING;
-      case 'generating':
-        return AITaskStatus.PROCESSING;
-      case 'success':
-        return AITaskStatus.SUCCESS;
-      case 'fail':
-        return AITaskStatus.FAILED;
-      default:
-        throw new Error(`unknown status: ${status}`);
-    }
-  }
-
-  // map music task status
-  private mapStatus(status: string): AITaskStatus {
-    switch (status) {
-      case 'PENDING':
-        return AITaskStatus.PENDING;
-      case 'TEXT_SUCCESS':
-        return AITaskStatus.PROCESSING;
-      case 'FIRST_SUCCESS':
-        return AITaskStatus.PROCESSING;
-      case 'SUCCESS':
-        return AITaskStatus.SUCCESS;
-      case 'CREATE_TASK_FAILED':
-      case 'GENERATE_AUDIO_FAILED':
-      case 'CALLBACK_EXCEPTION':
-      case 'SENSITIVE_WORD_ERROR':
-        return AITaskStatus.FAILED;
-      default:
-        throw new Error(`unknown status: ${status}`);
-    }
+    return this.queryImage({ taskId });
   }
 }

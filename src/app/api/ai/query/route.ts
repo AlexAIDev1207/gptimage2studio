@@ -1,9 +1,11 @@
+import { AITaskStatus } from '@/extensions/ai';
 import { respData, respErr } from '@/shared/lib/resp';
 import {
   findAITaskById,
   UpdateAITask,
   updateAITaskById,
 } from '@/shared/models/ai_task';
+import { syncImageAssetsFromAITask } from '@/shared/models/image_asset';
 import { getUserInfo } from '@/shared/models/user';
 import { getAIService } from '@/shared/services/ai';
 
@@ -28,6 +30,11 @@ export async function POST(req: Request) {
       return respErr('no permission');
     }
 
+    if (task.status === AITaskStatus.SUCCESS) {
+      await syncImageAssetsFromAITask(task as any);
+      return respData(task);
+    }
+
     const aiService = await getAIService();
     const aiProvider = aiService.getProvider(task.provider);
     if (!aiProvider) {
@@ -44,13 +51,13 @@ export async function POST(req: Request) {
       return respErr('query ai task failed');
     }
 
-    // update ai task
     const updateAITask: UpdateAITask = {
       status: result.taskStatus,
       taskInfo: result.taskInfo ? JSON.stringify(result.taskInfo) : null,
       taskResult: result.taskResult ? JSON.stringify(result.taskResult) : null,
-      creditId: task.creditId, // credit consumption record id
+      creditId: task.creditId,
     };
+
     if (updateAITask.taskInfo !== task.taskInfo) {
       await updateAITaskById(task.id, updateAITask);
     }
@@ -58,6 +65,10 @@ export async function POST(req: Request) {
     task.status = updateAITask.status || '';
     task.taskInfo = updateAITask.taskInfo || null;
     task.taskResult = updateAITask.taskResult || null;
+
+    if (task.status === AITaskStatus.SUCCESS) {
+      await syncImageAssetsFromAITask(task as any);
+    }
 
     return respData(task);
   } catch (e: any) {

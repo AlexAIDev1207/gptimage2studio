@@ -89,8 +89,8 @@ const MODEL_OPTIONS: ModelOption[] = [
     label: 'GPT Image 2',
     tagline: 'Perfect text rendering · 4K resolution',
     emoji: '✨',
-    textToImage: { provider: 'replicate', model: 'bytedance/seedream-4' },
-    imageToImage: { provider: 'replicate', model: 'bytedance/seedream-4' },
+    textToImage: { provider: 'kie', model: 'gpt-image-2-text-to-image' },
+    imageToImage: { provider: 'kie', model: 'gpt-image-2-image-to-image' },
   },
   {
     key: 'nano-banana',
@@ -103,17 +103,12 @@ const MODEL_OPTIONS: ModelOption[] = [
 ];
 
 const ASPECT_RATIO_OPTIONS: { value: string; label: string }[] = [
-  { value: 'auto', label: 'Auto' },
+  { value: 'auto', label: 'Auto · 1K only' },
   { value: '1:1', label: '1:1 Square' },
-  { value: '4:5', label: '4:5 Portrait' },
-  { value: '5:4', label: '5:4 Landscape' },
   { value: '3:4', label: '3:4 Portrait' },
   { value: '4:3', label: '4:3 Landscape' },
   { value: '16:9', label: '16:9 Wide' },
   { value: '9:16', label: '9:16 Vertical' },
-  { value: '3:2', label: '3:2 Photo' },
-  { value: '2:3', label: '2:3 Photo' },
-  { value: '21:9', label: '21:9 Cinema' },
 ];
 
 const RESOLUTION_OPTIONS: {
@@ -121,12 +116,12 @@ const RESOLUTION_OPTIONS: {
   label: string;
   multiplier: number;
 }[] = [
-  { value: '1K', label: '1K (1024 × 1024)', multiplier: 1 },
-  { value: '2K', label: '2K (2048 × 2048)', multiplier: 2 },
-  { value: '4K', label: '4K (4096 × 4096)', multiplier: 4 },
+  { value: '1K', label: '1K · 6 credits', multiplier: 6 },
+  { value: '2K', label: '2K · 10 credits', multiplier: 10 },
+  { value: '4K', label: '4K · 16 credits', multiplier: 16 },
 ];
 
-const OUTPUT_COUNT_OPTIONS: OutputCount[] = [1, 2, 4];
+const OUTPUT_COUNT_OPTIONS: OutputCount[] = [1];
 
 const WORKBENCH_THEMES: Record<
   WorkbenchVariant,
@@ -228,7 +223,7 @@ export default function Workbench({
 
   const [mode, setMode] = useState<Mode>('text-to-image');
   const [modelKey, setModelKey] = useState<ModelKey>('gpt-image-2');
-  const [aspectRatio, setAspectRatio] = useState<string>('auto');
+  const [aspectRatio, setAspectRatio] = useState<string>('16:9');
   const [resolution, setResolution] = useState<ResolutionTier>('2K');
   const [outputCount, setOutputCount] = useState<OutputCount>(1);
   const [prompt, setPrompt] = useState<string>(workbench.defaultPrompt);
@@ -284,10 +279,9 @@ export default function Workbench({
     [referenceImageItems]
   );
 
-  const baseCost = isImageEditMode ? 4 : 2;
-  const resolutionMultiplier =
-    RESOLUTION_OPTIONS.find((r) => r.value === resolution)?.multiplier ?? 1;
-  const costCredits = baseCost * resolutionMultiplier * outputCount;
+  const resolutionCost =
+    RESOLUTION_OPTIONS.find((r) => r.value === resolution)?.multiplier ?? 6;
+  const costCredits = resolutionCost * outputCount;
 
   const taskStatusLabel = useMemo(() => {
     if (!taskStatus) return '';
@@ -451,6 +445,11 @@ export default function Workbench({
                 prompt: task.prompt ?? undefined,
               }))
             );
+            void fetch('/api/images/mirror', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ taskId: task.id }),
+            }).catch(() => undefined);
             toast.success('Image generated successfully');
           }
 
@@ -514,7 +513,7 @@ export default function Workbench({
       return;
     }
 
-    if (remainingCredits < baseCost) {
+    if (remainingCredits < costCredits) {
       toast.error('Insufficient credits. Please top up to keep creating.');
       return;
     }
@@ -543,13 +542,9 @@ export default function Workbench({
 
     try {
       const options: Record<string, any> = {
-        image_size: resolution,
-        num_images: outputCount,
+        resolution,
+        aspect_ratio: aspectRatio,
       };
-
-      if (aspectRatio !== 'auto') {
-        options.aspect_ratio = aspectRatio;
-      }
 
       if (isImageEditMode) {
         options.image_input = referenceImageUrls;
@@ -976,7 +971,7 @@ export default function Workbench({
                 <UserIcon className="mr-2 h-4 w-4" />
                 Sign in to start
               </Button>
-            ) : remainingCredits < baseCost ? (
+            ) : remainingCredits < costCredits ? (
               <Link
                 href="/pricing"
                 className={`inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl px-5 text-base font-black transition ${theme.primaryButton}`}

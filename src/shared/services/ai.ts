@@ -13,12 +13,24 @@ import { Configs, getAllConfigs } from '@/shared/models/config';
 export function getAIManagerWithConfigs(configs: Configs) {
   const aiManager = new AIManager();
 
-  if (configs.kie_api_key) {
+  // GPT Image 2 Studio 默认 provider：Kie.ai
+  const kieApiKey = configs.kie_api_key || process.env.KIE_API_KEY;
+  if (kieApiKey) {
     aiManager.addProvider(
       new KieProvider({
-        apiKey: configs.kie_api_key,
-        customStorage: configs.kie_custom_storage === 'true',
-      })
+        apiKey: kieApiKey,
+        baseUrl:
+          configs.kie_base_url ||
+          process.env.KIE_BASE_URL ||
+          'https://api.kie.ai/api/v1',
+        // 保持 false 走快速预览流程：先回 Kie URL，后由
+        // /api/ai/notify/kie 与 /api/images/mirror 异步镜像到 R2
+        customStorage:
+          (configs.kie_custom_storage ||
+            process.env.KIE_CUSTOM_STORAGE ||
+            'false') === 'true',
+      }),
+      true
     );
   }
 
