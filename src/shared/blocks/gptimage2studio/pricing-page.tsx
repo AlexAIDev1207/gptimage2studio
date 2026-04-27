@@ -56,16 +56,17 @@ const billingOptions: { value: PricingBilling; label: string; note?: string }[] 
     { value: 'packs', label: 'Credits Packs' },
   ];
 
+// SSR 静态初值：10:00:00（避免 hydration mismatch；客户端 mount 后会被实际计时覆盖）
 const initialCountdown: CountdownValue = {
   days: 0,
-  hours: 0,
+  hours: 10,
   minutes: 0,
   seconds: 0,
   ended: false,
 };
 
-function getCountdownValue(): CountdownValue {
-  const diff = new Date(launchOffer.endsAt).getTime() - Date.now();
+function getCountdownValue(endTimeMs: number): CountdownValue {
+  const diff = endTimeMs - Date.now();
 
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, ended: true };
@@ -137,10 +138,12 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
     billing === 'packs' ? creditPacks : pricingPlansByBilling[billing];
 
   useEffect(() => {
-    setCountdown(getCountdownValue());
+    // 每次 mount（即每次进入 /pricing）都重新计时 launchOffer.durationHours 小时
+    const endTimeMs = Date.now() + launchOffer.durationHours * 60 * 60 * 1000;
+    setCountdown(getCountdownValue(endTimeMs));
 
     const timer = window.setInterval(() => {
-      setCountdown(getCountdownValue());
+      setCountdown(getCountdownValue(endTimeMs));
     }, 1000);
 
     return () => window.clearInterval(timer);

@@ -654,7 +654,8 @@ export const coreFeatures = [
 ];
 
 export const launchOffer = {
-  endsAt: '2026-05-04T23:59:59Z',
+  // 倒计时长度（小时）。每次进入 /pricing 都重新计时，不持久化。
+  durationHours: 10,
   eyebrow: 'Launch offer',
   title: '50% OFF',
   description:
