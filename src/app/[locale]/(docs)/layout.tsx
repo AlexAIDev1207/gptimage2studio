@@ -19,10 +19,6 @@ const locales = [
     name: 'English',
     locale: 'en',
   },
-  {
-    name: '简体中文',
-    locale: 'zh',
-  },
 ];
 
 export default async function DocsRootLayout({
