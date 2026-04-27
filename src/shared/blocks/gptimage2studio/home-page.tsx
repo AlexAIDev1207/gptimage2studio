@@ -1,13 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
 import {
   ArrowRight,
   Check,
   ChevronDown,
   Copy,
+  Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
   Menu,
@@ -15,6 +16,7 @@ import {
   Wand2,
   X,
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
 import { useAppContext } from '@/shared/contexts/app';
@@ -37,7 +39,6 @@ import {
   pricing,
   promoBar,
   promptCards,
-  promptCategories,
   testimonials,
   testimonialsDisclaimer,
   testimonialsIntro,
@@ -48,6 +49,7 @@ import {
   whyChooseCta,
   whyChooseSubtitle,
   workbench,
+  type PromptCard,
 } from './content';
 import Workbench from './workbench';
 
@@ -91,25 +93,68 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
 
   const [activeEditDemo, setActiveEditDemo] = useState(0);
 
-  const [filter, setFilter] = useState('All');
   const [copied, setCopied] = useState<string | null>(null);
+  const [selectedPrompt, setSelectedPrompt] = useState<PromptCard | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const filteredPrompts = useMemo(() => {
-    if (filter === 'All') return promptCards;
-    return promptCards.filter((p) => p.category === filter);
-  }, [filter]);
   const activeEdit = editDemos[activeEditDemo];
+
+  useEffect(() => {
+    if (!selectedPrompt) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedPrompt(null);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedPrompt]);
 
   const handleCopy = async (text: string, key: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(key);
+      toast.success('Prompt copied');
       setTimeout(() => setCopied(null), 1500);
     } catch {
-      setCopied(key);
-      setTimeout(() => setCopied(null), 1500);
+      toast.error('Unable to copy prompt');
     }
+  };
+
+  const handleUsePrompt = (
+    card: PromptCard,
+    mode: 'text-to-image' | 'image-to-image'
+  ) => {
+    const referenceImage =
+      mode === 'image-to-image'
+        ? new URL(card.image, window.location.origin).toString()
+        : undefined;
+
+    window.dispatchEvent(
+      new CustomEvent('gptimage2studio:use-prompt', {
+        detail: {
+          prompt: card.fullPrompt,
+          mode,
+          modelKey: 'gpt-image-2',
+          referenceImage,
+        },
+      })
+    );
+
+    setSelectedPrompt(null);
+    window.setTimeout(() => {
+      document
+        .getElementById('workbench')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
   };
 
   return (
@@ -128,10 +173,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               </span>
               <span className="truncate text-zinc-300">{promoBar.text}</span>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex shrink-0 items-center gap-2">
               <a
                 href={promoBar.href}
-                className="inline-flex items-center gap-1 rounded-full bg-white text-zinc-950 px-3 py-1 text-xs font-semibold transition hover:bg-zinc-200"
+                className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-zinc-950 transition hover:bg-zinc-200"
               >
                 {promoBar.cta}
                 <ArrowRight className="size-3" />
@@ -300,7 +345,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
 
           {/* Workbench section header (centered) */}
-          <div id="workbench" className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center">
+          <div
+            id="workbench"
+            className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center"
+          >
             <SectionEyebrow palette={palette}>Workbench</SectionEyebrow>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               {workbench.title}
@@ -322,94 +370,97 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               GPT Image 2 Prompts for Real Projects
             </h2>
             <p className="mt-4 max-w-2xl text-zinc-400">
-              Browse prompt patterns for product photos, posters, social ads, UI mockups, infographics, and editable image workflows. Copy a prompt, adjust the details, and turn it into a reusable creative brief.
+              Browse prompt patterns for product photos, posters, social ads, UI
+              mockups, infographics, and editable image workflows. Copy a
+              prompt, adjust the details, and turn it into a reusable creative
+              brief.
             </p>
-            <a
-              href="#prompts"
-              className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              Explore All Prompts
-              <ArrowRight className="size-3.5" />
-            </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
-            {promptCategories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setFilter(cat)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
-                  filter === cat
-                    ? `border-transparent bg-gradient-to-r ${palette.accent} text-zinc-950`
-                    : 'border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]">
-            {filteredPrompts.map((card) => {
+          <div className="mt-10 columns-1 gap-3 [column-fill:_balance] sm:columns-2 lg:columns-3 xl:columns-4">
+            {promptCards.map((card) => {
               const key = `card-${card.title}`;
               return (
-                <article
+                <figure
                   key={card.title}
-                  className="mb-4 inline-block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-[#101218] transition hover:border-white/20"
+                  className="group relative mb-3 inline-block w-full break-inside-avoid overflow-hidden rounded-lg bg-[#101218] transition"
                 >
-                  <div className="relative w-full">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      width={800}
-                      height={1000}
-                      sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      loading="lazy"
-                      className="h-auto w-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase ${palette.badgeText}`}
-                      >
-                        {card.category}
-                      </span>
-                      <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-zinc-400">
-                        GPT Image 2
-                      </span>
+                  <Link
+                    href={card.href}
+                    aria-label={`Open prompt: ${card.title}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setSelectedPrompt(card);
+                    }}
+                    className="block outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  >
+                    <div className="relative w-full">
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        width={800}
+                        height={1000}
+                        sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        loading="lazy"
+                        className="h-auto w-full object-cover transition-transform duration-300 group-focus-within:scale-[1.02] group-hover:scale-[1.02]"
+                      />
                     </div>
-                    <h3 className="mt-2 text-sm font-semibold text-white">
-                      {card.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-zinc-400 line-clamp-3">
-                      {card.prompt}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy(card.fullPrompt, key)}
-                      className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-zinc-200 transition hover:bg-white/10"
-                    >
-                      {copied === key ? (
-                        <>
-                          <Check className="size-3.5" />
-                          Copied
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="size-3.5" />
-                          Copy Prompt
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </article>
+
+                    <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/55 to-black/5 p-4 opacity-0 transition-opacity duration-200 group-focus-within:opacity-100 group-hover:opacity-100">
+                      <figcaption className="translate-y-2 transition-transform duration-200 group-focus-within:translate-y-0 group-hover:translate-y-0">
+                        <p className="line-clamp-1 text-sm font-semibold text-white">
+                          {card.title}
+                        </p>
+                        <p className="mt-2 line-clamp-5 text-sm leading-5 text-zinc-100">
+                          {card.fullPrompt}
+                        </p>
+                      </figcaption>
+                    </div>
+                  </Link>
+
+                  <button
+                    type="button"
+                    aria-label={`Copy prompt: ${card.title}`}
+                    title="Copy prompt"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleCopy(card.fullPrompt, key);
+                    }}
+                    className="absolute top-2 right-2 z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-black/70 text-white opacity-0 shadow-sm backdrop-blur transition group-focus-within:opacity-100 group-hover:opacity-100 group-focus:opacity-100 hover:bg-black/85 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+                  >
+                    {copied === key ? (
+                      <Check className="size-4" aria-hidden="true" />
+                    ) : (
+                      <Copy className="size-4" aria-hidden="true" />
+                    )}
+                  </button>
+                </figure>
               );
             })}
           </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/showcases"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Explore All Prompts
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
+
+      {selectedPrompt && (
+        <PromptDetailDialog
+          card={selectedPrompt}
+          copied={copied}
+          onClose={() => setSelectedPrompt(null)}
+          onCopy={handleCopy}
+          onUsePrompt={(card) => handleUsePrompt(card, 'text-to-image')}
+          onUseReference={(card) => handleUsePrompt(card, 'image-to-image')}
+        />
+      )}
 
       {/* Use cases */}
       <section className="border-b border-white/5 bg-[#0B0D12]">
@@ -554,9 +605,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 <h3 className="mt-4 text-base font-semibold text-white">
                   {c.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-zinc-400">
-                  {c.copy}
-                </p>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">{c.copy}</p>
               </div>
             ))}
           </div>
@@ -753,10 +802,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       </section>
 
       {/* Pricing */}
-      <section
-        id="pricing"
-        className="border-b border-white/5 bg-[#0B0D12]"
-      >
+      <section id="pricing" className="border-b border-white/5 bg-[#0B0D12]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
@@ -764,7 +810,9 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
               Simple Plans for GPT Image 2 Studio
             </h2>
             <p className="mt-4 text-zinc-400">
-              Choose a plan for testing prompts, generating campaign visuals, and building repeatable image workflows. Final credits, pricing, and limits will be shown before launch.
+              Choose a plan for testing prompts, generating campaign visuals,
+              and building repeatable image workflows. Final credits, pricing,
+              and limits will be shown before launch.
             </p>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -806,7 +854,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             ))}
           </div>
           <p className="mt-6 text-center text-xs text-zinc-500">
-            Plan details are placeholders for the MVP and should be replaced before paid launch.
+            Plan details are placeholders for the MVP and should be replaced
+            before paid launch.
           </p>
         </div>
       </section>
@@ -864,7 +913,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                       )}
                     </div>
                     <div className="text-xs text-zinc-400">
-                      {t.role} · <span className="text-zinc-500">{t.handle}</span>
+                      {t.role} ·{' '}
+                      <span className="text-zinc-500">{t.handle}</span>
                     </div>
                   </div>
                 </figcaption>
@@ -932,9 +982,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-5 pb-5 text-sm text-zinc-400">
-                      {f.a}
-                    </div>
+                    <div className="px-5 pb-5 text-sm text-zinc-400">{f.a}</div>
                   )}
                 </div>
               );
@@ -1014,6 +1062,119 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   );
 }
 
+function PromptDetailDialog({
+  card,
+  copied,
+  onClose,
+  onCopy,
+  onUsePrompt,
+  onUseReference,
+}: {
+  card: PromptCard;
+  copied: string | null;
+  onClose: () => void;
+  onCopy: (text: string, key: string) => void;
+  onUsePrompt: (card: PromptCard) => void;
+  onUseReference: (card: PromptCard) => void;
+}) {
+  const copyKey = `dialog-${card.title}`;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="prompt-dialog-title"
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-3 py-4 backdrop-blur-sm sm:px-6"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div className="relative grid max-h-[calc(100vh-2rem)] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/10 bg-[#15161B] shadow-2xl shadow-black/70 md:h-[calc(100vh-5rem)] md:max-h-[820px] md:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
+        <button
+          type="button"
+          aria-label="Close prompt details"
+          onClick={onClose}
+          className="absolute top-4 right-4 z-20 inline-flex size-10 items-center justify-center rounded-full text-zinc-400 transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
+        >
+          <X className="size-6" />
+        </button>
+
+        <div className="relative h-[42vh] min-h-[260px] bg-black md:h-full">
+          <Image
+            src={card.image}
+            alt={card.title}
+            fill
+            sizes="(min-width: 768px) 56vw, 100vw"
+            className="object-contain"
+            priority
+          />
+        </div>
+
+        <div className="flex max-h-[calc(58vh-2rem)] flex-col overflow-y-auto px-5 py-6 sm:px-8 md:max-h-none md:px-10 md:py-12">
+          <div className="flex flex-wrap items-center gap-3 pr-10">
+            <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-zinc-100">
+              GPT Image 2 Studio
+            </span>
+            <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-4 py-2 text-sm font-bold text-emerald-300">
+              {card.category}
+            </span>
+          </div>
+
+          <h3
+            id="prompt-dialog-title"
+            className="mt-8 text-3xl font-black tracking-tight text-white md:text-4xl"
+          >
+            {card.title}
+          </h3>
+
+          <div className="mt-8 flex items-center justify-between gap-4">
+            <p className="text-sm font-bold tracking-[0.2em] text-zinc-500 uppercase">
+              Prompt
+            </p>
+            <button
+              type="button"
+              onClick={() => onCopy(card.fullPrompt, copyKey)}
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-zinc-200 transition hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
+            >
+              {copied === copyKey ? (
+                <Check className="size-4" />
+              ) : (
+                <Copy className="size-4" />
+              )}
+              Copy Prompt
+            </button>
+          </div>
+
+          <p className="mt-6 font-mono text-base leading-8 whitespace-pre-wrap text-zinc-100 md:text-lg">
+            {card.fullPrompt}
+          </p>
+
+          <div className="mt-auto grid gap-4 pt-10">
+            <button
+              type="button"
+              onClick={() => onUsePrompt(card)}
+              className="inline-flex min-h-16 w-full items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-5 py-4 text-lg font-black text-zinc-950 transition hover:bg-emerald-300 focus-visible:ring-2 focus-visible:ring-emerald-200 focus-visible:outline-none"
+            >
+              <Wand2 className="size-6" />
+              Use This Prompt
+            </button>
+            <button
+              type="button"
+              onClick={() => onUseReference(card)}
+              className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-white/10 px-5 py-4 text-base font-black text-zinc-100 transition hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
+            >
+              <ImageIcon className="size-5" />
+              Use as Reference
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SectionEyebrow({
   children,
   palette,
@@ -1040,10 +1201,7 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
       <ul className="mt-3 space-y-2 text-sm">
         {items.map((item) => (
           <li key={item}>
-            <a
-              href="#"
-              className="text-zinc-400 transition hover:text-white"
-            >
+            <a href="#" className="text-zinc-400 transition hover:text-white">
               {item}
             </a>
           </li>

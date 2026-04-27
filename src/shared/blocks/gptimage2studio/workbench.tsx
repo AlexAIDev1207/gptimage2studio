@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,10 +19,7 @@ import {
 import { toast } from 'sonner';
 
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
-import {
-  ImageUploader,
-  ImageUploaderValue,
-} from '@/shared/blocks/common';
+import { ImageUploader, ImageUploaderValue } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
 import { Progress } from '@/shared/components/ui/progress';
 import {
@@ -32,11 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-} from '@/shared/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { useAppContext } from '@/shared/contexts/app';
 
@@ -46,6 +39,14 @@ type Mode = 'text-to-image' | 'image-to-image';
 type ResolutionTier = '1K' | '2K' | '4K';
 type OutputCount = 1 | 2 | 4;
 type WorkbenchVariant = 'banana' | 'studio';
+type ModelKey = 'gpt-image-2' | 'nano-banana';
+
+interface UsePromptEventDetail {
+  prompt?: string;
+  mode?: Mode;
+  modelKey?: ModelKey;
+  referenceImage?: string;
+}
 
 interface GeneratedImage {
   id: string;
@@ -70,8 +71,6 @@ const POLL_INTERVAL = 5000;
 const GENERATION_TIMEOUT = 180000;
 
 // Two-model dropdown. Maps to (provider, model) per scene.
-type ModelKey = 'gpt-image-2' | 'nano-banana';
-
 interface ModelOption {
   key: ModelKey;
   label: string;
@@ -150,13 +149,13 @@ const WORKBENCH_THEMES: Record<
     promoIcon: 'border-emerald-400/30 bg-emerald-500/15 text-emerald-300',
     primaryButton:
       'bg-gradient-to-r from-emerald-500 to-cyan-400 text-zinc-950 hover:from-emerald-400 hover:to-cyan-300',
-    activeTab: 'data-[state=active]:bg-slate-700 data-[state=active]:text-white',
+    activeTab:
+      'data-[state=active]:bg-slate-700 data-[state=active]:text-white',
     activeModel: 'border-emerald-400/50 bg-emerald-500/10 text-white',
     focusRing: 'focus-visible:ring-emerald-400/40',
     costPanel: 'border-emerald-400/30 bg-emerald-500/[0.08]',
     costText: 'text-emerald-300',
-    featurePill:
-      'border-emerald-400/40 bg-emerald-500/25 text-emerald-100',
+    featurePill: 'border-emerald-400/40 bg-emerald-500/25 text-emerald-100',
     dot: 'bg-emerald-400',
     panelGlow: 'shadow-emerald-950/30',
   },
@@ -166,7 +165,8 @@ const WORKBENCH_THEMES: Record<
     promoIcon: 'border-violet-400/30 bg-violet-500/15 text-violet-300',
     primaryButton:
       'bg-gradient-to-r from-violet-500 via-blue-500 to-cyan-400 text-white hover:from-violet-400 hover:via-blue-400 hover:to-cyan-300',
-    activeTab: 'data-[state=active]:bg-violet-500/25 data-[state=active]:text-white',
+    activeTab:
+      'data-[state=active]:bg-violet-500/25 data-[state=active]:text-white',
     activeModel: 'border-violet-400/50 bg-violet-500/15 text-white',
     focusRing: 'focus-visible:ring-violet-400/40',
     costPanel: 'border-violet-400/30 bg-violet-500/[0.09]',
@@ -245,10 +245,10 @@ export default function Workbench({
   const [taskId, setTaskId] = useState<string | null>(null);
   const [taskStatus, setTaskStatus] = useState<AITaskStatus | null>(null);
   const [generationStartTime, setGenerationStartTime] = useState<number | null>(
-    null,
+    null
   );
   const [downloadingImageId, setDownloadingImageId] = useState<string | null>(
-    null,
+    null
   );
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
@@ -263,23 +263,23 @@ export default function Workbench({
 
   const selectedModel = useMemo(
     () => MODEL_OPTIONS.find((m) => m.key === modelKey) ?? MODEL_OPTIONS[0],
-    [modelKey],
+    [modelKey]
   );
 
   const currentMapping = useMemo(
     () =>
       isImageEditMode ? selectedModel.imageToImage : selectedModel.textToImage,
-    [isImageEditMode, selectedModel],
+    [isImageEditMode, selectedModel]
   );
 
   const isReferenceUploading = useMemo(
     () => referenceImageItems.some((item) => item.status === 'uploading'),
-    [referenceImageItems],
+    [referenceImageItems]
   );
 
   const hasReferenceUploadError = useMemo(
     () => referenceImageItems.some((item) => item.status === 'error'),
-    [referenceImageItems],
+    [referenceImageItems]
   );
 
   const baseCost = isImageEditMode ? 4 : 2;
@@ -311,7 +311,7 @@ export default function Workbench({
         .map((item) => item.url as string);
       setReferenceImageUrls(uploadedUrls);
     },
-    [],
+    []
   );
 
   const resetTaskState = useCallback(() => {
@@ -321,6 +321,49 @@ export default function Workbench({
     setGenerationStartTime(null);
     setTaskStatus(null);
   }, []);
+
+  useEffect(() => {
+    const handleUsePrompt = (event: Event) => {
+      const detail = (event as CustomEvent<UsePromptEventDetail>).detail;
+
+      if (!detail?.prompt) return;
+
+      const nextMode = detail.mode ?? 'text-to-image';
+      const trimmedPrompt = detail.prompt.slice(0, MAX_PROMPT_LENGTH);
+
+      setPrompt(trimmedPrompt);
+      setMode(nextMode);
+      setModelKey(detail.modelKey ?? 'gpt-image-2');
+      setGeneratedImages([]);
+      resetTaskState();
+
+      if (detail.referenceImage) {
+        const referenceItem: ImageUploaderValue = {
+          id: `prompt-ref-${Date.now()}`,
+          preview: detail.referenceImage,
+          url: detail.referenceImage,
+          status: 'uploaded',
+        };
+        setReferenceImageItems([referenceItem]);
+        setReferenceImageUrls([detail.referenceImage]);
+      } else if (nextMode === 'text-to-image') {
+        setReferenceImageItems([]);
+        setReferenceImageUrls([]);
+      }
+
+      toast.success(
+        nextMode === 'image-to-image'
+          ? 'Prompt loaded with reference image'
+          : 'Prompt loaded in workbench'
+      );
+    };
+
+    window.addEventListener('gptimage2studio:use-prompt', handleUsePrompt);
+
+    return () => {
+      window.removeEventListener('gptimage2studio:use-prompt', handleUsePrompt);
+    };
+  }, [resetTaskState]);
 
   const pollTaskStatus = useCallback(
     async (id: string) => {
@@ -370,7 +413,7 @@ export default function Workbench({
                 provider: task.provider,
                 model: task.model,
                 prompt: task.prompt ?? undefined,
-              })),
+              }))
             );
             setProgress((prev) => Math.max(prev, 85));
           } else {
@@ -390,7 +433,7 @@ export default function Workbench({
                 provider: task.provider,
                 model: task.model,
                 prompt: task.prompt ?? undefined,
-              })),
+              }))
             );
             toast.success('Image generated successfully');
           }
@@ -418,7 +461,7 @@ export default function Workbench({
         return true;
       }
     },
-    [generationStartTime, resetTaskState, fetchUserCredits],
+    [generationStartTime, resetTaskState, fetchUserCredits]
   );
 
   useEffect(() => {
@@ -535,7 +578,7 @@ export default function Workbench({
               provider: currentMapping.provider,
               model: currentMapping.model,
               prompt: trimmedPrompt,
-            })),
+            }))
           );
           toast.success('Image generated successfully');
           setProgress(100);
@@ -561,7 +604,7 @@ export default function Workbench({
     try {
       setDownloadingImageId(image.id);
       const resp = await fetch(
-        `/api/proxy/file?url=${encodeURIComponent(image.url)}`,
+        `/api/proxy/file?url=${encodeURIComponent(image.url)}`
       );
       if (!resp.ok) {
         throw new Error('Failed to fetch image');
@@ -616,7 +659,8 @@ export default function Workbench({
                 Get 20 Free Credits &amp; Try Pro
               </h3>
               <p className="mt-0.5 text-xs text-zinc-400 sm:text-sm">
-                Sign up now to test GPT Image 2 and Nano Banana workflows when access opens.
+                Sign up now to test GPT Image 2 and Nano Banana workflows when
+                access opens.
               </p>
             </div>
           </div>
@@ -685,7 +729,7 @@ export default function Workbench({
                       {opt.emoji}
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-sm font-bold leading-tight text-white">
+                      <span className="block text-sm leading-tight font-bold text-white">
                         {opt.label}
                       </span>
                       <span className="mt-0.5 block text-[11px] leading-snug text-zinc-400">
@@ -713,26 +757,29 @@ export default function Workbench({
                   allowMultiple
                   maxImages={5}
                   maxSizeMB={30}
+                  defaultPreviews={referenceImageUrls}
                   emptyHint=""
                   uploadLabel="Add Image"
                   uploadSubLabel="Max 30MB"
                   onChange={handleReferenceImagesChange}
-                  className="w-full [&>div:last-child]:grid [&>div:last-child]:grid-cols-1 [&>div:last-child]:gap-3 [&_.group]:w-full [&_.group]:rounded-2xl [&_.group]:border-white/15 [&_.group]:bg-[#080B10] [&_.group]:p-0 [&_.group]:shadow-none [&_.group]:hover:border-cyan-300/60 [&_button]:h-[118px] [&_button]:w-full [&_button]:gap-2.5 [&_button]:px-3 [&_button]:text-center [&_button_div]:h-11 [&_button_div]:w-11 [&_button_div]:border-white/30 [&_button_svg]:h-5 [&_button_svg]:w-5 [&_button_svg]:text-cyan-300 [&_img]:h-[118px] [&_img]:w-full [&_img]:rounded-2xl [&_span]:leading-none [&_span]:text-zinc-300 [&_span:first-of-type]:text-[13px] [&_span:first-of-type]:font-bold [&_span:last-child]:text-[11px] [&_span:last-child]:font-medium [&_span:last-child]:text-zinc-500"
+                  className="w-full [&_.group]:w-full [&_.group]:rounded-2xl [&_.group]:border-white/15 [&_.group]:bg-[#080B10] [&_.group]:p-0 [&_.group]:shadow-none [&_.group]:hover:border-cyan-300/60 [&_button]:h-[118px] [&_button]:w-full [&_button]:gap-2.5 [&_button]:px-3 [&_button]:text-center [&_button_div]:h-11 [&_button_div]:w-11 [&_button_div]:border-white/30 [&_button_svg]:h-5 [&_button_svg]:w-5 [&_button_svg]:text-cyan-300 [&_img]:h-[118px] [&_img]:w-full [&_img]:rounded-2xl [&_span]:leading-none [&_span]:text-zinc-300 [&_span:first-of-type]:text-[13px] [&_span:first-of-type]:font-bold [&_span:last-child]:text-[11px] [&_span:last-child]:font-medium [&_span:last-child]:text-zinc-500 [&>div:last-child]:grid [&>div:last-child]:grid-cols-1 [&>div:last-child]:gap-3"
                 />
                 <button
                   type="button"
                   onClick={() =>
-                    toast.message('Library picker will be connected after launch.')
+                    toast.message(
+                      'Library picker will be connected after launch.'
+                    )
                   }
                   className="flex h-[118px] w-full flex-col items-center justify-center gap-2.5 rounded-2xl border border-dashed border-white/15 bg-[#080B10] px-3 text-center transition hover:border-cyan-300/60 hover:bg-white/[0.04]"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-dashed border-white/30">
                     <Images className="size-5 text-cyan-300" />
                   </span>
-                  <span className="text-[13px] font-bold leading-none text-zinc-300">
+                  <span className="text-[13px] leading-none font-bold text-zinc-300">
                     From Library
                   </span>
-                  <span className="text-[11px] font-medium leading-none text-zinc-500">
+                  <span className="text-[11px] leading-none font-medium text-zinc-500">
                     Saved refs
                   </span>
                 </button>
@@ -963,10 +1010,7 @@ export default function Workbench({
               onDownload={handleDownloadImage}
             />
           ) : isGenerating ? (
-            <ProgressPanel
-              progress={progress}
-              statusLabel={taskStatusLabel}
-            />
+            <ProgressPanel progress={progress} statusLabel={taskStatusLabel} />
           ) : (
             <CarouselPanel
               variant={variant}
@@ -1134,7 +1178,11 @@ function ResultsPanel({
           key={image.id}
           className="group relative overflow-hidden rounded-[18px] border border-white/10 bg-[#0B0D12]"
         >
-          <div className={single ? 'relative w-full' : 'relative aspect-square w-full'}>
+          <div
+            className={
+              single ? 'relative w-full' : 'relative aspect-square w-full'
+            }
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image.url}
