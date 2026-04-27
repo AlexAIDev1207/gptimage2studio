@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { SignUser } from '@/shared/blocks/sign/sign-user';
 import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
 import { useAppContext } from '@/shared/contexts/app';
 
@@ -223,12 +224,22 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="flex items-center gap-2">
             <AnimatedThemeToggler className="inline-flex size-9 items-center justify-center rounded-md text-zinc-400 transition hover:bg-white/10 hover:text-white [&_svg]:size-4" />
             {user ? (
-              <Link
-                href="/pricing"
-                className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
-              >
-                Top Up Credits
-              </Link>
+              <>
+                <Link
+                  href="/pricing"
+                  className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
+                >
+                  Top Up Credits
+                </Link>
+                <SignUser
+                  userNav={{
+                    show_name: true,
+                    show_credits: true,
+                    show_sign_out: true,
+                    items: [],
+                  }}
+                />
+              </>
             ) : (
               <button
                 type="button"
