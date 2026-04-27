@@ -31,7 +31,7 @@ export const promoBar = {
 
 export const nav = [
   { label: 'Generator', href: '#workbench' },
-  { label: 'Prompts', href: '#prompts' },
+  { label: 'Prompts', href: '/prompts' },
   { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: '#pricing' },
 ];
@@ -487,7 +487,7 @@ export const editDemos: EditDemo[] = [
 ];
 
 export const whatIsIntro =
-  "GPT Image 2 Studio is a web workspace for AI image creation. Bring a prompt or a reference image, pick GPT Image 2 or Nano Banana, and walk away with product photos, posters, social ads, infographics, and UI mockups in minutes — no design software, no API setup.";
+  'GPT Image 2 Studio is a web workspace for AI image creation. Bring a prompt or a reference image, pick GPT Image 2 or Nano Banana, and walk away with product photos, posters, social ads, infographics, and UI mockups in minutes — no design software, no API setup.';
 
 export const whatIsCards = [
   {
@@ -550,8 +550,7 @@ export const comparison = [
     dimension: 'Speed',
     gptImage2:
       'Instant mode generates in roughly 3 seconds; thinking mode takes longer on layout-heavy briefs.',
-    nanoBanana:
-      'Generation typically takes around 10–15 seconds per image.',
+    nanoBanana: 'Generation typically takes around 10–15 seconds per image.',
   },
   {
     dimension: 'Best for',
@@ -577,7 +576,7 @@ export const benefits = [
   },
   {
     title: 'Thinks Before It Generates',
-    copy: "GPT Image 2 is OpenAI's first image model with native reasoning. It plans the composition, verifies the layout, and follows multi-constraint briefs in a single prompt — fewer \"almost right\" generations, less iteration.",
+    copy: 'GPT Image 2 is OpenAI\'s first image model with native reasoning. It plans the composition, verifies the layout, and follows multi-constraint briefs in a single prompt — fewer "almost right" generations, less iteration.',
   },
   {
     title: 'Production-Ready, Out of the Box',
@@ -709,8 +708,7 @@ export const testimonials: Testimonial[] = [
     avatarUrl: 'https://unavatar.io/twitter/hewarsaber',
     initial: 'H',
     color: 'from-cyan-500 to-blue-500',
-    quote:
-      "GPT Image 2 is insane for branding. Designers, we're cooked.",
+    quote: "GPT Image 2 is insane for branding. Designers, we're cooked.",
   },
   {
     name: 'WY',

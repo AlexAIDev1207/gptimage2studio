@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -8,7 +8,6 @@ import {
   Check,
   ChevronDown,
   Copy,
-  Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
   Menu,
@@ -42,7 +41,6 @@ import {
   testimonials,
   testimonialsDisclaimer,
   testimonialsIntro,
-  type Testimonial,
   useCases,
   whatIsCards,
   whatIsIntro,
@@ -50,7 +48,9 @@ import {
   whyChooseSubtitle,
   workbench,
   type PromptCard,
+  type Testimonial,
 } from './content';
+import { PromptDetailDialog } from './prompt-detail-dialog';
 import Workbench from './workbench';
 
 type Variant = 'A' | 'B';
@@ -98,25 +98,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const activeEdit = editDemos[activeEditDemo];
-
-  useEffect(() => {
-    if (!selectedPrompt) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setSelectedPrompt(null);
-      }
-    };
-
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedPrompt]);
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -472,8 +453,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             </h2>
             <p className="mt-4 text-zinc-400">
               From clean ecommerce product shots to multilingual posters,
-              vertical social ads, and labeled UI mockups — these are the
-              most common briefs creators bring to GPT Image 2 today.
+              vertical social ads, and labeled UI mockups — these are the most
+              common briefs creators bring to GPT Image 2 today.
             </p>
           </div>
           <div className="mt-12 flex flex-col gap-16 md:gap-24">
@@ -707,7 +688,13 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 <span
                   className={`inline-flex size-10 items-center justify-center rounded-xl bg-gradient-to-br ${palette.accent} text-zinc-950`}
                 >
-                  {[<LayoutIcon key="0" className="size-5" />, <Sparkles key="1" className="size-5" />, <Layers key="2" className="size-5" />][i]}
+                  {
+                    [
+                      <LayoutIcon key="0" className="size-5" />,
+                      <Sparkles key="1" className="size-5" />,
+                      <Layers key="2" className="size-5" />,
+                    ][i]
+                  }
                 </span>
                 <h3 className="mt-5 text-lg font-semibold text-white">
                   {b.title}
@@ -755,7 +742,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   />
                 </div>
                 <span
-                  className={`mt-6 text-3xl font-bold bg-gradient-to-br ${palette.accent} bg-clip-text text-transparent`}
+                  className={`mt-6 bg-gradient-to-br text-3xl font-bold ${palette.accent} bg-clip-text text-transparent`}
                 >
                   {s.step}
                 </span>
@@ -868,9 +855,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
               What Creators Say About GPT Image 2
             </h2>
-            <p className="mt-4 max-w-3xl text-zinc-400">
-              {testimonialsIntro}
-            </p>
+            <p className="mt-4 max-w-3xl text-zinc-400">{testimonialsIntro}</p>
           </div>
         </div>
 
@@ -879,7 +864,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#0B0D12] to-transparent md:w-20" />
 
           <div
-            className="flex w-max gap-6 will-change-transform [animation:testimonial-scroll_60s_linear_infinite] motion-reduce:[animation:none] group-hover:[animation-play-state:paused]"
+            className="flex w-max [animation:testimonial-scroll_60s_linear_infinite] gap-6 will-change-transform group-hover:[animation-play-state:paused] motion-reduce:[animation:none]"
             aria-label="Creator testimonials"
           >
             {[...testimonials, ...testimonials].map((t, i) => (
@@ -1062,119 +1047,6 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   );
 }
 
-function PromptDetailDialog({
-  card,
-  copied,
-  onClose,
-  onCopy,
-  onUsePrompt,
-  onUseReference,
-}: {
-  card: PromptCard;
-  copied: string | null;
-  onClose: () => void;
-  onCopy: (text: string, key: string) => void;
-  onUsePrompt: (card: PromptCard) => void;
-  onUseReference: (card: PromptCard) => void;
-}) {
-  const copyKey = `dialog-${card.title}`;
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="prompt-dialog-title"
-      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-3 py-4 backdrop-blur-sm sm:px-6"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) {
-          onClose();
-        }
-      }}
-    >
-      <div className="relative grid max-h-[calc(100vh-2rem)] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/10 bg-[#15161B] shadow-2xl shadow-black/70 md:h-[calc(100vh-5rem)] md:max-h-[820px] md:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
-        <button
-          type="button"
-          aria-label="Close prompt details"
-          onClick={onClose}
-          className="absolute top-4 right-4 z-20 inline-flex size-10 items-center justify-center rounded-full text-zinc-400 transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
-        >
-          <X className="size-6" />
-        </button>
-
-        <div className="relative h-[42vh] min-h-[260px] bg-black md:h-full">
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            sizes="(min-width: 768px) 56vw, 100vw"
-            className="object-contain"
-            priority
-          />
-        </div>
-
-        <div className="flex max-h-[calc(58vh-2rem)] flex-col overflow-y-auto px-5 py-6 sm:px-8 md:max-h-none md:px-10 md:py-12">
-          <div className="flex flex-wrap items-center gap-3 pr-10">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-zinc-100">
-              GPT Image 2 Studio
-            </span>
-            <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-4 py-2 text-sm font-bold text-emerald-300">
-              {card.category}
-            </span>
-          </div>
-
-          <h3
-            id="prompt-dialog-title"
-            className="mt-8 text-3xl font-black tracking-tight text-white md:text-4xl"
-          >
-            {card.title}
-          </h3>
-
-          <div className="mt-8 flex items-center justify-between gap-4">
-            <p className="text-sm font-bold tracking-[0.2em] text-zinc-500 uppercase">
-              Prompt
-            </p>
-            <button
-              type="button"
-              onClick={() => onCopy(card.fullPrompt, copyKey)}
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-zinc-200 transition hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
-            >
-              {copied === copyKey ? (
-                <Check className="size-4" />
-              ) : (
-                <Copy className="size-4" />
-              )}
-              Copy Prompt
-            </button>
-          </div>
-
-          <p className="mt-6 font-mono text-base leading-8 whitespace-pre-wrap text-zinc-100 md:text-lg">
-            {card.fullPrompt}
-          </p>
-
-          <div className="mt-auto grid gap-4 pt-10">
-            <button
-              type="button"
-              onClick={() => onUsePrompt(card)}
-              className="inline-flex min-h-16 w-full items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-5 py-4 text-lg font-black text-zinc-950 transition hover:bg-emerald-300 focus-visible:ring-2 focus-visible:ring-emerald-200 focus-visible:outline-none"
-            >
-              <Wand2 className="size-6" />
-              Use This Prompt
-            </button>
-            <button
-              type="button"
-              onClick={() => onUseReference(card)}
-              className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-white/10 px-5 py-4 text-base font-black text-zinc-100 transition hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none"
-            >
-              <ImageIcon className="size-5" />
-              Use as Reference
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SectionEyebrow({
   children,
   palette,
@@ -1193,6 +1065,13 @@ function SectionEyebrow({
 }
 
 function FooterColumn({ title, items }: { title: string; items: string[] }) {
+  const itemHrefs: Record<string, string> = {
+    Generator: '/#workbench',
+    Prompts: '/prompts',
+    Blog: '/blog',
+    Pricing: '/#pricing',
+  };
+
   return (
     <div>
       <h4 className="text-xs font-semibold tracking-wider text-zinc-300 uppercase">
@@ -1201,7 +1080,10 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
       <ul className="mt-3 space-y-2 text-sm">
         {items.map((item) => (
           <li key={item}>
-            <a href="#" className="text-zinc-400 transition hover:text-white">
+            <a
+              href={itemHrefs[item] ?? '#'}
+              className="text-zinc-400 transition hover:text-white"
+            >
               {item}
             </a>
           </li>

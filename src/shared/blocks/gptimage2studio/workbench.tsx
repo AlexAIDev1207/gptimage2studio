@@ -69,6 +69,7 @@ interface BackendTask {
 const MAX_PROMPT_LENGTH = 5000;
 const POLL_INTERVAL = 5000;
 const GENERATION_TIMEOUT = 180000;
+const PENDING_PROMPT_STORAGE_KEY = 'gptimage2studio:pending-prompt';
 
 // Two-model dropdown. Maps to (provider, model) per scene.
 interface ModelOption {
@@ -323,9 +324,7 @@ export default function Workbench({
   }, []);
 
   useEffect(() => {
-    const handleUsePrompt = (event: Event) => {
-      const detail = (event as CustomEvent<UsePromptEventDetail>).detail;
-
+    const applyPromptDetail = (detail?: UsePromptEventDetail) => {
       if (!detail?.prompt) return;
 
       const nextMode = detail.mode ?? 'text-to-image';
@@ -356,6 +355,22 @@ export default function Workbench({
           ? 'Prompt loaded with reference image'
           : 'Prompt loaded in workbench'
       );
+    };
+
+    try {
+      const pendingPrompt = window.sessionStorage.getItem(
+        PENDING_PROMPT_STORAGE_KEY
+      );
+      if (pendingPrompt) {
+        window.sessionStorage.removeItem(PENDING_PROMPT_STORAGE_KEY);
+        applyPromptDetail(JSON.parse(pendingPrompt) as UsePromptEventDetail);
+      }
+    } catch {
+      window.sessionStorage.removeItem(PENDING_PROMPT_STORAGE_KEY);
+    }
+
+    const handleUsePrompt = (event: Event) => {
+      applyPromptDetail((event as CustomEvent<UsePromptEventDetail>).detail);
     };
 
     window.addEventListener('gptimage2studio:use-prompt', handleUsePrompt);

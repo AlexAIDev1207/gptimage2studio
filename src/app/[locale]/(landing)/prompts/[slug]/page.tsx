@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -15,17 +16,32 @@ function getPrompt(slug: string) {
   return promptCards.find((card) => card.href === `/prompts/${slug}`);
 }
 
-export async function generateMetadata({ params }: PromptPageProps) {
+export async function generateMetadata({
+  params,
+}: PromptPageProps): Promise<Metadata> {
   const { slug } = await params;
   const prompt = getPrompt(slug);
 
   if (!prompt) {
-    return {};
+    return {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
   }
 
   return {
     title: `${prompt.title} | GPT Image 2 Studio`,
     description: prompt.prompt,
+    robots: {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      },
+    },
   };
 }
 
