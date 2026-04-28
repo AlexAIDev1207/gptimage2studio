@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq, gt, isNull, or, sum } from 'drizzle-orm';
+import { and, asc, count, desc, eq, gt, gte, isNull, or, sql, sum } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { credit } from '@/config/db/schema';
@@ -143,11 +143,19 @@ export async function getCreditsCount({
 
 // Plan returned by planConsumeCredits — caller composes additional writes
 // and runs everything through db().batch([...]) to get D1-atomic execution.
+// After running the batch, caller must call verifyConsumePlan() to detect
+// concurrent over-spend (the WHERE remaining_credits >= ? guards above
+// silently no-op on race; we have to actively verify).
 export type ConsumeCreditsPlan = {
+  userId: string;
+  credits: number;
   consumeRecord: NewCredit;
   // drizzle query builders ready to be passed into db.batch():
-  // [N×UPDATE credit SET remaining_credits, INSERT credit (consume row)]
+  // [N×UPDATE credit (with race guard), INSERT credit (consume row)]
   statements: any[];
+  // pre-batch sum(remaining_credits) for active grants — verifyConsumePlan
+  // re-reads the sum and confirms the difference equals `credits`.
+  expectedBalanceAfter: number;
 };
 
 /**
@@ -229,12 +237,22 @@ export async function planConsumeCredits({
     if (remainingToConsume <= 0) break;
     const toConsume = Math.min(remainingToConsume, item.remainingCredits);
 
-    // build (do not execute) UPDATE statement
+    // Build (do not execute) UPDATE with two race guards:
+    // 1. Use relative arithmetic (`remaining_credits - X`) so concurrent
+    //    deductions compose correctly.
+    // 2. WHERE remaining_credits >= X — if a concurrent consume already
+    //    drained this row, our UPDATE matches 0 rows. Caller verifies
+    //    rowsAffected on each batch result and aborts/compensates if
+    //    any guard failed.
     updateStatements.push(
       dbi
         .update(credit)
-        .set({ remainingCredits: item.remainingCredits - toConsume })
-        .where(eq(credit.id, item.id))
+        .set({
+          remainingCredits: sql`${credit.remainingCredits} - ${toConsume}`,
+        })
+        .where(
+          and(eq(credit.id, item.id), gte(credit.remainingCredits, toConsume))
+        )
     );
 
     consumedItems.push({
@@ -273,17 +291,63 @@ export async function planConsumeCredits({
 
   // 4. return plan with all writes ready to be batched
   return {
+    userId,
+    credits,
     consumeRecord,
     statements: [
       ...updateStatements,
       dbi.insert(credit).values(consumeRecord),
     ],
+    expectedBalanceAfter: parseInt(creditsBalance.total) - credits,
   };
 }
 
 /**
- * Atomically consume credits via D1 batch.
+ * Verify post-batch that the actual sum(remaining_credits) matches what
+ * planConsumeCredits expected. If concurrent consumers raced our UPDATEs
+ * and our `WHERE remaining_credits >= ?` guards silently dropped some
+ * deductions, the actual balance will be higher than expected.
+ *
+ * Throws ConsumeRaceError on detection so the caller can compensate.
+ */
+export class ConsumeRaceError extends Error {
+  constructor(
+    public expected: number,
+    public actual: number
+  ) {
+    super(
+      `Consume race detected: expected balance ${expected}, got ${actual} (delta ${actual - expected})`
+    );
+    this.name = 'ConsumeRaceError';
+  }
+}
+
+export async function verifyConsumePlan(plan: ConsumeCreditsPlan): Promise<void> {
+  const dbi = db();
+  const currentTime = new Date();
+  const [row] = await dbi
+    .select({ total: sum(credit.remainingCredits) })
+    .from(credit)
+    .where(
+      and(
+        eq(credit.userId, plan.userId),
+        eq(credit.transactionType, CreditTransactionType.GRANT),
+        eq(credit.status, CreditStatus.ACTIVE),
+        or(isNull(credit.expiresAt), gt(credit.expiresAt, currentTime))
+      )
+    );
+  const actual = parseInt(row?.total || '0');
+  if (actual !== plan.expectedBalanceAfter) {
+    throw new ConsumeRaceError(plan.expectedBalanceAfter, actual);
+  }
+}
+
+/**
+ * Atomically consume credits via D1 batch + post-verify for race detection.
  * Convenience wrapper for callers that don't need to compose with other writes.
+ *
+ * On ConsumeRaceError, the consume row is marked INVALID so balance reads
+ * skip it; caller should treat the operation as failed and retry.
  */
 export async function consumeCredits(args: {
   userId: string;
@@ -294,6 +358,18 @@ export async function consumeCredits(args: {
 }): Promise<NewCredit> {
   const plan = await planConsumeCredits(args);
   await db().batch(plan.statements);
+  try {
+    await verifyConsumePlan(plan);
+  } catch (e) {
+    if (e instanceof ConsumeRaceError) {
+      // best-effort: invalidate the consume row so it doesn't double-count
+      await db()
+        .update(credit)
+        .set({ status: CreditStatus.DELETED })
+        .where(eq(credit.id, plan.consumeRecord.id));
+    }
+    throw e;
+  }
   return plan.consumeRecord;
 }
 

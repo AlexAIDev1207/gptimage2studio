@@ -5,7 +5,12 @@ import { aiTask, credit } from '@/config/db/schema';
 import { AITaskStatus } from '@/extensions/ai';
 import { appendUserToResult, User } from '@/shared/models/user';
 
-import { CreditStatus, planConsumeCredits } from './credit';
+import {
+  ConsumeRaceError,
+  CreditStatus,
+  planConsumeCredits,
+  verifyConsumePlan,
+} from './credit';
 
 export type AITask = typeof aiTask.$inferSelect & {
   user?: User;
@@ -45,6 +50,24 @@ export async function createAITask(newAITask: NewAITask) {
     dbi.insert(aiTask).values(taskWithCreditId),
   ]);
 
+  // 4. detect concurrent over-spend that bypassed our WHERE guards.
+  //    On race: invalidate consume row + drop ai_task we just inserted +
+  //    surface the error so the route returns 5xx and the user retries.
+  try {
+    await verifyConsumePlan(plan);
+  } catch (e) {
+    if (e instanceof ConsumeRaceError) {
+      await dbi.batch([
+        dbi
+          .update(credit)
+          .set({ status: CreditStatus.DELETED })
+          .where(eq(credit.id, plan.consumeRecord.id)),
+        dbi.delete(aiTask).where(eq(aiTask.id, newAITask.id)),
+      ]);
+    }
+    throw e;
+  }
+
   return taskWithCreditId;
 }
 
@@ -66,15 +89,24 @@ export async function updateAITaskById(id: string, updateAITask: UpdateAITask) {
     return result;
   }
 
-  // Failed path: refund consumed credits and update ai_task in one D1 batch
-  // (atomic). 1. read consume record (read-only — outside batch).
+  // Failed path: refund consumed credits + mark consume DELETED + update
+  // ai_task — all idempotent in one D1 batch.
+  //
+  // Concurrency: this method may be invoked from multiple paths
+  // (Kie webhook, frontend polling) racing on the same task. We make the
+  // batch idempotent by guarding every write with `consume.status='active'`
+  // via an EXISTS subquery. The first batch wins; subsequent ones see
+  // status='deleted' and become no-ops.
+  const consumeId = updateAITask.creditId;
+
+  // 1. read consume record once (outside batch) so we know which grants to refund.
+  //    If already deleted (someone else won), we still update ai_task and return.
   const [consumedCredit] = await dbi
     .select()
     .from(credit)
-    .where(eq(credit.id, updateAITask.creditId));
+    .where(eq(credit.id, consumeId));
 
-  // No active consume record to refund — just update task.
-  if (!consumedCredit || consumedCredit.status !== CreditStatus.ACTIVE) {
+  if (!consumedCredit) {
     const [result] = await dbi
       .update(aiTask)
       .set(updateAITask)
@@ -83,8 +115,14 @@ export async function updateAITaskById(id: string, updateAITask: UpdateAITask) {
     return result;
   }
 
-  // 2. build refund statements
-  const consumedItems: any[] = JSON.parse(consumedCredit.consumedDetail || '[]');
+  const consumedItems: any[] = JSON.parse(
+    consumedCredit.consumedDetail || '[]'
+  );
+
+  // 2. Build batch statements. Every refund / claim guards on consume still
+  //    being ACTIVE — so concurrent batches don't double-refund.
+  const consumeStillActive = sql`EXISTS (SELECT 1 FROM credit AS c WHERE c.id = ${consumeId} AND c.status = ${CreditStatus.ACTIVE})`;
+
   const refundStatements = consumedItems
     .filter((item: any) => item && item.creditId && item.creditsConsumed > 0)
     .map((item: any) =>
@@ -93,20 +131,23 @@ export async function updateAITaskById(id: string, updateAITask: UpdateAITask) {
         .set({
           remainingCredits: sql`${credit.remainingCredits} + ${item.creditsConsumed}`,
         })
-        .where(eq(credit.id, item.creditId))
+        .where(and(eq(credit.id, item.creditId), consumeStillActive))
     );
 
-  // 3. atomic batch: refunds + mark consume as deleted + update ai_task
   await dbi.batch([
     ...refundStatements,
+    // Atomic claim: only the first batch sees status=ACTIVE and flips it.
     dbi
       .update(credit)
       .set({ status: CreditStatus.DELETED })
-      .where(eq(credit.id, updateAITask.creditId)),
+      .where(
+        and(eq(credit.id, consumeId), eq(credit.status, CreditStatus.ACTIVE))
+      ),
+    // ai_task update is always safe (idempotent — last write wins).
     dbi.update(aiTask).set(updateAITask).where(eq(aiTask.id, id)),
   ]);
 
-  // 4. read back updated task (D1 batch doesn't return .returning() values cleanly)
+  // 3. read back updated task
   const [result] = await dbi.select().from(aiTask).where(eq(aiTask.id, id));
   return result;
 }

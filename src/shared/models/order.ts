@@ -224,6 +224,15 @@ export async function updateOrderInTransaction({
   }
 
   // D1 doesn't support BEGIN/COMMIT — use db.batch() (atomic).
+  //
+  // Known limitation (P2 follow-up): the idempotency check is read-then-write
+  // (see step 1 below). Schema currently has *non-unique* indexes on
+  // (subscriptionId, paymentProvider) and credit.orderNo, so two concurrent
+  // webhook deliveries may both observe "not exists" and create duplicate rows.
+  // To fix robustly: add UNIQUE constraints in schema migration and use
+  // INSERT ... ON CONFLICT IGNORE/UPDATE here. Acceptable for now because:
+  // 1) Stripe webhooks rarely deliver in true parallel for the same event.
+  // 2) The optimistic-lock guard on the order UPDATE prevents double-PAID.
   const dbi = db();
   const stmts: any[] = [];
   const finalResult: any = { order: null, subscription: null, credit: null };

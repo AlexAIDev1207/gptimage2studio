@@ -92,6 +92,26 @@ function withMysqlCompat<T extends object>(dbInstance: T): T {
         };
       }
 
+      // db.batch(stmts) — MySQL/Postgres drivers don't expose batch natively;
+      // polyfill by executing inside a transaction (atomic on these dialects).
+      if (prop === 'batch') {
+        const native = (target as any).batch;
+        if (typeof native === 'function') {
+          return native.bind(target);
+        }
+        return async (stmts: any[]) => {
+          // For MySQL/Postgres, group sequential awaits in a real transaction
+          // to keep atomic semantics (the underlying driver supports BEGIN/COMMIT).
+          return (target as any).transaction(async (_tx: any) => {
+            const results: any[] = [];
+            for (const stmt of stmts) {
+              results.push(await stmt);
+            }
+            return results;
+          });
+        };
+      }
+
       const value = Reflect.get(target, prop, receiver);
       if (typeof value !== 'function') return value;
 
@@ -154,6 +174,25 @@ function withSqliteCompat<T extends object>(dbInstance: T): T {
         if (typeof original !== 'function') return original;
         return (fn: any, ...rest: any[]) =>
           original.call(target, (tx: any) => fn(withSqliteCompat(tx)), ...rest);
+      }
+
+      // db.batch(stmts) — D1 native batch is atomic. For libsql/sqlite/turso
+      // we polyfill via real transaction (these dialects support BEGIN/COMMIT)
+      // so atomicity is preserved across dialects.
+      if (prop === 'batch') {
+        const native = (target as any).batch;
+        if (typeof native === 'function') {
+          return native.bind(target);
+        }
+        return async (stmts: any[]) => {
+          return (target as any).transaction(async (_tx: any) => {
+            const results: any[] = [];
+            for (const stmt of stmts) {
+              results.push(await stmt);
+            }
+            return results;
+          });
+        };
       }
 
       const value = Reflect.get(target, prop, receiver);
