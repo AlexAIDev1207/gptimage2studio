@@ -1173,44 +1173,68 @@ function ResultsPanel({
   downloadingImageId: string | null;
   onDownload: (image: GeneratedImage) => void;
 }) {
-    if (images.length === 0) {
-      return (
+  if (images.length === 0) {
+    return (
       <div className="flex h-full min-h-[560px] flex-col items-center justify-center rounded-[18px] border border-emerald-100 bg-white p-6 text-center dark:border-white/10 dark:bg-[#0B0D12] lg:min-h-[700px]">
         <span className="mb-3 inline-flex size-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-white/5 dark:text-zinc-400">
           <ImageIcon className="size-6" />
         </span>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">No images yet</p>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">
+          No images yet
+        </p>
       </div>
-      );
-    }
+    );
+  }
 
   const single = images.length === 1;
 
+  // Single image: center within panel using flex; image keeps native
+  // aspect ratio via object-contain, never overflows panel height.
+  // Works for 16:9 / 1:1 / 9:16 / 4:3 / 3:4: tall images get side gutters,
+  // wide images get top/bottom gutters — always centered.
+  if (single) {
+    const image = images[0];
+    return (
+      <div className="flex h-full min-h-[560px] items-center justify-center rounded-[18px] border border-emerald-100 bg-white p-3 dark:border-white/10 dark:bg-[#0B0D12] lg:min-h-[700px]">
+        <div className="group relative inline-flex max-h-full max-w-full overflow-hidden rounded-[14px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={image.url}
+            alt={image.prompt || 'Generated image'}
+            className="block max-h-full max-w-full rounded-[14px] object-contain"
+            loading="lazy"
+          />
+          <button
+            type="button"
+            onClick={() => onDownload(image)}
+            disabled={downloadingImageId === image.id}
+            className="absolute right-2 bottom-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-100 bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-slate-700 backdrop-blur transition hover:bg-emerald-50 disabled:opacity-60 dark:border-white/15 dark:bg-black/65 dark:text-white dark:hover:bg-black/80"
+          >
+            {downloadingImageId === image.id ? (
+              <Loader2 className="size-3.5 animate-spin" />
+            ) : (
+              <Download className="size-3.5" />
+            )}
+            Download
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={
-        single
-          ? 'grid grid-cols-1 gap-3'
-          : 'grid grid-cols-1 gap-3 sm:grid-cols-2'
-      }
-    >
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {images.map((image) => (
         <div
           key={image.id}
           className="group relative overflow-hidden rounded-[18px] border border-emerald-100 bg-white dark:border-white/10 dark:bg-[#0B0D12]"
         >
-          <div
-            className={
-              single ? 'relative w-full' : 'relative aspect-square w-full'
-            }
-          >
+          <div className="relative aspect-square w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image.url}
               alt={image.prompt || 'Generated image'}
-              className={
-                single ? 'h-auto w-full' : 'h-full w-full object-cover'
-              }
+              className="h-full w-full object-cover"
               loading="lazy"
             />
           </div>
