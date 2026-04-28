@@ -1,5 +1,3 @@
-'use client';
-
 import { Sparkles } from 'lucide-react';
 
 import { Link } from '@/core/i18n/navigation';
@@ -19,9 +17,9 @@ const footerLinkHrefs: Record<string, string> = {
 function FooterColumn({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h4 className="text-xs font-semibold tracking-wider text-zinc-300 uppercase">
+      <h3 className="text-xs font-semibold tracking-wider text-zinc-300 uppercase">
         {title}
-      </h4>
+      </h3>
       <ul className="mt-3 space-y-2 text-sm">
         {items.map((item) => (
           <li key={item}>

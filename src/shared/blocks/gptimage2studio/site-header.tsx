@@ -29,16 +29,30 @@ const navItems = [
 ];
 
 function HeaderAction({
+  isChecking,
   userLoggedIn,
   onGuestClick,
   onNavigate,
   mobile = false,
 }: {
+  isChecking: boolean;
   userLoggedIn: boolean;
   onGuestClick: () => void;
   onNavigate?: () => void;
   mobile?: boolean;
 }) {
+  if (isChecking) {
+    return (
+      <div
+        aria-hidden="true"
+        className={cn(
+          'rounded-full bg-slate-200/70 animate-pulse dark:bg-white/10',
+          mobile ? 'h-11 w-full' : 'hidden h-11 w-[168px] sm:block'
+        )}
+      />
+    );
+  }
+
   if (userLoggedIn) {
     return (
       <Link
@@ -48,13 +62,20 @@ function HeaderAction({
           'inline-flex items-center justify-center rounded-full text-sm font-semibold transition focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none',
           mobile
             ? 'min-h-11 w-full border border-emerald-300/50 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 px-4 py-2 text-slate-950 shadow-[0_18px_40px_-26px_rgba(16,185,129,0.45)] hover:brightness-105 dark:border-emerald-400/30 dark:text-slate-950 dark:shadow-[0_18px_40px_-26px_rgba(34,211,238,0.30)]'
-            : 'hidden min-h-10 border border-emerald-200/80 bg-emerald-50/90 px-4 py-2 text-emerald-800 shadow-sm hover:border-emerald-300 hover:bg-emerald-100 sm:inline-flex dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-200 dark:hover:bg-emerald-400/15'
+            : 'hidden min-h-11 border border-emerald-200/80 bg-emerald-50/90 px-4 py-2 text-emerald-800 shadow-sm hover:border-emerald-300 hover:bg-emerald-100 sm:inline-flex dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-200 dark:hover:bg-emerald-400/15'
         )}
       >
         Top Up Credits
       </Link>
     );
   }
+
+  const guestClassName = cn(
+    'inline-flex items-center justify-center rounded-full text-sm font-semibold transition focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none',
+    mobile
+      ? 'min-h-11 w-full border border-emerald-300/50 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 px-4 py-2 text-slate-950 shadow-[0_18px_40px_-26px_rgba(16,185,129,0.45)] hover:brightness-105 dark:border-emerald-400/30 dark:text-slate-950 dark:shadow-[0_18px_40px_-26px_rgba(34,211,238,0.30)]'
+      : 'hidden min-h-11 border border-emerald-300/60 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 px-4 py-2 text-slate-950 shadow-[0_18px_40px_-26px_rgba(16,185,129,0.42)] hover:brightness-105 sm:inline-flex dark:border-emerald-400/30 dark:text-slate-950 dark:shadow-[0_18px_40px_-26px_rgba(34,211,238,0.30)]'
+  );
 
   return (
     <button
@@ -63,12 +84,7 @@ function HeaderAction({
         onNavigate?.();
         onGuestClick();
       }}
-      className={cn(
-        'inline-flex items-center justify-center rounded-full text-sm font-semibold transition focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none',
-        mobile
-          ? 'min-h-11 w-full border border-emerald-300/50 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 px-4 py-2 text-slate-950 shadow-[0_18px_40px_-26px_rgba(16,185,129,0.45)] hover:brightness-105 dark:border-emerald-400/30 dark:text-slate-950 dark:shadow-[0_18px_40px_-26px_rgba(34,211,238,0.30)]'
-          : 'hidden min-h-10 border border-emerald-300/60 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 px-4 py-2 text-slate-950 shadow-[0_18px_40px_-26px_rgba(16,185,129,0.42)] hover:brightness-105 sm:inline-flex dark:border-emerald-400/30 dark:text-slate-950 dark:shadow-[0_18px_40px_-26px_rgba(34,211,238,0.30)]'
-      )}
+      className={guestClassName}
     >
       Get 20 Free Credits
     </button>
@@ -77,8 +93,9 @@ function HeaderAction({
 
 export function GptImageStudioSiteHeader() {
   const pathname = usePathname();
-  const { user, setIsShowSignModal } = useAppContext();
+  const { user, isCheckSign, setIsShowSignModal } = useAppContext();
   const [navOpen, setNavOpen] = useState(false);
+  const handleGuestClick = () => setIsShowSignModal(true);
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/88 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)] backdrop-blur-xl dark:border-white/5 dark:bg-[#09090B]/80 dark:shadow-none">
@@ -117,10 +134,11 @@ export function GptImageStudioSiteHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <AnimatedThemeToggler className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200/80 bg-white/80 text-slate-600 shadow-sm transition hover:bg-slate-100 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none [&_svg]:size-4 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white" />
+          <AnimatedThemeToggler className="inline-flex size-11 items-center justify-center rounded-xl border border-slate-200/80 bg-white/80 text-slate-600 shadow-sm transition hover:bg-slate-100 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none [&_svg]:size-4 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white" />
           <HeaderAction
+            isChecking={isCheckSign}
             userLoggedIn={Boolean(user)}
-            onGuestClick={() => setIsShowSignModal(true)}
+            onGuestClick={handleGuestClick}
           />
           {user && (
             <SignUser
@@ -136,7 +154,7 @@ export function GptImageStudioSiteHeader() {
             type="button"
             aria-label="Toggle navigation"
             onClick={() => setNavOpen((value) => !value)}
-            className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200/80 bg-white/80 text-slate-700 shadow-sm transition hover:bg-slate-100 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none lg:hidden dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white"
+            className="inline-flex size-11 items-center justify-center rounded-xl border border-slate-200/80 bg-white/80 text-slate-700 shadow-sm transition hover:bg-slate-100 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none lg:hidden dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white"
           >
             {navOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -169,8 +187,9 @@ export function GptImageStudioSiteHeader() {
 
             <div className="mt-2">
               <HeaderAction
+                isChecking={isCheckSign}
                 userLoggedIn={Boolean(user)}
-                onGuestClick={() => setIsShowSignModal(true)}
+                onGuestClick={handleGuestClick}
                 onNavigate={() => setNavOpen(false)}
                 mobile
               />
