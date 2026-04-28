@@ -270,6 +270,10 @@ export class StripeProvider implements PaymentProvider {
         paymentSession = await this.buildPaymentSessionFromSubscription(
           event.data.object as Stripe.Response<Stripe.Subscription>
         );
+      } else if (eventType === PaymentEventType.PAYMENT_REFUNDED) {
+        paymentSession = await this.buildPaymentSessionFromCharge(
+          event.data.object as Stripe.Charge
+        );
       }
 
       if (!paymentSession) {
@@ -368,6 +372,8 @@ export class StripeProvider implements PaymentProvider {
         return PaymentEventType.SUBSCRIBE_UPDATED;
       case 'customer.subscription.deleted':
         return PaymentEventType.SUBSCRIBE_CANCELED;
+      case 'charge.refunded':
+        return PaymentEventType.PAYMENT_REFUNDED;
       default:
         throw new Error(`Unknown Stripe event type: ${eventType}`);
     }
@@ -402,6 +408,76 @@ export class StripeProvider implements PaymentProvider {
       default:
         throw new Error(`Unknown Stripe status: ${session.status}`);
     }
+  }
+
+  // build payment session from a refunded Charge.
+  //
+  // Stripe propagates checkout.session metadata → PaymentIntent.metadata, but
+  // not always to Charge.metadata. We try multiple chains to recover order_no:
+  //   1. charge.metadata.order_no
+  //   2. retrieve PaymentIntent → its metadata.order_no
+  //   3. (subscription) retrieve invoice → subscription_id; the route handler
+  //      can then look up our DB by subscription_id if order_no is still missing.
+  private async buildPaymentSessionFromCharge(
+    charge: Stripe.Charge
+  ): Promise<PaymentSession> {
+    let orderNo = (charge.metadata as any)?.order_no || '';
+    let paymentIntentMetadata: Record<string, string> = {};
+
+    if (!orderNo && charge.payment_intent) {
+      try {
+        const pi = await this.client.paymentIntents.retrieve(
+          charge.payment_intent as string
+        );
+        paymentIntentMetadata = (pi.metadata as Record<string, string>) || {};
+        orderNo = paymentIntentMetadata.order_no || '';
+      } catch {
+        // best-effort
+      }
+    }
+
+    let subscriptionId: string | undefined;
+    const invoiceId = (charge as any).invoice as string | undefined;
+    if (invoiceId) {
+      try {
+        const invoice = await this.client.invoices.retrieve(invoiceId);
+        if (invoice.lines.data.length > 0) {
+          const line = invoice.lines.data[0];
+          if (line.subscription) {
+            subscriptionId = line.subscription as string;
+          } else if (
+            (line as any).parent?.subscription_item_details?.subscription
+          ) {
+            subscriptionId = (line as any).parent.subscription_item_details
+              .subscription as string;
+          }
+        }
+      } catch {
+        // best-effort
+      }
+    }
+
+    return {
+      provider: this.name,
+      paymentStatus: PaymentStatus.REFUNDED,
+      paymentInfo: {
+        transactionId: charge.id,
+        paymentAmount: charge.amount_refunded,
+        paymentCurrency: charge.currency,
+        paymentEmail:
+          charge.billing_details?.email ||
+          (charge as any).receipt_email ||
+          undefined,
+        paidAt: undefined,
+      },
+      paymentResult: charge,
+      metadata: {
+        order_no: orderNo,
+        ...paymentIntentMetadata,
+        ...((charge.metadata as Record<string, string>) || {}),
+      },
+      subscriptionId,
+    };
   }
 
   // build payment session from checkout session

@@ -62,6 +62,7 @@ export enum PaymentStatus {
   SUCCESS = 'paid', // paid means payment success
   FAILED = 'failed', // failed means payment failed
   CANCELED = 'canceled', // canceled means payment canceled
+  REFUNDED = 'refunded', // payment fully refunded
 }
 
 /**

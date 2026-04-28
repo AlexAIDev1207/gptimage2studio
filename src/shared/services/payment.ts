@@ -1,3 +1,7 @@
+import { and, eq } from 'drizzle-orm';
+
+import { db } from '@/core/db';
+import { credit as creditTable, order as orderTable } from '@/config/db/schema';
 import {
   CreemProvider,
   PaymentManager,
@@ -30,6 +34,7 @@ import {
   updateSubscriptionInTransaction,
 } from '../models/order';
 import {
+  findSubscriptionByProviderSubscriptionId,
   NewSubscription,
   Subscription,
   SubscriptionStatus,
@@ -578,4 +583,109 @@ export async function handleSubscriptionCanceled({
   });
 
   // console.log('handle subscription canceled', subscriptionInfo);
+}
+
+/**
+ * Handle a refund webhook (Stripe charge.refunded).
+ *
+ * Best-effort idempotent flow:
+ * 1. Resolve the impacted order — first via session.metadata.order_no,
+ *    then via subscriptionId fallback.
+ * 2. Skip if already REFUNDED (idempotent).
+ * 3. Atomic batch:
+ *    - mark grant credit row(s) for this order as DELETED (so balance reflects refund)
+ *    - mark order status REFUNDED
+ * 4. If a subscription is still active, cancel it (Stripe usually emits
+ *    customer.subscription.deleted alongside, but we don't depend on order).
+ *
+ * NOTE: We do NOT try to "undo" credits the user has already consumed —
+ * the grant row is just marked deleted so future getRemainingCredits()
+ * skips it. If the user spent more than they paid, balance can go below
+ * the welcome bonus; that's by design (we won't claw back consumed credits).
+ */
+export async function handlePaymentRefund({
+  session,
+}: {
+  session: PaymentSession;
+}) {
+  const TAG = '[handlePaymentRefund]';
+
+  const orderNo = session.metadata?.order_no as string | undefined;
+  let order: Order | null | undefined;
+
+  if (orderNo) {
+    order = await findOrderByOrderNo(orderNo);
+  }
+
+  // Fallback: when checkout metadata is missing, look up via subscription_id
+  // mapped through findSubscriptionByProviderSubscriptionId, which gives us
+  // back the subscriptionNo and we can find an order via that link.
+  if (!order && session.subscriptionId) {
+    const sub = await findSubscriptionByProviderSubscriptionId({
+      provider: session.provider || 'stripe',
+      subscriptionId: session.subscriptionId,
+    });
+    if (sub?.subscriptionNo) {
+      // The first paid order on a subscription stores subscription_no.
+      // Pick the most recent paid order for this subscription_no.
+      const dbi = db();
+      const [row] = await dbi
+        .select()
+        .from(orderTable)
+        .where(
+          and(
+            eq(orderTable.subscriptionNo, sub.subscriptionNo),
+            eq(orderTable.status, OrderStatus.PAID)
+          )
+        )
+        .limit(1);
+      order = row || null;
+    }
+  }
+
+  if (!order || !order.orderNo) {
+    console.log(`${TAG} order not found from session metadata or subscription`);
+    return;
+  }
+
+  // Idempotency: already refunded
+  if (order.status === OrderStatus.REFUNDED) {
+    console.log(`${TAG} order ${order.orderNo} already REFUNDED, skipping`);
+    return;
+  }
+
+  console.log(
+    `${TAG} order=${order.orderNo} user=${order.userId} amount=${order.paymentAmount || order.amount}`
+  );
+
+  // Atomic write: mark grant credit row(s) DELETED + flip order to REFUNDED.
+  const dbi = db();
+  await dbi.batch([
+    dbi
+      .update(creditTable)
+      .set({ status: CreditStatus.DELETED })
+      .where(
+        and(
+          eq(creditTable.orderNo, order.orderNo),
+          eq(creditTable.transactionType, CreditTransactionType.GRANT),
+          eq(creditTable.status, CreditStatus.ACTIVE)
+        )
+      ),
+    dbi
+      .update(orderTable)
+      .set({ status: OrderStatus.REFUNDED })
+      .where(eq(orderTable.orderNo, order.orderNo)),
+  ]);
+
+  // If associated subscription is still active, cancel it so renewal stops.
+  // Stripe typically also fires customer.subscription.deleted; this just
+  // ensures DB state is right even if that event is missed/delayed.
+  if (order.subscriptionNo) {
+    await updateSubscriptionBySubscriptionNo(order.subscriptionNo, {
+      status: SubscriptionStatus.CANCELED,
+      canceledAt: new Date(),
+    });
+  }
+
+  console.log(`${TAG} done order=${order.orderNo}`);
 }

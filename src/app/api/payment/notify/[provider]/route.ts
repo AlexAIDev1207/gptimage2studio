@@ -10,6 +10,7 @@ import { findSubscriptionByProviderSubscriptionId } from '@/shared/models/subscr
 import {
   getPaymentService,
   handleCheckoutSuccess,
+  handlePaymentRefund,
   handleSubscriptionCanceled,
   handleSubscriptionRenewal,
   handleSubscriptionUpdated,
@@ -224,6 +225,11 @@ export async function POST(
         subscription: existingSubscription,
         session,
       });
+    } else if (eventType === PaymentEventType.PAYMENT_REFUNDED) {
+      await handlePaymentRefund({ session });
+      console.log(
+        `${TAG} refund handled: order_no=${session.metadata?.order_no || '-'} sub=${session.subscriptionId || '-'} duration=${Date.now() - startedAt}ms`
+      );
     } else {
       console.log(`${TAG} unhandled_event: ${eventType}`);
     }

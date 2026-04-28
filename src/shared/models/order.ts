@@ -28,6 +28,7 @@ export enum OrderStatus {
   COMPLETED = 'completed', // checkout completed, but failed
   PAID = 'paid', // order paid success
   FAILED = 'failed', // order paid, but failed
+  REFUNDED = 'refunded', // order fully refunded by merchant or user
 }
 
 /**
