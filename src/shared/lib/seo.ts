@@ -74,6 +74,7 @@ export function getMetadata(
     }
 
     return {
+      metadataBase: new URL(envConfigs.app_url),
       title:
         passedMetadata.title ||
         translatedMetadata.title ||

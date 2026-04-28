@@ -67,6 +67,10 @@ src/config/db/migrations*
 # 本地调研数据
 research/
 
+# SEO 审计（一次性产物，不入库）
+/scripts/seo-audit.ts
+/seo-audit-report.md
+
 # Claude Code 本地状态
 .claude/scheduled_tasks.lock
 

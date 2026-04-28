@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 
+import { envConfigs } from '@/config';
 import HomePage from '@/shared/blocks/gptimage2studio/home-page';
 import { faqs } from '@/shared/blocks/gptimage2studio/content';
 
-const SITE_URL = 'https://gptimage2studio.com';
+const SITE_URL = envConfigs.app_url;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'GPT Image 2 Studio - AI Image Generator and Editor Online',
   description:
-    'Create and edit images with GPT Image 2 Studio. Explore GPT Image 2 and Nano Banana prompts for product photos, posters, ads, infographics, UI mockups, and text-rich visuals.',
+    'Create and edit images with GPT Image 2 Studio. Prompt-first AI for product photos, posters, ads, infographics, UI mockups, and text-rich visuals.',
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'GPT Image 2 Studio - AI Image Generator and Editor Online',

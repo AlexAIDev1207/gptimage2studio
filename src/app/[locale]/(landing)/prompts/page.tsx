@@ -1,11 +1,22 @@
+import { setRequestLocale } from 'next-intl/server';
+
 import PromptsListPageClient from '@/shared/blocks/gptimage2studio/prompts-list-page';
+import { getMetadata } from '@/shared/lib/seo';
 
-export const metadata = {
-  title: 'Prompts Library | GPT Image 2 Studio',
-  description:
-    'Browse the GPT Image 2 Studio prompt library — product photos, posters, social ads, UI mockups, infographics, and more. Click any card to see the full prompt and load it into the workbench.',
-};
+export const revalidate = 3600;
 
-export default function PromptsListPage() {
+export const generateMetadata = getMetadata({
+  metadataKey: 'pages.prompts.metadata',
+  canonicalUrl: '/prompts',
+});
+
+export default async function PromptsListPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return <PromptsListPageClient />;
 }

@@ -4,13 +4,14 @@ import path from 'node:path';
 import { MetadataRoute } from 'next';
 
 import { envConfigs } from '@/config';
-import { promptCards } from '@/shared/blocks/gptimage2studio/content';
 
 const STATIC_PATHS: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/pricing', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/prompts', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/blog', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
   { path: '/refund-policy', priority: 0.3, changeFrequency: 'yearly' },
 ];
 
@@ -41,14 +42,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const promptEntries: MetadataRoute.Sitemap = promptCards
-    .filter((card) => typeof card.href === 'string' && card.href.startsWith('/prompts/'))
-    .map((card) => ({
-      url: `${appUrl}${card.href}`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    }));
-
-  return [...staticEntries, ...blogEntries, ...promptEntries];
+  return [...staticEntries, ...blogEntries];
 }

@@ -50,6 +50,19 @@ export async function middleware(request: NextRequest) {
   intlResponse.headers.set('x-pathname', request.nextUrl.pathname);
   intlResponse.headers.set('x-url', request.url);
 
+  // 私域路径强制 noindex（覆盖 client component 无法 export metadata 的场景，例如 /chat/[id]）
+  if (
+    pathWithoutLocale.startsWith('/admin') ||
+    pathWithoutLocale.startsWith('/settings') ||
+    pathWithoutLocale.startsWith('/activity') ||
+    pathWithoutLocale.startsWith('/chat') ||
+    pathWithoutLocale.startsWith('/sign-') ||
+    pathWithoutLocale === '/no-permission' ||
+    pathWithoutLocale === '/verify-email'
+  ) {
+    intlResponse.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
+
   // Remove Set-Cookie from public pages to allow caching
   // We exclude admin, settings, activity, and auth pages from this behavior
   if (

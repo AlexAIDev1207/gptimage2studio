@@ -50,7 +50,6 @@ export const localeMessagesPaths = [
   'activity/chats',
   'pages/index',
   'pages/pricing',
-  'pages/showcases',
+  'pages/prompts',
   'pages/blog',
-  'pages/updates',
 ];
