@@ -18,29 +18,30 @@ export type Configs = Record<string, string>;
 export const CACHE_TAG_CONFIGS = 'configs';
 
 export async function saveConfigs(configs: Record<string, string>) {
-  const result = await db().transaction(async (tx: any) => {
-    const configEntries = Object.entries(configs);
-    const results: any[] = [];
+  const dbi = db();
+  const entries = Object.entries(configs);
+  if (entries.length === 0) return [];
 
-    for (const [name, configValue] of configEntries) {
-      const [upsertResult] = await tx
-        .insert(config)
-        .values({ name, value: configValue })
-        .onConflictDoUpdate({
-          target: config.name,
-          set: { value: configValue },
-        })
-        .returning();
+  // D1 doesn't support BEGIN/COMMIT transactions — use db.batch (atomic).
+  const stmts = entries.map(([name, configValue]) =>
+    dbi
+      .insert(config)
+      .values({ name, value: configValue })
+      .onConflictDoUpdate({
+        target: config.name,
+        set: { value: configValue },
+      })
+  );
 
-      results.push(upsertResult);
-    }
-
-    return results;
-  });
+  await dbi.batch(stmts);
 
   revalidateTag(CACHE_TAG_CONFIGS);
 
-  return result;
+  // Read back to keep return shape compatible with previous .returning() result.
+  const result = await dbi.select().from(config);
+  return result.filter((row: any) =>
+    entries.some(([name]) => name === row.name)
+  );
 }
 
 export async function addConfig(newConfig: NewConfig) {

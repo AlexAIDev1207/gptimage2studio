@@ -141,158 +141,160 @@ export async function getCreditsCount({
   return result?.count || 0;
 }
 
-// consume credits
-export async function consumeCredits({
+// Plan returned by planConsumeCredits — caller composes additional writes
+// and runs everything through db().batch([...]) to get D1-atomic execution.
+export type ConsumeCreditsPlan = {
+  consumeRecord: NewCredit;
+  // drizzle query builders ready to be passed into db.batch():
+  // [N×UPDATE credit SET remaining_credits, INSERT credit (consume row)]
+  statements: any[];
+};
+
+/**
+ * Read user's grant credits, plan FIFO consumption, build write statements.
+ * Does NOT execute any writes — returns statements + the consume record so
+ * the caller can compose them with other writes (e.g. ai_task insert) and
+ * run as one D1 batch (truly atomic).
+ *
+ * Throws if balance is insufficient.
+ */
+export async function planConsumeCredits({
   userId,
   credits,
   scene,
   description,
   metadata,
-  tx,
 }: {
   userId: string;
   credits: number; // credits to consume
   scene?: string;
   description?: string;
   metadata?: string;
-  tx?: any;
-}) {
+}): Promise<ConsumeCreditsPlan> {
   const currentTime = new Date();
+  const dbi = db();
 
-  // consume credits
-  const execute = async (tx: any) => {
-    // 1. check credits balance
-    const [creditsBalance] = await tx
-      .select({
-        total: sum(credit.remainingCredits),
-      })
-      .from(credit)
-      .where(
-        and(
-          eq(credit.userId, userId),
-          eq(credit.transactionType, CreditTransactionType.GRANT),
-          eq(credit.status, CreditStatus.ACTIVE),
-          gt(credit.remainingCredits, 0),
-          or(
-            isNull(credit.expiresAt), // Never expires
-            gt(credit.expiresAt, currentTime) // Not yet expired
-          )
+  // 1. check credits balance
+  const [creditsBalance] = await dbi
+    .select({ total: sum(credit.remainingCredits) })
+    .from(credit)
+    .where(
+      and(
+        eq(credit.userId, userId),
+        eq(credit.transactionType, CreditTransactionType.GRANT),
+        eq(credit.status, CreditStatus.ACTIVE),
+        gt(credit.remainingCredits, 0),
+        or(
+          isNull(credit.expiresAt),
+          gt(credit.expiresAt, currentTime)
         )
-      );
+      )
+    );
 
-    // balance is not enough
-    if (
-      !creditsBalance ||
-      !creditsBalance.total ||
-      parseInt(creditsBalance.total) < credits
-    ) {
-      throw new Error(
-        `Insufficient credits, ${creditsBalance?.total || 0} < ${credits}`
-      );
-    }
-
-    // 2. get available credits, FIFO queue with expiresAt, batch query
-    let remainingToConsume = credits; // remaining credits to consume
-
-    // only deal with 10000 credit grant records
-    let batchNo = 1; // batch no
-    const maxBatchNo = 10; // max batch no
-    const batchSize = 1000; // batch size
-    const consumedItems: any[] = [];
-
-    while (remainingToConsume > 0) {
-      // get batch credits
-      const batchCredits = await tx
-        .select()
-        .from(credit)
-        .where(
-          and(
-            eq(credit.userId, userId),
-            eq(credit.transactionType, CreditTransactionType.GRANT),
-            eq(credit.status, CreditStatus.ACTIVE),
-            gt(credit.remainingCredits, 0),
-            or(
-              isNull(credit.expiresAt), // Never expires
-              gt(credit.expiresAt, currentTime) // Not yet expired
-            )
-          )
-        )
-        .orderBy(
-          // FIFO queue: expired credits first, then by expiration date
-          // NULL values (never expires) will be ordered last
-          asc(credit.expiresAt)
-        )
-        .limit(batchSize) // batch size
-        .offset((batchNo - 1) * batchSize) // offset
-        .for('update'); // lock for update
-
-      // no more credits
-      if (batchCredits?.length === 0) {
-        break;
-      }
-
-      // consume credits for each item
-      for (const item of batchCredits) {
-        // no need to consume more
-        if (remainingToConsume <= 0) {
-          break;
-        }
-        const toConsume = Math.min(remainingToConsume, item.remainingCredits);
-
-        // update remaining credits
-        await tx
-          .update(credit)
-          .set({ remainingCredits: item.remainingCredits - toConsume })
-          .where(eq(credit.id, item.id));
-
-        // update consumed items
-        consumedItems.push({
-          creditId: item.id,
-          transactionNo: item.transactionNo,
-          expiresAt: item.expiresAt,
-          creditsToConsume: remainingToConsume,
-          creditsConsumed: toConsume,
-          creditsBefore: item.remainingCredits,
-          creditsAfter: item.remainingCredits - toConsume,
-          batchSize: batchSize,
-          batchNo: batchNo,
-        });
-
-        batchNo += 1;
-        remainingToConsume -= toConsume;
-
-        // if too many batches, throw error
-        if (batchNo > maxBatchNo) {
-          throw new Error(`Too many batches: ${batchNo} > ${maxBatchNo}`);
-        }
-      }
-    }
-
-    // 3. create consumed credit
-    const consumedCredit: NewCredit = {
-      id: getUuid(),
-      transactionNo: getSnowId(),
-      transactionType: CreditTransactionType.CONSUME,
-      transactionScene: scene,
-      userId: userId,
-      status: CreditStatus.ACTIVE,
-      description: description,
-      credits: -credits,
-      consumedDetail: JSON.stringify(consumedItems),
-      metadata: metadata,
-    };
-    await tx.insert(credit).values(consumedCredit);
-
-    return consumedCredit;
-  };
-
-  // use provided transaction
-  if (tx) {
-    return await execute(tx);
+  if (
+    !creditsBalance ||
+    !creditsBalance.total ||
+    parseInt(creditsBalance.total) < credits
+  ) {
+    throw new Error(
+      `Insufficient credits, ${creditsBalance?.total || 0} < ${credits}`
+    );
   }
 
-  // use default transaction
-  return await db().transaction(execute);
+  // 2. plan FIFO consumption (read only)
+  const maxRowsToScan = 10000;
+  const grants = await dbi
+    .select()
+    .from(credit)
+    .where(
+      and(
+        eq(credit.userId, userId),
+        eq(credit.transactionType, CreditTransactionType.GRANT),
+        eq(credit.status, CreditStatus.ACTIVE),
+        gt(credit.remainingCredits, 0),
+        or(
+          isNull(credit.expiresAt),
+          gt(credit.expiresAt, currentTime)
+        )
+      )
+    )
+    .orderBy(asc(credit.expiresAt))
+    .limit(maxRowsToScan);
+
+  let remainingToConsume = credits;
+  const consumedItems: any[] = [];
+  const updateStatements: any[] = [];
+
+  for (const item of grants) {
+    if (remainingToConsume <= 0) break;
+    const toConsume = Math.min(remainingToConsume, item.remainingCredits);
+
+    // build (do not execute) UPDATE statement
+    updateStatements.push(
+      dbi
+        .update(credit)
+        .set({ remainingCredits: item.remainingCredits - toConsume })
+        .where(eq(credit.id, item.id))
+    );
+
+    consumedItems.push({
+      creditId: item.id,
+      transactionNo: item.transactionNo,
+      expiresAt: item.expiresAt,
+      creditsToConsume: remainingToConsume,
+      creditsConsumed: toConsume,
+      creditsBefore: item.remainingCredits,
+      creditsAfter: item.remainingCredits - toConsume,
+    });
+
+    remainingToConsume -= toConsume;
+  }
+
+  if (remainingToConsume > 0) {
+    // shouldn't happen because balance check above passed, but be safe
+    throw new Error(
+      `Insufficient credits when planning consumption (still need ${remainingToConsume})`
+    );
+  }
+
+  // 3. build consume record (id pre-generated so callers can reference it)
+  const consumeRecord: NewCredit = {
+    id: getUuid(),
+    transactionNo: getSnowId(),
+    transactionType: CreditTransactionType.CONSUME,
+    transactionScene: scene,
+    userId,
+    status: CreditStatus.ACTIVE,
+    description,
+    credits: -credits,
+    consumedDetail: JSON.stringify(consumedItems),
+    metadata,
+  };
+
+  // 4. return plan with all writes ready to be batched
+  return {
+    consumeRecord,
+    statements: [
+      ...updateStatements,
+      dbi.insert(credit).values(consumeRecord),
+    ],
+  };
+}
+
+/**
+ * Atomically consume credits via D1 batch.
+ * Convenience wrapper for callers that don't need to compose with other writes.
+ */
+export async function consumeCredits(args: {
+  userId: string;
+  credits: number;
+  scene?: string;
+  description?: string;
+  metadata?: string;
+}): Promise<NewCredit> {
+  const plan = await planConsumeCredits(args);
+  await db().batch(plan.statements);
+  return plan.consumeRecord;
 }
 
 // get remaining credits

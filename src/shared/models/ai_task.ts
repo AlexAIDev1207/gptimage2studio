@@ -5,7 +5,7 @@ import { aiTask, credit } from '@/config/db/schema';
 import { AITaskStatus } from '@/extensions/ai';
 import { appendUserToResult, User } from '@/shared/models/user';
 
-import { consumeCredits, CreditStatus } from './credit';
+import { CreditStatus, planConsumeCredits } from './credit';
 
 export type AITask = typeof aiTask.$inferSelect & {
   user?: User;
@@ -14,39 +14,38 @@ export type NewAITask = typeof aiTask.$inferInsert;
 export type UpdateAITask = Partial<Omit<NewAITask, 'id' | 'createdAt'>>;
 
 export async function createAITask(newAITask: NewAITask) {
-  const result = await db().transaction(async (tx: any) => {
-    // 1. create task record
-    const [taskResult] = await tx.insert(aiTask).values(newAITask).returning();
+  const dbi = db();
 
-    if (newAITask.costCredits && newAITask.costCredits > 0) {
-      // 2. consume credits
-      const consumedCredit = await consumeCredits({
-        userId: newAITask.userId,
-        credits: newAITask.costCredits,
-        scene: newAITask.scene,
-        description: `generate ${newAITask.mediaType}`,
-        metadata: JSON.stringify({
-          type: 'ai-task',
-          mediaType: taskResult.mediaType,
-          taskId: taskResult.id,
-        }),
-        tx,
-      });
-
-      // 3. update task record with consumed credit id
-      if (consumedCredit && consumedCredit.id) {
-        taskResult.creditId = consumedCredit.id;
-        await tx
-          .update(aiTask)
-          .set({ creditId: consumedCredit.id })
-          .where(eq(aiTask.id, taskResult.id));
-      }
-    }
-
+  // No credits needed: simple single insert.
+  if (!newAITask.costCredits || newAITask.costCredits <= 0) {
+    const [taskResult] = await dbi.insert(aiTask).values(newAITask).returning();
     return taskResult;
+  }
+
+  // With credits: D1 doesn't support BEGIN/COMMIT — use db.batch() (atomic).
+  // 1. plan credit consumption (reads only)
+  const plan = await planConsumeCredits({
+    userId: newAITask.userId,
+    credits: newAITask.costCredits,
+    scene: newAITask.scene,
+    description: `generate ${newAITask.mediaType}`,
+    metadata: JSON.stringify({
+      type: 'ai-task',
+      mediaType: newAITask.mediaType,
+      taskId: newAITask.id,
+    }),
   });
 
-  return result;
+  // 2. ai_task references the consume credit row via creditId (set upfront)
+  const taskWithCreditId = { ...newAITask, creditId: plan.consumeRecord.id };
+
+  // 3. atomically execute: credit UPDATEs + consume INSERT + ai_task INSERT
+  await dbi.batch([
+    ...plan.statements,
+    dbi.insert(aiTask).values(taskWithCreditId),
+  ]);
+
+  return taskWithCreditId;
 }
 
 export async function findAITaskById(id: string) {
@@ -55,53 +54,60 @@ export async function findAITaskById(id: string) {
 }
 
 export async function updateAITaskById(id: string, updateAITask: UpdateAITask) {
-  const result = await db().transaction(async (tx: any) => {
-    // task failed, Revoke credit consumption record
-    if (updateAITask.status === AITaskStatus.FAILED && updateAITask.creditId) {
-      // get consumed credit record
-      const [consumedCredit] = await tx
-        .select()
-        .from(credit)
-        .where(eq(credit.id, updateAITask.creditId));
-      if (consumedCredit && consumedCredit.status === CreditStatus.ACTIVE) {
-        const consumedItems = JSON.parse(consumedCredit.consumedDetail || '[]');
+  const dbi = db();
 
-        // console.log('consumedItems', consumedItems);
-
-        // add back consumed credits
-        await Promise.all(
-          consumedItems.map((item: any) => {
-            if (item && item.creditId && item.creditsConsumed > 0) {
-              return tx
-                .update(credit)
-                .set({
-                  remainingCredits: sql`${credit.remainingCredits} + ${item.creditsConsumed}`,
-                })
-                .where(eq(credit.id, item.creditId));
-            }
-          })
-        );
-
-        // delete consumed credit record
-        await tx
-          .update(credit)
-          .set({
-            status: CreditStatus.DELETED,
-          })
-          .where(eq(credit.id, updateAITask.creditId));
-      }
-    }
-
-    // update task
-    const [result] = await tx
+  // Simple update path: no credit refund needed.
+  if (updateAITask.status !== AITaskStatus.FAILED || !updateAITask.creditId) {
+    const [result] = await dbi
       .update(aiTask)
       .set(updateAITask)
       .where(eq(aiTask.id, id))
       .returning();
-
     return result;
-  });
+  }
 
+  // Failed path: refund consumed credits and update ai_task in one D1 batch
+  // (atomic). 1. read consume record (read-only — outside batch).
+  const [consumedCredit] = await dbi
+    .select()
+    .from(credit)
+    .where(eq(credit.id, updateAITask.creditId));
+
+  // No active consume record to refund — just update task.
+  if (!consumedCredit || consumedCredit.status !== CreditStatus.ACTIVE) {
+    const [result] = await dbi
+      .update(aiTask)
+      .set(updateAITask)
+      .where(eq(aiTask.id, id))
+      .returning();
+    return result;
+  }
+
+  // 2. build refund statements
+  const consumedItems: any[] = JSON.parse(consumedCredit.consumedDetail || '[]');
+  const refundStatements = consumedItems
+    .filter((item: any) => item && item.creditId && item.creditsConsumed > 0)
+    .map((item: any) =>
+      dbi
+        .update(credit)
+        .set({
+          remainingCredits: sql`${credit.remainingCredits} + ${item.creditsConsumed}`,
+        })
+        .where(eq(credit.id, item.creditId))
+    );
+
+  // 3. atomic batch: refunds + mark consume as deleted + update ai_task
+  await dbi.batch([
+    ...refundStatements,
+    dbi
+      .update(credit)
+      .set({ status: CreditStatus.DELETED })
+      .where(eq(credit.id, updateAITask.creditId)),
+    dbi.update(aiTask).set(updateAITask).where(eq(aiTask.id, id)),
+  ]);
+
+  // 4. read back updated task (D1 batch doesn't return .returning() values cleanly)
+  const [result] = await dbi.select().from(aiTask).where(eq(aiTask.id, id));
   return result;
 }
 

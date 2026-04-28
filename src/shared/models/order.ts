@@ -223,75 +223,58 @@ export async function updateOrderInTransaction({
     return updateOrderByOrderNo(orderNo, updateOrder);
   }
 
-  // need transaction
-  const result = await db().transaction(async (tx: any) => {
-    let result: any = {
-      order: null,
-      subscription: null,
-      credit: null,
-    };
+  // D1 doesn't support BEGIN/COMMIT — use db.batch() (atomic).
+  const dbi = db();
+  const stmts: any[] = [];
+  const finalResult: any = { order: null, subscription: null, credit: null };
 
-    // deal with subscription
-    if (newSubscription) {
-      let existingSubscription: any = null;
-      if (newSubscription.subscriptionId && newSubscription.paymentProvider) {
-        // not create subscription with same subscription id and payment provider
-        const [existingSubscriptionResult] = await tx
-          .select()
-          .from(subscription)
-          .where(
-            and(
-              eq(subscription.subscriptionId, newSubscription.subscriptionId),
-              eq(subscription.paymentProvider, newSubscription.paymentProvider)
-            )
-          );
+  // 1. read existing subscription / credit (idempotency)
+  let existingSubscription: any = null;
+  if (newSubscription?.subscriptionId && newSubscription.paymentProvider) {
+    const [row] = await dbi
+      .select()
+      .from(subscription)
+      .where(
+        and(
+          eq(subscription.subscriptionId, newSubscription.subscriptionId),
+          eq(subscription.paymentProvider, newSubscription.paymentProvider)
+        )
+      );
+    existingSubscription = row;
+  }
 
-        existingSubscription = existingSubscriptionResult;
-      }
+  let existingCredit: any = null;
+  if (newCredit) {
+    const [row] = await dbi
+      .select()
+      .from(credit)
+      .where(eq(credit.orderNo, orderNo));
+    existingCredit = row;
+  }
 
-      if (!existingSubscription) {
-        // create subscription
-        const [subscriptionResult] = await tx
-          .insert(subscription)
-          .values(newSubscription)
-          .returning();
+  // 2. compose batch writes
+  if (newSubscription && !existingSubscription) {
+    stmts.push(dbi.insert(subscription).values(newSubscription));
+    finalResult.subscription = newSubscription;
+  } else if (existingSubscription) {
+    finalResult.subscription = existingSubscription;
+  }
 
-        existingSubscription = subscriptionResult;
-      }
+  if (newCredit && !existingCredit) {
+    stmts.push(dbi.insert(credit).values(newCredit));
+    finalResult.credit = newCredit;
+  } else if (existingCredit) {
+    finalResult.credit = existingCredit;
+  }
 
-      result.subscription = existingSubscription;
-    }
-
-    // deal with credit
-    if (newCredit) {
-      // not create credit with same order no
-      let [existingCredit] = await tx
-        .select()
-        .from(credit)
-        .where(eq(credit.orderNo, orderNo));
-
-      if (!existingCredit) {
-        // create credit
-        const [creditResult] = await tx
-          .insert(credit)
-          .values(newCredit)
-          .returning();
-
-        existingCredit = creditResult;
-      }
-
-      result.credit = existingCredit;
-    }
-
-    // update order with optimistic lock
-    // only update if status is not PAID (prevent duplicate processing)
-    const [orderResult] = await tx
+  // update order with optimistic lock
+  stmts.push(
+    dbi
       .update(order)
       .set(updateOrder)
       .where(
         and(
           eq(order.orderNo, orderNo),
-          // Only update if not already paid (optimistic lock)
           updateOrder.status === OrderStatus.PAID
             ? or(
                 eq(order.status, OrderStatus.CREATED),
@@ -300,20 +283,29 @@ export async function updateOrderInTransaction({
             : undefined
         )
       )
-      .returning();
+  );
 
-    // If no order was updated and we're trying to set status to PAID,
-    // it means the order was already processed
-    if (!orderResult && updateOrder.status === OrderStatus.PAID) {
-      console.log(`Order ${orderNo} already paid or not in CREATED status, skipping update`);
-    }
+  // 3. atomic execution
+  await dbi.batch(stmts);
 
-    result.order = orderResult;
+  // 4. read back order (D1 batch has no .returning())
+  const [orderRow] = await dbi
+    .select()
+    .from(order)
+    .where(eq(order.orderNo, orderNo));
+  finalResult.order = orderRow;
 
-    return result;
-  });
+  if (
+    updateOrder.status === OrderStatus.PAID &&
+    orderRow &&
+    orderRow.status !== OrderStatus.PAID
+  ) {
+    console.log(
+      `Order ${orderNo} optimistic lock missed: status=${orderRow.status}`
+    );
+  }
 
-  return result;
+  return finalResult;
 }
 
 export async function updateSubscriptionInTransaction({
@@ -339,82 +331,71 @@ export async function updateSubscriptionInTransaction({
     );
   }
 
-  // need transaction
-  const result = await db().transaction(async (tx: any) => {
-    let result: any = {
-      order: null,
-      subscription: null,
-      credit: null,
-    };
+  // D1 doesn't support BEGIN/COMMIT — use db.batch() (atomic).
+  const dbi = db();
+  const stmts: any[] = [];
+  const finalResult: any = { order: null, subscription: null, credit: null };
 
-    // deal with order
-    if (newOrder) {
-      let existingOrder: any = null;
-      if (newOrder.transactionId && newOrder.paymentProvider) {
-        // not create order with same payment transaction id and payment provider
-        const [existingOrderResult] = await tx
-          .select()
-          .from(order)
-          .where(
-            and(
-              eq(order.transactionId, newOrder.transactionId),
-              eq(order.paymentProvider, newOrder.paymentProvider)
-            )
-          );
+  // 1. read existing order (idempotency on transaction id)
+  let existingOrder: any = null;
+  if (newOrder?.transactionId && newOrder.paymentProvider) {
+    const [row] = await dbi
+      .select()
+      .from(order)
+      .where(
+        and(
+          eq(order.transactionId, newOrder.transactionId),
+          eq(order.paymentProvider, newOrder.paymentProvider)
+        )
+      );
+    existingOrder = row;
+  }
 
-        existingOrder = existingOrderResult;
-      }
-
-      if (!existingOrder) {
-        // create order
-        const [orderResult] = await tx
-          .insert(order)
-          .values(newOrder)
-          .returning();
-
-        existingOrder = orderResult;
-      }
-
-      result.order = existingOrder;
+  // 2. read existing credit (using order_no — either from existing or new)
+  let existingCredit: any = null;
+  if (newCredit) {
+    const checkOrderNo = existingOrder?.orderNo || newOrder?.orderNo;
+    if (checkOrderNo) {
+      const [row] = await dbi
+        .select()
+        .from(credit)
+        .where(eq(credit.orderNo, checkOrderNo));
+      existingCredit = row;
     }
+  }
 
-    // deal with credit
-    if (newCredit) {
-      let existingCredit: any = null;
-      if (result.order && result.order.orderNo) {
-        // not create credit with same order no
-        const [existingCreditResult] = await tx
-          .select()
-          .from(credit)
-          .where(eq(credit.orderNo, result.order.orderNo));
+  // 3. compose batch writes
+  if (newOrder && !existingOrder) {
+    stmts.push(dbi.insert(order).values(newOrder));
+    finalResult.order = newOrder;
+  } else if (existingOrder) {
+    finalResult.order = existingOrder;
+  }
 
-        existingCredit = existingCreditResult;
-      }
+  if (newCredit && !existingCredit) {
+    stmts.push(dbi.insert(credit).values(newCredit));
+    finalResult.credit = newCredit;
+  } else if (existingCredit) {
+    finalResult.credit = existingCredit;
+  }
 
-      if (!existingCredit) {
-        // create credit
-        const [creditResult] = await tx
-          .insert(credit)
-          .values(newCredit)
-          .returning();
-
-        existingCredit = creditResult;
-      }
-
-      result.credit = existingCredit;
-    }
-
-    // update subscription
-    const [subscriptionResult] = await tx
+  // update subscription
+  stmts.push(
+    dbi
       .update(subscription)
       .set(updateSubscription)
       .where(eq(subscription.subscriptionNo, subscriptionNo))
-      .returning();
+  );
 
-    result.subscription = subscriptionResult;
+  // 4. atomic execution
+  await dbi.batch(stmts);
 
-    return result;
-  });
+  // 5. read back subscription
+  const [subRow] = await dbi
+    .select()
+    .from(subscription)
+    .where(eq(subscription.subscriptionNo, subscriptionNo));
+  finalResult.subscription = subRow;
 
-  return result;
+  return finalResult;
 }
