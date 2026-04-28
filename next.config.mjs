@@ -67,6 +67,16 @@ const nextConfig = {
     ...(process.env.VERCEL ? {} : { mdxRs: true }),
   },
   reactCompiler: true,
+  // 当 DATABASE_PROVIDER=d1 时不加载 libsql/postgres/mysql；标记为 external 避免 OpenNext bundle
+  serverExternalPackages: [
+    '@libsql/client',
+    '@libsql/core',
+    '@libsql/hrana-client',
+    '@libsql/isomorphic-fetch',
+    '@libsql/isomorphic-ws',
+    'postgres',
+    'mysql2',
+  ],
 };
 
 export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));
