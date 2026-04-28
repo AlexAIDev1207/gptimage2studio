@@ -148,12 +148,12 @@ function withSqliteCompat<T extends object>(dbInstance: T): T {
 
   const proxied = new Proxy(dbInstance, {
     get(target, prop, receiver) {
-      // Wrap transaction callback so `tx` is also shimmed.
+      // D1 不支持 BEGIN/COMMIT 风格的 transaction，drizzle 在 D1 上调
+      // db.transaction(fn) 会发 `BEGIN` 然后 D1 拒绝。
+      // 折中：直接用 db 当 tx 跑 callback，牺牲原子性换可用性。
+      // 后续如需真原子性，用 D1 的 db.batch([stmt, ...]) API 重写关键路径。
       if (prop === 'transaction') {
-        const original = Reflect.get(target, prop, receiver);
-        if (typeof original !== 'function') return original;
-        return (fn: any, ...rest: any[]) =>
-          original.call(target, (tx: any) => fn(withSqliteCompat(tx)), ...rest);
+        return async (fn: any) => fn(receiver);
       }
 
       const value = Reflect.get(target, prop, receiver);
