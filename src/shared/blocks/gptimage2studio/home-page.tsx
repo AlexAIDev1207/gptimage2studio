@@ -3,28 +3,22 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import {
   ArrowRight,
   Check,
   ChevronDown,
-  Copy,
   Crown,
   Flame,
   Gift,
-  Image as ImageIcon,
   Layers,
   Layout as LayoutIcon,
-  Menu,
   Sparkles,
   Wand2,
   X,
   Zap,
 } from 'lucide-react';
 import { toast } from 'sonner';
-
-import { SignUser } from '@/shared/blocks/sign/sign-user';
-import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
-import { useAppContext } from '@/shared/contexts/app';
 
 import {
   benefits,
@@ -37,11 +31,9 @@ import {
   editDemos,
   faqs,
   finalCta,
-  footer,
   hero,
   howToUse,
   howToUseSubtitle,
-  nav,
   pricingPlansByBilling,
   promoBar,
   promptCards,
@@ -58,7 +50,10 @@ import {
   type PromptCard,
   type Testimonial,
 } from './content';
+import { PromptCardsMasonry } from './prompt-cards-masonry';
 import { PromptDetailDialog } from './prompt-detail-dialog';
+import { GptImageStudioSiteFooter } from './site-footer';
+import { GptImageStudioSiteHeader } from './site-header';
 import Workbench from './workbench';
 
 type Variant = 'A' | 'B';
@@ -104,10 +99,10 @@ const pricingBillingOptions: {
 
 export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const palette = palettes[variant];
-  const { user, setIsShowSignModal } = useAppContext();
+  const { resolvedTheme } = useTheme();
+  const isLightTheme = resolvedTheme === 'light';
 
   const [promoOpen, setPromoOpen] = useState(true);
-  const [navOpen, setNavOpen] = useState(false);
 
   const [activeEditDemo, setActiveEditDemo] = useState(0);
 
@@ -192,100 +187,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         </div>
       )}
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-[#09090B]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-          {/* Left: logo + nav */}
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2">
-              <span
-                className={`inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br ${palette.accent} text-zinc-950 shadow-lg shadow-cyan-500/20`}
-              >
-                <Sparkles className="size-4" />
-              </span>
-              <span className="text-sm font-semibold text-white sm:text-base">
-                GPT Image 2 Studio
-              </span>
-            </Link>
-            <nav className="hidden items-center gap-6 lg:flex">
-              {nav.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-sm text-zinc-400 transition hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-          {/* Right: theme toggle + sign in */}
-          <div className="flex items-center gap-2">
-            <AnimatedThemeToggler className="inline-flex size-9 items-center justify-center rounded-md text-zinc-400 transition hover:bg-white/10 hover:text-white [&_svg]:size-4" />
-            {user ? (
-              <>
-                <Link
-                  href="/pricing"
-                  className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
-                >
-                  Top Up Credits
-                </Link>
-                <SignUser
-                  userNav={{
-                    show_name: true,
-                    show_credits: true,
-                    show_sign_out: true,
-                    items: [],
-                  }}
-                />
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsShowSignModal(true)}
-                className="hidden rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:inline-flex"
-              >
-                Get 20 Free Credits
-              </button>
-            )}
-            <button
-              className="rounded-md p-2 text-zinc-300 hover:bg-white/10 lg:hidden"
-              aria-label="Toggle navigation"
-              onClick={() => setNavOpen((v) => !v)}
-            >
-              {navOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
-        </div>
-        {navOpen && (
-          <div className="border-t border-white/5 lg:hidden">
-            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
-              {nav.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setNavOpen(false)}
-                  className="rounded-md px-2 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ))}
-              {!user && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setNavOpen(false);
-                    setIsShowSignModal(true);
-                  }}
-                  className="mt-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:hidden"
-                >
-                  Sign In
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-      </header>
+      <GptImageStudioSiteHeader />
 
       {/* Hero + Workbench (centered, single column to match nanobanana) */}
       <section className="relative overflow-hidden border-b border-white/5">
@@ -386,67 +288,13 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
             </p>
           </div>
 
-          <div className="mt-10 columns-1 gap-3 [column-fill:_balance] sm:columns-2 lg:columns-3 xl:columns-4">
-            {promptCards.map((card) => {
-              const key = `card-${card.title}`;
-              return (
-                <figure
-                  key={card.title}
-                  className="group relative mb-3 inline-block w-full break-inside-avoid overflow-hidden rounded-lg bg-[#101218] transition"
-                >
-                  <Link
-                    href={card.href}
-                    aria-label={`Open prompt: ${card.title}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      setSelectedPrompt(card);
-                    }}
-                    className="block outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                  >
-                    <div className="relative w-full">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        width={800}
-                        height={1000}
-                        sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        loading="lazy"
-                        className="h-auto w-full object-cover transition-transform duration-300 group-focus-within:scale-[1.02] group-hover:scale-[1.02]"
-                      />
-                    </div>
-
-                    <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/55 to-black/5 p-4 opacity-0 transition-opacity duration-200 group-focus-within:opacity-100 group-hover:opacity-100">
-                      <figcaption className="translate-y-2 transition-transform duration-200 group-focus-within:translate-y-0 group-hover:translate-y-0">
-                        <p className="line-clamp-1 text-sm font-semibold text-white">
-                          {card.title}
-                        </p>
-                        <p className="mt-2 line-clamp-5 text-sm leading-5 text-zinc-100">
-                          {card.fullPrompt}
-                        </p>
-                      </figcaption>
-                    </div>
-                  </Link>
-
-                  <button
-                    type="button"
-                    aria-label={`Copy prompt: ${card.title}`}
-                    title="Copy prompt"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleCopy(card.fullPrompt, key);
-                    }}
-                    className="absolute top-2 right-2 z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-black/70 text-white opacity-0 shadow-sm backdrop-blur transition group-focus-within:opacity-100 group-hover:opacity-100 group-focus:opacity-100 hover:bg-black/85 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
-                  >
-                    {copied === key ? (
-                      <Check className="size-4" aria-hidden="true" />
-                    ) : (
-                      <Copy className="size-4" aria-hidden="true" />
-                    )}
-                  </button>
-                </figure>
-              );
-            })}
-          </div>
+          <PromptCardsMasonry
+            cards={promptCards}
+            copied={copied}
+            copyKeyPrefix="home-prompt"
+            onOpen={setSelectedPrompt}
+            onCopy={handleCopy}
+          />
 
           <div className="mt-10 flex justify-center">
             <Link
@@ -817,19 +665,38 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="border-b border-white/5 bg-[#0B0D12]">
+      <section
+        id="pricing"
+        className={
+          isLightTheme
+            ? 'border-b border-slate-200/70 bg-[linear-gradient(180deg,#ffffff_0%,#f8fffd_40%,#ecfdf5_100%)]'
+            : 'border-b border-white/5 bg-[#0B0D12]'
+        }
+      >
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2
+              className={
+                isLightTheme
+                  ? 'mt-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl'
+                  : 'mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl'
+              }
+            >
               GPT Image 2 Studio pricing
             </h2>
-            <p className="mt-4 text-zinc-400">
+            <p className={isLightTheme ? 'mt-4 text-slate-600' : 'mt-4 text-zinc-400'}>
               Choose the perfect plan for your AI image creation needs.
             </p>
           </div>
 
-          <div className="mx-auto mt-8 flex w-full max-w-2xl rounded-xl border border-emerald-400/20 bg-[#081915]/80 p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
+          <div
+            className={
+              isLightTheme
+                ? 'mx-auto mt-8 flex w-full max-w-2xl rounded-[20px] border border-transparent bg-[linear-gradient(rgba(255,255,255,0.94),rgba(255,255,255,0.94))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.30),rgba(34,211,238,0.35),rgba(148,163,184,0.30))_border-box] p-1.5 shadow-[0_18px_55px_-40px_rgba(14,165,233,0.28)]'
+                : 'mx-auto mt-8 flex w-full max-w-2xl rounded-xl border border-emerald-400/20 bg-[#081915]/80 p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]'
+            }
+          >
             {pricingBillingOptions.map((option) => (
               <button
                 key={option.value}
@@ -839,7 +706,9 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 className={`relative flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg px-2 text-sm font-bold transition focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:outline-none md:text-base ${
                   pricingBilling === option.value
                     ? `bg-gradient-to-r ${palette.accent} text-white shadow-lg shadow-cyan-950/40`
-                    : 'text-zinc-400 hover:bg-white/5 hover:text-white'
+                    : isLightTheme
+                      ? 'text-slate-500 hover:bg-slate-100 hover:text-slate-950'
+                      : 'text-zinc-400 hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <span>{option.label}</span>
@@ -854,7 +723,13 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
           </div>
 
           <div className="mt-8 text-center">
-            <span className="inline-flex items-center gap-2 text-base font-semibold text-white">
+            <span
+              className={
+                isLightTheme
+                  ? 'inline-flex items-center gap-2 text-base font-semibold text-slate-900'
+                  : 'inline-flex items-center gap-2 text-base font-semibold text-white'
+              }
+            >
               <span className="size-1.5 rounded-full bg-emerald-400" />
               Cancel anytime
             </span>
@@ -866,8 +741,8 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 key={p.name}
                 className={`relative flex min-h-[520px] flex-col rounded-2xl border p-6 transition ${
                   p.featured
-                    ? 'border-emerald-500/50 bg-[#0b2517] shadow-2xl shadow-emerald-950/25 ring-1 ring-emerald-400/25'
-                    : 'border-white/10 bg-[#090e1a] hover:border-white/20'
+                    ? 'border-transparent bg-[linear-gradient(rgba(248,250,252,0.98),rgba(236,253,245,0.96))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.68),rgba(34,211,238,0.46),rgba(148,163,184,0.34))_border-box] shadow-[0_30px_70px_-40px_rgba(16,185,129,0.35)] ring-1 ring-emerald-300/35 dark:border-emerald-500/50 dark:bg-[#0b2517] dark:shadow-2xl dark:shadow-emerald-950/25 dark:ring-emerald-400/25'
+                    : 'border-slate-200/80 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.28)] hover:border-emerald-200 dark:border-white/10 dark:bg-[#090e1a] dark:hover:border-white/20'
                 }`}
               >
                 {p.featured && (
@@ -883,7 +758,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     className={`inline-flex size-12 shrink-0 items-center justify-center rounded-xl ${
                       p.featured
                         ? 'bg-gradient-to-br from-emerald-500 to-cyan-500 text-white'
-                        : 'bg-emerald-500/15 text-emerald-400'
+                        : 'bg-emerald-500/12 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400'
                     }`}
                   >
                     {p.featured ? (
@@ -892,13 +767,15 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                       <Zap className="size-6" />
                     )}
                   </span>
-                  <h3 className="text-xl font-black text-white">{p.name}</h3>
+                  <h3 className="text-xl font-black text-slate-950 dark:text-white">
+                    {p.name}
+                  </h3>
                 </div>
 
                 <div className="mt-8">
                   <div className="flex flex-wrap items-baseline gap-2">
                     {p.originalPrice && (
-                      <span className="text-base font-black text-zinc-500 line-through">
+                      <span className="text-base font-black text-slate-400 line-through dark:text-zinc-500">
                         {p.originalPrice}
                       </span>
                     )}
@@ -906,19 +783,19 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                       className={`text-4xl font-black tracking-tight ${
                         p.featured
                           ? `bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`
-                          : 'text-white'
+                          : 'text-slate-950 dark:text-white'
                       }`}
                     >
                       {p.price}
                     </span>
-                    <span className="text-base font-bold text-zinc-400">
+                    <span className="text-base font-bold text-slate-500 dark:text-zinc-400">
                       {p.unit}
                     </span>
                   </div>
                   {(p.annualPrice || p.discountLabel) && (
                     <div className="mt-4 flex flex-wrap gap-2">
                       {p.annualPrice && (
-                        <span className="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-black text-emerald-300">
+                        <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-black text-emerald-700 dark:text-emerald-300">
                           {p.annualPrice}
                         </span>
                       )}
@@ -930,44 +807,43 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   )}
                 </div>
               )}
-                  <p className="mt-5 text-sm font-semibold text-zinc-400 underline decoration-dotted underline-offset-4">
+                  <p className="mt-5 text-sm font-semibold text-slate-500 underline decoration-dotted underline-offset-4 dark:text-zinc-400">
                     {p.creditValue}
                   </p>
                 </div>
-                <p className="mt-5 min-h-16 text-sm leading-6 text-zinc-400">
+                <p className="mt-5 min-h-16 text-sm leading-6 text-slate-600 dark:text-zinc-400">
                   {p.description}
                 </p>
-                <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.04] p-4">
-                  <p className={`text-sm font-black ${palette.badgeText}`}>
-                    {p.credits}
-                  </p>
-                  <p className="mt-1 text-xs font-medium text-zinc-500">
-                    {p.billingNote}
-                  </p>
-                </div>
                 <Link
                   href="/pricing"
                   className={`mt-6 inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-black transition ${
                     p.featured
                       ? `bg-gradient-to-r ${palette.accent} text-white hover:brightness-110`
-                      : 'border border-zinc-300/30 bg-zinc-100 text-zinc-950 hover:bg-white'
+                      : 'border border-emerald-200 bg-white text-emerald-700 shadow-[0_18px_40px_-32px_rgba(16,185,129,0.18)] hover:border-cyan-300 hover:bg-emerald-50 dark:border-zinc-300/30 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white'
                   }`}
                 >
                   {p.cta}
                   <Zap className="size-4 fill-current" />
                 </Link>
-
-                <ul className="mt-6 space-y-3 text-sm">
-                  {p.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-2 text-zinc-300"
-                    >
-                      <Check className="mt-0.5 size-4 shrink-0 text-emerald-300" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-8 rounded-2xl border border-slate-200/80 bg-slate-50/85 p-5 dark:border-white/10 dark:bg-black/20">
+                  <p className="text-sm font-black text-slate-950 dark:text-white">
+                    {p.credits}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-slate-500 dark:text-zinc-500">
+                    {p.billingNote}
+                  </p>
+                  <ul className="mt-5 space-y-3 text-sm">
+                    {p.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-start gap-3 text-slate-700 dark:text-zinc-300"
+                      >
+                        <Check className="mt-0.5 size-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -1004,7 +880,10 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                 className="relative flex w-[300px] flex-shrink-0 flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821] sm:w-[360px]"
               >
                 <div className="flex items-center justify-between">
-                  <SocialLogo source={t.source} className="size-5 text-white" />
+                  <SocialLogo
+                    source={t.source}
+                    className="size-5 text-white"
+                  />
                 </div>
                 <blockquote className="text-sm leading-relaxed text-zinc-200">
                   &ldquo;{t.quote}&rdquo;
@@ -1133,43 +1012,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#09090B]">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8">
-          <div className="grid gap-10 lg:grid-cols-[2fr_1fr_1fr]">
-            <div className="max-w-md">
-              <div className="flex items-center gap-2">
-                <span
-                  className={`inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br ${palette.accent} text-zinc-950`}
-                >
-                  <Sparkles className="size-4" />
-                </span>
-                <span className="text-base font-semibold text-white">
-                  {footer.brand}
-                </span>
-              </div>
-              <p className="mt-4 text-sm text-zinc-400">{footer.description}</p>
-              <p className="mt-4 text-sm text-zinc-500">
-                Contact:{' '}
-                <a
-                  href={`mailto:${footer.contact}`}
-                  className="text-zinc-300 hover:text-white"
-                >
-                  {footer.contact}
-                </a>
-              </p>
-            </div>
-            <FooterColumn title="Product" items={footer.product} />
-            <FooterColumn title="Legal" items={footer.legal} />
-          </div>
-          <div className="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-            <span>{footer.disclaimer}</span>
-            <span>
-              © {new Date().getFullYear()} {footer.brand}
-            </span>
-          </div>
-        </div>
-      </footer>
+      <GptImageStudioSiteFooter />
     </div>
   );
 }
@@ -1188,38 +1031,6 @@ function SectionEyebrow({
       <span className="size-1 rounded-full bg-current" />
       {children}
     </span>
-  );
-}
-
-const footerLinkHrefs: Record<string, string> = {
-  Generator: '/#workbench',
-  Prompts: '/prompts',
-  Blog: '/blog',
-  Pricing: '/pricing',
-  'Privacy Policy': '/privacy-policy',
-  'Terms of Service': '/terms-of-service',
-  'Refund Policy': '/refund-policy',
-};
-
-function FooterColumn({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <h4 className="text-xs font-semibold tracking-wider text-zinc-300 uppercase">
-        {title}
-      </h4>
-      <ul className="mt-3 space-y-2 text-sm">
-        {items.map((item) => (
-          <li key={item}>
-            <a
-              href={footerLinkHrefs[item] ?? '/'}
-              className="text-zinc-400 transition hover:text-white"
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
