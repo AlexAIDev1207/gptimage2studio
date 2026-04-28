@@ -51,7 +51,7 @@ export function GptImageStudioSiteFooter() {
               </span>
             </div>
             <p className="mt-4 text-sm text-zinc-400">{footer.description}</p>
-            <p className="mt-4 text-sm text-zinc-500">
+            <p className="mt-4 text-sm text-zinc-400">
               Contact:{' '}
               <a
                 href={`mailto:${footer.contact}`}
@@ -64,7 +64,7 @@ export function GptImageStudioSiteFooter() {
           <FooterColumn title="Product" items={footer.product} />
           <FooterColumn title="Legal" items={footer.legal} />
         </div>
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
           <span>{footer.disclaimer}</span>
           <span>
             © {new Date().getFullYear()} {footer.brand}

@@ -322,7 +322,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
                       <div className="flex h-14 w-16 items-center justify-center rounded-xl border border-amber-300/40 bg-amber-50 font-mono text-2xl font-black text-amber-500 shadow-[0_0_45px_rgba(250,204,21,0.10)] tabular-nums sm:h-16 sm:w-20 sm:text-3xl dark:border-amber-400/20 dark:bg-white/[0.04] dark:text-[#ffd000]">
                         {String(value).padStart(2, '0')}
                       </div>
-                      <div className="mt-3 text-center text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-zinc-500">
+                      <div className="mt-3 text-center text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-zinc-400">
                         {label}
                       </div>
                     </div>
@@ -522,7 +522,7 @@ function PlanCard({
       <div className="mt-8">
         <div className="flex flex-wrap items-baseline gap-2">
           {plan.originalPrice && (
-            <span className="text-base font-black text-slate-400 line-through dark:text-zinc-500">
+            <span className="text-base font-black text-slate-400 line-through dark:text-zinc-400">
               {plan.originalPrice}
             </span>
           )}
@@ -594,7 +594,7 @@ function PlanCard({
         <div className="text-sm font-black text-slate-950 dark:text-white">
           {plan.credits}
         </div>
-        <div className="mt-1 text-sm font-medium text-slate-500 dark:text-zinc-500">
+        <div className="mt-1 text-sm font-medium text-slate-500 dark:text-zinc-400">
           {plan.billingNote}
         </div>
         <ul className="mt-5 space-y-3 text-sm">

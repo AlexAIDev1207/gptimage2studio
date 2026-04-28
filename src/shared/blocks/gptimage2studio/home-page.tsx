@@ -277,7 +277,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                   }`}
                 >
                   <div>
-                    <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
+                    <span className="text-[10px] font-semibold tracking-wider text-zinc-400 uppercase md:hidden">
                       Dimension
                     </span>
                     <p className="mt-1 font-semibold text-zinc-100 md:mt-0">
@@ -295,7 +295,7 @@ export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
                     </p>
                   </div>
                   <div>
-                    <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
+                    <span className="text-[10px] font-semibold tracking-wider text-zinc-400 uppercase md:hidden">
                       Nano Banana
                     </span>
                     <p className="mt-1 text-zinc-300 md:mt-0">

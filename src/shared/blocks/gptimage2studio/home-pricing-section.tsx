@@ -129,7 +129,7 @@ export function HomePricingSection({
               <div className="mt-8">
                 <div className="flex flex-wrap items-baseline gap-2">
                   {plan.originalPrice && (
-                    <span className="text-base font-black text-slate-400 line-through dark:text-zinc-500">
+                    <span className="text-base font-black text-slate-400 line-through dark:text-zinc-400">
                       {plan.originalPrice}
                     </span>
                   )}

@@ -71,7 +71,7 @@ export function LazyWorkbench({
         observer.disconnect();
       },
       {
-        rootMargin: '320px 0px',
+        rootMargin: '120px 0px',
       }
     );
 
@@ -84,7 +84,7 @@ export function LazyWorkbench({
   }, []);
 
   return (
-    <div ref={sentinelRef}>
+    <div>
       {!shouldLoad ? (
         <>
           <div className="mx-auto mt-10 max-w-4xl rounded-3xl border border-emerald-200/70 bg-gradient-to-br from-white via-emerald-50/70 to-cyan-50/70 p-6 text-left shadow-[0_32px_80px_-56px_rgba(16,185,129,0.35)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(10,12,16,0.96)_0%,rgba(11,21,18,0.98)_100%)] dark:shadow-none md:p-8">
@@ -114,6 +114,7 @@ export function LazyWorkbench({
             </div>
           </div>
           <WorkbenchSkeleton />
+          <div ref={sentinelRef} aria-hidden="true" className="h-px" />
         </>
       ) : (
         <Workbench variant={variant === 'B' ? 'studio' : 'banana'} />

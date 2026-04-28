@@ -140,7 +140,7 @@ export function PromptDetailDialog({
               className={
                 isLightTheme
                   ? 'text-sm font-bold tracking-[0.2em] text-slate-500 uppercase'
-                  : 'text-sm font-bold tracking-[0.2em] text-zinc-500 uppercase'
+                  : 'text-sm font-bold tracking-[0.2em] text-zinc-400 uppercase'
               }
             >
               Prompt
