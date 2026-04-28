@@ -9,16 +9,12 @@ import {
   Flame,
   Gift,
   Loader2,
-  Menu,
-  Sparkles,
-  Wand2,
   X,
   Zap,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { PaymentModal } from '@/shared/blocks/payment/payment-modal';
-import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
 import { useAppContext } from '@/shared/contexts/app';
 import { getCookie } from '@/shared/lib/cookie';
 import { cn } from '@/shared/lib/utils';
@@ -33,6 +29,8 @@ import {
   type PricingBilling,
   type PricingPlan,
 } from './content';
+import { GptImageStudioSiteFooter } from './site-footer';
+import { GptImageStudioSiteHeader } from './site-header';
 
 type CountdownValue = {
   days: number;
@@ -41,13 +39,6 @@ type CountdownValue = {
   seconds: number;
   ended: boolean;
 };
-
-const pricingNav = [
-  { label: 'Generator', href: '/#workbench' },
-  { label: 'Prompts', href: '/#prompts' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Pricing', href: '/pricing' },
-];
 
 const billingOptions: { value: PricingBilling; label: string; note?: string }[] =
   [
@@ -126,7 +117,6 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
     setIsShowPaymentModal,
   } = useAppContext();
   const [promoOpen, setPromoOpen] = useState(true);
-  const [navOpen, setNavOpen] = useState(false);
   const [billing, setBilling] = useState<PricingBilling>('yearly');
   const [countdown, setCountdown] =
     useState<CountdownValue>(initialCountdown);
@@ -278,7 +268,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#050606] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-cyan-400/30 selection:text-white dark:bg-[#050606] dark:text-zinc-200">
       {promoOpen && (
         <div className="relative border-b border-amber-300/70 bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 text-zinc-950 shadow-[0_8px_24px_rgba(250,204,21,0.18)]">
           <Link
@@ -306,91 +296,13 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
         </div>
       )}
 
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-[#09090B]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="inline-flex size-7 items-center justify-center rounded-md bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400 text-zinc-950 shadow-lg shadow-cyan-500/20">
-                <Sparkles className="size-4" />
-              </span>
-              <span className="text-sm font-semibold text-white sm:text-base">
-                GPT Image 2 Studio
-              </span>
-            </Link>
-            <nav className="hidden items-center gap-6 lg:flex">
-              {pricingNav.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-sm text-zinc-400 transition hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div className="flex items-center gap-2">
-            <AnimatedThemeToggler className="inline-flex size-9 items-center justify-center rounded-md text-zinc-400 transition hover:bg-white/10 hover:text-white [&_svg]:size-4" />
-            {user ? (
-              <a
-                href="#plans"
-                className="hidden min-h-9 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10 sm:inline-flex"
-              >
-                Top Up Credits
-              </a>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsShowSignModal(true)}
-                className="hidden min-h-9 rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 sm:inline-flex"
-              >
-                Get 20 Free Credits
-              </button>
-            )}
-            <button
-              className="rounded-md p-2 text-zinc-300 hover:bg-white/10 lg:hidden"
-              aria-label="Toggle navigation"
-              onClick={() => setNavOpen((v) => !v)}
-            >
-              {navOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
-        </div>
-        {navOpen && (
-          <div className="border-t border-white/5 lg:hidden">
-            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
-              {pricingNav.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setNavOpen(false)}
-                  className="rounded-md px-2 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <button
-                type="button"
-                onClick={() => {
-                  setNavOpen(false);
-                  user
-                    ? (window.location.href = '#plans')
-                    : setIsShowSignModal(true);
-                }}
-                className="mt-2 inline-flex min-h-11 items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950"
-              >
-                {user ? 'Top Up Credits' : 'Get 20 Free Credits'}
-              </button>
-            </div>
-          </div>
-        )}
-      </header>
+      <GptImageStudioSiteHeader />
 
       <main>
         <section className="px-4 pt-8 md:px-8">
-          <div className="mx-auto grid max-w-7xl gap-8 rounded-2xl border border-amber-400/35 bg-[radial-gradient(circle_at_40%_0%,rgba(245,158,11,0.20),transparent_34%),linear-gradient(110deg,rgba(24,24,27,0.98),rgba(13,14,18,0.98))] px-5 py-6 shadow-2xl shadow-amber-950/25 md:grid-cols-[auto_auto] md:items-center md:justify-center md:gap-16 md:px-8 md:py-8 lg:gap-24 xl:gap-36">
+          <div className="mx-auto grid max-w-7xl gap-8 rounded-[28px] border border-transparent bg-[radial-gradient(circle_at_40%_0%,rgba(245,158,11,0.16),transparent_34%),linear-gradient(rgba(255,255,255,0.98),rgba(255,255,255,0.98))_padding-box,linear-gradient(135deg,rgba(245,158,11,0.42),rgba(34,211,238,0.26),rgba(148,163,184,0.30))_border-box] px-5 py-6 shadow-[0_30px_80px_-50px_rgba(245,158,11,0.35)] md:grid-cols-[auto_auto] md:items-center md:justify-center md:gap-16 md:px-8 md:py-8 lg:gap-24 xl:gap-36 dark:bg-[radial-gradient(circle_at_40%_0%,rgba(245,158,11,0.20),transparent_34%),linear-gradient(110deg,rgba(24,24,27,0.98),rgba(13,14,18,0.98))] dark:shadow-amber-950/25">
             <div>
-              <div className="text-base font-bold text-amber-100 md:text-lg">
+              <div className="text-base font-bold text-amber-700 dark:text-amber-100 md:text-lg">
                 🎉 Congrats! You&apos;ve unlocked special pricing
               </div>
               <div className="mt-4 text-3xl font-black tracking-tight text-[#ffd000] sm:text-4xl md:text-5xl">
@@ -406,10 +318,10 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
                 {offerStats.map(([label, value], index) => (
                   <div key={label} className="flex items-start gap-2 sm:gap-4">
                     <div>
-                      <div className="flex h-14 w-16 items-center justify-center rounded-xl border border-amber-400/20 bg-white/[0.04] font-mono text-2xl font-black text-[#ffd000] shadow-[0_0_45px_rgba(250,204,21,0.10)] tabular-nums sm:h-16 sm:w-20 sm:text-3xl">
+                      <div className="flex h-14 w-16 items-center justify-center rounded-xl border border-amber-300/40 bg-amber-50 font-mono text-2xl font-black text-amber-500 shadow-[0_0_45px_rgba(250,204,21,0.10)] tabular-nums sm:h-16 sm:w-20 sm:text-3xl dark:border-amber-400/20 dark:bg-white/[0.04] dark:text-[#ffd000]">
                         {String(value).padStart(2, '0')}
                       </div>
-                      <div className="mt-3 text-center text-xs font-bold tracking-wider text-zinc-500 uppercase">
+                      <div className="mt-3 text-center text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-zinc-500">
                         {label}
                       </div>
                     </div>
@@ -427,14 +339,14 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
 
         <section id="plans" className="px-4 py-14 md:px-8 md:py-20">
           <div className="mx-auto max-w-7xl text-center">
-            <h1 className="mx-auto max-w-5xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-2xl font-bold tracking-tight text-transparent sm:text-3xl md:text-4xl">
+            <h1 className="mx-auto max-w-5xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-emerald-400 dark:via-teal-400 dark:to-cyan-400 sm:text-3xl md:text-4xl">
               GPT Image 2 Studio pricing
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-sm text-zinc-400 md:text-base">
+            <p className="mx-auto mt-5 max-w-2xl text-sm text-slate-600 dark:text-zinc-400 md:text-base">
               Choose the perfect plan for your AI image creation needs.
             </p>
 
-            <div className="mx-auto mt-8 flex w-full max-w-2xl rounded-xl border border-emerald-400/20 bg-[#081915]/80 p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
+            <div className="mx-auto mt-8 flex w-full max-w-2xl rounded-[20px] border border-transparent bg-[linear-gradient(rgba(255,255,255,0.94),rgba(255,255,255,0.94))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.30),rgba(34,211,238,0.35),rgba(148,163,184,0.30))_border-box] p-1.5 shadow-[0_18px_55px_-40px_rgba(14,165,233,0.28)] dark:bg-[linear-gradient(rgba(8,25,21,0.92),rgba(8,25,21,0.92))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.34),rgba(34,211,238,0.30),rgba(255,255,255,0.08))_border-box] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
               {billingOptions.map((option) => (
                 <button
                   key={option.value}
@@ -445,7 +357,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
                     'relative flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg px-2 text-sm font-bold transition focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:outline-none md:text-base',
                     billing === option.value
                       ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/40'
-                      : 'text-zinc-400 hover:bg-white/5 hover:text-white'
+                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-950 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white'
                   )}
                 >
                   <span>{option.label}</span>
@@ -459,7 +371,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
               ))}
             </div>
 
-            <div className="mt-8 inline-flex items-center gap-2 text-base font-semibold text-white">
+            <div className="mt-8 inline-flex items-center gap-2 text-base font-semibold text-slate-900 dark:text-white">
               <span className="size-1.5 rounded-full bg-emerald-400" />
               Cancel anytime
             </div>
@@ -477,15 +389,15 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
           </div>
         </section>
 
-        <section className="px-4 py-14 md:px-8 md:py-20">
+        <section className="border-t border-slate-200/70 px-4 py-14 md:px-8 md:py-20 dark:border-white/5">
           <div className="mx-auto max-w-7xl text-center">
             <span className="inline-flex min-h-8 items-center rounded-lg bg-emerald-100 px-4 text-sm font-bold text-emerald-700">
               FAQ
             </span>
-            <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-bold leading-tight tracking-tight text-emerald-100 md:text-4xl">
+            <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-bold leading-tight tracking-tight text-slate-950 dark:text-emerald-100 md:text-4xl">
               Frequently Asked Questions About GPT Image 2 Studio Payments
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-zinc-400 md:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-700 dark:text-zinc-400 md:text-lg">
               Have more questions about GPT Image 2 Studio payments? Contact
               our support team for help.
             </p>
@@ -495,14 +407,16 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
             {pricingFaqs.map((item, index) => (
               <article
                 key={item.q}
-                className="grid gap-4 rounded-2xl border border-white/10 bg-[#0d1320] p-5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] md:grid-cols-[56px_1fr] md:p-6"
+                className="grid gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 text-left shadow-[0_18px_55px_-42px_rgba(15,23,42,0.22)] md:grid-cols-[56px_1fr] md:p-6 dark:border-white/10 dark:bg-[#0d1320] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
               >
                 <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/70 to-cyan-500/50 text-base font-black text-white">
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white md:text-lg">{item.q}</h3>
-                  <p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-400 md:text-base md:leading-7">
+                  <h3 className="text-base font-bold text-slate-950 dark:text-white md:text-lg">
+                    {item.q}
+                  </h3>
+                  <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700 dark:text-zinc-400 md:text-[17px]">
                     {item.a}
                   </p>
                 </div>
@@ -530,7 +444,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
               </button>
               <a
                 href="#plans"
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border-2 border-zinc-800/70 px-6 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/65 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/18 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
               >
                 View Pricing
               </a>
@@ -538,6 +452,8 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
           </div>
         </section>
       </main>
+
+      <GptImageStudioSiteFooter />
 
       <PaymentModal
         isLoading={isLoading}
@@ -566,8 +482,8 @@ function PlanCard({
       className={cn(
         'relative flex min-h-[480px] flex-col overflow-visible rounded-2xl border p-5 transition md:p-6',
         featured
-          ? 'border-emerald-500/60 bg-[#092316] shadow-[0_0_55px_rgba(16,185,129,0.20)] ring-1 ring-emerald-400/25'
-          : 'border-white/10 bg-[#090e1a] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-white/20'
+          ? 'border-transparent bg-[linear-gradient(rgba(248,250,252,0.98),rgba(236,253,245,0.96))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.68),rgba(34,211,238,0.46),rgba(148,163,184,0.34))_border-box] shadow-[0_30px_70px_-40px_rgba(16,185,129,0.35)] ring-1 ring-emerald-300/35 dark:bg-[linear-gradient(rgba(9,35,22,0.98),rgba(9,35,22,0.98))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.82),rgba(34,211,238,0.52),rgba(255,255,255,0.12))_border-box] dark:ring-emerald-400/25'
+          : 'border-slate-200/80 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.28)] hover:border-emerald-200 dark:border-white/10 dark:bg-[#090e1a] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] dark:hover:border-white/20'
       )}
     >
       {plan.badge && (
@@ -583,7 +499,7 @@ function PlanCard({
             'flex size-12 shrink-0 items-center justify-center rounded-xl',
             featured
               ? 'bg-gradient-to-br from-emerald-500 to-cyan-500 text-white'
-              : 'bg-emerald-500/15 text-emerald-500'
+              : 'bg-emerald-500/12 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-500'
           )}
         >
           {plan.icon === 'crown' ? (
@@ -594,7 +510,7 @@ function PlanCard({
         </div>
         <h3
           className={cn(
-            'text-lg font-black text-white md:text-xl',
+            'text-lg font-black text-slate-950 dark:text-white md:text-xl',
             featured && 'bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent'
           )}
         >
@@ -605,13 +521,13 @@ function PlanCard({
       <div className="mt-8">
         <div className="flex flex-wrap items-baseline gap-2">
           {plan.originalPrice && (
-            <span className="text-base font-black text-zinc-500 line-through">
+            <span className="text-base font-black text-slate-400 line-through dark:text-zinc-500">
               {plan.originalPrice}
             </span>
           )}
           <span
             className={cn(
-              'text-3xl font-black tracking-tight text-white md:text-4xl',
+              'text-3xl font-black tracking-tight text-slate-950 dark:text-white md:text-4xl',
               featured &&
                 'bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent'
             )}
@@ -619,7 +535,7 @@ function PlanCard({
             {plan.price}
           </span>
           {plan.unit && (
-            <span className="text-base font-black text-zinc-400">
+            <span className="text-base font-black text-slate-500 dark:text-zinc-400">
               {plan.unit}
             </span>
           )}
@@ -628,7 +544,7 @@ function PlanCard({
         {(plan.annualPrice || plan.discountLabel) && (
           <div className="mt-4 flex flex-wrap gap-2">
             {plan.annualPrice && (
-              <span className="inline-flex min-h-8 items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 text-xs font-black text-emerald-400">
+              <span className="inline-flex min-h-8 items-center rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 text-xs font-black text-emerald-700 dark:text-emerald-400">
                 {plan.annualPrice}
               </span>
             )}
@@ -642,10 +558,10 @@ function PlanCard({
         )}
       </div>
 
-      <div className="mt-5 text-sm font-semibold text-zinc-400 underline decoration-dotted underline-offset-4">
+      <div className="mt-5 text-sm font-semibold text-slate-500 underline decoration-dotted underline-offset-4 dark:text-zinc-400">
         {plan.creditValue}
       </div>
-      <p className="mt-5 min-h-16 text-sm leading-6 text-zinc-400">
+      <p className="mt-5 min-h-16 text-sm leading-6 text-slate-600 dark:text-zinc-400">
         {plan.description}
       </p>
 
@@ -657,7 +573,7 @@ function PlanCard({
           'mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-5 text-sm font-black transition focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-60',
           featured
             ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/35 hover:brightness-110 focus-visible:ring-emerald-200'
-            : 'border border-zinc-300/30 bg-zinc-100 text-zinc-950 hover:bg-white focus-visible:ring-cyan-300'
+            : 'border border-emerald-200 bg-white text-emerald-700 shadow-[0_18px_40px_-32px_rgba(16,185,129,0.18)] hover:border-cyan-300 hover:bg-emerald-50 focus-visible:ring-cyan-300 dark:border-zinc-300/30 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white'
         )}
       >
         {isLoading ? (
@@ -673,15 +589,20 @@ function PlanCard({
         )}
       </button>
 
-      <div className="mt-8 rounded-2xl border border-white/10 bg-black/20 p-5">
-        <div className="text-sm font-black text-white">{plan.credits}</div>
-        <div className="mt-1 text-sm font-medium text-zinc-500">
+      <div className="mt-8 rounded-2xl border border-slate-200/80 bg-slate-50/85 p-5 dark:border-white/10 dark:bg-black/20">
+        <div className="text-sm font-black text-slate-950 dark:text-white">
+          {plan.credits}
+        </div>
+        <div className="mt-1 text-sm font-medium text-slate-500 dark:text-zinc-500">
           {plan.billingNote}
         </div>
         <ul className="mt-5 space-y-3 text-sm">
           {plan.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3 text-zinc-300">
-              <Check className="mt-0.5 size-4 shrink-0 text-emerald-400" />
+            <li
+              key={feature}
+              className="flex items-start gap-3 text-slate-700 dark:text-zinc-300"
+            >
+              <Check className="mt-0.5 size-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
               <span>{feature}</span>
             </li>
           ))}
