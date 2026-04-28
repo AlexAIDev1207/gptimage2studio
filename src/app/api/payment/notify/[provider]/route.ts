@@ -15,10 +15,13 @@ import {
   handleSubscriptionUpdated,
 } from '@/shared/services/payment';
 
+const TAG = '[payment/notify]';
+
 export async function POST(
   req: Request,
   { params }: { params: Promise<{ provider: string }> }
 ) {
+  const startedAt = Date.now();
   try {
     const { provider } = await params;
 
@@ -49,7 +52,9 @@ export async function POST(
       throw new Error('payment session not found');
     }
 
-    // console.log('notify payment session', session);
+    console.log(
+      `${TAG} hit: provider=${provider} event=${eventType} order_no=${session.metadata?.order_no || '-'} sub=${session.subscriptionId || '-'} txn=${session.paymentInfo?.transactionId || '-'}`
+    );
 
     if (eventType === PaymentEventType.CHECKOUT_SUCCESS) {
       // one-time payment or subscription first payment
@@ -68,6 +73,9 @@ export async function POST(
         order,
         session,
       });
+      console.log(
+        `${TAG} checkout_success: order=${orderNo} user=${order.userId} amount=${session.paymentInfo?.paymentAmount || '-'} duration=${Date.now() - startedAt}ms`
+      );
     } else if (eventType === PaymentEventType.PAYMENT_SUCCESS) {
       // handle subscription payment or one-time payment
       if (session.subscriptionId && session.subscriptionInfo) {
@@ -217,14 +225,14 @@ export async function POST(
         session,
       });
     } else {
-      console.log('not handle other event type: ' + eventType);
+      console.log(`${TAG} unhandled_event: ${eventType}`);
     }
 
     return Response.json({
       message: 'success',
     });
   } catch (err: any) {
-    console.log('handle payment notify failed', err);
+    console.error(`${TAG} failed: ${err?.message || err} duration=${Date.now() - startedAt}ms`);
     return Response.json(
       {
         message: `handle payment notify failed: ${err.message}`,

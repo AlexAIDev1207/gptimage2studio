@@ -10,7 +10,10 @@ import { syncImageAssetsFromAITask } from '@/shared/models/image_asset';
 import { getUserInfo } from '@/shared/models/user';
 import { getAIService } from '@/shared/services/ai';
 
+const TAG = '[ai/generate]';
+
 export async function POST(request: Request) {
+  const startedAt = Date.now();
   try {
     let { provider, mediaType, model, prompt, options, scene } =
       await request.json();
@@ -56,7 +59,14 @@ export async function POST(request: Request) {
     });
 
     const remainingCredits = await getRemainingCredits(user.id);
+    console.log(
+      `${TAG} start: user=${user.id} provider=${provider} model=${model} scene=${scene} cost=${costCredits} balance=${remainingCredits}`
+    );
+
     if (remainingCredits < costCredits) {
+      console.log(
+        `${TAG} reject: user=${user.id} insufficient_credits balance=${remainingCredits} need=${costCredits}`
+      );
       throw new Error('insufficient credits');
     }
 
@@ -72,6 +82,9 @@ export async function POST(request: Request) {
 
     const result = await aiProvider.generate({ params });
     if (!result?.taskId) {
+      console.log(
+        `${TAG} provider_no_task_id: user=${user.id} provider=${provider} model=${model}`
+      );
       throw new Error(
         `ai generate failed, mediaType: ${mediaType}, provider: ${provider}, model: ${model}`
       );
@@ -99,9 +112,13 @@ export async function POST(request: Request) {
       await syncImageAssetsFromAITask(newAITask as any);
     }
 
+    console.log(
+      `${TAG} success: user=${user.id} task=${newAITask.id} kie_task=${result.taskId} status=${newAITask.status} duration=${Date.now() - startedAt}ms`
+    );
+
     return respData(newAITask);
   } catch (e: any) {
-    console.log('generate failed', e);
+    console.error(`${TAG} failed: ${e?.message || e} duration=${Date.now() - startedAt}ms`);
     return respErr(e.message);
   }
 }

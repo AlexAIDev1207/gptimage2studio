@@ -72,13 +72,19 @@ async function verifyKieWebhook({
   return constantTimeEqual(expected, signature);
 }
 
+const TAG = '[ai/notify/kie]';
+
 export async function POST(request: Request) {
+  const startedAt = Date.now();
   try {
     const rawBody = await request.text();
     const body = JSON.parse(rawBody || '{}');
     const providerTaskId = getProviderTaskId(body);
 
+    console.log(`${TAG} hit: kie_task=${providerTaskId || 'unknown'} payload_size=${rawBody.length}`);
+
     if (!providerTaskId) {
+      console.log(`${TAG} reject: missing task id`);
       return new Response('missing task id', { status: 400 });
     }
 
@@ -86,6 +92,7 @@ export async function POST(request: Request) {
     const webhookHmacKey = configs.kie_webhook_hmac_key || process.env.KIE_WEBHOOK_HMAC_KEY;
     const verified = await verifyKieWebhook({ request, taskId: providerTaskId, webhookHmacKey });
     if (!verified) {
+      console.log(`${TAG} reject: invalid signature kie_task=${providerTaskId}`);
       return new Response('invalid signature', { status: 401 });
     }
 
@@ -96,6 +103,7 @@ export async function POST(request: Request) {
       .limit(1);
 
     if (!task) {
+      console.log(`${TAG} skip: task_not_found kie_task=${providerTaskId}`);
       // Return 200 so Kie does not retry forever for old tasks that are no longer in our DB.
       return Response.json({ ok: true, skipped: 'task not found' });
     }
@@ -103,6 +111,7 @@ export async function POST(request: Request) {
     const aiService = await getAIService(configs);
     const aiProvider = aiService.getProvider('kie');
     if (!aiProvider?.query) {
+      console.error(`${TAG} kie_provider_unavailable: task=${task.id}`);
       return new Response('kie provider unavailable', { status: 500 });
     }
 
@@ -128,9 +137,13 @@ export async function POST(request: Request) {
       await mirrorImageAssetsForTask({ aiTaskId: updated.id, userId: updated.userId });
     }
 
+    console.log(
+      `${TAG} done: task=${task.id} kie_task=${providerTaskId} status=${updated?.status || result.taskStatus} duration=${Date.now() - startedAt}ms`
+    );
+
     return Response.json({ ok: true, status: updated?.status || result.taskStatus });
   } catch (error: any) {
-    console.error('kie notify failed', error);
+    console.error(`${TAG} failed: ${error?.message || error} duration=${Date.now() - startedAt}ms`);
     return new Response(error?.message || 'kie notify failed', { status: 500 });
   }
 }

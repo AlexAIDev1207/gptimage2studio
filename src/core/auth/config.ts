@@ -139,13 +139,17 @@ export async function getAuthOptions(configs: Record<string, string>) {
                 throw new Error('user id is required');
               }
 
+              console.log(
+                `[auth] new_user: id=${user.id} email=${user.email || '-'} provider=${user.provider || 'email'} locale=${user.locale || '-'} utm=${user.utmSource || '-'}`
+              );
+
               // grant credits for new user
               await grantCreditsForNewUser(user);
 
               // grant role for new user
               await grantRoleForNewUser(user);
-            } catch (e) {
-              console.log('grant credits or role for new user failed', e);
+            } catch (e: any) {
+              console.error(`[auth] grant_failed: user=${user?.id} ${e?.message || e}`);
             }
           },
         },
