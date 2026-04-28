@@ -15,14 +15,25 @@ let d1DbInstance: ReturnType<typeof drizzle> | null = null;
 /**
  * Get the D1 database binding from Cloudflare Workers environment.
  *
- * Uses `getCloudflareContext()` from @opennextjs/cloudflare.
+ * Uses `getCloudflareContext()` from @opennextjs/cloudflare to access
+ * env bindings declared in wrangler.toml ([[d1_databases]] binding="DB").
+ *
  * During build/static rendering this will throw — callers should
  * handle the error gracefully (e.g. config.ts already catches it).
  */
 function getD1Binding(): D1Database {
-  throw new Error(
-    'D1 database not supported in non-CloudflareWorkers environment.'
-  );
+  // Lazy require to avoid bundling the OpenNext context module into routes
+  // that never reach D1 (sitemap, robots, static pages).
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { getCloudflareContext } = require('@opennextjs/cloudflare');
+  const ctx = getCloudflareContext();
+  const binding = (ctx?.env as any)?.DB as D1Database | undefined;
+  if (!binding) {
+    throw new Error(
+      'D1 binding "DB" not found on Cloudflare context (check wrangler.toml [[d1_databases]] binding="DB").'
+    );
+  }
+  return binding;
 }
 
 export function getD1Db() {
