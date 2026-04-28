@@ -664,35 +664,37 @@ export default function Workbench({
 
   return (
     <div className="mt-9">
-      {/* Promo card */}
-      <div className="mx-auto max-w-[1280px]">
-        <div
-          className={`flex flex-col items-start gap-4 rounded-2xl border ${theme.promoBorder} ${theme.promoBg} p-4 shadow-[0_0_60px_-28px_rgba(34,211,238,0.45)] sm:flex-row sm:items-center sm:justify-between md:p-5`}
-        >
-          <div className="flex items-center gap-3">
-            <span
-              className={`inline-flex size-10 items-center justify-center rounded-xl border ${theme.promoIcon}`}
-            >
-              <Gift className="size-5" />
-            </span>
-            <div>
-              <h3 className="text-sm font-semibold text-slate-950 dark:text-white sm:text-base">
-                {workbench.promoCard.title}
-              </h3>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-zinc-400 sm:text-sm">
-                {workbench.promoCard.subtitle}
-              </p>
-            </div>
-          </div>
-          <Link
-            href={workbench.promoCard.href}
-            className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-bold transition ${theme.primaryButton}`}
+      {/* Promo card — 仅未登录用户可见 */}
+      {!user && (
+        <div className="mx-auto max-w-[1280px]">
+          <div
+            className={`flex flex-col items-start gap-4 rounded-2xl border ${theme.promoBorder} ${theme.promoBg} p-4 shadow-[0_0_60px_-28px_rgba(34,211,238,0.45)] sm:flex-row sm:items-center sm:justify-between md:p-5`}
           >
-            {workbench.promoCard.cta}
-            <Sparkles className="size-4" />
-          </Link>
+            <div className="flex items-center gap-3">
+              <span
+                className={`inline-flex size-10 items-center justify-center rounded-xl border ${theme.promoIcon}`}
+              >
+                <Gift className="size-5" />
+              </span>
+              <div>
+                <h3 className="text-sm font-semibold text-slate-950 dark:text-white sm:text-base">
+                  {workbench.promoCard.title}
+                </h3>
+                <p className="mt-0.5 text-xs text-slate-600 dark:text-zinc-400 sm:text-sm">
+                  {workbench.promoCard.subtitle}
+                </p>
+              </div>
+            </div>
+            <Link
+              href={workbench.promoCard.href}
+              className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-bold transition ${theme.primaryButton}`}
+            >
+              {workbench.promoCard.cta}
+              <Sparkles className="size-4" />
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Workbench card */}
       <div
