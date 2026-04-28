@@ -95,6 +95,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
         <img
           {...props}
           src={imageSrc}
+          loading={props.loading ?? 'lazy'}
+          decoding={props.decoding ?? 'async'}
           className={cn('rounded-lg border', props.className)}
           style={{ maxWidth: '100%', height: 'auto' }}
         />
