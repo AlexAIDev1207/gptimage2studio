@@ -1,85 +1,35 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
-
 import { getRequestConfig } from 'next-intl/server';
 
 import {
   defaultLocale,
   localeMessagesPaths,
+  localeMessagesRootPath,
 } from '@/config/locale';
 
 import { routing } from './config';
 
-function getLocaleMessageFile(locale: string, messagePath: string) {
-  return path.join(
-    process.cwd(),
-    'src',
-    'config',
-    'locale',
-    'messages',
-    locale,
-    `${messagePath}.json`
-  );
-}
-
-async function readLocaleMessageFile(locale: string, messagePath: string) {
-  try {
-    const file = getLocaleMessageFile(locale, messagePath);
-    return JSON.parse(await readFile(file, 'utf-8'));
-  } catch {
-    return null;
-  }
-}
-
 export async function loadMessages(
-  messagePath: string,
+  path: string,
   locale: string = defaultLocale
 ) {
-  const localizedMessages = await readLocaleMessageFile(locale, messagePath);
-  if (localizedMessages) {
-    return localizedMessages;
-  }
-
-  if (locale !== defaultLocale) {
+  try {
+    // try to load locale messages
+    const messages = await import(
+      `@/config/locale/messages/${locale}/${path}.json`
+    );
+    return messages.default;
+  } catch (e) {
     try {
-      const fallbackMessages = await readLocaleMessageFile(
-        defaultLocale,
-        messagePath
+      // try to load default locale messages
+      const messages = await import(
+        `@/config/locale/messages/${defaultLocale}/${path}.json`
       );
-      if (fallbackMessages) {
-        return fallbackMessages;
-      }
-    } catch {
+      return messages.default;
+    } catch (err) {
+      // if default locale is not found, return empty object
       return {};
     }
   }
-
-  return {};
-}
-
-async function buildLocaleMessages(locale: string) {
-  const allMessages = await Promise.all(
-    localeMessagesPaths.map((messagePath) => loadMessages(messagePath, locale))
-  );
-
-  const messages: Record<string, any> = {};
-
-  localeMessagesPaths.forEach((messagePath, index) => {
-    const localMessages = allMessages[index];
-    const keys = messagePath.split('/');
-    let current = messages;
-
-    for (let i = 0; i < keys.length - 1; i++) {
-      if (!current[keys[i]]) {
-        current[keys[i]] = {};
-      }
-      current = current[keys[i]];
-    }
-
-    current[keys[keys.length - 1]] = localMessages;
-  });
-
-  return messages;
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {
@@ -89,14 +39,38 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
 
   try {
+    // load all local messages
+    const allMessages = await Promise.all(
+      localeMessagesPaths.map((path) => loadMessages(path, locale))
+    );
+
+    // merge all local messages
+    const messages: any = {};
+
+    localeMessagesPaths.forEach((path, index) => {
+      const localMessages = allMessages[index];
+
+      const keys = path.split('/');
+      let current = messages;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) {
+          current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+      }
+
+      current[keys[keys.length - 1]] = localMessages;
+    });
+
     return {
       locale,
-      messages: await buildLocaleMessages(locale),
+      messages,
     };
-  } catch {
+  } catch (e) {
     return {
       locale: defaultLocale,
-      messages: await buildLocaleMessages(defaultLocale),
+      messages: await loadMessages(localeMessagesRootPath, defaultLocale),
     };
   }
 });
