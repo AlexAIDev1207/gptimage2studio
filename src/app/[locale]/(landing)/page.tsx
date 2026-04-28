@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'GPT Image 2 Studio',
     images: [
       {
-        url: '/imgs/gptimage2studio/png/workbench-primary-hydra-glow-serum.png',
+        url: '/imgs/gptimage2studio/png/workbench-primary-hydra-glow-serum.webp',
         width: 1200,
         height: 800,
         alt: 'GPT Image 2 Studio workbench preview',

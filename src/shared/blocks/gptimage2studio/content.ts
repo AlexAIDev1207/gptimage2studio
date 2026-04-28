@@ -217,7 +217,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Neon Fashion Editorial Portrait',
     category: 'Portrait',
-    image: '/imgs/gptimage2studio/prompts/fashion-editorial-neon-portrait.png',
+    image: '/imgs/gptimage2studio/prompts/fashion-editorial-neon-portrait.webp',
     prompt:
       'High-fashion portrait with neon rim light, wet city reflections, and cinematic editorial energy.',
     href: '/prompts/neon-fashion-editorial-portrait',
@@ -227,7 +227,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'AI Creator Action Figure Box',
     category: '3D',
-    image: '/imgs/gptimage2studio/prompts/ai-action-figure-box.png',
+    image: '/imgs/gptimage2studio/prompts/ai-action-figure-box.webp',
     prompt:
       'Collectible creator figurine in premium toy packaging with a clear window and desk-photo realism.',
     href: '/prompts/ai-creator-action-figure-box',
@@ -237,7 +237,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Cinematic Beauty Mirror Selfie',
     category: 'Fashion',
-    image: '/imgs/gptimage2studio/prompts/cinematic-beauty-mirror-selfie.png',
+    image: '/imgs/gptimage2studio/prompts/cinematic-beauty-mirror-selfie.webp',
     prompt:
       'Influencer-style mirror selfie in a cozy RGB gaming room with realistic phone-photo framing.',
     href: '/prompts/cinematic-beauty-mirror-selfie',
@@ -247,7 +247,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'AI Face-Off YouTube Thumbnail',
     category: 'Thumbnail',
-    image: '/imgs/gptimage2studio/prompts/viral-youtube-ai-faceoff.png',
+    image: '/imgs/gptimage2studio/prompts/viral-youtube-ai-faceoff.webp',
     prompt:
       'Clickable creator thumbnail with human vs AI split-screen drama, bold text, arrows, and glow.',
     href: '/prompts/ai-faceoff-youtube-thumbnail',
@@ -257,7 +257,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Red Match Day Sports Poster',
     category: 'Sports',
-    image: '/imgs/gptimage2studio/prompts/match-day-red-poster.png',
+    image: '/imgs/gptimage2studio/prompts/match-day-red-poster.webp',
     prompt:
       'Explosive football poster with smoke, stadium lights, red-black grading, and bold match-day typography.',
     href: '/prompts/red-match-day-sports-poster',
@@ -267,7 +267,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Night Street UGC Fashion',
     category: 'Social',
-    image: '/imgs/gptimage2studio/prompts/night-street-ugc-fashion.png',
+    image: '/imgs/gptimage2studio/prompts/night-street-ugc-fashion.webp',
     prompt:
       'Candid fashion photo with red roses, wet pavement, restaurant glow, and direct-flash social realism.',
     href: '/prompts/night-street-ugc-fashion',
@@ -277,7 +277,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Anime Cyber Hero Sheet',
     category: 'Character',
-    image: '/imgs/gptimage2studio/prompts/anime-cyber-hero-sheet.png',
+    image: '/imgs/gptimage2studio/prompts/anime-cyber-hero-sheet.webp',
     prompt:
       'Cyberpunk heroine concept sheet with views, expressions, gear callouts, and game art polish.',
     href: '/prompts/anime-cyber-hero-sheet',
@@ -287,7 +287,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Polaroid Travel Memory Wall',
     category: 'Creative',
-    image: '/imgs/gptimage2studio/prompts/polaroid-travel-memory-wall.png',
+    image: '/imgs/gptimage2studio/prompts/polaroid-travel-memory-wall.webp',
     prompt:
       'Nostalgic wall of taped Polaroids with one traveler across cities, captions, stamps, and film grain.',
     href: '/prompts/polaroid-travel-memory-wall',
@@ -297,7 +297,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Fitness Transformation Poster',
     category: 'Fitness',
-    image: '/imgs/gptimage2studio/prompts/fitness-transformation-poster.png',
+    image: '/imgs/gptimage2studio/prompts/fitness-transformation-poster.webp',
     prompt:
       'Motivational fitness campaign poster with gym lights, training energy, and bold 30-day reset typography.',
     href: '/prompts/fitness-transformation-poster',
@@ -307,7 +307,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Luxury Perfume Beauty Ad',
     category: 'Product',
-    image: '/imgs/gptimage2studio/prompts/luxury-perfume-beauty-ad.png',
+    image: '/imgs/gptimage2studio/prompts/luxury-perfume-beauty-ad.webp',
     prompt:
       'Golden beauty campaign with perfume, silk, petals, and glossy magazine lighting.',
     href: '/prompts/luxury-perfume-beauty-ad',
@@ -317,7 +317,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Basketball Street Poster',
     category: 'Sports',
-    image: '/imgs/gptimage2studio/prompts/basketball-street-poster.png',
+    image: '/imgs/gptimage2studio/prompts/basketball-street-poster.webp',
     prompt:
       'Neon street basketball dunk poster with sparks, gritty asphalt, and GAME ON headline.',
     href: '/prompts/basketball-street-poster',
@@ -327,7 +327,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'K-Pop Album Cover Concept',
     category: 'Music',
-    image: '/imgs/gptimage2studio/prompts/kpop-album-cover-concept.png',
+    image: '/imgs/gptimage2studio/prompts/kpop-album-cover-concept.webp',
     prompt:
       'Glossy futuristic group album cover with chrome styling, pastel neon stage, and release artwork polish.',
     href: '/prompts/kpop-album-cover-concept',
@@ -337,7 +337,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Movie Storyboard Grid',
     category: 'Creative',
-    image: '/imgs/gptimage2studio/prompts/movie-storyboard-grid.png',
+    image: '/imgs/gptimage2studio/prompts/movie-storyboard-grid.webp',
     prompt:
       'Six-panel sci-fi storyboard with consistent heroine, desert portal, and cinematic teal-orange grading.',
     href: '/prompts/movie-storyboard-grid',
@@ -347,7 +347,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Liquid Chrome Sneaker Campaign',
     category: 'Product',
-    image: '/imgs/gptimage2studio/prompts/luxury-sneaker-liquid-chrome.png',
+    image: '/imgs/gptimage2studio/prompts/luxury-sneaker-liquid-chrome.webp',
     prompt:
       'Floating futuristic sneaker with liquid chrome splash, electric blue trails, and premium ad lighting.',
     href: '/prompts/liquid-chrome-sneaker-campaign',
@@ -357,7 +357,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Midnight Ramen Food Poster',
     category: 'Food',
-    image: '/imgs/gptimage2studio/prompts/viral-food-poster-ramen.png',
+    image: '/imgs/gptimage2studio/prompts/viral-food-poster-ramen.webp',
     prompt:
       'Steaming ramen restaurant poster with chili oil splash, warm street-food lighting, and readable headline.',
     href: '/prompts/midnight-ramen-food-poster',
@@ -367,7 +367,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Cute Pet Action Figure',
     category: '3D',
-    image: '/imgs/gptimage2studio/prompts/cute-pet-action-figure.png',
+    image: '/imgs/gptimage2studio/prompts/cute-pet-action-figure.webp',
     prompt:
       'Corgi collectible toy box with clear plastic window, playful accessories, and product-photo realism.',
     href: '/prompts/cute-pet-action-figure',
@@ -377,7 +377,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Cyberpunk Electric Car Ad',
     category: 'Automotive',
-    image: '/imgs/gptimage2studio/prompts/cyberpunk-car-ad.png',
+    image: '/imgs/gptimage2studio/prompts/cyberpunk-car-ad.webp',
     prompt:
       'Futuristic electric sports car ad with rainy neon street reflections and NEXT DRIVE headline.',
     href: '/prompts/cyberpunk-electric-car-ad',
@@ -387,7 +387,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Fashion Magazine Cover',
     category: 'Fashion',
-    image: '/imgs/gptimage2studio/prompts/fashion-magazine-cover.png',
+    image: '/imgs/gptimage2studio/prompts/fashion-magazine-cover.webp',
     prompt:
       'Luxury fashion cover with sculptural red dress, AURA masthead, and clean editorial typography.',
     href: '/prompts/fashion-magazine-cover',
@@ -397,7 +397,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Kyoto After Dark Travel Poster',
     category: 'Travel',
-    image: '/imgs/gptimage2studio/prompts/travel-poster-kyoto-night.png',
+    image: '/imgs/gptimage2studio/prompts/travel-poster-kyoto-night.webp',
     prompt:
       'Lantern-lit Kyoto night travel poster with rain reflections, warm red-gold palette, and elegant headline.',
     href: '/prompts/kyoto-after-dark-travel-poster',
@@ -407,7 +407,7 @@ export const promptCards: PromptCard[] = [
   {
     title: 'Future City 2030 Infographic',
     category: 'Infographic',
-    image: '/imgs/gptimage2studio/prompts/future-city-infographic.png',
+    image: '/imgs/gptimage2studio/prompts/future-city-infographic.webp',
     prompt:
       'Editorial smart-city infographic with isometric buildings, robots, data lines, and readable labels.',
     href: '/prompts/future-city-2030-infographic',

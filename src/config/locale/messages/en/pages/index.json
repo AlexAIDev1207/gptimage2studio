@@ -44,19 +44,19 @@
         "avatars_tip": "999+ users are using ShipAny",
         "show_award": false,
         "image": {
-          "src": "/imgs/features/admin.png",
+          "src": "/imgs/features/admin.webp",
           "alt": "hero",
           "width": 1200,
           "height": 800
         },
         "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
+          "src": "/imgs/features/admin-dark.webp",
           "alt": "hero",
           "width": 1200,
           "height": 800
         },
         "background_image": {
-          "src": "/imgs/bg/tree.jpg",
+          "src": "/imgs/bg/tree.webp",
           "alt": "hero"
         }
       },
@@ -108,7 +108,7 @@
         "label": "Introduce",
         "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups, including templates, components, and documentation.",
         "image": {
-          "src": "/imgs/features/landing-page.png",
+          "src": "/imgs/features/landing-page.webp",
           "alt": "introduce"
         },
         "items": [
@@ -117,7 +117,7 @@
             "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
             "icon": "RiNextjsFill",
             "image": {
-              "src": "/imgs/features/1.png",
+              "src": "/imgs/features/1.webp",
               "alt": "introduce"
             }
           },
@@ -126,7 +126,7 @@
             "description": "Get instant access to scalable infrastructure with best practices built-in.",
             "icon": "RiDatabase2Line",
             "image": {
-              "src": "/imgs/features/2.png",
+              "src": "/imgs/features/2.webp",
               "alt": "introduce"
             }
           },
@@ -135,7 +135,7 @@
             "description": "Deploy your AI SaaS application to production in hours, not days.",
             "icon": "RiCloudyFill",
             "image": {
-              "src": "/imgs/features/3.png",
+              "src": "/imgs/features/3.webp",
               "alt": "introduce"
             }
           },
@@ -144,7 +144,7 @@
             "description": "Integrate AI into your project with ease using our built-in AI SDK.",
             "icon": "RiRobot2Line",
             "image": {
-              "src": "/imgs/features/4.png",
+              "src": "/imgs/features/4.webp",
               "alt": "introduce"
             }
           }
@@ -163,7 +163,7 @@
             "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
             "icon": "RiNextjsFill",
             "image": {
-              "src": "/imgs/features/user-billing.png",
+              "src": "/imgs/features/user-billing.webp",
               "alt": "benefits"
             }
           },
@@ -172,7 +172,7 @@
             "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
             "icon": "RiClapperboardAiLine",
             "image": {
-              "src": "/imgs/features/admin-settings.png",
+              "src": "/imgs/features/admin-settings.webp",
               "alt": "benefits"
             }
           },
@@ -181,7 +181,7 @@
             "description": "Get dedicated support and join our developer community to ensure your successful launch.",
             "icon": "RiCodeFill",
             "image": {
-              "src": "/imgs/features/landing-page.png",
+              "src": "/imgs/features/landing-page.webp",
               "alt": "benefits"
             }
           }
@@ -193,7 +193,7 @@
         "title": "How to Launch with ShipAny",
         "description": "Get your AI SaaS startup running in three simple steps:",
         "image": {
-          "src": "/imgs/features/1.png",
+          "src": "/imgs/features/1.webp",
           "alt": "usage"
         },
         "image_position": "left",
@@ -203,7 +203,7 @@
             "title": "Get ShipAny",
             "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
             "image": {
-              "src": "/imgs/features/5.png",
+              "src": "/imgs/features/5.webp",
               "alt": "usage"
             }
           },
@@ -211,7 +211,7 @@
             "title": "Start Your Project",
             "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
             "image": {
-              "src": "/imgs/features/6.png",
+              "src": "/imgs/features/6.webp",
               "alt": "usage"
             }
           },
@@ -219,7 +219,7 @@
             "title": "Customize Your Project",
             "description": "Modify the template with your data and contents. Specific AI functionality needs.",
             "image": {
-              "src": "/imgs/features/7.png",
+              "src": "/imgs/features/7.webp",
               "alt": "usage"
             }
           },
@@ -227,7 +227,7 @@
             "title": "Deploy to Production",
             "description": "Deploy your project to production with a few steps and start serving customers immediately.",
             "image": {
-              "src": "/imgs/features/8.png",
+              "src": "/imgs/features/8.webp",
               "alt": "usage"
             }
           }
@@ -301,7 +301,7 @@
             "role": "Founder of AIWallpaper.shop",
             "quote": "ShipAny saved us months of development time. We launched our AI wallpaper business in just 2 days and got our first paying customer within a week!",
             "image": {
-              "src": "/imgs/avatars/1.png",
+              "src": "/imgs/avatars/1.webp",
               "alt": "david"
             }
           },
@@ -310,7 +310,7 @@
             "role": "CTO at HeyBeauty.ai",
             "quote": "The pre-built AI infrastructure is a game-changer. We didn't have to worry about architecture - just focused on our AI beauty tech and went live fast.",
             "image": {
-              "src": "/imgs/avatars/2.png",
+              "src": "/imgs/avatars/2.webp",
               "alt": "rachel"
             }
           },
@@ -319,7 +319,7 @@
             "role": "Solo Developer",
             "quote": "As a solo developer, ShipAny gave me everything I needed - auth, payments, AI integration, and beautiful UI. Launched my SaaS in a weekend!",
             "image": {
-              "src": "/imgs/avatars/3.png",
+              "src": "/imgs/avatars/3.webp",
               "alt": "marcus"
             }
           },
@@ -328,7 +328,7 @@
             "role": "CEO of Melodisco",
             "quote": "The templates are production-ready and highly customizable. We built our AI music platform in hours instead of months. Incredible time-to-market!",
             "image": {
-              "src": "/imgs/avatars/4.png",
+              "src": "/imgs/avatars/4.webp",
               "alt": "sofia"
             }
           },
@@ -337,7 +337,7 @@
             "role": "Tech Lead at GPTs.works",
             "quote": "ShipAny's infrastructure is rock-solid. We scaled from 0 to 10k users without touching the backend. Best investment for our AI startup.",
             "image": {
-              "src": "/imgs/avatars/5.png",
+              "src": "/imgs/avatars/5.webp",
               "alt": "james"
             }
           },
@@ -346,7 +346,7 @@
             "role": "Startup Founder",
             "quote": "From idea to launch in 3 days! ShipAny's templates and deployment tools made it possible to test our AI business concept incredibly fast.",
             "image": {
-              "src": "/imgs/avatars/6.png",
+              "src": "/imgs/avatars/6.webp",
               "alt": "anna"
             }
           }
