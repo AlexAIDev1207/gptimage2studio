@@ -1,37 +1,50 @@
-"use client";
+'use client';
 
-import { Moon, SunDim } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import { flushSync } from "react-dom";
-import { cn } from "@/shared/lib/utils";
-import { useTheme } from "next-themes";
+import { Moon, SunDim } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { useTheme } from 'next-themes';
+
+import { cn } from '@/shared/lib/utils';
 
 type props = {
   className?: string;
 };
 
 export const AnimatedThemeToggler = ({ className }: props) => {
-  const { theme, setTheme } = useTheme();
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-
-    setIsDarkMode(theme === "dark");
-  }, [theme]);
+  }, []);
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const changeTheme = async () => {
-    if (!buttonRef.current) return;
+  const isDarkMode = resolvedTheme === 'dark';
 
-    await document.startViewTransition(() => {
+  const changeTheme = async () => {
+    const nextTheme = isDarkMode ? 'light' : 'dark';
+    const documentWithTransition = document as Document & {
+      startViewTransition?: (callback: () => void) => {
+        ready: Promise<void>;
+      };
+    };
+
+    if (
+      !buttonRef.current ||
+      typeof documentWithTransition.startViewTransition !== 'function'
+    ) {
+      setTheme(nextTheme);
+      return;
+    }
+
+    const transition = documentWithTransition.startViewTransition(() => {
       flushSync(() => {
-        const dark = document.documentElement.classList.toggle("dark");
-        setTheme(dark ? "dark" : "light");
-        setIsDarkMode(dark);
+        setTheme(nextTheme);
       });
-    }).ready;
+    });
+
+    await transition.ready;
 
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect();
