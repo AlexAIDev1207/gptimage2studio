@@ -97,8 +97,9 @@ const MODEL_OPTIONS: ModelOption[] = [
     label: 'Nano Banana',
     tagline: 'Reference-driven editing · fast iteration',
     emoji: '🍌',
-    textToImage: { provider: 'replicate', model: 'google/nano-banana-pro' },
-    imageToImage: { provider: 'fal', model: 'fal-ai/nano-banana-pro/edit' },
+    // Nano Banana 2 走 Kie.ai 同一个模型；image_input 为空时为 text-to-image，非空时为 image-to-image。
+    textToImage: { provider: 'kie', model: 'nano-banana-2' },
+    imageToImage: { provider: 'kie', model: 'nano-banana-2' },
   },
 ];
 

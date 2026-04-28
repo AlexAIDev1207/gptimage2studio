@@ -29,6 +29,9 @@ type KieAspectRatio = 'auto' | '1:1' | '9:16' | '16:9' | '4:3' | '3:4';
 
 const KIE_GPT_IMAGE_2_TEXT_MODEL = 'gpt-image-2-text-to-image';
 const KIE_GPT_IMAGE_2_EDIT_MODEL = 'gpt-image-2-image-to-image';
+// Nano Banana 2 在 Kie.ai 上是单一模型，根据 image_input 是否传值决定 text-to-image 或 image-to-image。
+// 文档：https://docs.kie.ai/market/google/nanobanana2.md
+const KIE_NANO_BANANA_2_MODEL = 'nano-banana-2';
 const SUPPORTED_ASPECT_RATIOS = new Set<KieAspectRatio>([
   'auto',
   '1:1',
@@ -162,8 +165,12 @@ export class KieProvider implements AIProvider {
     };
   }
 
-  private isGptImage2Model(model?: string) {
-    return model === KIE_GPT_IMAGE_2_TEXT_MODEL || model === KIE_GPT_IMAGE_2_EDIT_MODEL;
+  private isSupportedImageModel(model?: string) {
+    return (
+      model === KIE_GPT_IMAGE_2_TEXT_MODEL ||
+      model === KIE_GPT_IMAGE_2_EDIT_MODEL ||
+      model === KIE_NANO_BANANA_2_MODEL
+    );
   }
 
   async generateImage({ params }: { params: AIGenerateParams }): Promise<AITaskResult> {
@@ -171,7 +178,7 @@ export class KieProvider implements AIProvider {
 
     if (!model) throw new Error('model is required');
     if (!prompt) throw new Error('prompt is required');
-    if (!this.isGptImage2Model(model)) {
+    if (!this.isSupportedImageModel(model)) {
       throw new Error(`unsupported Kie image model: ${model}`);
     }
 
@@ -191,6 +198,12 @@ export class KieProvider implements AIProvider {
 
     if (model === KIE_GPT_IMAGE_2_EDIT_MODEL) {
       input.input_urls = imageInputs;
+    } else if (model === KIE_NANO_BANANA_2_MODEL) {
+      // Nano Banana 2：image_input 为空数组 → text-to-image；非空 → image-to-image。最多 14 张。
+      input.image_input = imageInputs.slice(0, 14);
+      if (typeof options.output_format === 'string') {
+        input.output_format = options.output_format;
+      }
     }
 
     const payload: Record<string, any> = {
