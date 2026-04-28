@@ -1,0 +1,257 @@
+---
+title: 'How to Keep Characters Consistent in GPT Image 2 Across Scenes and Angles'
+description: 'Learn a practical GPT Image 2 character consistency workflow for recurring faces, reference packs, scene changes, outfit swaps, and continuity repair.'
+created_at: 2026-04-28
+image: /imgs/blog/gpt-image-2-consistent-characters-cover.webp
+tags:
+  [
+    'gpt image 2 consistent characters',
+    'gpt image 2 character sheet',
+    'gpt image 2 same character',
+  ]
+---
+
+GPT Image 2 consistent characters come from identity control, not from luck. If you want the same person to stay recognizable across scenes and angles, you need a character lock, a master reference pack, and a repair workflow for drift. That is the difference between one good image and a usable character system.
+
+<img
+  src="/imgs/blog/gpt-image-2-consistent-characters-master-character-sheet.webp"
+  alt="Master GPT Image 2 character sheet with front, side, back, and expression views"
+  width="1672"
+  height="941"
+/>
+
+This article treats GPT Image 2 consistent characters as a production task. The goal is not to make one attractive portrait. The goal is to make one identity hold together across close-ups, wide shots, outfit changes, storyboards, and campaign sequences.
+
+If your current images are failing because of muddy textures or broken details, read the [artifacting guide](/blog/fix-gpt-image-2-artifacting-lighting-details) alongside this one. Many users think they have a consistency problem when they really have a local image-quality problem. But when the face, body language, and props keep drifting between generations, GPT Image 2 consistent characters requires a different solution.
+
+## Start With a Character Lock, Not a Scene Prompt
+
+The biggest mistake in character work is starting with scene language instead of identity language.
+
+People often write prompts like this:
+
+`Create a stylish young woman in a cafe, cinematic lighting, modern outfit, realistic skin, laptop, coffee, city background.`
+
+That prompt may produce a nice image, but it does not create GPT Image 2 consistent characters. It creates a scene with a person inside it. The model has too much freedom to change face structure, styling, proportions, and visual anchors every time you rerun it.
+
+Start with a character lock instead.
+
+Your character lock should define:
+
+1. age range
+2. face shape
+3. hair style and hair length
+4. skin tone
+5. body build
+6. signature accessory
+7. signature prop
+8. default wardrobe cues
+
+For example:
+
+`Young woman, sharp dark bob haircut, oval face, olive skin, medium height, slim build, silver hoop earrings, olive trench coat, red notebook as recurring prop.`
+
+That is already much closer to a system. GPT Image 2 consistent characters works better when identity details are stable and scene details are variable.
+
+## Build a Reusable Character Sheet and Reference Pack
+
+The first successful output should not be scene one. It should be the master reference.
+
+That is how serious continuity workflows work. Before you ask for narrative scenes, you build the person.
+
+Your master character sheet should include:
+
+- front view
+- side view
+- three-quarter view
+- full-body neutral pose
+- close-up portrait
+- smiling expression
+- serious expression
+- one clear prop view
+
+This gives GPT Image 2 consistent characters a stronger anchor than a single fashionable portrait ever could.
+
+<img
+  src="/imgs/blog/gpt-image-2-consistent-characters-same-character-different-angles.webp"
+  alt="The same GPT Image 2 character shown from multiple camera angles in one cafe scene"
+  width="1672"
+  height="941"
+/>
+
+In practice, the best reference pack usually contains three image types:
+
+1. `Face anchor`
+   - close portrait
+   - good lighting
+   - stable hairstyle
+2. `Full-body anchor`
+   - proportions
+   - posture
+   - wardrobe silhouette
+3. `Prop or accessory anchor`
+   - notebook, earrings, glasses, hat, branded object, or other recurring marker
+
+GPT Image 2 consistent characters gets easier when at least one signature anchor stays visible even as the scene changes. That is why recurring earrings, jackets, or props matter so much.
+
+## Prompt Templates for Same Character, New Scene
+
+You do not need fifty prompts. You need three reusable structures.
+
+### 1. Master character prompt
+
+Use this first:
+
+`Create a clean character reference sheet of the same woman: sharp dark bob haircut, oval face, olive skin, silver hoop earrings, olive trench coat, slim build, medium height, recurring red notebook. Include front view, side view, three-quarter view, full-body neutral pose, and two facial expressions. Keep facial identity perfectly consistent. Clean studio background, realistic anatomy, controlled neutral light.`
+
+This is a true GPT Image 2 consistent characters prompt because it asks for repeatability before storytelling.
+
+### 2. Same character, new scene prompt
+
+Use this after the master sheet works:
+
+`Use the same character identity as the master reference: sharp dark bob haircut, oval face, olive skin, silver hoop earrings, red notebook, same body proportions. Place her in a modern cafe at morning light, eye-level medium shot, realistic atmosphere, keep facial identity and wardrobe silhouette consistent.`
+
+### 3. Two-character continuity prompt
+
+This is useful for dialogue scenes or campaigns:
+
+`Create two recurring characters with fixed identities across all panels. Character one keeps the sharp dark bob haircut, silver hoop earrings, olive trench coat, and red notebook. Character two keeps short curly hair, navy overshirt, warm brown skin, and black square glasses. Maintain face structure, height difference, and recurring wardrobe cues consistently in every frame.`
+
+The point is simple: GPT Image 2 consistent characters depends on identity instructions that survive scene variation.
+
+## Keep the Same Character Across Angles, Outfits, and Lighting
+
+Most continuity failures happen because users change too many variables at once.
+
+The stable order is:
+
+1. angle
+2. outfit
+3. lighting
+
+If you jump straight to “new outfit, new city, night rain, action pose, wide shot, dramatic neon,” GPT Image 2 consistent characters becomes much harder.
+
+### Same scene, four camera angles
+
+First prove continuity under controlled framing changes. Keep the location fixed. Change only the camera.
+
+This is why `same character, different angles` is a better test than `same character, different worlds`.
+
+### New outfit, same face
+
+After angles hold, change clothing while preserving:
+
+- face structure
+- hairstyle
+- body proportions
+- signature accessories
+- recurring prop
+
+<img
+  src="/imgs/blog/gpt-image-2-consistent-characters-same-character-different-outfits.webp"
+  alt="The same GPT Image 2 character preserved across multiple outfit changes"
+  width="1672"
+  height="941"
+/>
+
+### Different lighting without identity drift
+
+Only after that should you move into daylight, dusk, studio, neon, or interior shadow variants. Many people blame GPT Image 2 consistent characters when a person looks different in a new lighting setup. Sometimes the issue is not identity drift. It is that poor lighting changed perceived face shape or skin texture.
+
+If your continuity breaks most often in hard lighting or complex scenes, compare the result against the [artifacting guide](/blog/fix-gpt-image-2-artifacting-lighting-details) before rebuilding the whole system.
+
+## Fix Character Drift With Edits and Targeted Repairs
+
+Even a good continuity workflow drifts sometimes. That is normal.
+
+The real skill is knowing when to regenerate and when to repair.
+
+Regenerate when:
+
+- the face structure is fundamentally different
+- the body proportions changed
+- the hairstyle is clearly off
+- the scene composition is weak anyway
+
+Edit when:
+
+- one eye shape drifted slightly
+- the earrings disappeared
+- the notebook changed shape
+- the jacket detail shifted
+- the lighting changed the character more than intended
+
+<img
+  src="/imgs/blog/gpt-image-2-consistent-characters-drift-vs-locked-identity.webp"
+  alt="Character drift versus locked identity in a GPT Image 2 continuity workflow"
+  width="1672"
+  height="941"
+/>
+
+Useful repair language:
+
+- keep the same face shape and hairstyle as the reference
+- keep the same silver hoop earrings
+- keep the red notebook unchanged
+- keep body proportions unchanged
+- only adjust the jacket color and sleeve shape
+
+This is where GPT Image 2 consistent characters becomes more efficient than random rerolling. You are no longer generating “a similar person.” You are preserving a defined identity.
+
+If your next goal is motion, stop after continuity is solid. Do not over-edit the stills into instability. Move them into the [Seedance 2 workflow](/blog/gpt-image-2-seedance-2-workflow) while the asset pack is still clean.
+
+## Best Use Cases for GPT Image 2 Consistent Characters
+
+GPT Image 2 consistent characters is most useful when the same person has to appear more than once for a reason.
+
+Strong use cases include:
+
+- storyboards
+- comics
+- ad sequences
+- short brand films
+- creator branding
+- recurring mascots
+- course or presenter visuals
+
+It is also more valuable in slide or report visuals than many people expect. If you are building a deck or explainer that uses the same illustrated host, character continuity matters there too. That is where this workflow overlaps with the [PDF to slides guide](/blog/gpt-image-2-pdf-to-slides-infographics).
+
+<img
+  src="/imgs/blog/gpt-image-2-consistent-characters-storyboard-sequence-use-case.webp"
+  alt="Consistent-character storyboard sequence created with GPT Image 2"
+  width="1672"
+  height="941"
+/>
+
+## Related Workflows
+
+- [GPT Image 2 Artifacting: How to Fix Bad Lighting, Muddy Textures, and Unnatural Details](/blog/fix-gpt-image-2-artifacting-lighting-details)
+- [GPT Image 2 + Seedance 2 Workflow for Game Concepts, Storyboards, and Ads](/blog/gpt-image-2-seedance-2-workflow)
+- [Is GPT Image 2 Free? Pricing, Access, and the Best Way to Use It Online](/blog/is-gpt-image-2-free-pricing-access)
+
+## QA Checklist, Limits, and Final Advice
+
+GPT Image 2 consistent characters is powerful, but it is not magic. There are still failure zones.
+
+Check these before you approve a sequence:
+
+1. face shape
+2. eye spacing
+3. hairline
+4. height and body ratio
+5. recurring accessory
+6. recurring prop
+7. wardrobe silhouette
+8. lighting consistency across the sequence
+
+Be honest about the limits too.
+
+GPT Image 2 consistent characters gets harder when:
+
+- scenes are crowded
+- lighting becomes extreme
+- too many edits pile onto the same base image
+- the identity was never clearly defined in the first place
+
+If you are still exploring whether this level of continuity work is worth the effort, compare your real needs against the [pricing guide](/blog/is-gpt-image-2-free-pricing-access). If you are ready to test the workflow now, open the [workbench](/#workbench), start with one master reference, and save the best prompt structure in the [prompt library](/#prompts). GPT Image 2 consistent characters improves fastest when you treat character identity like a reusable asset instead of a one-off prompt.
