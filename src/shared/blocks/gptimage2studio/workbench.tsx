@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,6 +18,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { Link } from '@/core/i18n/navigation';
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import { ImageUploader, ImageUploaderValue } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
@@ -1098,7 +1098,7 @@ function CarouselPanel({
           type="button"
           onClick={onPrev}
           aria-label="Previous slide"
-          className="absolute top-1/2 left-4 -translate-y-1/2 rounded-full border border-emerald-100 bg-white/88 p-3 text-slate-700 shadow-lg backdrop-blur transition hover:bg-emerald-50 dark:border-white/15 dark:bg-black/55 dark:text-white dark:hover:bg-black/75"
+          className="absolute top-1/2 left-4 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-100 bg-white/88 text-slate-700 shadow-lg backdrop-blur transition hover:bg-emerald-50 dark:border-white/15 dark:bg-black/55 dark:text-white dark:hover:bg-black/75"
         >
           <ChevronLeft className="size-4" />
         </button>
@@ -1106,7 +1106,7 @@ function CarouselPanel({
           type="button"
           onClick={onNext}
           aria-label="Next slide"
-          className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full border border-emerald-100 bg-white/88 p-3 text-slate-700 shadow-lg backdrop-blur transition hover:bg-emerald-50 dark:border-white/15 dark:bg-black/55 dark:text-white dark:hover:bg-black/75"
+          className="absolute top-1/2 right-4 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-100 bg-white/88 text-slate-700 shadow-lg backdrop-blur transition hover:bg-emerald-50 dark:border-white/15 dark:bg-black/55 dark:text-white dark:hover:bg-black/75"
         >
           <ChevronRight className="size-4" />
         </button>
@@ -1127,7 +1127,7 @@ function CarouselPanel({
               type="button"
               onClick={() => onSelect(i)}
               aria-label={`Slide ${i + 1}: ${c.title}`}
-              aria-current={i === activeIndex}
+              aria-current={i === activeIndex ? 'true' : undefined}
               className={`h-2 rounded-full transition-all ${
                 i === activeIndex
                   ? `w-9 ${theme.dot}`

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLocale } from 'next-intl';
 import { toast } from 'sonner';
 
 import { promptCards, type PromptCard } from './content';
@@ -19,8 +20,10 @@ function getReferenceImage(card: PromptCard, mode: PromptMode) {
 }
 
 export default function PromptsListPageClient() {
+  const locale = useLocale();
   const [selectedPrompt, setSelectedPrompt] = useState<PromptCard | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
+  const workbenchHref = locale === 'en' ? '/#workbench' : `/${locale}/#workbench`;
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -45,7 +48,7 @@ export default function PromptsListPageClient() {
       PENDING_PROMPT_STORAGE_KEY,
       JSON.stringify(detail)
     );
-    window.location.href = '/#workbench';
+    window.location.href = workbenchHref;
   };
 
   return (

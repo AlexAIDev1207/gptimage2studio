@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { AppRuntimeProvider } from '@/shared/contexts/app-runtime-provider';
+
 export default function LandingLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return <AppRuntimeProvider>{children}</AppRuntimeProvider>;
 }

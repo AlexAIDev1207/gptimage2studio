@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { Link } from '@/core/i18n/navigation';
 import { promptCards } from '@/shared/blocks/gptimage2studio/content';
 import { GptImageStudioSiteFooter } from '@/shared/blocks/gptimage2studio/site-footer';
 import { GptImageStudioSiteHeader } from '@/shared/blocks/gptimage2studio/site-header';

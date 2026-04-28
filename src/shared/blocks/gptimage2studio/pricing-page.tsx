@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
 import {
   ArrowRight,
   Check,
@@ -14,6 +13,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { Link } from '@/core/i18n/navigation';
 import { PaymentModal } from '@/shared/blocks/payment/payment-modal';
 import { useAppContext } from '@/shared/contexts/app';
 import { getCookie } from '@/shared/lib/cookie';
@@ -123,6 +123,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProductId, setLoadingProductId] = useState<string | null>(null);
   const [pricingItem, setPricingItem] = useState<PricingItem | null>(null);
+  const workbenchHref = locale === 'en' ? '/#workbench' : `/${locale}/#workbench`;
 
   const visiblePlans =
     billing === 'packs' ? creditPacks : pricingPlansByBilling[billing];
@@ -154,7 +155,7 @@ export default function GptImagePricingPage({ locale }: { locale: string }) {
       return;
     }
 
-    window.location.href = '/#workbench';
+    window.location.href = workbenchHref;
   };
 
   const getAffiliateMetadata = ({

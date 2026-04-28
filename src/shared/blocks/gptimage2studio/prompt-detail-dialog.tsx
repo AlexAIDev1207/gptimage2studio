@@ -72,8 +72,8 @@ export function PromptDetailDialog({
           onClick={onClose}
           className={
             isLightTheme
-              ? 'absolute top-4 right-4 z-20 inline-flex size-10 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none'
-              : 'absolute top-4 right-4 z-20 inline-flex size-10 items-center justify-center rounded-full text-zinc-400 transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none'
+              ? 'absolute top-4 right-4 z-20 inline-flex size-11 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none'
+              : 'absolute top-4 right-4 z-20 inline-flex size-11 items-center justify-center rounded-full text-zinc-400 transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none'
           }
         >
           <X className="size-6" />

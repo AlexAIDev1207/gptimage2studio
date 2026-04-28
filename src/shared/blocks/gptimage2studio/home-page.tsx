@@ -1,24 +1,8 @@
-'use client';
-
-import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useTheme } from 'next-themes';
-import {
-  ArrowRight,
-  Check,
-  ChevronDown,
-  Crown,
-  Flame,
-  Gift,
-  Layers,
-  Layout as LayoutIcon,
-  Sparkles,
-  Wand2,
-  X,
-  Zap,
-} from 'lucide-react';
-import { toast } from 'sonner';
+import { ArrowRight, Check, Sparkles, Wand2 } from 'lucide-react';
+
+import { Link } from '@/core/i18n/navigation';
 
 import {
   benefits,
@@ -27,16 +11,11 @@ import {
   comparisonHero,
   comparisonIntro,
   coreFeatures,
-  creditPacks,
-  editDemos,
   faqs,
   finalCta,
   hero,
   howToUse,
   howToUseSubtitle,
-  pricingPlansByBilling,
-  promoBar,
-  promptCards,
   testimonials,
   testimonialsDisclaimer,
   testimonialsIntro,
@@ -45,992 +24,592 @@ import {
   whatIsIntro,
   whyChooseCta,
   whyChooseSubtitle,
-  workbench,
-  type PricingBilling,
-  type PromptCard,
-  type Testimonial,
 } from './content';
-import { PromptCardsMasonry } from './prompt-cards-masonry';
-import { PromptDetailDialog } from './prompt-detail-dialog';
 import { GptImageStudioSiteFooter } from './site-footer';
 import { GptImageStudioSiteHeader } from './site-header';
-import Workbench from './workbench';
+import { HomeEditDemo } from './home-edit-demo';
+import { HomePricingSection } from './home-pricing-section';
+import { HomePromoBar } from './home-promo-bar';
+import { HomePromptLibrary } from './home-prompt-library';
+import { palettes, type HomePalette, type Variant } from './home-theme';
+import { LazyWorkbench } from './lazy-workbench';
+import { SectionEyebrow } from './section-eyebrow';
 
-type Variant = 'A' | 'B';
-
-const palettes: Record<
-  Variant,
-  {
-    accent: string;
-    accentSoft: string;
-    accentRing: string;
-    accentBg: string;
-    badgeText: string;
-    glow: string;
-  }
-> = {
-  A: {
-    accent: 'from-emerald-400 via-teal-400 to-cyan-400',
-    accentSoft: 'from-emerald-500/20 via-teal-500/15 to-cyan-500/20',
-    accentRing: 'ring-emerald-400/40',
-    accentBg: 'bg-emerald-500 hover:bg-emerald-400 text-zinc-950',
-    badgeText: 'text-emerald-300',
-    glow: 'bg-emerald-500/20',
-  },
-  B: {
-    accent: 'from-fuchsia-400 via-violet-500 to-indigo-500',
-    accentSoft: 'from-fuchsia-500/20 via-violet-500/15 to-indigo-500/20',
-    accentRing: 'ring-violet-400/40',
-    accentBg: 'bg-violet-500 hover:bg-violet-400 text-white',
-    badgeText: 'text-violet-300',
-    glow: 'bg-violet-500/25',
-  },
+const deferredSectionStyle: CSSProperties = {
+  contentVisibility: 'auto',
+  containIntrinsicSize: '1200px',
 };
 
-const pricingBillingOptions: {
-  value: PricingBilling;
-  label: string;
-  note?: string;
-}[] = [
-  { value: 'monthly', label: 'Monthly' },
-  { value: 'yearly', label: 'Yearly', note: 'Save 50%' },
-  { value: 'packs', label: 'Credits Packs' },
-];
+const comparisonSectionStyle: CSSProperties = {
+  contentVisibility: 'auto',
+  containIntrinsicSize: '1400px',
+};
 
 export default function HomePage({ variant = 'A' }: { variant?: Variant }) {
   const palette = palettes[variant];
-  const { resolvedTheme } = useTheme();
-  const isLightTheme = resolvedTheme === 'light';
-
-  const [promoOpen, setPromoOpen] = useState(true);
-
-  const [activeEditDemo, setActiveEditDemo] = useState(0);
-
-  const [copied, setCopied] = useState<string | null>(null);
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptCard | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [pricingBilling, setPricingBilling] =
-    useState<PricingBilling>('yearly');
-
-  const activeEdit = editDemos[activeEditDemo];
-  const visiblePricingPlans =
-    pricingBilling === 'packs'
-      ? creditPacks
-      : pricingPlansByBilling[pricingBilling];
-
-  const handleCopy = async (text: string, key: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(key);
-      toast.success('Prompt copied');
-      setTimeout(() => setCopied(null), 1500);
-    } catch {
-      toast.error('Unable to copy prompt');
-    }
-  };
-
-  const handleUsePrompt = (
-    card: PromptCard,
-    mode: 'text-to-image' | 'image-to-image'
-  ) => {
-    const referenceImage =
-      mode === 'image-to-image'
-        ? new URL(card.image, window.location.origin).toString()
-        : undefined;
-
-    window.dispatchEvent(
-      new CustomEvent('gptimage2studio:use-prompt', {
-        detail: {
-          prompt: card.fullPrompt,
-          mode,
-          modelKey: 'gpt-image-2',
-          referenceImage,
-        },
-      })
-    );
-
-    setSelectedPrompt(null);
-    window.setTimeout(() => {
-      document
-        .getElementById('workbench')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 0);
-  };
 
   return (
     <div className="gpt-studio-page min-h-screen bg-[#09090B] text-zinc-200 antialiased selection:bg-cyan-400/30 selection:text-white">
-      {/* Promo bar */}
-      {promoOpen && (
-        <div className="relative border-b border-amber-300/70 bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 text-zinc-950 shadow-[0_8px_24px_rgba(250,204,21,0.18)]">
-          <Link
-            href={promoBar.href}
-            className="block pr-10 transition hover:brightness-105 focus-visible:ring-2 focus-visible:ring-zinc-950/40 focus-visible:outline-none"
-          >
-            <div className="mx-auto flex min-h-11 max-w-7xl items-center justify-center px-4 py-2 text-xs font-bold leading-5 sm:text-sm md:px-8">
-              <span className="text-center">
-                <Gift className="mr-1 inline-block size-4 align-[-3px] text-amber-800 sm:size-5" />
-                {promoBar.text}{' '}
-                <span className="inline-flex min-h-7 items-center gap-1 rounded-full bg-zinc-950 px-3 py-1 text-xs font-black text-amber-100 align-middle">
-                  {promoBar.cta}
-                  <ArrowRight className="size-3" />
-                </span>
-              </span>
-            </div>
-          </Link>
-          <button
-            aria-label="Close promo bar"
-            onClick={() => setPromoOpen(false)}
-            className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-zinc-700/70 hover:bg-zinc-950/10 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-zinc-950/40 focus-visible:outline-none"
-          >
-            <X className="size-3.5" />
-          </button>
-        </div>
-      )}
-
+      <HomePromoBar />
       <GptImageStudioSiteHeader />
 
-      {/* Hero + Workbench (centered, single column to match nanobanana) */}
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div
-          className={`pointer-events-none absolute -top-40 left-1/2 -z-10 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-[140px] ${palette.glow} opacity-60`}
-        />
-        <div className="mx-auto max-w-7xl px-4 pt-8 pb-12 md:px-8 md:pt-12 md:pb-20">
-          {/* Trust strip */}
-          <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold tracking-wider uppercase">
-            {hero.trustLabels.map((label, i) => (
-              <span
-                key={label}
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 ${
-                  i === 0
-                    ? 'border-emerald-400/30 bg-emerald-500/10 text-emerald-300'
-                    : 'border-white/10 bg-white/5 text-zinc-300'
-                }`}
-              >
-                {i === 0 && (
-                  <span className="inline-flex size-1.5 animate-pulse rounded-full bg-emerald-400" />
-                )}
-                {label}
-              </span>
-            ))}
-          </div>
-
-          {/* Eyebrow */}
-          <div className="mt-5 flex justify-center">
-            <span
-              className={`inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium ${palette.badgeText}`}
-            >
-              <Sparkles className="size-3" />
-              {hero.eyebrow}
-            </span>
-          </div>
-
-          {/* H1 centered */}
-          <h1 className="mt-5 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-            <span
-              className={`bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`}
-            >
-              {hero.title}
-            </span>
-          </h1>
-
-          {/* Subtitle centered */}
-          <p className="mx-auto mt-5 max-w-2xl text-center text-base text-zinc-400 md:text-lg">
-            {hero.subtitle}
-          </p>
-
-          {/* CTAs centered */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={hero.primaryCta.href}
-              className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
-            >
-              <Wand2 className="size-4" />
-              {hero.primaryCta.label}
-            </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              {hero.secondaryCta.label}
-            </a>
-          </div>
-
-          {/* Workbench section header (centered) */}
+      <main>
+        <section className="relative overflow-hidden border-b border-white/5">
           <div
-            id="workbench"
-            className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center"
-          >
-            <SectionEyebrow palette={palette}>Workbench</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              {workbench.title}
-            </h2>
-            <p className="mt-4 text-zinc-400">{workbench.subcopy}</p>
-          </div>
-
-          {/* Workbench card: real generator (left form + right carousel/progress/results) */}
-          <Workbench variant={variant === 'B' ? 'studio' : 'banana'} />
-        </div>
-      </section>
-
-      {/* Prompt waterfall */}
-      <section id="prompts" className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="flex flex-col items-center text-center">
-            <SectionEyebrow palette={palette}>Prompt Library</SectionEyebrow>
-            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-              GPT Image 2 Prompts for Real Projects
-            </h2>
-            <p className="mt-4 max-w-2xl text-zinc-400">
-              Browse prompt patterns for product photos, posters, social ads, UI
-              mockups, infographics, and editable image workflows. Copy a
-              prompt, adjust the details, and turn it into a reusable creative
-              brief.
-            </p>
-          </div>
-
-          <PromptCardsMasonry
-            cards={promptCards}
-            copied={copied}
-            copyKeyPrefix="home-prompt"
-            onOpen={setSelectedPrompt}
-            onCopy={handleCopy}
+            className={`pointer-events-none absolute -top-40 left-1/2 -z-10 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-[140px] ${palette.glow} opacity-60`}
           />
-
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/prompts"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              Explore All Prompts
-              <ArrowRight className="size-3.5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {selectedPrompt && (
-        <PromptDetailDialog
-          card={selectedPrompt}
-          copied={copied}
-          onClose={() => setSelectedPrompt(null)}
-          onCopy={handleCopy}
-          onUsePrompt={(card) => handleUsePrompt(card, 'text-to-image')}
-          onUseReference={(card) => handleUsePrompt(card, 'image-to-image')}
-        />
-      )}
-
-      {/* Use cases */}
-      <section className="border-b border-white/5 bg-[#0B0D12]">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>Use Cases</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              What You Can Create with GPT Image 2
-            </h2>
-            <p className="mt-4 text-zinc-400">
-              From clean ecommerce product shots to multilingual posters,
-              vertical social ads, and labeled UI mockups — these are the most
-              common briefs creators bring to GPT Image 2 today.
-            </p>
-          </div>
-          <div className="mt-12 flex flex-col gap-16 md:gap-24">
-            {useCases.map((u, i) => {
-              const reverse = i % 2 === 1;
-              return (
-                <article
-                  key={u.title}
-                  className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
-                    reverse ? 'lg:[&>div:first-child]:order-2' : ''
+          <div className="mx-auto max-w-7xl px-4 pt-8 pb-12 md:px-8 md:pt-12 md:pb-20">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold tracking-wider uppercase">
+              {hero.trustLabels.map((label, index) => (
+                <span
+                  key={label}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 ${
+                    index === 0
+                      ? 'border-emerald-400/30 bg-emerald-500/10 text-emerald-300'
+                      : 'border-white/10 bg-white/5 text-zinc-200'
                   }`}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
+                  {index === 0 && (
+                    <span className="inline-flex size-1.5 animate-pulse rounded-full bg-emerald-400" />
+                  )}
+                  {label}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-5 flex justify-center">
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium ${palette.badgeText}`}
+              >
+                <Sparkles className="size-3" />
+                {hero.eyebrow}
+              </span>
+            </div>
+
+            <h1 className="mt-5 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+              <span
+                className={`bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`}
+              >
+                {hero.title}
+              </span>
+            </h1>
+
+            <p className="mx-auto mt-5 max-w-2xl text-center text-base text-zinc-300 md:text-lg">
+              {hero.subtitle}
+            </p>
+
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={hero.primaryCta.href}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold ${palette.accentBg} transition`}
+              >
+                <Wand2 className="size-4" />
+                {hero.primaryCta.label}
+              </a>
+              <a
+                href={hero.secondaryCta.href}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                {hero.secondaryCta.label}
+              </a>
+            </div>
+
+            <div
+              id="workbench"
+              className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center"
+            >
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                Workbench
+              </SectionEyebrow>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Create Images with GPT Image 2 Studio
+              </h2>
+              <p className="mt-4 text-zinc-300">
+                Start from a prompt or reference image, choose a model, and
+                preview image ideas for product, marketing, and content
+                workflows. The MVP interface is designed around reusable
+                prompts, clear settings, and fast creative iteration.
+              </p>
+            </div>
+
+            <LazyWorkbench palette={palette} variant={variant} />
+          </div>
+        </section>
+
+        <HomePromptLibrary palette={palette} />
+
+        <section
+          className="border-b border-white/5 bg-[#0B0D12]"
+          style={deferredSectionStyle}
+        >
+          <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                Use Cases
+              </SectionEyebrow>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                What You Can Create with GPT Image 2
+              </h2>
+              <p className="mt-4 text-zinc-300">
+                From clean ecommerce product shots to multilingual posters,
+                vertical social ads, and labeled UI mockups — these are the most
+                common briefs creators bring to GPT Image 2 today.
+              </p>
+            </div>
+            <div className="mt-12 flex flex-col gap-16 md:gap-24">
+              {useCases.map((useCase, index) => {
+                const reverse = index % 2 === 1;
+
+                return (
+                  <article
+                    key={useCase.title}
+                    className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
+                      reverse ? 'lg:[&>div:first-child]:order-2' : ''
+                    }`}
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
+                      <Image
+                        src={useCase.image}
+                        alt={useCase.title}
+                        fill
+                        sizes="(min-width: 1024px) 600px, 100vw"
+                        loading="lazy"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <h3 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+                        {useCase.title}
+                      </h3>
+                      <p className="mt-4 text-zinc-300">{useCase.copy}</p>
+                      <a
+                        href={useCase.href}
+                        className={`mt-6 inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:opacity-90`}
+                      >
+                        {useCase.cta}
+                        <ArrowRight className="size-4" />
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <HomeEditDemo palette={palette} />
+
+        <section
+          id="comparison"
+          className="border-b border-white/5 bg-[#0B0D12]"
+          style={comparisonSectionStyle}
+        >
+          <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                About
+              </SectionEyebrow>
+              <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+                What Is GPT Image 2 Studio?
+              </h2>
+              <p className="mt-4 text-zinc-300">{whatIsIntro}</p>
+            </div>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {whatIsCards.map((card, index) => (
+                <div
+                  key={card.title}
+                  className="rounded-2xl border border-white/10 bg-[#101218] p-5"
+                >
+                  <span
+                    className={`inline-flex size-9 items-center justify-center rounded-lg bg-gradient-to-br ${palette.accent} text-xs font-bold text-zinc-950`}
+                  >
+                    {index + 1}
+                  </span>
+                  <h3 className="mt-4 text-base font-semibold text-white">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-300">
+                    {card.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mx-auto mt-20 max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                Comparison
+              </SectionEyebrow>
+              <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+                GPT Image 2 vs Nano Banana
+              </h2>
+              <p className="mt-4 text-zinc-300">{comparisonIntro}</p>
+            </div>
+
+            <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+              <div className="relative aspect-[16/9] w-full">
+                <Image
+                  src={comparisonHero.src}
+                  alt={comparisonHero.alt}
+                  fill
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  loading="lazy"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+              <div className="hidden grid-cols-[0.8fr_1.2fr_1.2fr] border-b border-white/10 bg-white/5 text-[11px] font-semibold tracking-wide uppercase md:grid">
+                <div className="px-4 py-3 text-zinc-200">Dimension</div>
+                <div className={`px-4 py-3 ${palette.badgeText}`}>
+                  GPT Image 2
+                </div>
+                <div className="px-4 py-3 text-zinc-300">Nano Banana</div>
+              </div>
+              {comparison.map((row, index) => (
+                <div
+                  key={row.dimension}
+                  className={`grid gap-3 px-4 py-4 text-sm md:grid-cols-[0.8fr_1.2fr_1.2fr] ${
+                    index !== comparison.length - 1
+                      ? 'border-b border-white/5'
+                      : ''
+                  }`}
+                >
+                  <div>
+                    <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
+                      Dimension
+                    </span>
+                    <p className="mt-1 font-semibold text-zinc-100 md:mt-0">
+                      {row.dimension}
+                    </p>
+                  </div>
+                  <div>
+                    <span
+                      className={`text-[10px] font-semibold tracking-wider uppercase md:hidden ${palette.badgeText}`}
+                    >
+                      GPT Image 2
+                    </span>
+                    <p className="mt-1 text-zinc-200 md:mt-0">
+                      {row.gptImage2}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
+                      Nano Banana
+                    </span>
+                    <p className="mt-1 text-zinc-300 md:mt-0">
+                      {row.nanoBanana}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <a
+                href={comparisonCta.href}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:opacity-90`}
+              >
+                {comparisonCta.label}
+                <ArrowRight className="size-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-white/5" style={deferredSectionStyle}>
+          <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                Benefits
+              </SectionEyebrow>
+              <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Why Choose GPT Image 2
+              </h2>
+              <p className="mt-4 text-zinc-300">{whyChooseSubtitle}</p>
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {benefits.map((benefit) => (
+                <div
+                  key={benefit.title}
+                  className="rounded-2xl border border-white/10 bg-[#101218] p-6"
+                >
+                  <h3 className="text-xl font-bold tracking-tight text-white">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-zinc-300">
+                    {benefit.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 flex justify-center">
+              <a
+                href={whyChooseCta.href}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:opacity-90`}
+              >
+                {whyChooseCta.label}
+                <ArrowRight className="size-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="border-b border-white/5 bg-[#0B0D12]"
+          style={deferredSectionStyle}
+        >
+          <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                How To Use
+              </SectionEyebrow>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                How to Use GPT Image 2 Studio
+              </h2>
+              <p className="mt-4 text-zinc-300">{howToUseSubtitle}</p>
+            </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {howToUse.map((step) => (
+                <div
+                  key={step.step}
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#101218]"
+                >
+                  <div className="relative aspect-[4/3]">
                     <Image
-                      src={u.image}
-                      alt={u.title}
+                      src={step.image}
+                      alt={step.alt}
                       fill
-                      sizes="(min-width: 1024px) 600px, 100vw"
+                      sizes="(min-width: 1280px) 280px, (min-width: 768px) 50vw, 100vw"
                       loading="lazy"
                       className="object-cover"
                     />
                   </div>
-                  <div className="flex flex-col">
-                    <h3 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-                      {u.title}
+                  <div className="p-5">
+                    <div className="text-sm font-black tracking-[0.18em] text-cyan-300 uppercase">
+                      {step.step}
+                    </div>
+                    <h3 className="mt-3 text-lg font-bold text-white">
+                      {step.title}
                     </h3>
-                    <p className="mt-4 text-zinc-400">{u.copy}</p>
-                    <a
-                      href={u.href}
-                      className={`mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:opacity-90`}
-                    >
-                      {u.cta}
-                      <ArrowRight className="size-4" />
-                    </a>
+                    <p className="mt-3 text-sm leading-6 text-zinc-300">
+                      {step.copy}
+                    </p>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Editing demo — image-driven tab switcher (cross-fade between scenarios) */}
-      <section className="border-b border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-8 md:py-20">
-          <div className="flex flex-col items-center text-center">
-            <SectionEyebrow palette={palette}>Editing</SectionEyebrow>
-            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Edit Images with GPT Image 2
-            </h2>
-            <p className="mt-4 max-w-3xl text-zinc-400">
-              Upload an image, describe the change. The Studio handles the rest.
-            </p>
-          </div>
-
-          {/* Tab buttons */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
-            {editDemos.map((d, i) => (
-              <button
-                key={d.title}
-                type="button"
-                onClick={() => setActiveEditDemo(i)}
-                aria-pressed={activeEditDemo === i}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold transition sm:text-sm ${
-                  activeEditDemo === i
-                    ? `border-transparent bg-gradient-to-r ${palette.accent} text-zinc-950`
-                    : 'border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10'
-                }`}
-              >
-                {d.title}
-              </button>
-            ))}
-          </div>
-
-          {/* Active tab — large image with cross-fade + 1-line copy + monospace prompt */}
-          <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
-            <div className="relative aspect-[16/9] w-full">
-              {editDemos.map((d, i) => (
-                <div
-                  key={d.title}
-                  className={`absolute inset-0 transition-opacity duration-500 ${
-                    i === activeEditDemo ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  aria-hidden={i !== activeEditDemo}
-                >
-                  <Image
-                    src={d.image}
-                    alt={d.title}
-                    fill
-                    sizes="(min-width: 1024px) 1100px, 100vw"
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    className="object-cover"
-                  />
                 </div>
               ))}
             </div>
-            <div className="border-t border-white/10 bg-[#0B0D12] p-5 md:p-6">
-              <div className="rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-[12px] leading-relaxed text-zinc-300">
-                {activeEdit.prompt}
-              </div>
+          </div>
+        </section>
+
+        <section className="border-b border-white/5" style={deferredSectionStyle}>
+          <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionEyebrow badgeTextClassName={palette.badgeText}>
+                Core Features
+              </SectionEyebrow>
+              <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Core Features of GPT Image 2
+              </h2>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What Is + Comparison (stacked, centered) */}
-      <section className="border-b border-white/5 bg-[#0B0D12]">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          {/* What Is */}
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>About</SectionEyebrow>
-            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-              What Is GPT Image 2 Studio?
-            </h2>
-            <p className="mt-4 text-zinc-400">{whatIsIntro}</p>
-          </div>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {whatIsCards.map((c, i) => (
-              <div
-                key={c.title}
-                className="rounded-2xl border border-white/10 bg-[#101218] p-5"
-              >
-                <span
-                  className={`inline-flex size-9 items-center justify-center rounded-lg bg-gradient-to-br ${palette.accent} text-xs font-bold text-zinc-950`}
+            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {coreFeatures.map((feature, index) => (
+                <div
+                  key={feature.title}
+                  className="rounded-2xl border border-white/10 bg-[#101218] p-5 transition hover:border-white/20 hover:bg-[#151821]"
                 >
-                  {i + 1}
-                </span>
-                <h3 className="mt-4 text-base font-semibold text-white">
-                  {c.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-zinc-400">{c.copy}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Comparison */}
-          <div className="mx-auto mt-20 max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>Comparison</SectionEyebrow>
-            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-              GPT Image 2 vs Nano Banana
-            </h2>
-            <p className="mt-4 text-zinc-400">{comparisonIntro}</p>
-          </div>
-
-          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-            <div className="relative aspect-[16/9] w-full">
-              <Image
-                src={comparisonHero.src}
-                alt={comparisonHero.alt}
-                fill
-                sizes="(min-width: 1024px) 960px, 100vw"
-                loading="lazy"
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-            <div className="hidden grid-cols-[0.8fr_1.2fr_1.2fr] border-b border-white/10 bg-white/5 text-[11px] font-semibold tracking-wide uppercase md:grid">
-              <div className="px-4 py-3 text-zinc-300">Dimension</div>
-              <div className={`px-4 py-3 ${palette.badgeText}`}>
-                GPT Image 2
-              </div>
-              <div className="px-4 py-3 text-zinc-400">Nano Banana</div>
-            </div>
-            {comparison.map((row, i) => (
-              <div
-                key={row.dimension}
-                className={`grid gap-3 px-4 py-4 text-sm md:grid-cols-[0.8fr_1.2fr_1.2fr] ${
-                  i !== comparison.length - 1 ? 'border-b border-white/5' : ''
-                }`}
-              >
-                <div>
-                  <span className="text-[10px] font-semibold tracking-wider text-zinc-600 uppercase md:hidden">
-                    Dimension
-                  </span>
-                  <p className="mt-1 font-semibold text-zinc-200 md:mt-0">
-                    {row.dimension}
-                  </p>
-                </div>
-                <div>
-                  <span
-                    className={`text-[10px] font-semibold tracking-wider uppercase md:hidden ${palette.badgeText}`}
-                  >
-                    GPT Image 2
-                  </span>
-                  <p className="mt-1 leading-6 text-zinc-300 md:mt-0">
-                    {row.gptImage2}
-                  </p>
-                </div>
-                <div>
-                  <span className="text-[10px] font-semibold tracking-wider text-zinc-500 uppercase md:hidden">
-                    Nano Banana
-                  </span>
-                  <p className="mt-1 leading-6 text-zinc-400 md:mt-0">
-                    {row.nanoBanana}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 flex justify-center">
-            <a
-              href={comparisonCta.href}
-              className={`inline-flex items-center gap-1.5 text-sm font-semibold ${palette.badgeText} hover:underline`}
-            >
-              {comparisonCta.label}
-              <ArrowRight className="size-3.5" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>Benefits</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Why Choose GPT Image 2
-            </h2>
-            <p className="mt-4 text-zinc-400">{whyChooseSubtitle}</p>
-          </div>
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            {benefits.map((b, i) => (
-              <div
-                key={b.title}
-                className="rounded-2xl border border-white/10 bg-[#101218] p-6"
-              >
-                <span
-                  className={`inline-flex size-10 items-center justify-center rounded-xl bg-gradient-to-br ${palette.accent} text-zinc-950`}
-                >
-                  {
-                    [
-                      <LayoutIcon key="0" className="size-5" />,
-                      <Sparkles key="1" className="size-5" />,
-                      <Layers key="2" className="size-5" />,
-                    ][i]
-                  }
-                </span>
-                <h3 className="mt-5 text-lg font-semibold text-white">
-                  {b.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400">{b.copy}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 flex justify-center">
-            <a
-              href={whyChooseCta.href}
-              className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-br ${palette.accent} px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:opacity-90`}
-            >
-              {whyChooseCta.label}
-              <ArrowRight className="size-4" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* How to use */}
-      <section className="border-b border-white/5 bg-[#0B0D12]">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>How To Use</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              How to Use GPT Image 2 Studio
-            </h2>
-            <p className="mt-4 text-zinc-400">{howToUseSubtitle}</p>
-          </div>
-          <div className="mx-auto mt-12 flex max-w-4xl flex-col gap-12 md:gap-16">
-            {howToUse.map((s) => (
-              <article
-                key={s.step}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#101218] shadow-2xl shadow-black/40">
-                  <Image
-                    src={s.image}
-                    alt={s.alt}
-                    fill
-                    sizes="(min-width: 768px) 880px, 100vw"
-                    loading="lazy"
-                    className="object-cover"
-                  />
-                </div>
-                <span
-                  className={`mt-6 bg-gradient-to-br text-3xl font-bold ${palette.accent} bg-clip-text text-transparent`}
-                >
-                  {s.step}
-                </span>
-                <h3 className="mt-3 text-xl font-semibold text-white md:text-2xl">
-                  {s.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-zinc-400">{s.copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Core Features */}
-      <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>Core Features</SectionEyebrow>
-            <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Core Features of GPT Image 2
-            </h2>
-          </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {coreFeatures.map((f, i) => (
-              <div
-                key={f.title}
-                className="rounded-2xl border border-white/10 bg-[#101218] p-5 transition hover:border-white/20 hover:bg-[#151821]"
-              >
-                <div className="flex items-center gap-2">
-                  <span
-                    className={`inline-flex size-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 ${palette.badgeText}`}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="text-base font-semibold text-white">
-                    {f.title}
-                  </h3>
-                </div>
-                <p className="mt-3 text-sm text-zinc-400">{f.copy}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section
-        id="pricing"
-        className={
-          isLightTheme
-            ? 'border-b border-slate-200/70 bg-[linear-gradient(180deg,#ffffff_0%,#f8fffd_40%,#ecfdf5_100%)]'
-            : 'border-b border-white/5 bg-[#0B0D12]'
-        }
-      >
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>Pricing</SectionEyebrow>
-            <h2
-              className={
-                isLightTheme
-                  ? 'mt-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl'
-                  : 'mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl'
-              }
-            >
-              GPT Image 2 Studio pricing
-            </h2>
-            <p className={isLightTheme ? 'mt-4 text-slate-600' : 'mt-4 text-zinc-400'}>
-              Choose the perfect plan for your AI image creation needs.
-            </p>
-          </div>
-
-          <div
-            className={
-              isLightTheme
-                ? 'mx-auto mt-8 flex w-full max-w-2xl rounded-[20px] border border-transparent bg-[linear-gradient(rgba(255,255,255,0.94),rgba(255,255,255,0.94))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.30),rgba(34,211,238,0.35),rgba(148,163,184,0.30))_border-box] p-1.5 shadow-[0_18px_55px_-40px_rgba(14,165,233,0.28)]'
-                : 'mx-auto mt-8 flex w-full max-w-2xl rounded-xl border border-emerald-400/20 bg-[#081915]/80 p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]'
-            }
-          >
-            {pricingBillingOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                aria-pressed={pricingBilling === option.value}
-                onClick={() => setPricingBilling(option.value)}
-                className={`relative flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg px-2 text-sm font-bold transition focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:outline-none md:text-base ${
-                  pricingBilling === option.value
-                    ? `bg-gradient-to-r ${palette.accent} text-white shadow-lg shadow-cyan-950/40`
-                    : isLightTheme
-                      ? 'text-slate-500 hover:bg-slate-100 hover:text-slate-950'
-                      : 'text-zinc-400 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                <span>{option.label}</span>
-                {option.note && (
-                  <span className="hidden items-center gap-1 rounded-md bg-gradient-to-r from-red-500 to-orange-600 px-2 py-1 text-xs font-black text-amber-100 shadow-lg shadow-orange-950/40 lg:inline-flex">
-                    <Flame className="size-3 fill-amber-200 text-amber-200" />
-                    {option.note}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <span
-              className={
-                isLightTheme
-                  ? 'inline-flex items-center gap-2 text-base font-semibold text-slate-900'
-                  : 'inline-flex items-center gap-2 text-base font-semibold text-white'
-              }
-            >
-              <span className="size-1.5 rounded-full bg-emerald-400" />
-              Cancel anytime
-            </span>
-          </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {visiblePricingPlans.map((p) => (
-              <div
-                key={p.name}
-                className={`relative flex min-h-[520px] flex-col rounded-2xl border p-6 transition ${
-                  p.featured
-                    ? 'border-transparent bg-[linear-gradient(rgba(248,250,252,0.98),rgba(236,253,245,0.96))_padding-box,linear-gradient(135deg,rgba(16,185,129,0.68),rgba(34,211,238,0.46),rgba(148,163,184,0.34))_border-box] shadow-[0_30px_70px_-40px_rgba(16,185,129,0.35)] ring-1 ring-emerald-300/35 dark:border-emerald-500/50 dark:bg-[#0b2517] dark:shadow-2xl dark:shadow-emerald-950/25 dark:ring-emerald-400/25'
-                    : 'border-slate-200/80 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.28)] hover:border-emerald-200 dark:border-white/10 dark:bg-[#090e1a] dark:hover:border-white/20'
-                }`}
-              >
-                {p.featured && (
-                  <span
-                    className={`absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-lg bg-gradient-to-r ${palette.accent} px-3 py-1 text-[10px] font-bold tracking-wider text-white uppercase`}
-                  >
-                    <Crown className="size-3" />
-                    Most Popular
-                  </span>
-                )}
-                <div className="flex items-center gap-4">
-                  <span
-                    className={`inline-flex size-12 shrink-0 items-center justify-center rounded-xl ${
-                      p.featured
-                        ? 'bg-gradient-to-br from-emerald-500 to-cyan-500 text-white'
-                        : 'bg-emerald-500/12 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400'
-                    }`}
-                  >
-                    {p.featured ? (
-                      <Crown className="size-6" />
-                    ) : (
-                      <Zap className="size-6" />
-                    )}
-                  </span>
-                  <h3 className="text-xl font-black text-slate-950 dark:text-white">
-                    {p.name}
-                  </h3>
-                </div>
-
-                <div className="mt-8">
-                  <div className="flex flex-wrap items-baseline gap-2">
-                    {p.originalPrice && (
-                      <span className="text-base font-black text-slate-400 line-through dark:text-zinc-500">
-                        {p.originalPrice}
-                      </span>
-                    )}
+                  <div className="flex items-center gap-2">
                     <span
-                      className={`text-4xl font-black tracking-tight ${
-                        p.featured
-                          ? `bg-gradient-to-r ${palette.accent} bg-clip-text text-transparent`
-                          : 'text-slate-950 dark:text-white'
-                      }`}
+                      className={`inline-flex size-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 ${palette.badgeText}`}
                     >
-                      {p.price}
+                      {String(index + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-base font-bold text-slate-500 dark:text-zinc-400">
-                      {p.unit}
-                    </span>
+                    <h3 className="text-base font-semibold text-white">
+                      {feature.title}
+                    </h3>
                   </div>
-                  {(p.annualPrice || p.discountLabel) && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {p.annualPrice && (
-                        <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-black text-emerald-700 dark:text-emerald-300">
-                          {p.annualPrice}
-                        </span>
-                      )}
-                      {p.discountLabel && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-red-500 to-orange-600 px-3 py-1 text-xs font-black text-amber-100">
-                          <Flame className="size-3 fill-amber-200 text-amber-200" />
-                      {p.discountLabel}
-                    </span>
-                  )}
+                  <p className="mt-3 text-sm text-zinc-300">{feature.copy}</p>
                 </div>
-              )}
-                  <p className="mt-5 text-sm font-semibold text-slate-500 underline decoration-dotted underline-offset-4 dark:text-zinc-400">
-                    {p.creditValue}
-                  </p>
-                </div>
-                <p className="mt-5 min-h-16 text-sm leading-6 text-slate-600 dark:text-zinc-400">
-                  {p.description}
-                </p>
-                <Link
-                  href="/pricing"
-                  className={`mt-6 inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-black transition ${
-                    p.featured
-                      ? `bg-gradient-to-r ${palette.accent} text-white hover:brightness-110`
-                      : 'border border-emerald-200 bg-white text-emerald-700 shadow-[0_18px_40px_-32px_rgba(16,185,129,0.18)] hover:border-cyan-300 hover:bg-emerald-50 dark:border-zinc-300/30 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white'
-                  }`}
-                >
-                  {p.cta}
-                  <Zap className="size-4 fill-current" />
-                </Link>
-                <div className="mt-8 rounded-2xl border border-slate-200/80 bg-slate-50/85 p-5 dark:border-white/10 dark:bg-black/20">
-                  <p className="text-sm font-black text-slate-950 dark:text-white">
-                    {p.credits}
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-slate-500 dark:text-zinc-500">
-                    {p.billingNote}
-                  </p>
-                  <ul className="mt-5 space-y-3 text-sm">
-                    {p.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-3 text-slate-700 dark:text-zinc-300"
-                      >
-                        <Check className="mt-0.5 size-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials — creator quotes (auto-scrolling marquee, constrained to max-w-7xl) */}
-      <section className="border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 pt-14 md:px-8 md:pt-20">
-          <div className="flex flex-col items-center text-center">
-            <SectionEyebrow palette={palette}>Creator Voices</SectionEyebrow>
-            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-              What Creators Say About GPT Image 2
+        <HomePricingSection palette={palette} />
+
+        <TestimonialsSection palette={palette} />
+        <FaqSection palette={palette} />
+
+        <section
+          id="get-started"
+          className={`relative overflow-hidden border-b border-white/5 bg-gradient-to-br ${palette.accentSoft}`}
+          style={deferredSectionStyle}
+        >
+          <div className="mx-auto max-w-4xl px-4 py-16 text-center md:px-8 md:py-24">
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+              {finalCta.title}
             </h2>
-            <p className="mt-4 max-w-3xl text-zinc-400">{testimonialsIntro}</p>
-          </div>
-        </div>
-
-        <div className="group relative mx-auto mt-10 max-w-7xl overflow-hidden px-4 md:px-8">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#0B0D12] to-transparent md:w-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#0B0D12] to-transparent md:w-20" />
-
-          <div
-            className="flex w-max [animation:testimonial-scroll_60s_linear_infinite] gap-6 will-change-transform group-hover:[animation-play-state:paused] motion-reduce:[animation:none]"
-            aria-label="Creator testimonials"
-          >
-            {[...testimonials, ...testimonials].map((t, i) => (
+            <p className="mx-auto mt-5 max-w-2xl text-zinc-200">
+              {finalCta.subcopy}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
-                key={`${t.url}-${i}`}
-                href={t.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-hidden={i >= testimonials.length}
-                className="relative flex w-[300px] flex-shrink-0 flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821] sm:w-[360px]"
+                href={finalCta.primary.href}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold ${palette.accentBg}`}
               >
-                <div className="flex items-center justify-between">
-                  <SocialLogo
-                    source={t.source}
-                    className="size-5 text-white"
-                  />
-                </div>
-                <blockquote className="text-sm leading-relaxed text-zinc-200">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <div className="text-xs text-zinc-500">
-                  {t.engagement} · {t.date}
-                </div>
-                <figcaption className="mt-auto flex items-center gap-3 border-t border-white/5 pt-4">
-                  <TestimonialAvatar testimonial={t} />
-                  <div className="leading-tight">
-                    <div className="flex items-center gap-1 text-sm font-semibold text-white">
-                      {t.name}
-                      {t.verified && (
-                        <Check
-                          className={`size-3.5 ${palette.badgeText}`}
-                          aria-label="Verified account"
-                        />
-                      )}
-                    </div>
-                    <div className="text-xs text-zinc-400">
-                      {t.role} ·{' '}
-                      <span className="text-zinc-500">{t.handle}</span>
-                    </div>
-                  </div>
-                </figcaption>
+                <Wand2 className="size-4" />
+                {finalCta.primary.label}
               </a>
-            ))}
+              <Link
+                href={finalCta.secondary.href}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
+              >
+                {finalCta.secondary.label}
+              </Link>
+            </div>
           </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 pb-14 md:px-8 md:pb-20">
-          <p className="mt-10 text-center text-xs text-zinc-500">
-            {testimonialsDisclaimer}
-          </p>
-        </div>
-
-        <style>{`
-          @keyframes testimonial-scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(-50% - 0.75rem)); }
-          }
-        `}</style>
-      </section>
-
-      {/* FAQ */}
-      <section className="border-b border-white/5 bg-[#0B0D12]">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: faqs.map((f) => ({
-                '@type': 'Question',
-                name: f.q,
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: f.a,
-                },
-              })),
-            }),
-          }}
-        />
-        <div className="mx-auto max-w-4xl px-4 py-14 md:px-8 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow palette={palette}>FAQ</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Frequently Asked Questions About GPT Image 2
-            </h2>
-          </div>
-          <div className="mt-8 divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
-            {faqs.map((f, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <div key={f.q}>
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-white/5"
-                  >
-                    <span className="text-sm font-semibold text-white sm:text-base">
-                      {f.q}
-                    </span>
-                    <ChevronDown
-                      className={`size-4 shrink-0 text-zinc-400 transition ${isOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-sm text-zinc-400">{f.a}</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section
-        id="get-started"
-        className={`relative overflow-hidden border-b border-white/5 bg-gradient-to-br ${palette.accentSoft}`}
-      >
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center md:px-8 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
-            {finalCta.title}
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-zinc-300">
-            {finalCta.subcopy}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={finalCta.primary.href}
-              className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold ${palette.accentBg}`}
-            >
-              <Wand2 className="size-4" />
-              {finalCta.primary.label}
-            </a>
-            <Link
-              href={finalCta.secondary.href}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              {finalCta.secondary.label}
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <GptImageStudioSiteFooter />
     </div>
   );
 }
 
-function SectionEyebrow({
-  children,
-  palette,
-}: {
-  children: React.ReactNode;
-  palette: (typeof palettes)['A'];
-}) {
+function TestimonialsSection({ palette }: { palette: HomePalette }) {
+  const loopedTestimonials = [...testimonials, ...testimonials];
+
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-wider uppercase ${palette.badgeText}`}
+    <section
+      className="border-b border-white/5"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '920px' }}
     >
-      <span className="size-1 rounded-full bg-current" />
-      {children}
-    </span>
+      <div className="mx-auto max-w-7xl px-4 pt-14 md:px-8 md:pt-20">
+        <div className="flex flex-col items-center text-center">
+          <SectionEyebrow badgeTextClassName={palette.badgeText}>
+            Creator Voices
+          </SectionEyebrow>
+          <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
+            What Creators Say About GPT Image 2
+          </h2>
+          <p className="mt-4 max-w-3xl text-zinc-300">{testimonialsIntro}</p>
+        </div>
+      </div>
+
+      <div className="group relative mx-auto mt-10 max-w-7xl overflow-hidden px-4 md:px-8">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#0B0D12] to-transparent md:w-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#0B0D12] to-transparent md:w-20" />
+
+        <div
+          className="flex w-max gap-6 will-change-transform motion-reduce:[animation:none] [animation:testimonial-scroll_60s_linear_infinite] group-hover:[animation-play-state:paused]"
+          aria-label="Creator testimonials"
+        >
+          {loopedTestimonials.map((testimonial, index) => {
+            const isDuplicate = index >= testimonials.length;
+
+            return (
+              <a
+                key={`${testimonial.url}-${index}`}
+                href={testimonial.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-hidden={isDuplicate}
+                tabIndex={isDuplicate ? -1 : undefined}
+                className="relative flex w-[300px] flex-shrink-0 flex-col gap-4 rounded-2xl border border-white/10 bg-[#101218] p-6 transition hover:border-white/30 hover:bg-[#151821] sm:w-[360px]"
+              >
+                <div className="flex items-center justify-between">
+                  <SocialLogo
+                    source={testimonial.source}
+                    className="size-5 text-white"
+                  />
+                </div>
+                <blockquote className="text-sm leading-relaxed text-zinc-200">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+                <div className="text-xs text-zinc-400">
+                  {testimonial.engagement} · {testimonial.date}
+                </div>
+                <div className="mt-auto flex items-center gap-3 border-t border-white/5 pt-4">
+                  <span
+                    aria-hidden="true"
+                    className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.color} text-sm font-bold text-white`}
+                  >
+                    {testimonial.initial}
+                  </span>
+                  <div className="leading-tight">
+                    <div className="flex items-center gap-1 text-sm font-semibold text-white">
+                      {testimonial.name}
+                      {testimonial.verified && (
+                        <Check
+                          className={`size-3.5 ${palette.badgeText}`}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                    <div className="text-xs text-zinc-300">
+                      {testimonial.role} ·{' '}
+                      <span className="text-zinc-400">{testimonial.handle}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 pb-14 md:px-8 md:pb-20">
+        <p className="mt-10 text-center text-xs text-zinc-400">
+          {testimonialsDisclaimer}
+        </p>
+      </div>
+
+      <style>{`
+        @keyframes testimonial-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(calc(-50% - 0.75rem)); }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+function FaqSection({ palette }: { palette: HomePalette }) {
+  return (
+    <section
+      className="border-b border-white/5 bg-[#0B0D12]"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '720px' }}
+    >
+      <div className="mx-auto max-w-4xl px-4 py-14 md:px-8 md:py-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionEyebrow badgeTextClassName={palette.badgeText}>
+            FAQ
+          </SectionEyebrow>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Frequently Asked Questions About GPT Image 2
+          </h2>
+        </div>
+        <div className="mt-8 divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-[#101218]">
+          {faqs.map((faq, index) => (
+            <details key={faq.q} className="group" open={index === 0}>
+              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-white/5">
+                <span className="text-sm font-semibold text-white sm:text-base">
+                  {faq.q}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="text-lg text-zinc-400 transition group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <div className="px-5 pb-5 text-sm text-zinc-300">{faq.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1045,7 +624,7 @@ function SocialLogo({
     return (
       <svg
         viewBox="0 0 24 24"
-        aria-label="X"
+        aria-hidden="true"
         className={className}
         fill="currentColor"
       >
@@ -1053,39 +632,15 @@ function SocialLogo({
       </svg>
     );
   }
+
   return (
     <svg
       viewBox="0 0 24 24"
-      aria-label="Reddit"
+      aria-hidden="true"
       className={className}
       fill="currentColor"
     >
       <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" />
     </svg>
-  );
-}
-
-function TestimonialAvatar({ testimonial }: { testimonial: Testimonial }) {
-  const [errored, setErrored] = useState(false);
-  const showFallback = errored || !testimonial.avatarUrl;
-
-  if (showFallback) {
-    return (
-      <span
-        aria-hidden="true"
-        className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.color} text-sm font-bold text-white`}
-      >
-        {testimonial.initial}
-      </span>
-    );
-  }
-  return (
-    <img
-      src={testimonial.avatarUrl}
-      alt={testimonial.name}
-      onError={() => setErrored(true)}
-      className="size-10 shrink-0 rounded-full border border-white/10 object-cover"
-      loading="lazy"
-    />
   );
 }

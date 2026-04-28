@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { requireAdminAccess } from '@/core/rbac/permission';
 import { LocaleDetector } from '@/shared/blocks/common';
 import { DashboardLayout } from '@/shared/blocks/dashboard/layout';
+import { AppRuntimeProvider } from '@/shared/contexts/app-runtime-provider';
 import { getAllConfigs } from '@/shared/models/config';
 import { Sidebar as SidebarType } from '@/shared/types/blocks/dashboard';
 
@@ -46,9 +47,11 @@ export default async function AdminLayout({
   }
 
   return (
-    <DashboardLayout sidebar={sidebar}>
-      <LocaleDetector />
-      {children}
-    </DashboardLayout>
+    <AppRuntimeProvider>
+      <DashboardLayout sidebar={sidebar}>
+        <LocaleDetector />
+        {children}
+      </DashboardLayout>
+    </AppRuntimeProvider>
   );
 }
