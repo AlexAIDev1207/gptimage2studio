@@ -30,7 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
-import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { useAppContext } from '@/shared/contexts/app';
 
@@ -703,24 +702,38 @@ export default function Workbench({
       >
         {/* LEFT: form */}
         <div className="border-b border-emerald-100 bg-white p-4 dark:border-white/10 dark:bg-[#17181D] md:p-6 lg:border-r lg:border-b-0">
-          <Tabs value={mode} onValueChange={(v) => setMode(v as Mode)}>
-            <TabsList className="grid h-12 w-full grid-cols-2 rounded-xl border border-emerald-100 bg-emerald-50/70 p-1 text-slate-500 dark:border-white/10 dark:bg-[#111827] dark:text-zinc-400">
-              <TabsTrigger
-                value="image-to-image"
-                className={`gap-1.5 rounded-lg text-xs font-semibold sm:text-sm ${theme.activeTab}`}
-              >
-                <Pencil className="size-3.5" />
-                Image Edit
-              </TabsTrigger>
-              <TabsTrigger
-                value="text-to-image"
-                className={`gap-1.5 rounded-lg text-xs font-semibold sm:text-sm ${theme.activeTab}`}
-              >
-                <Wand2 className="size-3.5" />
-                Text-to-Image
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+          <div className="grid h-12 w-full grid-cols-2 rounded-xl border border-emerald-100 bg-emerald-50/70 p-1 text-slate-500 dark:border-white/10 dark:bg-[#111827] dark:text-zinc-400">
+            {[
+              {
+                value: 'image-to-image' as const,
+                label: 'Image Edit',
+                icon: Pencil,
+              },
+              {
+                value: 'text-to-image' as const,
+                label: 'Text-to-Image',
+                icon: Wand2,
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              const active = mode === item.value;
+
+              return (
+                <button
+                  key={item.value}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setMode(item.value)}
+                  className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition focus-visible:ring-2 focus-visible:ring-emerald-400/50 focus-visible:outline-none sm:text-sm ${
+                    active ? theme.activeTab : ''
+                  }`}
+                >
+                  <Icon className="size-3.5" />
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
 
           <div className="mt-5">
             <div className="flex items-center justify-between">
@@ -785,7 +798,7 @@ export default function Workbench({
                   uploadLabel="Add Image"
                   uploadSubLabel="Max 30MB"
                   onChange={handleReferenceImagesChange}
-                  className="w-full [&_.group]:w-full [&_.group]:rounded-2xl [&_.group]:border-emerald-100 [&_.group]:bg-emerald-50/55 [&_.group]:p-0 [&_.group]:shadow-none [&_.group]:hover:border-cyan-300/60 dark:[&_.group]:border-white/15 dark:[&_.group]:bg-[#080B10] [&_button]:h-[118px] [&_button]:w-full [&_button]:gap-2.5 [&_button]:px-3 [&_button]:text-center [&_button_div]:h-11 [&_button_div]:w-11 [&_button_div]:border-emerald-200 dark:[&_button_div]:border-white/30 [&_button_svg]:h-5 [&_button_svg]:w-5 [&_button_svg]:text-cyan-500 dark:[&_button_svg]:text-cyan-300 [&_img]:h-[118px] [&_img]:w-full [&_img]:rounded-2xl [&_span]:leading-none [&_span]:text-slate-700 dark:[&_span]:text-zinc-300 [&_span:first-of-type]:text-[13px] [&_span:first-of-type]:font-bold [&_span:last-child]:text-[11px] [&_span:last-child]:font-medium [&_span:last-child]:text-slate-500 dark:[&_span:last-child]:text-zinc-500 [&>div:last-child]:grid [&>div:last-child]:grid-cols-1 [&>div:last-child]:gap-3"
+                  className="w-full [&_.group]:w-full [&_.group]:rounded-2xl [&_.group]:border-emerald-100 [&_.group]:bg-emerald-50/55 [&_.group]:p-0 [&_.group]:shadow-none [&_.group]:hover:border-cyan-300/60 dark:[&_.group]:border-white/15 dark:[&_.group]:bg-[#080B10] [&_button]:h-[118px] [&_button]:w-full [&_button]:gap-2.5 [&_button]:px-3 [&_button]:text-center [&_button_div]:h-11 [&_button_div]:w-11 [&_button_div]:border-emerald-200 dark:[&_button_div]:border-white/30 [&_button_svg]:h-5 [&_button_svg]:w-5 [&_button_svg]:text-cyan-500 dark:[&_button_svg]:text-cyan-300 [&_img]:h-[118px] [&_img]:w-full [&_img]:rounded-2xl [&_span]:leading-none [&_span]:text-slate-700 dark:[&_span]:text-zinc-300 [&_span:first-of-type]:text-[13px] [&_span:first-of-type]:font-bold [&_span:last-child]:text-[11px] [&_span:last-child]:font-medium [&_span:last-child]:text-slate-500 dark:[&_span:last-child]:text-zinc-400 [&>div:last-child]:grid [&>div:last-child]:grid-cols-1 [&>div:last-child]:gap-3"
                 />
                 <button
                   type="button"
@@ -802,7 +815,7 @@ export default function Workbench({
                   <span className="text-[13px] leading-none font-bold text-slate-800 dark:text-zinc-300">
                     From Library
                   </span>
-                  <span className="text-[11px] leading-none font-medium text-slate-500 dark:text-zinc-500">
+                  <span className="text-[11px] leading-none font-medium text-slate-500 dark:text-zinc-400">
                     Saved refs
                   </span>
                 </button>
@@ -827,7 +840,7 @@ export default function Workbench({
                 className={`text-[11px] tabular-nums ${
                   isPromptOverLimit
                     ? 'text-rose-500 dark:text-rose-400'
-                    : 'text-slate-500 dark:text-zinc-500'
+                    : 'text-slate-500 dark:text-zinc-400'
                 }`}
               >
                 {promptLength}/{MAX_PROMPT_LENGTH}
@@ -844,7 +857,7 @@ export default function Workbench({
               }`}
             />
             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-              <p className="text-xs text-slate-500 dark:text-zinc-500">
+              <p className="text-xs text-slate-500 dark:text-zinc-400">
                 Detailed descriptions lead to better results
               </p>
               <a
@@ -866,7 +879,10 @@ export default function Workbench({
                 value={aspectRatio}
                 onValueChange={(v) => setAspectRatio(v)}
               >
-                <SelectTrigger className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
+                <SelectTrigger
+                  aria-label="Aspect ratio"
+                  className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate"
+                >
                   <span className="flex items-center gap-2">
                     {aspectRatio === 'auto' && (
                       <span className="inline-flex size-3 rounded-sm bg-emerald-400" />
@@ -896,7 +912,10 @@ export default function Workbench({
                 value={resolution}
                 onValueChange={(v) => setResolution(v as ResolutionTier)}
               >
-                <SelectTrigger className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
+                <SelectTrigger
+                  aria-label="Resolution"
+                  className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate"
+                >
                   <span className="flex items-center gap-2">
                     <Monitor className="size-3.5 text-slate-400 dark:text-zinc-400" />
                     <SelectValue placeholder="2K" />
@@ -925,7 +944,10 @@ export default function Workbench({
               value={String(outputCount)}
               onValueChange={(v) => setOutputCount(Number(v) as OutputCount)}
             >
-              <SelectTrigger className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate">
+              <SelectTrigger
+                aria-label="Output count"
+                className="mt-2 w-full rounded-xl border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50/60 dark:border-white/10 dark:bg-[#0B0D12] dark:text-zinc-200 dark:hover:bg-white/[0.04] [&>span]:min-w-0 [&>span]:truncate"
+              >
                 <span className="flex items-center gap-2">
                   <Images className="size-3.5 text-slate-400 dark:text-zinc-400" />
                   <SelectValue placeholder="1" />
@@ -1018,7 +1040,7 @@ export default function Workbench({
             )}
 
             {isMounted && user && (
-              <p className="mt-2 text-center text-[11px] text-slate-500 dark:text-zinc-500">
+              <p className="mt-2 text-center text-[11px] text-slate-500 dark:text-zinc-400">
                 Remaining credits: {remainingCredits}
               </p>
             )}
@@ -1128,12 +1150,17 @@ function CarouselPanel({
               onClick={() => onSelect(i)}
               aria-label={`Slide ${i + 1}: ${c.title}`}
               aria-current={i === activeIndex ? 'true' : undefined}
-              className={`h-2 rounded-full transition-all ${
-                i === activeIndex
-                  ? `w-9 ${theme.dot}`
-                  : 'w-2 bg-emerald-200 hover:bg-emerald-300 dark:bg-white/35 dark:hover:bg-white/60'
-              }`}
-            />
+              className="group inline-flex size-11 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:ring-emerald-400/60 focus-visible:outline-none"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all ${
+                  i === activeIndex
+                    ? `w-9 ${theme.dot}`
+                    : 'w-2 bg-emerald-200 group-hover:bg-emerald-300 dark:bg-white/35 dark:group-hover:bg-white/60'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -1160,7 +1187,7 @@ function ProgressPanel({
         </div>
         <Progress value={progress} className="bg-emerald-100 dark:bg-white/10" />
         {statusLabel && (
-          <p className="text-center text-xs text-slate-500 dark:text-zinc-500">{statusLabel}</p>
+          <p className="text-center text-xs text-slate-500 dark:text-zinc-400">{statusLabel}</p>
         )}
       </div>
     </div>

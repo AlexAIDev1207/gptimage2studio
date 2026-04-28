@@ -1,12 +1,16 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 
 import { authClient, useSession } from '@/core/auth/client';
 import { useAppContext } from '@/shared/contexts/app';
 import { User as UserType } from '@/shared/models/user';
 
-import { SignModal } from './sign-modal';
+const SignModal = dynamic(
+  () => import('./sign-modal').then((mod) => mod.SignModal),
+  { ssr: false }
+);
 
 function extractSessionUser(data: any): UserType | null {
   const u = data?.user ?? data?.data?.user ?? null;
@@ -21,6 +25,7 @@ export function AuthRuntime() {
     user,
     setUser,
     fetchUserInfo,
+    isShowSignModal,
     showOneTap,
   } = useAppContext();
 
@@ -92,5 +97,5 @@ export function AuthRuntime() {
     })();
   }, [fetchUserInfo, isPending, sessionUser, setUser, user]);
 
-  return <SignModal />;
+  return isShowSignModal ? <SignModal /> : null;
 }

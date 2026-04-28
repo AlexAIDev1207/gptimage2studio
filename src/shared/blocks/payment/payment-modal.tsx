@@ -38,9 +38,6 @@ export function PaymentModal({
   const { isShowPaymentModal, setIsShowPaymentModal } = useAppContext();
   const { configs } = useAppContext();
 
-  // todo: dynamic set callbackURL
-  const callbackURL = '/';
-
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   if (isDesktop) {
@@ -54,10 +51,8 @@ export function PaymentModal({
             </DialogDescription>
           </DialogHeader>
           <PaymentProviders
-            callbackUrl={callbackURL}
             configs={configs}
             loading={isLoading}
-            setLoading={() => {}}
             pricingItem={pricingItem}
             onCheckout={onCheckout}
           />
@@ -76,10 +71,8 @@ export function PaymentModal({
           </DrawerDescription>
         </DrawerHeader>
         <PaymentProviders
-          callbackUrl={callbackURL}
           configs={configs}
           loading={isLoading}
-          setLoading={() => {}}
           pricingItem={pricingItem}
           onCheckout={onCheckout}
           className="px-4"

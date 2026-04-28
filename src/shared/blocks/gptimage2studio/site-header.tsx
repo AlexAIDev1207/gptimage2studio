@@ -1,13 +1,18 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { ArrowRight, Menu, Sparkles, X } from 'lucide-react';
 
 import { Link, usePathname } from '@/core/i18n/navigation';
-import { SignUser } from '@/shared/blocks/sign/sign-user';
 import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme-toggler';
 import { useAppContext } from '@/shared/contexts/app';
 import { cn } from '@/shared/lib/utils';
+
+const SignUser = dynamic(
+  () => import('@/shared/blocks/sign/sign-user').then((mod) => mod.SignUser),
+  { ssr: false }
+);
 
 const navItems = [
   { label: 'Generator', href: '/#workbench', match: (pathname: string) => pathname === '/' },
