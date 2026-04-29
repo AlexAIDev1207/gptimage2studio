@@ -5,11 +5,13 @@ import { AnalyticsConfigs, AnalyticsProvider } from '.';
 
 /**
  * Plausible analytics configs
- * @docs https://plausible.io/docs/integration-guides
+ * 适配 Plausible CE v3+ 的 init() 风格 snippet（hash 文件名内置 domain）。
+ * 旧版 data-domain 风格已不再使用，domain 字段仅作为 UI 标签保留。
+ * @docs https://plausible.io/docs/plausible-script
  */
 export interface PlausibleAnalyticsConfigs extends AnalyticsConfigs {
-  domain: string; // data domain
-  src: string; // script src
+  domain?: string; // 仅用于配置 UI 显示，不参与脚本注入
+  src: string; // 完整 script URL，例如 https://analysis.example.com/js/pa--xxx.js
 }
 
 /**
@@ -28,23 +30,15 @@ export class PlausibleAnalyticsProvider implements AnalyticsProvider {
   getHeadScripts(): ReactNode {
     return (
       <>
-        {/* Plausible Analytics */}
+        {/* Plausible Analytics: init queue stub + init() 触发上报 */}
         <Script
           id={this.name}
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `
-              window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
-            `,
+            __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init();`,
           }}
         />
-        <Script
-          data-domain={this.configs.domain}
-          src={this.configs.src}
-          strategy="afterInteractive"
-          defer
-          async
-        />
+        <Script src={this.configs.src} strategy="afterInteractive" async />
       </>
     );
   }

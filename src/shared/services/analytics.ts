@@ -28,8 +28,8 @@ export function getAnalyticsManagerWithConfigs(configs: Configs) {
     );
   }
 
-  // plausible
-  if (configs.plausible_domain && configs.plausible_src) {
+  // plausible（CE v3+ 仅需 src，domain 已编码进 hash 文件名）
+  if (configs.plausible_src) {
     analytics.addProvider(
       new PlausibleAnalyticsProvider({
         domain: configs.plausible_domain,
