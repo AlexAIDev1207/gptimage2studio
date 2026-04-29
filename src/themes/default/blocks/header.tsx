@@ -7,10 +7,10 @@ import { Link, usePathname } from '@/core/i18n/navigation';
 import {
   BrandLogo,
   LocaleSelector,
-  SignUser,
   SmartIcon,
   ThemeToggler,
 } from '@/shared/blocks/common';
+import { SignUser } from '@/shared/blocks/sign/sign-user';
 import {
   Accordion,
   AccordionContent,
