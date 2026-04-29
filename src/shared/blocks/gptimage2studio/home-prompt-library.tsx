@@ -1,7 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState, type ComponentType } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -12,13 +11,16 @@ import { promptCards, type PromptCard } from './content';
 import type { HomePalette } from './home-theme';
 import { SectionEyebrow } from './section-eyebrow';
 
-const PromptDetailDialog = dynamic(
-  () =>
-    import('./prompt-detail-dialog').then((module) => ({
-      default: module.PromptDetailDialog,
-    })),
-  { ssr: false }
-);
+// dialog chunk 仅在用户首次点 prompt card 时下载
+type DialogProps = {
+  card: PromptCard;
+  copied: string | null;
+  onClose: () => void;
+  onCopy: (text: string, key: string) => void;
+  onUsePrompt: (card: PromptCard) => void;
+  onUseReference: (card: PromptCard) => void;
+};
+type DialogComponent = ComponentType<DialogProps>;
 
 const PENDING_PROMPT_STORAGE_KEY = 'gptimage2studio:pending-prompt';
 const INITIAL_PROMPT_COUNT = 12;
@@ -40,6 +42,27 @@ export function HomePromptLibrary({
   const [copied, setCopied] = useState<string | null>(null);
   const [selectedPrompt, setSelectedPrompt] = useState<PromptCard | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_PROMPT_COUNT);
+  const [PromptDetailDialog, setDialog] = useState<DialogComponent | null>(null);
+
+  useEffect(() => {
+    if (!selectedPrompt || PromptDetailDialog) return;
+    let cancelled = false;
+    import('./prompt-detail-dialog')
+      .then((mod) => {
+        if (!cancelled) {
+          setDialog(() => mod.PromptDetailDialog as DialogComponent);
+        }
+      })
+      .catch((err) => {
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.error('[home-prompt-library] dialog import failed', err);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedPrompt, PromptDetailDialog]);
 
   const visibleCards = promptCards.slice(0, visibleCount);
   const hasMore = visibleCount < promptCards.length;
@@ -132,7 +155,7 @@ export function HomePromptLibrary({
         </div>
       </div>
 
-      {selectedPrompt && (
+      {selectedPrompt && PromptDetailDialog ? (
         <PromptDetailDialog
           card={selectedPrompt}
           copied={copied}
@@ -141,7 +164,7 @@ export function HomePromptLibrary({
           onUsePrompt={(card) => handleUsePrompt(card, 'text-to-image')}
           onUseReference={(card) => handleUsePrompt(card, 'image-to-image')}
         />
-      )}
+      ) : null}
     </section>
   );
 }

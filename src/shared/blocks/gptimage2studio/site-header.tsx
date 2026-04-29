@@ -1,7 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState, type ComponentType } from 'react';
 import { ArrowRight, Menu, Sparkles, X } from 'lucide-react';
 
 import { Link, usePathname } from '@/core/i18n/navigation';
@@ -9,10 +8,14 @@ import { AnimatedThemeToggler } from '@/shared/components/magicui/animated-theme
 import { useAppContext } from '@/shared/contexts/app';
 import { cn } from '@/shared/lib/utils';
 
-const SignUser = dynamic(
-  () => import('@/shared/blocks/sign/sign-user').then((mod) => mod.SignUser),
-  { ssr: false }
-);
+// SignUser 仅在已登录用户客户端首次挂载后下载，未登录用户永不付这部分 chunk
+type SignUserNav = {
+  show_name?: boolean;
+  show_credits?: boolean;
+  show_sign_out?: boolean;
+  items?: unknown[];
+};
+type SignUserComponent = ComponentType<{ userNav: SignUserNav }>;
 
 const navItems = [
   { label: 'Generator', href: '/#workbench', match: (pathname: string) => pathname === '/' },
@@ -100,7 +103,28 @@ export function GptImageStudioSiteHeader() {
   const pathname = usePathname();
   const { user, isCheckSign, setIsShowSignModal } = useAppContext();
   const [navOpen, setNavOpen] = useState(false);
+  const [SignUser, setSignUser] = useState<SignUserComponent | null>(null);
   const handleGuestClick = () => setIsShowSignModal(true);
+
+  useEffect(() => {
+    if (!user || SignUser) return;
+    let cancelled = false;
+    import('@/shared/blocks/sign/sign-user')
+      .then((mod) => {
+        if (!cancelled) {
+          setSignUser(() => mod.SignUser as SignUserComponent);
+        }
+      })
+      .catch((err) => {
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.error('[site-header] SignUser import failed', err);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [user, SignUser]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/88 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)] backdrop-blur-xl dark:border-white/5 dark:bg-[#09090B]/80 dark:shadow-none">
@@ -145,7 +169,7 @@ export function GptImageStudioSiteHeader() {
             userLoggedIn={Boolean(user)}
             onGuestClick={handleGuestClick}
           />
-          {user && (
+          {user && SignUser ? (
             <SignUser
               userNav={{
                 show_name: true,
@@ -154,7 +178,7 @@ export function GptImageStudioSiteHeader() {
                 items: [],
               }}
             />
-          )}
+          ) : null}
           <button
             type="button"
             aria-label="Toggle navigation"

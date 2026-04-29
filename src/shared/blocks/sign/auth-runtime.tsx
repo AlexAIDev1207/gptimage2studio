@@ -1,16 +1,13 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, type ComponentType } from 'react';
 
 import { authClient, useSession } from '@/core/auth/client';
 import { useAppContext } from '@/shared/contexts/app';
 import { User as UserType } from '@/shared/models/user';
 
-const SignModal = dynamic(
-  () => import('./sign-modal').then((mod) => mod.SignModal),
-  { ssr: false }
-);
+// SignModal chunk 仅在用户首次点登录按钮 (isShowSignModal=true) 时下载
+type SignModalComponent = ComponentType<Record<string, never>>;
 
 function extractSessionUser(data: any): UserType | null {
   const u = data?.user ?? data?.data?.user ?? null;
@@ -33,6 +30,27 @@ export function AuthRuntime() {
   const sessionUser = extractSessionUser(session);
   const didFallbackSyncRef = useRef(false);
   const oneTapInitializedRef = useRef(false);
+  const [SignModal, setSignModal] = useState<SignModalComponent | null>(null);
+
+  useEffect(() => {
+    if (!isShowSignModal || SignModal) return;
+    let cancelled = false;
+    import('./sign-modal')
+      .then((mod) => {
+        if (!cancelled) {
+          setSignModal(() => mod.SignModal as SignModalComponent);
+        }
+      })
+      .catch((err) => {
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.error('[auth-runtime] SignModal import failed', err);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [isShowSignModal, SignModal]);
 
   useEffect(() => {
     fetchConfigs();
@@ -97,5 +115,5 @@ export function AuthRuntime() {
     })();
   }, [fetchUserInfo, isPending, sessionUser, setUser, user]);
 
-  return isShowSignModal ? <SignModal /> : null;
+  return isShowSignModal && SignModal ? <SignModal /> : null;
 }
