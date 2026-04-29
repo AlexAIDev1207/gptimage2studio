@@ -3,7 +3,6 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
 import HomePage from '@/shared/blocks/gptimage2studio/home-page';
-import { faqs } from '@/shared/blocks/gptimage2studio/content';
 
 const SITE_URL = envConfigs.app_url;
 
@@ -56,28 +55,11 @@ export default async function LandingPage({
       'Create and edit product photos, posters, social ads, infographics, UI mockups, and text-rich visuals with prompt-first AI image workflows.',
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: f.a,
-      },
-    })),
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <HomePage variant="A" />
     </>
