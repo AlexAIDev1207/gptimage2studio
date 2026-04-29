@@ -97,7 +97,7 @@ const MODEL_OPTIONS: ModelOption[] = [
   },
   {
     key: 'nano-banana',
-    label: 'Nano Banana',
+    label: 'Nano Banana 2',
     tagline: 'Reference-driven editing · fast iteration',
     emoji: '🍌',
     // Nano Banana 2 走 Kie.ai 同一个模型；image_input 为空时为 text-to-image，非空时为 image-to-image。
@@ -774,12 +774,12 @@ export default function Workbench({
               <label className="block text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-zinc-400">
                 Select Model
               </label>
-              <a
-                href="#comparison"
+              <Link
+                href="/#comparison"
                 className="text-[11px] font-bold text-cyan-600 hover:text-emerald-600 dark:text-cyan-300 dark:hover:text-cyan-200"
               >
                 Compare →
-              </a>
+              </Link>
             </div>
             <div className="mt-2 grid gap-2">
               {MODEL_OPTIONS.map((opt) => {

@@ -113,7 +113,7 @@ export const workbench = {
     },
     {
       value: 'nano-banana',
-      label: 'Nano Banana',
+      label: 'Nano Banana 2',
       tagline: 'Reference-driven editing · fast iteration',
       emoji: '🍌',
       provider: 'kie',
@@ -156,8 +156,7 @@ export const workbench = {
     },
   ] satisfies WorkbenchResolution[],
   outputCounts: [1, 2, 4] as const,
-  defaultPrompt:
-    'Create a clean studio product photo of a premium skincare serum bottle on a white marble surface. Soft daylight, realistic contact shadows, subtle reflection, minimal luxury background. The label must read "HYDRA GLOW SERUM". Commercial ecommerce photography, sharp product edges, natural glass texture, no extra text.',
+  defaultPrompt: '',
   primaryAction: 'Start Creation',
   primaryImage:
     '/imgs/gptimage2studio/webp/workbench-primary-hydra-glow-serum.webp',
