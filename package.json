@@ -33,9 +33,9 @@
     "rbac:init": "tsx scripts/with-env.ts npx tsx scripts/init-rbac.ts",
     "rbac:assign": "tsx scripts/with-env.ts npx tsx scripts/assign-role.ts",
     "postinstall": "fumadocs-mdx",
-    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf:upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf:preview": "NEXT_PUBLIC_APP_URL=https://gptimage2studio.com opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "NEXT_PUBLIC_APP_URL=https://gptimage2studio.com opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:upload": "NEXT_PUBLIC_APP_URL=https://gptimage2studio.com opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf:typegen": "wrangler types --env-interface CloudflareEnv src/shared/types/cloudflare.d.ts"
   },
   "dependencies": {
