@@ -21,6 +21,10 @@ import { toast } from 'sonner';
 import { Link } from '@/core/i18n/navigation';
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import { ImageUploader, ImageUploaderValue } from '@/shared/blocks/common';
+import {
+  HistoryPickerDialog,
+  type HistoryImage,
+} from './history-picker-dialog';
 import { Button } from '@/shared/components/ui/button';
 import { Progress } from '@/shared/components/ui/progress';
 import {
@@ -242,6 +246,7 @@ export default function Workbench({
     ImageUploaderValue[]
   >([]);
   const [referenceImageUrls, setReferenceImageUrls] = useState<string[]>([]);
+  const [historyDialogOpen, setHistoryDialogOpen] = useState<boolean>(false);
 
   const [activeWorkbenchFeature, setActiveWorkbenchFeature] =
     useState<number>(0);
@@ -319,6 +324,32 @@ export default function Workbench({
     },
     []
   );
+
+  const handleSelectFromHistory = useCallback((image: HistoryImage) => {
+    setReferenceImageItems((prev) => {
+      if (prev.some((item) => item.url === image.imageUrl)) {
+        toast.message('Already added');
+        return prev;
+      }
+      if (prev.length >= 5) {
+        toast.error('Up to 5 reference images');
+        return prev;
+      }
+      const next: ImageUploaderValue = {
+        id: `history-${image.taskId}-${Date.now()}`,
+        preview: image.imageUrl,
+        url: image.imageUrl,
+        status: 'uploaded',
+      };
+      const merged = [...prev, next];
+      setReferenceImageUrls(
+        merged
+          .filter((item) => item.status === 'uploaded' && item.url)
+          .map((item) => item.url as string)
+      );
+      return merged;
+    });
+  }, []);
 
   const resetTaskState = useCallback(() => {
     setIsGenerating(false);
@@ -723,9 +754,12 @@ export default function Workbench({
                   key={item.value}
                   type="button"
                   aria-pressed={active}
+                  data-state={active ? 'active' : 'inactive'}
                   onClick={() => setMode(item.value)}
                   className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition focus-visible:ring-2 focus-visible:ring-emerald-400/50 focus-visible:outline-none sm:text-sm ${
-                    active ? theme.activeTab : ''
+                    active
+                      ? `${theme.activeTab} shadow-sm`
+                      : 'text-slate-500 hover:bg-white/40 hover:text-slate-700 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-100'
                   }`}
                 >
                   <Icon className="size-3.5" />
@@ -802,11 +836,7 @@ export default function Workbench({
                 />
                 <button
                   type="button"
-                  onClick={() =>
-                    toast.message(
-                      'Library picker will be connected after launch.'
-                    )
-                  }
+                  onClick={() => setHistoryDialogOpen(true)}
                   className="flex h-[118px] w-full flex-col items-center justify-center gap-2.5 rounded-2xl border border-dashed border-emerald-200 bg-emerald-50/55 px-3 text-center transition hover:border-cyan-300/60 hover:bg-cyan-50/60 dark:border-white/15 dark:bg-[#080B10] dark:hover:bg-white/[0.04]"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-dashed border-emerald-200 dark:border-white/30">
@@ -1070,6 +1100,12 @@ export default function Workbench({
           )}
         </div>
       </div>
+      <HistoryPickerDialog
+        open={historyDialogOpen}
+        onOpenChange={setHistoryDialogOpen}
+        onSelect={handleSelectFromHistory}
+        isLoggedIn={Boolean(user)}
+      />
     </div>
   );
 }
