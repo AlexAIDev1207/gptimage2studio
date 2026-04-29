@@ -94,7 +94,7 @@ function HeaderAction({
       }}
       className={guestClassName}
     >
-      Get 20 Free Credits
+      Sign in
     </button>
   );
 }
