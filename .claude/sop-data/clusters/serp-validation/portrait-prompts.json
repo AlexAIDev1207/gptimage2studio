@@ -1,0 +1,38 @@
+{
+  "slug": "portrait-prompts",
+  "candidate_score": 0.682,
+  "query": "portrait prompts",
+  "search_url": "https://www.google.com/search?q=portrait+prompts&hl=en",
+  "top10": [
+    { "rank": 1, "domain": "promptomania.com", "title": "Best Portrait Photography Prompts for AI Image Generation", "type": "tool" },
+    { "rank": 2, "domain": "promptplum.com", "title": "Portraits - AI Photo Editing Prompts (242 curated)", "type": "tool" },
+    { "rank": 3, "domain": "121clicks.com", "title": "20 ChatGPT Photo Prompts for Modern Portrait Photography", "type": "blog" },
+    { "rank": 4, "domain": "pinterest.com", "title": "Portrait Prompts Photography", "type": "social" },
+    { "rank": 5, "domain": "eweek.com", "title": "8 Gemini AI Prompts That Turn Ordinary Photos...", "type": "blog" },
+    { "rank": 6, "domain": "reddit.com", "title": "My 10 Go To Professional Photography & Portrait... (r/ChatGPTPromptGenius)", "type": "social", "has_sitelinks": true },
+    { "rank": 7, "domain": "nanobananaprompt.org", "title": "AI Portrait Photography & Character Generation", "type": "competitor_hub" },
+    { "rank": 8, "domain": "carephoto.art", "title": "260+ Free AI Photo Prompts – Image Prompt Library", "type": "tool" },
+    { "rank": 9, "domain": "fiddl.art", "title": "AI Portrait Prompts for Realistic Photos", "type": "blog" },
+    { "rank": 10, "domain": "cyberlink.com", "title": "70 Trending Gemini AI Prompts for Boys & Men Portraits", "type": "blog" }
+  ],
+  "paa": [],
+  "related_searches": [
+    "Portrait prompts generator",
+    "Portrait prompts ChatGPT",
+    "Portrait prompts AI",
+    "Realistic portrait image prompts",
+    "Portrait prompts Gemini",
+    "Portrait prompts for men",
+    "Best portrait prompts",
+    "Portrait prompts free"
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 1,
+  "reddit_has_sitelinks": true,
+  "pinterest_count": 1,
+  "competitor_hubs_in_top10": ["nanobananaprompt.org/prompts/portrait"],
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康度中等：top 10 有 1 个直接竞品 cluster hub (nanobananaprompt.org)，Reddit 1 席带 sitelinks（搜索意图含强社区讨论倾向）。Related 偏向 ChatGPT/Gemini/AI 通用词，词意宽泛。我们要差异化做 GPT Image 2 specific。建议 H1 加 'GPT Image 2' 限定。",
+  "recommended_h1": "Portrait Prompts for GPT Image 2",
+  "sub_scenes_from_related": ["generator", "ChatGPT", "realistic", "Gemini", "for men", "best", "free"]
+}

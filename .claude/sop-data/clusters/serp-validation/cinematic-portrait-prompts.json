@@ -1,0 +1,27 @@
+{
+  "slug": "cinematic-portrait-prompts",
+  "candidate_score": 0.537,
+  "query": "cinematic portrait prompts",
+  "top10": [
+    { "rank": 1, "domain": "ai.meta.com", "title": "Prompts for AI images: 10 examples and tips for better results", "type": "official_doc" },
+    { "rank": 2, "domain": "121clicks.com", "title": "ChatGPT Prompts for Cinematic Portrait Photography", "type": "blog" },
+    { "rank": 3, "domain": "media.io", "title": "ChatGPT Cinematic AI Portrait Prompts: 20+ Movie-Style Portrait Ideas", "type": "tool" },
+    { "rank": 4, "domain": "filmora.wondershare.com", "title": "30+ Gemini Nano Banana Pro Prompts for Cinematic Portrait", "type": "blog" },
+    { "rank": 5, "domain": "medium.com", "title": "I Created a Cinematic Portrait Prompt That Turns Simple Photos into Film Scenes", "type": "blog" },
+    { "rank": 6, "domain": "121clicks.com", "title": "20 Gemini AI Prompts for Creating High-Contrast Cinematic Portraits", "type": "blog" },
+    { "rank": 7, "domain": "promptplum.com", "title": "100+ Best Cinematic AI Photo Editing Prompts 2026", "type": "competitor_hub" },
+    { "rank": 8, "domain": "openart.ai", "title": "Best 25 Midjourney Prompts for Cinematic", "type": "tool/blog" },
+    { "rank": 9, "domain": "atlabs.ai", "title": "42 Cinematic AI Prompts to Master Composition", "type": "blog" },
+    { "rank": 10, "domain": "promptbase.com", "title": "Cinematic Portrait Photography Prompt Generator App", "type": "marketplace" }
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["promptplum.com", "promptbase.com"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 极其健康：9 unique domains，0 Reddit/Pinterest/Quora，全是 prompt 教程站和工具（121clicks/media.io/filmora/atlabs/promptbase）。Cinematic + portrait 这个组合用户意图非常清晰（电影感人像），GPT Image 2 image-to-image 模式正中下怀。是首选 P0 之一。",
+  "recommended_h1": "Cinematic Portrait Prompts for GPT Image 2",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

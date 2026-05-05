@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-05-03T18:04:36.850Z",
+  "expected": 140,
+  "actual": 140,
+  "failures": [],
+  "output_base": "/Users/moxiao/Documents/web-outbound/sites/gptimage2studio-claude-optimize/public/imgs/gptimage2studio/prompt-clusters",
+  "public_url_base": "/imgs/gptimage2studio/prompt-clusters",
+  "by_cluster": [
+    {
+      "slug": "product-photography",
+      "count": 14
+    },
+    {
+      "slug": "action-figure",
+      "count": 14
+    },
+    {
+      "slug": "old-photo-restoration",
+      "count": 14
+    },
+    {
+      "slug": "ui-mockups",
+      "count": 14
+    },
+    {
+      "slug": "poster-design",
+      "count": 14
+    },
+    {
+      "slug": "ecommerce-product-photos",
+      "count": 14
+    },
+    {
+      "slug": "infographics",
+      "count": 14
+    },
+    {
+      "slug": "stickers",
+      "count": 14
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "count": 14
+    },
+    {
+      "slug": "character-design",
+      "count": 14
+    }
+  ]
+}

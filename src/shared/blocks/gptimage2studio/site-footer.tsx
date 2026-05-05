@@ -6,7 +6,7 @@ import { footer } from './content';
 
 const footerLinkHrefs: Record<string, string> = {
   Generator: '/#workbench',
-  Prompts: '/prompts',
+  Prompts: '/gpt-image-2-prompts',
   Blog: '/blog',
   Pricing: '/pricing',
   'Privacy Policy': '/privacy-policy',

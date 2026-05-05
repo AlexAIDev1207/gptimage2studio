@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "product-photography",
+    "url_path": "/gpt-image-2-prompts/for-product-photography/",
+    "launch_batch": 1,
+    "h1": "GPT Image 2 Prompts for Product Photography",
+    "sub_scene_count": 6,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "action-figure",
+    "url_path": "/gpt-image-2-prompts/for-action-figure/",
+    "launch_batch": 1,
+    "h1": "GPT Image 2 Action Figure Prompts",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "old-photo-restoration",
+    "url_path": "/gpt-image-2-prompts/for-old-photo-restoration/",
+    "launch_batch": 1,
+    "h1": "GPT Image 2 Prompts for Old Photo Restoration",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 3
+  },
+  {
+    "slug": "ui-mockups",
+    "url_path": "/gpt-image-2-prompts/for-ui-mockups/",
+    "launch_batch": 1,
+    "h1": "GPT Image 2 Prompts for UI Mockups",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "poster-design",
+    "url_path": "/gpt-image-2-prompts/for-poster-design/",
+    "launch_batch": 1,
+    "h1": "GPT Image 2 Prompts for Poster Design",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "ecommerce-product-photos",
+    "url_path": "/gpt-image-2-prompts/for-ecommerce-product-photos/",
+    "launch_batch": 2,
+    "h1": "GPT Image 2 Prompts for Ecommerce Product Photos",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "infographics",
+    "url_path": "/gpt-image-2-prompts/for-infographics/",
+    "launch_batch": 2,
+    "h1": "GPT Image 2 Prompts for Infographics",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "stickers",
+    "url_path": "/gpt-image-2-prompts/for-stickers/",
+    "launch_batch": 2,
+    "h1": "GPT Image 2 Prompts for Stickers",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "instagram-photo-editing",
+    "url_path": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+    "launch_batch": 2,
+    "h1": "GPT Image 2 Prompts for Instagram Photo Editing",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  },
+  {
+    "slug": "character-design",
+    "url_path": "/gpt-image-2-prompts/for-character-design/",
+    "launch_batch": 2,
+    "h1": "GPT Image 2 Prompts for Character Design",
+    "sub_scene_count": 5,
+    "faq_count": 5,
+    "related_count": 4
+  }
+]

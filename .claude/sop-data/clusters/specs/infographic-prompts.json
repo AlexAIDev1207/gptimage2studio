@@ -1,0 +1,214 @@
+{
+  "slug": "infographic-prompts",
+  "priority": "P0-10",
+  "tier": "creative",
+  "h1": "Infographic Prompts for GPT Image 2",
+  "meta_title": "Infographic Prompts for GPT Image 2 — Data Viz with Real Text",
+  "meta_description": "Copy-paste infographic prompts for GPT Image 2. Process diagrams, isometric breakdowns, data viz, educational. Pixel-level text rendering for legible labels and stats.",
+  "intro_long": "13 tested GPT Image 2 prompts that produce labeled infographics with pixel-perfect text — process diagrams, isometric breakdowns, and data visualizations.",
+  "how_it_works": [
+    {
+      "title": "Pick an infographic format",
+      "body": "Choose process diagram, isometric exploded view, data viz, comparison, or timeline based on your topic."
+    },
+    {
+      "title": "Quote labels and data points",
+      "body": "Wrap exact strings in `label: \"EXACT TEXT\"` JSON syntax — keeps labels accurate and prevents garbled output."
+    },
+    {
+      "title": "Generate at 2K or 4K resolution",
+      "body": "High resolution is required for legible small text. 2K minimum for charts; 4K for dense isometric callouts."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Pixel-level text rendering",
+      "body": "Labels, stats, axis names, and callouts all render legibly — no garbled letters that plague Midjourney or SDXL infographic outputs."
+    },
+    {
+      "title": "JSON template locks layout",
+      "body": "Structured prompts pin down label position, hierarchy, and color coding — exploded callouts land where you specify, not randomly."
+    },
+    {
+      "title": "Reasoning model plans composition",
+      "body": "GPT Image 2 thinks through layout, label spacing, and visual hierarchy before drawing — fewer overlapping labels and unbalanced charts."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Educators & course creators",
+      "body": "Generate concept diagrams and process flows for lecture slides, MOOCs, and study guides."
+    },
+    {
+      "title": "Consultants & analysts",
+      "body": "Ship pitch-deck-ready isometric breakdowns and comparison charts without hiring a designer."
+    },
+    {
+      "title": "Data journalists",
+      "body": "Turn datasets into LinkedIn-ready data viz with custom illustrations templates can't produce."
+    },
+    {
+      "title": "Marketers & PMs",
+      "body": "Produce product explainers, feature comparison charts, and roadmap timelines for landing pages."
+    }
+  ],
+  "tips": [
+    {
+      "q": "Can GPT Image 2 create infographics?",
+      "a": "Yes — it is one of the few models with reliable text rendering for infographics. Use the JSON template pattern (`label: \"EXACT TEXT\"`) and generate at 2K or 4K. Process diagrams, isometric breakdowns, and data viz all work; keep total labels to 8-10 max per image."
+    },
+    {
+      "q": "How do I prompt AI to make readable labels?",
+      "a": "Quote every label exactly with `label: \"EXACT TEXT\"` JSON syntax, specify font weight (bold sans-serif), and request 2K minimum resolution. Cap at 8-10 labels per image — packing more text causes garbled output even with GPT Image 2."
+    },
+    {
+      "q": "What should an infographic prompt include?",
+      "a": "Five required parts: (1) format type (process / isometric / data viz), (2) layout aspect ratio (9:16 or 16:9), (3) exact label strings in quoted JSON fields, (4) color scheme with semantic mapping, (5) resolution at 2K+ with sharp text rendering as an explicit instruction."
+    },
+    {
+      "q": "How do I avoid wrong text in AI diagrams?",
+      "a": "Three fixes: (1) wrap every label in `label: \"EXACT TEXT\"` JSON syntax instead of inline prose, (2) limit to 8-10 labels per image, (3) set bold sans-serif font weight and request 2K+ resolution. Re-roll once if a label still misspells — GPT Image 2 lands it the second pass."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-pdf-to-slides-infographics",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "B2B / 商务 / 教育 / 产品营销人：要做信息图给 LinkedIn / 课件 / 公众号 / 电商详情页。GPT Image 2 文字渲染让数字 + 标签直接出图，不需要 PS。",
+  "primary_query": "infographic prompts",
+  "search_volume_signal": "creative_medium_high",
+  "competitor_to_outrank": ["venngage.com (top 1, generator)", "piktochart.com (generator)", "napkin.ai (visual storytelling)", "godofprompt.ai (10 ChatGPT prompts)", "tenorshare.ai", "atlabs.ai (Nano Banana 30 prompts, direct competitor)"],
+  "sub_scenes": [
+    {
+      "name": "Process Diagram",
+      "slug_anchor": "process-diagram",
+      "description": "Numbered steps with arrows and icons",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Isometric Technical Breakdown",
+      "slug_anchor": "isometric-technical",
+      "description": "45-degree exploded view with callouts",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Data Visualization",
+      "slug_anchor": "data-viz",
+      "description": "Bar, pie, and dashboard-style charts",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Educational / Concept",
+      "slug_anchor": "educational",
+      "description": "Concept explainers with visual analogies",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Comparison Chart",
+      "slug_anchor": "comparison",
+      "description": "Two-column VS / pros vs cons layout",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Timeline / Roadmap",
+      "slug_anchor": "timeline",
+      "description": "Milestones along a timeline or roadmap",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "Can GPT Image 2 generate infographics with readable text?",
+      "a": "Yes — pixel-level text rendering is its key advantage over Midjourney/SDXL. Numbers, labels, callouts, and headings all render legibly. Wrap exact text in double quotes in your prompt. For complex infographics keep total text under 400 words to avoid garbled output."
+    },
+    {
+      "q": "What's the best AI prompt for infographics?",
+      "a": "Reliable template: '[Type] infographic explaining [topic]. Layout: [vertical 9:16 / horizontal 16:9]. Style: [flat / isometric / hand-drawn]. Include: [3-5 key data points or steps]. Bold sans-serif typography. Color-coded sections. Clean white background.' Specify type (process / data viz / comparison) for accuracy."
+    },
+    {
+      "q": "How to make isometric infographics with AI?",
+      "a": "Use this template: 'Isometric 3D infographic of [object/system], 45-degree perspective, exploded view showing internal components, color-coded callout labels, technical pen line art, white background, museum-exhibit aesthetic.' This is the viral GitHub dataset format used by tech educators."
+    },
+    {
+      "q": "What aspect ratio for infographics?",
+      "a": "Vertical 9:16 (1080×1920) for Pinterest / Instagram / mobile reading. Horizontal 16:9 (1920×1080) for presentations / LinkedIn carousel. Square 1:1 (1080×1080) for Instagram feed. Specify in your prompt and at 2K resolution for crisp text."
+    },
+    {
+      "q": "GPT Image 2 vs Venngage / Piktochart — which is better for infographics?",
+      "a": "Venngage / Piktochart are template-based (drag and drop). GPT Image 2 is prompt-based (full creative control + custom illustrations). Use template tools when you need quick standard layouts. Use GPT Image 2 when you need (1) custom illustrations matching your brand, (2) isometric / 3D / artistic styles, (3) text + visual hybrid that templates can't do."
+    }
+  ],
+  "related_searches_inferred": [
+    "Infographic prompts ChatGPT",
+    "Infographic prompts copy paste",
+    "Infographic prompts Nano Banana",
+    "Process diagram prompt AI",
+    "Isometric infographic prompt",
+    "Data visualization prompt AI",
+    "Comparison chart prompt",
+    "Best AI for infographics"
+  ],
+  "page_structure_notes": "首屏：① H1 + 强调『真实可读文字渲染』(数据准确出图，无需 PS) ② Workbench CTA + 案例对比『Midjourney 文字糊 vs GPT Image 2 文字清晰』③ 6 子场景 grid + 强 visual。LinkedIn / Pinterest 是流量来源，要把这些子场景 visual 优化好。",
+  "internal_links": [
+    { "to": "poster-design-prompts", "anchor_text": "Poster design prompts (typography-heavy designs)" },
+    { "to": "product-photography-prompts", "anchor_text": "Product photography prompts (isometric breakdowns)" },
+    { "to": "social-media-ad-prompts", "anchor_text": "Social media ad prompts (data-driven ads)" }
+  ],
+  "estimated_prompt_count": 13,
+  "image_count_target": 13,
+  "kie_credits_estimate": 130,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "infographic 必须 2K 出图保证小字标签可读",
+  "json_template": {
+    "_note": "复杂 infographic 推荐 JSON 结构化 prompt（参考 awesome-gpt-image-2 VR Headset 模式）。{argument name=\"X\" default=\"Y\"} 是动态参数语法，工作台会解析为可填表单。",
+    "_pattern": "exploded-callout-infographic",
+    "template": {
+      "type": "{argument name=\"diagram_type\" default=\"isometric exploded view infographic\"}",
+      "subject": "{argument name=\"subject\" default=\"product or concept\"}",
+      "style": "clean technical illustration, color-coded callouts, white background, museum exhibit aesthetic",
+      "header": {
+        "title": "{argument name=\"title\" default=\"How It Works\"}",
+        "subtitle": "{argument name=\"subtitle\" default=\"\"}"
+      },
+      "layout": {
+        "centerpiece": "{argument name=\"centerpiece_description\" default=\"central isometric/exploded view showing N components\"}",
+        "callout_labels": {
+          "count": "{argument name=\"label_count\" default=\"6\"}",
+          "left_side": [
+            "{argument name=\"label_1\" default=\"Component A — function description\"}",
+            "{argument name=\"label_2\" default=\"Component B — function description\"}",
+            "{argument name=\"label_3\" default=\"Component C — function description\"}"
+          ],
+          "right_side": [
+            "{argument name=\"label_4\" default=\"Component D — function description\"}",
+            "{argument name=\"label_5\" default=\"Component E — function description\"}",
+            "{argument name=\"label_6\" default=\"Component F — function description\"}"
+          ]
+        },
+        "footer": {
+          "headline": "{argument name=\"footer_headline\" default=\"\"}",
+          "body": "{argument name=\"footer_body\" default=\"\"}"
+        }
+      },
+      "color_scheme": "{argument name=\"color_scheme\" default=\"RED for power/battery, BLUE for data, ORANGE for thermal, GREEN for sensors\"}",
+      "output": "vertical 9:16 or horizontal 16:9, 2K resolution, sharp text rendering"
+    },
+    "alternative_patterns": [
+      {
+        "name": "process-diagram",
+        "use_when": "解释流程 / 步骤",
+        "schema": "{type, subject, style, layout: {steps: [{number, title, description, icon}], flow: arrows | curve | timeline}}"
+      },
+      {
+        "name": "comparison-chart",
+        "use_when": "VS 对比 / Pros vs Cons",
+        "schema": "{type, layout: {left_column: {label, items}, right_column: {label, items}, divider_style}}"
+      },
+      {
+        "name": "data-viz",
+        "use_when": "数据图表",
+        "schema": "{type, chart_type: bar|pie|line, data: [{label, value, color}], annotations}"
+      }
+    ]
+  }
+}

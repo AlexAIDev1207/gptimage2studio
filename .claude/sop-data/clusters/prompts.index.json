@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "action-figure",
+    "prompt_count": 14,
+    "evidence_count": 41,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "character-design",
+    "prompt_count": 14,
+    "evidence_count": 378,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "ecommerce-product-photos",
+    "prompt_count": 14,
+    "evidence_count": 256,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "infographics",
+    "prompt_count": 14,
+    "evidence_count": 115,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "instagram-photo-editing",
+    "prompt_count": 14,
+    "evidence_count": 5,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "old-photo-restoration",
+    "prompt_count": 14,
+    "evidence_count": 6,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "poster-design",
+    "prompt_count": 14,
+    "evidence_count": 219,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "product-photography",
+    "prompt_count": 14,
+    "evidence_count": 1027,
+    "sub_scene_count": 6,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "stickers",
+    "prompt_count": 14,
+    "evidence_count": 42,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  },
+  {
+    "slug": "ui-mockups",
+    "prompt_count": 14,
+    "evidence_count": 59,
+    "sub_scene_count": 5,
+    "min_title_length_ok": true
+  }
+]

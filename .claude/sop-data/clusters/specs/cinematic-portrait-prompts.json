@@ -1,0 +1,162 @@
+{
+  "slug": "cinematic-portrait-prompts",
+  "priority": "P0-6",
+  "tier": "commercial",
+  "h1": "Cinematic Portrait Prompts for GPT Image 2",
+  "meta_title": "Cinematic Portrait Prompts for GPT Image 2 — Movie-Style Headshots",
+  "meta_description": "Copy-paste cinematic portrait prompts for GPT Image 2. Film noir, golden hour, neon rain, editorial styles. Turn selfies into movie-quality character portraits.",
+  "intro_long": "13 tested GPT Image 2 prompts that turn selfies into movie-quality portraits — film noir chiaroscuro, neon rain cyberpunk, and golden hour editorial.",
+  "how_it_works": [
+    {
+      "title": "Upload a clean front-facing selfie",
+      "body": "Best results: 1024px+, even lighting on the face, no sunglasses or heavy filters."
+    },
+    {
+      "title": "Pick a cinematic style",
+      "body": "Choose film noir, neon rain, golden hour, window light, fantasy, or vintage Hollywood."
+    },
+    {
+      "title": "Customize lighting and generate",
+      "body": "Tweak lens, key light, wardrobe, era — one click pre-fills the prompt and runs GPT Image 2."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Identity locked across stylization",
+      "body": "GPT Image 2 image-to-image preserves face geometry across noir, neon, and golden-hour grades — your portrait still looks like you, not a generic actor lookalike."
+    },
+    {
+      "title": "Cinematic lighting cues understood",
+      "body": "Prompts use real cinematography terms — key/fill/rim light, golden hour, neon rain, chiaroscuro — and GPT Image 2 renders them as actual lighting, not flat filters."
+    },
+    {
+      "title": "Editorial composition reasoning",
+      "body": "Shallow DOF, 50mm framing, rule of thirds, and graded color palettes are interpreted as composition rules, giving magazine-grade portraits instead of snapshots."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "LinkedIn & executive headshot",
+      "body": "Window-light or golden-hour variants give a polished, premium headshot without a studio booking."
+    },
+    {
+      "title": "Actor reel & casting portrait",
+      "body": "Film noir and fantasy character looks build a character-range reel from a single selfie."
+    },
+    {
+      "title": "Album cover & poster concept",
+      "body": "Neon rain and vintage Hollywood styles work as moody single-cover or tour-poster mockups."
+    },
+    {
+      "title": "Personal brand & dating profile",
+      "body": "Editorial portraits raise perceived quality on dating apps, brand sites, and creator pages."
+    }
+  ],
+  "tips": [
+    {
+      "q": "How do I write a cinematic portrait prompt?",
+      "a": "Stack five layers: genre ('film noir' / 'cyberpunk'), lighting ('chiaroscuro key light' / 'golden hour rim'), lens ('50mm f/1.4, shallow DOF'), film stock ('Kodak Portra 400, fine grain'), and mood ('moody, contemplative'). Combine all five — that's what separates cinematic from generic portrait."
+    },
+    {
+      "q": "Which lighting keywords work best (golden hour, neon rain, film noir)?",
+      "a": "Golden hour gives warm rim light + soft skin glow. Neon rain produces saturated magenta/cyan reflections on wet surfaces. Film noir means hard key + deep shadow + black-and-white. Pick the one matching your mood, then add a secondary cue like 'practical lights in background' to add depth."
+    },
+    {
+      "q": "How do I keep my face recognizable across stylized portraits?",
+      "a": "Add 'preserve facial features, hairstyle, and skin tone exactly' to every prompt and upload a sharp 1024px+ reference. Avoid pushing genre keywords like 'anime' or 'cartoon' that override likeness. Heavy stylization (fantasy, vintage Hollywood) needs a stronger reference photo than realistic styles."
+    },
+    {
+      "q": "What aspect ratio is best for editorial vs phone wallpaper?",
+      "a": "4:5 is the editorial sweet spot — magazine covers, LinkedIn featured, Instagram portrait. 9:16 is for phone wallpaper, Reels, and TikTok. 3:4 works for poster prints and dating-app vertical crops. GPT Image 2 supports all three natively at 2K so detail holds up at print size."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-consistent-characters",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "高质量内容创作者：要把自照变成电影感大片。GPT Image 2 image-to-image 强项 = 保持人脸 + 加电影质感。",
+  "primary_query": "cinematic portrait prompts",
+  "search_volume_signal": "commercial_medium_high",
+  "competitor_to_outrank": ["121clicks.com", "media.io", "filmora.wondershare.com (Nano Banana)", "promptplum.com (100+ cinematic prompts)", "atlabs.ai", "promptbase.com (Cinematic Portrait App)"],
+  "sub_scenes": [
+    {
+      "name": "Film Noir / Chiaroscuro",
+      "slug_anchor": "film-noir",
+      "description": "B&W high-contrast half-face shadow, 1940s detective look",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Neon Rain / Cyberpunk",
+      "slug_anchor": "neon-rain",
+      "description": "Rainy night, neon reflections, cyberpunk color grade",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Golden Hour Editorial",
+      "slug_anchor": "golden-hour",
+      "description": "Warm dusk light, shallow DOF, fashion editorial framing",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Window Light Studio",
+      "slug_anchor": "window-light",
+      "description": "Side window light, minimal interior, Vermeer-style calm",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Fantasy / Character Portrait",
+      "slug_anchor": "fantasy-character",
+      "description": "Hollywood character look: knight, mage, villain, dramatic light",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Vintage Hollywood",
+      "slug_anchor": "vintage-hollywood",
+      "description": "1950s golden-age portrait, B&W film, classic star glamour",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "What makes a cinematic portrait prompt?",
+      "a": "Five elements: (1) lighting cue ('chiaroscuro' / 'golden hour' / 'neon key light'), (2) camera/lens ('shot on 50mm f/1.4' / 'shallow depth of field'), (3) film/grain ('Kodak Portra 400' / 'film grain'), (4) mood ('moody noir' / 'dreamy haze'), (5) composition ('close-up portrait' / 'editorial framing'). Combine all five for cinematic feel."
+    },
+    {
+      "q": "How do I turn my photo into a movie poster portrait?",
+      "a": "Upload your photo, paste a cinematic prompt that names the genre ('film noir' / 'sci-fi' / 'fantasy hero'), specify the lens (50mm / 85mm), lighting (key + fill), and mood. GPT Image 2 keeps your face accurate while transforming the atmosphere."
+    },
+    {
+      "q": "What's the best cinematic portrait prompt for ChatGPT / GPT Image 2?",
+      "a": "Reliable template: 'Cinematic close-up portrait of [me/subject], [genre] aesthetic, [lighting setup], shot on 50mm lens at f/1.4, shallow depth of field, [color palette], film grain, [mood], moody atmosphere.' Adjust genre and color palette for the specific look."
+    },
+    {
+      "q": "Can GPT Image 2 do realistic skin texture in portraits?",
+      "a": "Yes — its image-to-image mode preserves real skin pores, micro-shadows, and natural blemishes when you upload a reference photo. Add 'realistic skin texture, natural skin tones, no plastic smoothing' to the prompt to lock this in."
+    },
+    {
+      "q": "How is cinematic portrait different from regular portrait prompts?",
+      "a": "Regular portraits aim for clean / flattering / studio look (LinkedIn-ready). Cinematic portraits aim for narrative / mood / film aesthetic (movie poster, character feel). Different lighting (one-direction key light vs even softbox), different color (graded vs neutral), different intent (storytelling vs identity)."
+    }
+  ],
+  "related_searches_inferred": [
+    "Cinematic portrait prompts ChatGPT",
+    "Cinematic portrait prompts free",
+    "Cinematic portrait prompts copy paste",
+    "Cinematic portrait prompts Nano Banana",
+    "Movie poster portrait prompt",
+    "Film noir portrait prompt",
+    "Golden hour portrait prompt",
+    "Cinematic headshot AI"
+  ],
+  "page_structure_notes": "首屏：① H1 + 1 张极致 cinematic 案例（推荐 noir 半脸阴影或 neon rain）② Workbench CTA『Upload your photo → Apply cinematic look』③ 子场景对比 grid（6 个 cinematic style 同一人物的不同变换）。masonry 卡片每张点开 modal 显示 1:1 大图 + prompt。",
+  "internal_links": [
+    { "to": "instagram-photo-edit-prompts", "anchor_text": "Instagram trending photo edits (viral cinematic angle)" },
+    { "to": "old-photo-restore-prompts", "anchor_text": "Old photo restore prompts (vintage portrait revival)" },
+    { "to": "thumbnail-prompts", "anchor_text": "YouTube thumbnail prompts (creator branding)" }
+  ],
+  "estimated_prompt_count": 13,
+  "image_count_target": 13,
+  "kie_credits_estimate": 130,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "cinematic 必须 2K 出图保证细节和景深质感"
+}

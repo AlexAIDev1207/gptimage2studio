@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "character-design",
+  "source_candidate_slug": "character-design-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-character-design/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Character Design",
+      "href": "/gpt-image-2-prompts/for-character-design/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Character Design: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for character design with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Character Design"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 character design prompts",
+    "query_variants": [
+      "ai character design prompt",
+      "character sheet prompt gpt image 2",
+      "consistent character prompt ai images",
+      "rpg character design prompt"
+    ],
+    "related_searches": [
+      "ai character design prompt",
+      "character sheet prompt",
+      "consistent character prompt",
+      "rpg character design prompt",
+      "mascot design prompt"
+    ],
+    "intent_grade": "strong-creative",
+    "kd_estimate": 24,
+    "search_intent": "Create character sheets, game characters, mascots, avatars, and consistency-friendly design briefs.",
+    "launch_batch": 2,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Character Design"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Character Design Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Character Design Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Character Design Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Character Design Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Character Design Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Character Design Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Character Design FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Design consistent characters, mascots, RPG heroes, and expression sheets with GPT Image 2 prompt templates.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "character-sheet",
+      "label": "Character Sheets",
+      "anchor": "#character-sheet",
+      "search_modifier": "character sheet prompt",
+      "user_intent": "Generate front, side, back, outfit, props, and expression references.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for character sheets with clear before/copy/use affordance."
+    },
+    {
+      "slug": "mascot-design",
+      "label": "Mascot Design",
+      "anchor": "#mascot-design",
+      "search_modifier": "mascot design prompt",
+      "user_intent": "Create brand mascots with readable silhouette and repeatable traits.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for mascot design with clear before/copy/use affordance."
+    },
+    {
+      "slug": "rpg-fantasy",
+      "label": "RPG and Fantasy Characters",
+      "anchor": "#rpg-fantasy",
+      "search_modifier": "rpg character design prompt",
+      "user_intent": "Build heroes, villains, classes, armor, and world-specific details.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for rpg and fantasy characters with clear before/copy/use affordance."
+    },
+    {
+      "slug": "consistent-character",
+      "label": "Consistent Character Variations",
+      "anchor": "#consistent-character",
+      "search_modifier": "consistent character prompt",
+      "user_intent": "Keep identity stable across poses, emotions, and scenes.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for consistent character variations with clear before/copy/use affordance."
+    },
+    {
+      "slug": "avatar-3d",
+      "label": "3D Avatar Concepts",
+      "anchor": "#avatar-3d",
+      "search_modifier": "ai character design prompt",
+      "user_intent": "Make stylized 3D, game-ready, or collectible character concepts.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for 3d avatar concepts with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Character Design Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "character-sheet",
+        "mascot-design",
+        "rpg-fantasy"
+      ]
+    },
+    {
+      "label": "Character Design Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "consistent-character",
+        "avatar-3d"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Define the character bible",
+      "body": "List age range, silhouette, outfit, palette, personality, props, and setting."
+    },
+    {
+      "heading": "Ask for repeatable views",
+      "body": "Use turnarounds, expression sheet, pose sheet, or model-sheet language."
+    },
+    {
+      "heading": "Separate style from identity",
+      "body": "Lock consistent traits before asking for 3D, anime, cinematic, or sticker styles."
+    }
+  ],
+  "variations": [
+    {
+      "label": "character sheet",
+      "instruction": "Add \"character sheet\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "brand mascot",
+      "instruction": "Add \"brand mascot\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "RPG hero",
+      "instruction": "Add \"RPG hero\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "villain concept",
+      "instruction": "Add \"villain concept\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "expression sheet",
+      "instruction": "Add \"expression sheet\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "3D avatar",
+      "instruction": "Add \"3D avatar\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The character changes between images",
+      "fix": "Repeat the same core traits and ask for a model sheet before scene variations."
+    },
+    {
+      "problem": "The design is generic",
+      "fix": "Add a role, backstory, signature prop, color rule, and strong silhouette."
+    },
+    {
+      "problem": "The pose hides important details",
+      "fix": "Ask for neutral standing pose, front view, and accessory callouts."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I prompt AI for character design?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Character Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can GPT Image 2 create character sheets?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Character Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I keep a character consistent across images?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Character Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should a game character prompt include?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Character Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for character design?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Character Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "action-figure",
+      "label": "Action Figure",
+      "href": "/gpt-image-2-prompts/for-action-figure/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "stickers",
+      "label": "Stickers",
+      "href": "/gpt-image-2-prompts/for-stickers/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "ui-mockups",
+      "label": "UI Mockups",
+      "href": "/gpt-image-2-prompts/for-ui-mockups/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 character design prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

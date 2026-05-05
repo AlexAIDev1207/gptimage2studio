@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-05-03T18:26:07.602Z",
+  "expected": 140,
+  "actual": 140,
+  "failures": [],
+  "by_cluster": [
+    {
+      "slug": "product-photography",
+      "count": 14
+    },
+    {
+      "slug": "action-figure",
+      "count": 14
+    },
+    {
+      "slug": "old-photo-restoration",
+      "count": 14
+    },
+    {
+      "slug": "ui-mockups",
+      "count": 14
+    },
+    {
+      "slug": "poster-design",
+      "count": 14
+    },
+    {
+      "slug": "ecommerce-product-photos",
+      "count": 14
+    },
+    {
+      "slug": "infographics",
+      "count": 14
+    },
+    {
+      "slug": "stickers",
+      "count": 14
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "count": 14
+    },
+    {
+      "slug": "character-design",
+      "count": 14
+    }
+  ]
+}

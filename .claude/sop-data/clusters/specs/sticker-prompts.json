@@ -1,0 +1,174 @@
+{
+  "slug": "sticker-prompts",
+  "priority": "P0-4",
+  "tier": "viral",
+  "h1": "Sticker Prompts for GPT Image 2",
+  "meta_title": "Sticker Prompts for GPT Image 2 — Turn Photos Into Cute Stickers",
+  "meta_description": "Copy-paste sticker prompts for GPT Image 2. Upload a photo, generate kawaii / die-cut / chibi / holographic stickers. Etsy-ready packs and Instagram cute styles.",
+  "intro_long": "13 tested GPT Image 2 prompts that turn any photo into ready-to-print stickers — kawaii chibi self-portraits, die-cut Etsy packs, and holographic foil designs.",
+  "how_it_works": [
+    {
+      "title": "Upload a clear photo or describe the subject",
+      "body": "Best results: 1024px+ close-up, single subject, clean background. Logos and pets work too."
+    },
+    {
+      "title": "Pick a sticker style",
+      "body": "Choose chibi for cute selfies, die-cut for Etsy packs, holographic for premium feel, or messaging pack."
+    },
+    {
+      "title": "Generate at the right size and aspect",
+      "body": "Square 1:1 with transparent background for die-cut prints, 512×512 PNG for Telegram/WhatsApp packs."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Chibi & kawaii proportions stay on-model",
+      "body": "GPT Image 2 nails the big-head small-body ratio, oversized eyes, and pastel palettes that make stickers read as cute, not just cropped portraits."
+    },
+    {
+      "title": "Transparent background prompts that actually work",
+      "body": "Our templates explicitly request die-cut white outline + transparent PNG, so output is print-ready without manual background removal in Photoshop."
+    },
+    {
+      "title": "Etsy-ready sheet packs and multilingual labels",
+      "body": "Generate full themed packs (planner, motivational, kawaii animals) and clean text on quote stickers in English, Spanish, Japanese, or Korean."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Etsy & Redbubble sellers",
+      "body": "Spin up themed sticker packs in minutes — planner, motivational, kawaii animal sets ready for print."
+    },
+    {
+      "title": "Personal Telegram / WhatsApp packs",
+      "body": "Turn yourself into a chibi reaction set for chats — 512×512 transparent PNGs that import cleanly."
+    },
+    {
+      "title": "Kids' projects & school crafts",
+      "body": "Generate safe, cute sticker sheets for birthdays, classrooms, or DIY laptop decoration."
+    },
+    {
+      "title": "Branded swag & creator merch",
+      "body": "Test mascot sticker variants for podcasts, streamers, or small brands before ordering bulk prints."
+    }
+  ],
+  "tips": [
+    {
+      "q": "How do I make stickers with ChatGPT?",
+      "a": "Open GPT Image 2 Studio, upload a clear photo, paste a sticker prompt that includes 'die-cut sticker, bold white outline, transparent background', and generate at 1:1 square. The output is a print-ready sticker — no Photoshop background removal needed."
+    },
+    {
+      "q": "What prompt creates chibi stickers?",
+      "a": "Use: 'Chibi sticker of [subject], oversized head and big sparkling eyes, tiny body, pastel palette, thick white die-cut outline, transparent background, kawaii style, no text.' Add `preserve facial features` if you need it to look like the uploaded person."
+    },
+    {
+      "q": "How do I create a sticker pack with AI?",
+      "a": "Pick a theme (planner, motivational quotes, kawaii animals) and generate 6-12 stickers with the same style modifiers — same outline width, palette, and proportions. Our Etsy Seller Pack sub-scene includes tested templates that keep visual consistency across the full sheet."
+    },
+    {
+      "q": "Can GPT Image 2 make transparent stickers?",
+      "a": "Yes — explicitly request 'transparent background, die-cut sticker, bold white outline, no surrounding scene' in the prompt. GPT Image 2 outputs a clean PNG ready for Etsy, Redbubble, or Telegram pack import without manual masking."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-consistent-characters",
+    "is-gpt-image-2-free-pricing-access"
+  ],
+  "search_intent": "意图分裂：(a) viral 自照 → cute sticker trend（Instagram 巨流量）(b) Etsy/Shopify sellers 要 prompt 包卖印刷 sticker (c) ChatGPT 教程。我们以 (a) viral 为核心 + (b) Etsy seller 作为变现叙事。",
+  "primary_query": "sticker prompts",
+  "search_volume_signal": "viral_high + commercial_high",
+  "competitor_to_outrank": ["promptomania.com", "openart.ai", "promptbase.com", "stickerswan.com (Etsy seller specialist)", "media.io"],
+  "sub_scenes": [
+    {
+      "name": "Cute Self Portrait Sticker",
+      "slug_anchor": "self-portrait",
+      "description": "Your photo as kawaii chibi sticker",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Die-cut Bold Outline",
+      "slug_anchor": "die-cut",
+      "description": "White border, transparent, print-ready",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Chibi & Kawaii Style",
+      "slug_anchor": "chibi-kawaii",
+      "description": "Big-headed mini chars, pastel palette",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Holographic & Foil",
+      "slug_anchor": "holographic",
+      "description": "Iridescent chrome and glitter effects",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Telegram / WhatsApp Pack",
+      "slug_anchor": "messaging-pack",
+      "description": "Reaction stickers for chat platforms",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Etsy Seller Pack",
+      "slug_anchor": "etsy-pack",
+      "description": "Themed packs ready for commercial sale",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "How do I make stickers with GPT Image 2 from my photo?",
+      "a": "Upload a clear face/close-up photo to GPT Image 2 Studio, paste a sticker prompt that includes 'die-cut sticker, bold white border, transparent background, kawaii chibi style', and the model returns a sticker-ready image. For Telegram/WhatsApp packs, ensure the prompt asks for 512×512 transparent PNG."
+    },
+    {
+      "q": "What are some good sticker ideas for AI?",
+      "a": "Top viral categories: (1) cute self portrait (turn yourself into chibi), (2) baby cuteness (motherhood trend), (3) reaction emojis, (4) motivational quote stickers, (5) kawaii animal pack. We have 13 tested templates covering each."
+    },
+    {
+      "q": "Can I sell GPT Image 2 generated stickers on Etsy or Redbubble?",
+      "a": "Yes — generated images are typically usable for commercial purposes under Studio's terms. For Etsy/Redbubble pack sales, generate at 2K resolution, ensure transparent background, and remove any text artifacts. See our 'Etsy seller pack' sub-section for tested templates."
+    },
+    {
+      "q": "What's the best sticker prompt for ChatGPT / GPT Image 2?",
+      "a": "Reliable template: 'Create a die-cut sticker of [subject]. Style: bold thick white outline, kawaii chibi proportions, pastel color palette, simple shapes, transparent background. Format: square sticker, centered subject, no text.' Adjust subject and style modifiers."
+    },
+    {
+      "q": "How to find sticker prompts on Instagram?",
+      "a": "Search hashtags like #stickerprompt, #aisticker, or #chibiselfie. Top creators post tested prompts in comments (Priyanka Singh, Kaylyn Pham trend). Our library aggregates the most viral templates so you don't have to dig through Reels."
+    }
+  ],
+  "related_searches_raw": [
+    "Sticker prompt Generator",
+    "Sticker prompts aesthetic",
+    "Sticker prompts funny",
+    "Sticker prompts for AI",
+    "Sticker prompt ChatGPT",
+    "Cute sticker prompts",
+    "Midjourney sticker prompts",
+    "Cute sticker prompts for chatgpt"
+  ],
+  "paa_raw": [
+    "What are some good sticker ideas?",
+    "How to find sticker prompts on IG?",
+    "How to make stickers in ChatGPT prompt?",
+    "What are sticker suggestions?"
+  ],
+  "viral_signals": [
+    "Shopping carousel with 7+ Etsy sticker prompt packs (commercial validation)",
+    "Instagram Priyanka Singh: 'cute stickers of yourself' Reel",
+    "Instagram Kaylyn Pham: baby cuteness sticker trend",
+    "Threads gptinsiderai sticker tutorial post",
+    "PAA shows Google views this as actively-asked topic"
+  ],
+  "page_structure_notes": "首屏：① H1 ② 双 CTA：『Make a sticker of yourself（viral 路径）』+『Generate sticker pack for Etsy（卖家路径）』③ 当前热门 viral 案例（自照→chibi 对比）。第二屏起 sub_scenes anchor。考虑加一个独立 H2 'Sell Stickers Online with AI' 抓住卖家流量。",
+  "internal_links": [
+    { "to": "action-figure-prompts", "anchor_text": "Action figure prompts (turn photo into 3D toy)" },
+    { "to": "instagram-photo-edit-prompts", "anchor_text": "Instagram trending photo edits" },
+    { "to": "thumbnail-prompts", "anchor_text": "YouTube thumbnail prompts (creator branding)" }
+  ],
+  "estimated_prompt_count": 13,
+  "image_count_target": 13,
+  "kie_credits_estimate": 78,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"]
+}

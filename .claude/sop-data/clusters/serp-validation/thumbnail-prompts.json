@@ -1,0 +1,28 @@
+{
+  "slug": "thumbnail-prompts",
+  "candidate_score": 0.412,
+  "query": "youtube thumbnail prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "miraflow.ai", "title": "10 AI Prompts for Viral YouTube Thumbnails", "type": "blog" },
+    { "rank": 2, "domain": "travisnicholson.medium.com", "title": "Best Way to Create YouTube Thumbnails with ChatGPT", "type": "blog" },
+    { "rank": 3, "domain": "promptsadda.com", "title": "10 Powerful AI YouTube Thumbnail Prompts", "type": "blog" },
+    { "rank": 4, "domain": "wayin.ai", "title": "Free AI YouTube Thumbnail Maker", "type": "tool" },
+    { "rank": 5, "domain": "docsbot.ai", "title": "YouTube Thumbnail Prompts", "type": "tool" },
+    { "rank": 6, "domain": "nowbam.com", "title": "AI Persona for High-Converting YouTube Thumbnails", "type": "blog" },
+    { "rank": 7, "domain": "miraflow.ai", "title": "Best AI Prompts for YouTube Thumbnails in 2026", "type": "blog" },
+    { "rank": 8, "domain": "vidpros.com", "title": "AI YouTube Thumbnail Prompts: ChatGPT, Nano Banana, SeeDream Guide", "type": "blog" },
+    { "rank": 9, "domain": "thumbprompt.com", "title": "Free AI Thumbnail Prompt Generator for YouTube", "type": "competitor_specialist" },
+    { "rank": 10, "domain": "canva.com", "title": "Free AI Thumbnail Maker", "type": "tool" }
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["thumbprompt.com"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：9 unique，0 UGC。竞争都是 thumbnail-specific 教程和工具。thumbprompt.com 是直接竞品 specialist。GPT Image 2 在 thumbnail 上有双重优势：① 文字渲染（thumbnail 标题文字）② 表情夸张化（image-to-image 把 creator 头像改成夸张表情）。viral creator 转化清晰。",
+  "recommended_h1": "YouTube Thumbnail Prompts for GPT Image 2",
+  "page_structure_note": "首屏强 visual：『Upload your face / pick template + Generate thumbnail』+ before/after 案例（强反差表情）。",
+  "note": "WebSearch-only data; viable P0 with strong commercial intent (YouTubers)"
+}

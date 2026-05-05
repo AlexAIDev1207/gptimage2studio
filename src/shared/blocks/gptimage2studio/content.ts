@@ -31,7 +31,7 @@ export const promoBar = {
 
 export const nav = [
   { label: 'Generator', href: '#workbench' },
-  { label: 'Prompts', href: '/prompts' },
+  { label: 'Prompts', href: '/gpt-image-2-prompts' },
   { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: '/pricing' },
 ];

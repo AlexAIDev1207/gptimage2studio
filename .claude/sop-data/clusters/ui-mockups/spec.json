@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "ui-mockups",
+  "source_candidate_slug": "ui-mockup-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-ui-mockups/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "UI Mockups",
+      "href": "/gpt-image-2-prompts/for-ui-mockups/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for UI Mockups: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for ui mockups with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for UI Mockups"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 ui mockup prompts",
+    "query_variants": [
+      "chatgpt ui design prompts",
+      "gpt image 2 app screen prompt",
+      "ai ui mockup prompt",
+      "saas dashboard prompt gpt image 2"
+    ],
+    "related_searches": [
+      "chatgpt ui design prompts",
+      "gpt image 2 ui mockup examples",
+      "saas dashboard ai prompt",
+      "mobile app mockup prompt",
+      "website mockup ai prompt"
+    ],
+    "intent_grade": "strong-design",
+    "kd_estimate": 22,
+    "search_intent": "Generate SaaS dashboards, app screens, landing pages, and realistic UI screenshots.",
+    "launch_batch": 1,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for UI Mockups"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse UI Mockups Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste UI Mockups Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "UI Mockups Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write UI Mockups Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "UI Mockups Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "UI Mockups Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "UI Mockups FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Create app screens, dashboards, landing pages, and polished product mockups with structured GPT Image 2 UI prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "saas-dashboard",
+      "label": "SaaS Dashboard Mockups",
+      "anchor": "#saas-dashboard",
+      "search_modifier": "saas dashboard ai prompt",
+      "user_intent": "Generate dense but readable analytics, CRM, finance, or admin interfaces.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for saas dashboard mockups with clear before/copy/use affordance."
+    },
+    {
+      "slug": "mobile-app",
+      "label": "Mobile App Screens",
+      "anchor": "#mobile-app",
+      "search_modifier": "mobile app mockup prompt",
+      "user_intent": "Design iOS or Android app screens with native controls and clear hierarchy.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for mobile app screens with clear before/copy/use affordance."
+    },
+    {
+      "slug": "website-mockup",
+      "label": "Website Mockups",
+      "anchor": "#website-mockup",
+      "search_modifier": "website mockup ai prompt",
+      "user_intent": "Create landing pages, pricing pages, hero sections, and product pages.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for website mockups with clear before/copy/use affordance."
+    },
+    {
+      "slug": "wireframe-to-ui",
+      "label": "Wireframe to High-Fidelity UI",
+      "anchor": "#wireframe-to-ui",
+      "search_modifier": "chatgpt ui design prompts",
+      "user_intent": "Turn a rough structure into a polished visual concept.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for wireframe to high-fidelity ui with clear before/copy/use affordance."
+    },
+    {
+      "slug": "component-system",
+      "label": "Component and Design System",
+      "anchor": "#component-system",
+      "search_modifier": "ui component prompt",
+      "user_intent": "Explore cards, buttons, forms, tables, and navigation patterns.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for component and design system with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "UI Mockups Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "saas-dashboard",
+        "mobile-app",
+        "website-mockup"
+      ]
+    },
+    {
+      "label": "UI Mockups Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "wireframe-to-ui",
+        "component-system"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Specify product type and user goal",
+      "body": "Say whether the screen is a dashboard, mobile app, onboarding flow, or landing page."
+    },
+    {
+      "heading": "Describe information density",
+      "body": "Call out navigation, tables, forms, charts, cards, and what should be emphasized."
+    },
+    {
+      "heading": "Constrain the visual system",
+      "body": "Add style, platform, typography feel, spacing, color palette, and accessibility requirements."
+    }
+  ],
+  "variations": [
+    {
+      "label": "SaaS dashboard",
+      "instruction": "Add \"SaaS dashboard\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "mobile app",
+      "instruction": "Add \"mobile app\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "settings screen",
+      "instruction": "Add \"settings screen\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "pricing page",
+      "instruction": "Add \"pricing page\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "analytics UI",
+      "instruction": "Add \"analytics UI\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "design system board",
+      "instruction": "Add \"design system board\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Text is unreadable",
+      "fix": "Ask for fewer labels, larger UI text, short real words, and clearly separated sections."
+    },
+    {
+      "problem": "The layout looks like a landing page",
+      "fix": "Specify utilitarian product UI, dense content, persistent navigation, and repeated workflows."
+    },
+    {
+      "problem": "Components overlap",
+      "fix": "Ask for a clean grid, consistent spacing, fixed side navigation, and no floating decorative cards."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can GPT Image 2 create UI mockups?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for UI Mockups examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I prompt an AI for a SaaS dashboard mockup?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for UI Mockups examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I make UI text readable in generated mockups?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for UI Mockups examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can I turn an AI UI image into real code?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for UI Mockups examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for ui mockups?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for UI Mockups examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "infographics",
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "product-photography",
+      "label": "Product Photography",
+      "href": "/gpt-image-2-prompts/for-product-photography/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "ecommerce-product-photos",
+      "label": "Ecommerce Product Photos",
+      "href": "/gpt-image-2-prompts/for-ecommerce-product-photos/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 ui mockup prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

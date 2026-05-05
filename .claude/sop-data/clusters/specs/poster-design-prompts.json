@@ -1,0 +1,209 @@
+{
+  "slug": "poster-design-prompts",
+  "priority": "P0-8",
+  "tier": "creative",
+  "h1": "Poster Design Prompts for GPT Image 2",
+  "meta_title": "Poster Design Prompts for GPT Image 2 — 12+ Tested Templates",
+  "meta_description": "Copy-paste poster design prompts for GPT Image 2. Movie, concert, retro, minimal, propaganda styles with bold typography. Print-ready 2K output for designers.",
+  "intro_long": "14 tested GPT Image 2 prompts that produce print-ready posters with bold typography — movie hero one-sheets, retro concert flyers, and minimal Swiss editorials.",
+  "how_it_works": [
+    {
+      "title": "Pick a poster type",
+      "body": "Choose minimalist, movie, concert, retro, propaganda, or editorial — each style ships with a tested template."
+    },
+    {
+      "title": "Quote your headline + tagline",
+      "body": "Wrap exact strings in quotes (`title: \"DESIGN MATTERS\"`, `tagline: \"Limited Run\"`) so text renders clean."
+    },
+    {
+      "title": "Generate at 2K for print",
+      "body": "Run in Workbench at 2K (10 credits) — 24×36 inch ready, sharp letterforms, no Photoshop overlay needed."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Pixel-level headline rendering",
+      "body": "GPT Image 2 prints poster titles cleanly even at 4K — no garbled letters, no warped kerning, no Photoshop text-layer rescue."
+    },
+    {
+      "title": "Multilingual typography support",
+      "body": "Headlines render correctly in EN / JA / KO / ZH / HI / BN — ideal for international tour posters and bilingual campaign work."
+    },
+    {
+      "title": "JSON prompts lock the layout",
+      "body": "Structured templates fix font weight, hierarchy, and grid placement — every regeneration keeps title, subtitle, and footer info exactly where you spec."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Event organizers",
+      "body": "Spin up concert and conference posters in minutes — date, venue, lineup all rendered in-image."
+    },
+    {
+      "title": "Movie studios & indie filmmakers",
+      "body": "Pitch one-sheet concepts with billing block and tagline locked before commissioning a designer."
+    },
+    {
+      "title": "Agency creatives",
+      "body": "Test typography and color directions across 10 variants in an hour, present the strongest to clients."
+    },
+    {
+      "title": "Educators & nonprofits",
+      "body": "Produce classroom and campaign posters with readable headlines on tight budgets, print-ready out of the box."
+    }
+  ],
+  "tips": [
+    {
+      "q": "How do you write a poster design prompt?",
+      "a": "Use this skeleton: '[Style] poster, [subject], [color palette], bold typography reading \"[TITLE]\", [supporting text], 2:3 portrait.' Always quote the headline string and specify font weight (bold / display / condensed). JSON-format prompts in this library handle the hierarchy automatically."
+    },
+    {
+      "q": "Can GPT Image 2 render readable poster text?",
+      "a": "Yes — pixel-level text rendering is its strongest advantage over Midjourney and SDXL. Wrap titles in double quotes, keep headlines under 6 words, and pick `bold sans-serif` or `condensed display`. Multilingual scripts (JA / KO / ZH / HI) also render correctly first try."
+    },
+    {
+      "q": "What should a movie poster AI prompt include?",
+      "a": "Five blocks: hero subject + pose, scene atmosphere, main title (quoted), tagline (quoted), and a credits billing line. Add color grade keywords like `teal-orange` or `noir monochrome` and a 2:3 portrait ratio. Our movie-poster JSON pattern wires all five into one structured prompt."
+    },
+    {
+      "q": "How do I control layout and typography in AI posters?",
+      "a": "Switch from prose prompts to JSON-format templates: declare `header.title`, `header.title_typography: \"bold sans-serif display, all caps\"`, `centerpiece`, and `footer.info_text` separately. The model honors the schema, so every regeneration keeps font weight, hierarchy, and grid placement consistent."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-pdf-to-slides-infographics",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "设计师 + 内容创作者：要做电影/演唱会/复古/极简风海报。GPT Image 2 文字渲染让海报标题第一次能直接生成而不是后期 PS。",
+  "primary_query": "poster design prompts",
+  "search_volume_signal": "creative_high",
+  "competitor_to_outrank": ["promptbase.com (top 1)", "lovart.ai", "openart.ai (Midjourney)", "designwiz.com (120+ prompts)", "fakeclients.com", "dribbble.com"],
+  "sub_scenes": [
+    {
+      "name": "Minimalist Poster",
+      "slug_anchor": "minimalist",
+      "description": "Swiss design, negative space, single focal element",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Movie / Film Poster",
+      "slug_anchor": "movie",
+      "description": "Cinematic hero shot, dramatic lighting, big title",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Concert / Music Event",
+      "slug_anchor": "concert",
+      "description": "Psychedelic, indie rock, with date and venue text",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Retro / Vintage",
+      "slug_anchor": "retro",
+      "description": "1950s-1980s feel, aged paper, vintage display fonts",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Propaganda Style",
+      "slug_anchor": "propaganda",
+      "description": "Soviet, Chinese, Bauhaus, high contrast, bold type",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Editorial / Magazine",
+      "slug_anchor": "editorial",
+      "description": "Fashion cover feel, large type blocks, premium palette",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "What's the best AI prompt for poster design?",
+      "a": "Reliable template: '[Style] poster, [subject] composition, [color palette], bold sans-serif typography reading \"[TITLE]\", [supporting text], [aspect ratio]'. Example: 'Minimalist Swiss poster, single geometric shape on cream background, red accents, bold typography reading \"DESIGN MATTERS\", 2:3 portrait.' GPT Image 2 renders the title text correctly first try."
+    },
+    {
+      "q": "Can GPT Image 2 generate posters with readable text?",
+      "a": "Yes — pixel-level text rendering is its strongest feature versus Midjourney/SDXL. Wrap the exact poster title in double quotes, specify font style (sans-serif / serif / hand-lettered), and the model produces poster-ready text without Photoshop overlay."
+    },
+    {
+      "q": "How do I make a vintage / retro poster with AI?",
+      "a": "Use this retro template: '[Decade]s-style poster, faded color palette, halftone print texture, vintage [genre] illustration, bold display font reading \"[TITLE]\", aged paper background, slight grain.' Specify the decade (1950s diner / 1970s disco / 1980s sci-fi) for accuracy."
+    },
+    {
+      "q": "What size and aspect ratio for AI-generated posters?",
+      "a": "Use 2:3 portrait (24×36 inches print standard) or 1:1 square for social. Always generate at 2K resolution (10 credits) for print quality. For Instagram-only sharing, 1K is enough (6 credits)."
+    },
+    {
+      "q": "Is there a ChatGPT prompt for poster design that works?",
+      "a": "ChatGPT image generation IS GPT Image 2 under the hood. Our Studio uses the same model with cleaner prompt parsing and no rate limits. All ChatGPT poster prompts work here, plus we have 14 tested templates organized by style."
+    }
+  ],
+  "related_searches_raw": [
+    "Poster design prompts generator",
+    "Creative poster design prompts",
+    "Free poster design prompts",
+    "AI prompt for poster design",
+    "Graphic design prompts generator free",
+    "ChatGPT prompt for poster design",
+    "Graphic design poster prompts",
+    "ChatGPT prompt for poster design free"
+  ],
+  "page_structure_notes": "首屏：① H1 强调『文字渲染优势』+ 1 张极致案例 ② Workbench CTA + 实时输入 demo（输入 title → 立刻看预览）③ 6 张子场景代表案例（minimalist/movie/concert/retro/propaganda/editorial）。下面 sub_scenes anchor。每张 prompt 卡片 modal 显示 2:3 portrait 尺寸。",
+  "internal_links": [
+    { "to": "thumbnail-prompts", "anchor_text": "YouTube thumbnail prompts (similar text-heavy designs)" },
+    { "to": "infographic-prompts", "anchor_text": "Infographic prompts (typography + data viz)" },
+    { "to": "social-media-ad-prompts", "anchor_text": "Social media ad prompts (commercial poster variants)" }
+  ],
+  "estimated_prompt_count": 14,
+  "image_count_target": 14,
+  "kie_credits_estimate": 140,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "海报必须 2K 出图（10 credits/张）保证印刷质量和文字清晰",
+  "json_template": {
+    "_note": "海报推荐 JSON 结构化 prompt 提高文字渲染准确度。{argument} 是动态参数，工作台解析为表单。",
+    "_pattern": "minimal-typographic-poster",
+    "template": {
+      "type": "{argument name=\"poster_style\" default=\"minimalist Swiss design poster\"}",
+      "subject": "{argument name=\"subject\" default=\"abstract geometric form\"}",
+      "background": "{argument name=\"background\" default=\"cream paper texture\"}",
+      "color_palette": "{argument name=\"palette\" default=\"red and black on cream\"}",
+      "header": {
+        "title": "{argument name=\"title\" default=\"DESIGN MATTERS\"}",
+        "title_typography": "{argument name=\"title_font\" default=\"bold sans-serif display, all caps\"}",
+        "subtitle": "{argument name=\"subtitle\" default=\"\"}"
+      },
+      "centerpiece": {
+        "element": "{argument name=\"centerpiece\" default=\"single bold geometric shape\"}",
+        "composition": "centered with generous negative space, balanced asymmetry"
+      },
+      "footer": {
+        "info_text": "{argument name=\"footer_info\" default=\"date · venue · organizer\"}",
+        "info_typography": "small sans-serif, secondary color"
+      },
+      "texture_overlay": "{argument name=\"texture\" default=\"subtle paper grain, aged feel\"}",
+      "output": "2:3 portrait, 24x36 inches print quality, 2K resolution, sharp text"
+    },
+    "alternative_patterns": [
+      {
+        "name": "movie-poster",
+        "use_when": "电影感戏剧性海报",
+        "schema": "{type, hero_subject: {character, pose, lighting}, background: {scene, atmosphere}, title_treatment: {main_title, tagline, credits_block, billing}, color_grade}"
+      },
+      {
+        "name": "concert-event",
+        "use_when": "演唱会 / 活动海报",
+        "schema": "{type, headliner, supporting_acts, date, venue, art_style: psychedelic|minimal|punk|vintage, color_scheme}"
+      },
+      {
+        "name": "vintage-retro",
+        "use_when": "复古怀旧风海报",
+        "schema": "{type, decade: 1950s|1970s|1980s, illustration_style, halftone_intensity, color_palette: muted|saturated|sepia, paper_aging}"
+      },
+      {
+        "name": "propaganda",
+        "use_when": "宣传海报风格",
+        "schema": "{type, era: soviet|chinese|bauhaus, hero_figure, slogan, symbolism: hammer|fist|star, contrast: high}"
+      }
+    ]
+  }
+}

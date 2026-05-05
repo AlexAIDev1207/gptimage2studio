@@ -1,0 +1,162 @@
+{
+  "slug": "food-photography-prompts",
+  "priority": "P0-9",
+  "tier": "commercial",
+  "h1": "Food Photography Prompts for GPT Image 2",
+  "meta_title": "Food Photography Prompts for GPT Image 2 — Restaurant & Recipe",
+  "meta_description": "Copy-paste food photography prompts for GPT Image 2. Flat lay, hero shot, restaurant menu, drink, dessert styles. Generate appetizing dish photos for social or menu.",
+  "intro_long": "13 tested GPT Image 2 prompts that generate appetizing food shots — flat lay top-down, hero close-up, and restaurant menu styles ready for any dish.",
+  "how_it_works": [
+    {
+      "title": "Pick your dish type",
+      "body": "Choose hero shot, flat lay, restaurant menu, drink, dessert, or recipe lifestyle from the sub-scenes."
+    },
+    {
+      "title": "Customize plating and lighting",
+      "body": "Edit dish name, garnish, surface, and lighting cue (window side / golden hour / studio softbox)."
+    },
+    {
+      "title": "Generate at 2K in Workbench",
+      "body": "One click pre-fills the prompt and runs GPT Image 2 — 2K resolution captures steam, sauce gloss, crust crumb."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Texture realism that reads as food",
+      "body": "GPT Image 2 renders rising steam, glossy sauce drip, and crispy crust crumb structure that signal freshness — not the plastic AI-look from generic models."
+    },
+    {
+      "title": "Right angle for every dish",
+      "body": "Top-down 90 degrees for flat lays and bowls, 45-degree hero for burgers and stacks, eye-level for drinks — sub-scenes pre-pick the angle that sells the dish."
+    },
+    {
+      "title": "Clean menu text rendering",
+      "body": "Dish names, prices, and category labels render without garbled letters — usable for printed menus, delivery app cards, and cafe chalkboards at 2K."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Restaurants and cafes",
+      "body": "Generate menu photos and chalkboard specials without booking a food photographer."
+    },
+    {
+      "title": "Food bloggers and creators",
+      "body": "Produce hero shots and flat lays for Instagram, Pinterest, and recipe blogs in minutes."
+    },
+    {
+      "title": "Cookbook authors",
+      "body": "Visualize recipe pages with consistent plating and lighting across an entire book."
+    },
+    {
+      "title": "Delivery apps and ghost kitchens",
+      "body": "Standardized menu shots for Uber Eats, DoorDash, and Grubhub listings at 2K resolution."
+    }
+  ],
+  "tips": [
+    {
+      "q": "How do I write a food photography prompt that looks appetizing?",
+      "a": "Combine five cues: dish + plating ('on white ceramic'), angle ('45-degree hero'), lighting ('window side light'), texture ('steam rising' / 'sauce drip' / 'crisp edges'), and realism ('photorealistic, food magazine quality'). Steam and gloss are the strongest appetite triggers."
+    },
+    {
+      "q": "Which lighting and angle work best for food shots?",
+      "a": "Use window side light or golden hour soft light for warmth. For burgers, stacks, and layered dishes shoot 45-degree hero. For bowls, pizza, and flat lays use top-down 90 degrees. For drinks and tall glasses go eye-level to show carbonation and ice clarity."
+    },
+    {
+      "q": "Can GPT Image 2 generate restaurant menu shots with prices?",
+      "a": "Yes. Quote exact strings (`dish: \"Truffle Risotto\"`, `price: \"$24\"`) and limit to 3 text fields per image. Generate at 2K for print menus and delivery apps — the model renders pricing and dish names cleanly without garbled letters."
+    },
+    {
+      "q": "How do I avoid plastic or AI-look in food photos?",
+      "a": "Add 'natural shadows', 'true-to-life color', and 'subtle imperfection' to the prompt. Include a real texture cue like 'crumb structure visible' for bread or 'oil droplets on greens' for salad. Avoid over-saturated keywords like 'vibrant' or 'glowing' which push toward CGI."
+    }
+  ],
+  "related_articles": [
+    "fix-gpt-image-2-artifacting-lighting-details",
+    "is-gpt-image-2-free-pricing-access"
+  ],
+  "search_intent": "餐厅老板 + 美食博主 + 外卖卖家 + 食谱博客：要好看的菜品图给菜单 / Instagram / 电商。",
+  "primary_query": "food photography prompts",
+  "search_volume_signal": "commercial_medium",
+  "competitor_to_outrank": ["promptomania.com (top 1 hub)", "promptbase.com (food category)", "media.io (Gemini 25+ looks)", "foodphoto.ai (specialist)", "aimenuphoto.com (specialist)", "openart.ai (Midjourney food)"],
+  "sub_scenes": [
+    {
+      "name": "Hero Shot / Close-Up",
+      "slug_anchor": "hero-shot",
+      "description": "Close-up dish, shallow depth, steam and drip cues",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Flat Lay Top-Down",
+      "slug_anchor": "flat-lay",
+      "description": "Top-down 90-degree multi-dish Instagram layout",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Restaurant Menu Shot",
+      "slug_anchor": "restaurant-menu",
+      "description": "Clean background standardized menu photography",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Drink / Cocktail",
+      "slug_anchor": "drink-cocktail",
+      "description": "Cocktails, latte art, juice with glass texture",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Dessert / Bakery",
+      "slug_anchor": "dessert",
+      "description": "Cake, pastry with sugar dust and chocolate drip",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Lifestyle / Recipe Story",
+      "slug_anchor": "lifestyle-recipe",
+      "description": "Cooking process, hands and kitchen storytelling",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "How do I make food photos look professional with AI?",
+      "a": "Five elements: (1) plating ('garnish with [herb]' / 'on white ceramic plate'), (2) lighting ('window side light' / 'golden hour soft light'), (3) angle ('45-degree hero angle' / 'top-down flat lay'), (4) detail ('steam rising' / 'sauce drip' / 'crispy texture'), (5) realism ('photorealistic, natural shadows, true-to-life color'). Combine these in your prompt."
+    },
+    {
+      "q": "What's the best AI food photography prompt template?",
+      "a": "Reliable template: '[Dish name] photographed in [angle], [plating], [lighting], [color palette], on [surface], styled with [garnish/props], [texture cues], hyperrealistic, sharp focus, food magazine quality.' Adjust dish-specific cues like 'molten cheese pull' for pizza or 'cocoa powder dusting' for cake."
+    },
+    {
+      "q": "Can GPT Image 2 generate food photos for restaurant menus?",
+      "a": "Yes — and faster than booking a food photographer. Generate at 2K resolution for menu printing. Use neutral backgrounds (white / wood / dark stone) for menu compliance. Our 'Restaurant menu shot' sub-section has tested templates."
+    },
+    {
+      "q": "How to make food look appetizing in AI prompts?",
+      "a": "Three secret cues: (1) 'steam rising' or 'bubbling' for hot food (signals freshness), (2) 'glossy surface' or 'sauce drip' (signals moisture), (3) 'crisp edges' or 'caramelized texture' (signals quality cooking). Add these to any base prompt and food instantly looks ASMR-level appetizing."
+    },
+    {
+      "q": "Free vs paid AI food photography — which is worth it?",
+      "a": "Free options (Canva / Bing) generate generic results. GPT Image 2 Studio at 1K (6 credits) gives food-magazine quality. For professional menu / cookbook / Amazon listings, use 2K (10 credits). Comparison: hiring a food photographer = $300-1000/dish. Studio = $0.06/dish. ROI obvious for any food business."
+    }
+  ],
+  "related_searches_inferred": [
+    "Food photography prompts ChatGPT",
+    "Food photography prompts Midjourney",
+    "Food photography prompts free",
+    "Restaurant menu photo prompt",
+    "Food photo prompt copy paste",
+    "AI food photography for Instagram",
+    "Cake photography prompt",
+    "Drink photography AI"
+  ],
+  "page_structure_notes": "首屏：① H1 + 1 张极致 hero shot（汉堡 / 拉面 / 蛋糕，强 visual）② Workbench CTA『Upload your dish → Generate magazine shot』③ 6 子场景 grid + 真实餐厅菜单案例。强调 ROI（vs 雇摄影师便宜 1000x）+ 速度（30 秒 vs 数天）。",
+  "internal_links": [
+    { "to": "product-photography-prompts", "anchor_text": "Product photography prompts (similar studio techniques)" },
+    { "to": "ecommerce-product-photo-prompts", "anchor_text": "E-commerce product photos (food packaging on Amazon)" },
+    { "to": "social-media-ad-prompts", "anchor_text": "Social media ad prompts (food brand ads)" }
+  ],
+  "estimated_prompt_count": 13,
+  "image_count_target": 13,
+  "kie_credits_estimate": 130,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "food 必须 2K 出图保证质感细节（蒸汽 / 滴落 / 纹理）"
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "ui-mockup-prompts",
+  "candidate_score": 0.479,
+  "query": "UI mockup prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "figma.com", "title": "AI mockup generator for fast prototyping", "type": "tool" },
+    { "rank": 2, "domain": "uizard.io", "title": "AI For Mockups With Uizard", "type": "tool" },
+    { "rank": 3, "domain": "banani.co", "title": "Free UI Mockup AI Generator", "type": "tool" },
+    { "rank": 4, "domain": "miro.com", "title": "AI prompts for UI design: Wireframes, prototypes, mockups", "type": "tool/blog" },
+    { "rank": 5, "domain": "uxpilot.ai", "title": "AI Mockup Generator | Create Professional UI Mockups Instantly", "type": "tool" },
+    { "rank": 6, "domain": "fotor.com", "title": "Free AI Mockup Generator Online", "type": "tool" },
+    { "rank": 7, "domain": "mockey.ai", "title": "Free Mockup Generator with 20,000+ AI Mockup Templates", "type": "tool" },
+    { "rank": 8, "domain": "humble-ui.com", "title": "AI Prompt Generator for Stunning UI Mockups", "type": "tool" },
+    { "rank": 9, "domain": "motiff.com", "title": "The Best UI Generator", "type": "tool" },
+    { "rank": 10, "domain": "recraft.ai", "title": "Free AI Mockup Generator Online with Recraft", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": [],
+  "midjourney_dominant": false,
+  "verdict": "REJECT",
+  "reason": "❌ 用户搜 'UI mockup prompts' 时的真实意图是『一键生成完整 UI 的工具』(Figma Make / Uizard / Motiff / Banani 等专业 UI AI 工具)，**不是要 prompt 列表**。Search intent 与 cluster hub 形态严重不匹配：用户来到我们的 prompt 卡片页会立刻跳出去找真正的 UI 工具。GPT Image 2 也不是为生成可交互 UI 设计的（它是 image generation，不是 design tool）。建议彻底放弃这个 cluster。",
+  "recommended_h1": null,
+  "alternative_path": "如果一定要做 UI 方向，做 'UI mockup screenshot prompts' 这种纯展示性的（用 GPT Image 2 生成假的 UI 截图作为博客配图/PPT 素材），但搜索量很小。",
+  "note": "WebSearch-only data; recommend reject — search intent mismatch"
+}

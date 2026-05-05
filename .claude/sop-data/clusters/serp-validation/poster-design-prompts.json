@@ -1,0 +1,41 @@
+{
+  "slug": "poster-design-prompts",
+  "candidate_score": 0.864,
+  "query": "poster design prompts",
+  "search_url": "https://www.google.com/search?q=poster+design+prompts&hl=en",
+  "top10": [
+    { "rank": 1, "domain": "promptbase.com", "title": "AI Poster Prompts | Design & Graphics", "type": "marketplace" },
+    { "rank": 2, "domain": "lovart.ai", "title": "How to Write Perfect AI Prompts for Poster Design 2025", "type": "blog/tool" },
+    { "rank": 3, "domain": "pinterest.com", "title": "Poster Design Prompts", "type": "social" },
+    { "rank": 4, "domain": "openart.ai", "title": "The Best 25 Midjourney Prompts for Poster", "type": "blog/tool" },
+    { "rank": 5, "domain": "sharpen.design", "title": "Design Challenge Generator", "type": "tool" },
+    { "rank": 6, "domain": "designwiz.com", "title": "120 Best AI Poster Prompts for Stunning Designs", "type": "blog" },
+    { "rank": 7, "domain": "fakeclients.com", "title": "Free Graphic Design Prompts Generator", "type": "tool" },
+    { "rank": 8, "domain": "dribbble.com", "title": "7 Design Prompt Generators To Inspire Your Next Project", "type": "social" }
+  ],
+  "video_carousel": [
+    { "domain": "youtube.com", "title": "World's Shortest Poster Design Course Using AI" },
+    { "domain": "youtube.com", "title": "I Made ANY AI Posters in Nano Banana Pro Using Only ONE..." },
+    { "domain": "youtube.com", "title": "Make AI Posters That Look REAL — Best Prompt Strategy" }
+  ],
+  "image_carousel_domains": ["amazon.com", "enhanceai.art", "instagram.com", "vistaprint.com", "shutterstock.com"],
+  "paa": [],
+  "related_searches": [
+    "Poster design prompts generator",
+    "Creative poster design prompts",
+    "Free poster design prompts",
+    "AI prompt for poster design",
+    "Graphic design prompts generator free",
+    "ChatGPT prompt for poster design",
+    "Graphic design poster prompts",
+    "ChatGPT prompt for poster design free"
+  ],
+  "domain_diversity": 8,
+  "reddit_count": 0,
+  "pinterest_count": 1,
+  "quora_count": 0,
+  "verdict": "PASS",
+  "reason": "SERP 健康：8 个不同 AI prompt 工具站和设计博客，Reddit/Quora 0 席，Pinterest 仅 1 席。竞争是同类站点（lovart/openart/promptbase/designwiz），cluster hub + 高质量图可以打。Related searches 暴露用户偏好 generator/free/AI prompt，是好的子场景词。",
+  "recommended_h1": "Poster Design Prompts for GPT Image 2",
+  "sub_scenes_from_related": ["generator", "creative", "free", "AI prompt", "graphic design", "ChatGPT prompt"]
+}

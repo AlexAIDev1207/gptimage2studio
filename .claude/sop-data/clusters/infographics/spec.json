@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "infographics",
+  "source_candidate_slug": "infographic-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-infographics/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Infographics: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for infographics with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Infographics"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 infographic prompts",
+    "query_variants": [
+      "ai infographic prompt",
+      "gpt image 2 diagram prompt",
+      "educational infographic ai prompt",
+      "technical diagram prompt gpt image 2"
+    ],
+    "related_searches": [
+      "ai infographic prompt",
+      "diagram prompt gpt image 2",
+      "technical infographic prompt",
+      "educational diagram ai prompt",
+      "data visualization prompt"
+    ],
+    "intent_grade": "strong-informational",
+    "kd_estimate": 21,
+    "search_intent": "Generate diagrams, explainers, charts, educational layouts, and labeled visual systems.",
+    "launch_batch": 2,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Infographics"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Infographics Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Infographics Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Infographics Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Infographics Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Infographics Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Infographics Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Infographics FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Turn concepts, processes, comparisons, and educational topics into clear GPT Image 2 infographic prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "process-diagram",
+      "label": "Process Diagrams",
+      "anchor": "#process-diagram",
+      "search_modifier": "diagram prompt gpt image 2",
+      "user_intent": "Explain workflows, funnels, cycles, and step-by-step systems.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for process diagrams with clear before/copy/use affordance."
+    },
+    {
+      "slug": "comparison-chart",
+      "label": "Comparison Charts",
+      "anchor": "#comparison-chart",
+      "search_modifier": "ai infographic prompt",
+      "user_intent": "Create versus layouts, feature matrices, pros/cons, and option grids.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for comparison charts with clear before/copy/use affordance."
+    },
+    {
+      "slug": "timeline",
+      "label": "Timelines",
+      "anchor": "#timeline",
+      "search_modifier": "timeline infographic prompt",
+      "user_intent": "Visualize historical, product, roadmap, or transformation timelines.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for timelines with clear before/copy/use affordance."
+    },
+    {
+      "slug": "technical-explainer",
+      "label": "Technical Explainers",
+      "anchor": "#technical-explainer",
+      "search_modifier": "technical infographic prompt",
+      "user_intent": "Break down products, AI systems, engineering topics, or mechanisms.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for technical explainers with clear before/copy/use affordance."
+    },
+    {
+      "slug": "educational-poster",
+      "label": "Educational Posters",
+      "anchor": "#educational-poster",
+      "search_modifier": "educational diagram ai prompt",
+      "user_intent": "Make classroom, training, and concept summary visuals.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for educational posters with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Infographics Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "process-diagram",
+        "comparison-chart",
+        "timeline"
+      ]
+    },
+    {
+      "label": "Infographics Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "technical-explainer",
+        "educational-poster"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Choose the information shape",
+      "body": "Use process, timeline, comparison, anatomy, checklist, or framework language."
+    },
+    {
+      "heading": "Limit the content load",
+      "body": "Use 3-7 sections, short labels, and one core idea per block."
+    },
+    {
+      "heading": "Ask for layout discipline",
+      "body": "Specify grid, icons, arrows, spacing, and readable hierarchy."
+    }
+  ],
+  "variations": [
+    {
+      "label": "process map",
+      "instruction": "Add \"process map\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "comparison chart",
+      "instruction": "Add \"comparison chart\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "timeline",
+      "instruction": "Add \"timeline\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "technical diagram",
+      "instruction": "Add \"technical diagram\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "educational poster",
+      "instruction": "Add \"educational poster\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "data visualization",
+      "instruction": "Add \"data visualization\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Labels are garbled",
+      "fix": "Use fewer words, short section titles, and ask for large readable text blocks."
+    },
+    {
+      "problem": "The logic is unclear",
+      "fix": "Specify the direction of reading, numbered steps, and the relationship between blocks."
+    },
+    {
+      "problem": "The result is decorative only",
+      "fix": "Ask for accurate explanatory structure before style details."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can GPT Image 2 create infographics?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Infographics examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I prompt AI to make readable labels?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Infographics examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should an infographic prompt include?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Infographics examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I avoid wrong text in AI diagrams?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Infographics examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for infographics?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Infographics examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "ui-mockups",
+      "label": "UI Mockups",
+      "href": "/gpt-image-2-prompts/for-ui-mockups/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "product-photography",
+      "label": "Product Photography",
+      "href": "/gpt-image-2-prompts/for-product-photography/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "ecommerce-product-photos",
+      "label": "Ecommerce Product Photos",
+      "href": "/gpt-image-2-prompts/for-ecommerce-product-photos/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 infographic prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

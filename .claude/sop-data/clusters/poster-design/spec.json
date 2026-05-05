@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "poster-design",
+  "source_candidate_slug": "poster-design-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-poster-design/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Poster Design: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for poster design with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Poster Design"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 poster design prompts",
+    "query_variants": [
+      "poster design ai prompt",
+      "movie poster ai prompt",
+      "product poster design ai prompt",
+      "gpt image 2 concert poster prompt"
+    ],
+    "related_searches": [
+      "poster design ai prompt",
+      "movie poster design prompt",
+      "concert poster prompt",
+      "sports poster ai prompt",
+      "typography poster prompt"
+    ],
+    "intent_grade": "strong-design",
+    "kd_estimate": 25,
+    "search_intent": "Create movie, product, event, sports, and typography-heavy posters.",
+    "launch_batch": 1,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Poster Design"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Poster Design Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Poster Design Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Poster Design Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Poster Design Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Poster Design Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Poster Design Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Poster Design FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Build movie posters, event flyers, typography layouts, and campaign graphics with GPT Image 2 poster prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "movie-poster",
+      "label": "Movie Posters",
+      "anchor": "#movie-poster",
+      "search_modifier": "movie poster design prompt",
+      "user_intent": "Use cinematic composition, title hierarchy, cast-like spacing, and dramatic lighting.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for movie posters with clear before/copy/use affordance."
+    },
+    {
+      "slug": "concert-flyer",
+      "label": "Concert and Event Flyers",
+      "anchor": "#concert-flyer",
+      "search_modifier": "concert poster prompt",
+      "user_intent": "Create music, club, conference, and launch event posters.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for concert and event flyers with clear before/copy/use affordance."
+    },
+    {
+      "slug": "sports-poster",
+      "label": "Sports Posters",
+      "anchor": "#sports-poster",
+      "search_modifier": "sports poster ai prompt",
+      "user_intent": "Design action-heavy posters with athlete focus, team color, and bold type.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for sports posters with clear before/copy/use affordance."
+    },
+    {
+      "slug": "typography-poster",
+      "label": "Typography Posters",
+      "anchor": "#typography-poster",
+      "search_modifier": "typography poster prompt",
+      "user_intent": "Control big type, hierarchy, negative space, and print layout style.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for typography posters with clear before/copy/use affordance."
+    },
+    {
+      "slug": "vintage-print",
+      "label": "Vintage Print Posters",
+      "anchor": "#vintage-print",
+      "search_modifier": "poster design ai prompt",
+      "user_intent": "Use retro paper, halftone, risograph, or editorial poster styles.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for vintage print posters with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Poster Design Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "movie-poster",
+        "concert-flyer",
+        "sports-poster"
+      ]
+    },
+    {
+      "label": "Poster Design Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "typography-poster",
+        "vintage-print"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Name the poster job",
+      "body": "Specify movie, event, campaign, sports, editorial, or product launch poster."
+    },
+    {
+      "heading": "Define the visual hierarchy",
+      "body": "Call out main subject, headline, subheadline, date/location, logo area, and CTA."
+    },
+    {
+      "heading": "Choose print and art direction",
+      "body": "Add poster size, medium, color palette, texture, lighting, and typography references."
+    }
+  ],
+  "variations": [
+    {
+      "label": "movie poster",
+      "instruction": "Add \"movie poster\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "concert flyer",
+      "instruction": "Add \"concert flyer\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "sports poster",
+      "instruction": "Add \"sports poster\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "typography poster",
+      "instruction": "Add \"typography poster\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "product launch poster",
+      "instruction": "Add \"product launch poster\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "retro print",
+      "instruction": "Add \"retro print\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The text is unusable",
+      "fix": "Keep copy short and ask for bold readable headline blocks with minimal small text."
+    },
+    {
+      "problem": "The design is too generic",
+      "fix": "Add a concrete genre, event type, audience, color contrast, and layout constraint."
+    },
+    {
+      "problem": "The poster lacks focus",
+      "fix": "Limit the scene to one hero subject, one headline, and one supporting visual motif."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do you write a poster design prompt?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Poster Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can GPT Image 2 render readable poster text?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Poster Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should a movie poster AI prompt include?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Poster Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I control layout and typography in AI posters?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Poster Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for poster design?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Poster Design examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "infographics",
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "product-photography",
+      "label": "Product Photography",
+      "href": "/gpt-image-2-prompts/for-product-photography/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "stickers",
+      "label": "Stickers",
+      "href": "/gpt-image-2-prompts/for-stickers/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 poster design prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

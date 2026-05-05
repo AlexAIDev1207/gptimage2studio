@@ -6,11 +6,44 @@ import { routing } from '@/core/i18n/config';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+const legacyPromptRedirects: Record<string, string> = {
+  'ai-creator-action-figure-box': '/gpt-image-2-prompts/action-figure-prompts',
+  'cute-pet-action-figure': '/gpt-image-2-prompts/action-figure-prompts',
+  'future-city-2030-infographic': '/gpt-image-2-prompts/infographic-prompts',
+  'anime-cyber-hero-sheet': '/gpt-image-2-prompts/cinematic-portrait-prompts',
+  'ai-faceoff-youtube-thumbnail': '/gpt-image-2-prompts/thumbnail-prompts',
+  'cinematic-beauty-mirror-selfie': '/gpt-image-2-prompts/instagram-photo-edit-prompts',
+  'night-street-ugc-fashion': '/gpt-image-2-prompts/instagram-photo-edit-prompts',
+  'polaroid-travel-memory-wall': '/gpt-image-2-prompts/instagram-photo-edit-prompts',
+  'fashion-magazine-cover': '/gpt-image-2-prompts/instagram-photo-edit-prompts',
+  'neon-fashion-editorial-portrait': '/gpt-image-2-prompts/cinematic-portrait-prompts',
+  'red-match-day-sports-poster': '/gpt-image-2-prompts/poster-design-prompts',
+  'fitness-transformation-poster': '/gpt-image-2-prompts/poster-design-prompts',
+  'basketball-street-poster': '/gpt-image-2-prompts/poster-design-prompts',
+  'kpop-album-cover-concept': '/gpt-image-2-prompts/poster-design-prompts',
+  'movie-storyboard-grid': '/gpt-image-2-prompts/poster-design-prompts',
+  'midnight-ramen-food-poster': '/gpt-image-2-prompts/food-photography-prompts',
+  'kyoto-after-dark-travel-poster': '/gpt-image-2-prompts/poster-design-prompts',
+  'luxury-perfume-beauty-ad': '/gpt-image-2-prompts/product-photography-prompts',
+  'liquid-chrome-sneaker-campaign': '/gpt-image-2-prompts/product-photography-prompts',
+  'cyberpunk-electric-car-ad': '/gpt-image-2-prompts/product-photography-prompts',
+};
+
+function getLegacyPromptRedirect(pathWithoutLocale: string) {
+  if (pathWithoutLocale === '/prompts' || pathWithoutLocale === '/prompts/') {
+    return '/gpt-image-2-prompts';
+  }
+
+  if (pathWithoutLocale.startsWith('/prompts/')) {
+    const slug = pathWithoutLocale.split('/').filter(Boolean)[1];
+    return legacyPromptRedirects[slug] || '/gpt-image-2-prompts';
+  }
+
+  return null;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // Handle internationalization first
-  const intlResponse = intlMiddleware(request);
 
   // Extract locale from pathname
   const locale = pathname.split('/')[1];
@@ -18,6 +51,17 @@ export async function middleware(request: NextRequest) {
   const pathWithoutLocale = isValidLocale
     ? pathname.slice(locale.length + 1)
     : pathname;
+
+  const legacyPromptRedirect = getLegacyPromptRedirect(pathWithoutLocale);
+  if (legacyPromptRedirect) {
+    const prefix = isValidLocale ? `/${locale}` : '';
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = `${prefix}${legacyPromptRedirect}`.replace(/\/{2,}/g, '/');
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
+  // Handle internationalization after canonical redirects
+  const intlResponse = intlMiddleware(request);
 
   // Only check authentication for admin routes
   if (

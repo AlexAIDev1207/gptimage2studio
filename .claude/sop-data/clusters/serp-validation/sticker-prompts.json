@@ -1,0 +1,28 @@
+{
+  "slug": "sticker-prompts",
+  "candidate_score": 0.425,
+  "query": "sticker prompts AI image generator",
+  "top10": [
+    { "rank": 1, "domain": "canva.com", "title": "AI Sticker Generator", "type": "tool" },
+    { "rank": 2, "domain": "howtoleverageai.com", "title": "Sticker Prompt Generator", "type": "blog" },
+    { "rank": 3, "domain": "colorifyai.art", "title": "Free AI Sticker Generator: Create Stickers From Text", "type": "tool" },
+    { "rank": 4, "domain": "openart.ai", "title": "Best 25 Stable Diffusion Prompts for Sticker", "type": "tool/blog" },
+    { "rank": 5, "domain": "adobe.com", "title": "AI Sticker Generator | Adobe Firefly", "type": "tool" },
+    { "rank": 6, "domain": "recraft.ai", "title": "Free Online AI Sticker Generator", "type": "tool" },
+    { "rank": 7, "domain": "imagine.art", "title": "Free AI Sticker Generator", "type": "tool" },
+    { "rank": 8, "domain": "media.io", "title": "24+ Copy-Paste AI Cute Sticker Prompts for Gemini, ChatGPT & Midjourney", "type": "blog" },
+    { "rank": 9, "domain": "notegpt.io", "title": "Free AI Sticker Generator", "type": "tool" },
+    { "rank": 10, "domain": "openart.ai", "title": "The Best Text to Sticker AI Generator", "type": "tool" }
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": [],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：9 unique，0 UGC。SERP 主要是 sticker 生成器工具 + media.io 教程页。GPT Image 2 在 sticker（人物→chibi/线稿/die-cut style）上转化率高，配合工作台『上传照片 + 选 sticker prompt』的玩法非常自然。是 viral-friendly P0 候选。",
+  "recommended_h1": "Sticker Prompts for GPT Image 2",
+  "page_structure_note": "首屏强 visual：『上传照片 → Apply sticker prompt → 下载』的工具+prompts 卡片混合。",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

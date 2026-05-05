@@ -1,0 +1,29 @@
+{
+  "slug": "character-design-prompts",
+  "candidate_score": 0.533,
+  "query": "character design prompts",
+  "top10": [
+    { "rank": 1, "domain": "tumblr.com", "title": "Character design inspiration/challenge", "type": "social" },
+    { "rank": 2, "domain": "yourartpath.com", "title": "Random Character Art Prompt Generator", "type": "tool/traditional_art" },
+    { "rank": 3, "domain": "characterhub.com", "title": "201 Character Design Drawing Prompts", "type": "traditional_art_community" },
+    { "rank": 4, "domain": "quillbot.com", "title": "Character Design Prompts | Ideas & AI Tools", "type": "blog" },
+    { "rank": 5, "domain": "bardotbrush.com", "title": "Character Generator", "type": "tool/traditional_art" },
+    { "rank": 6, "domain": "weam.ai", "title": "50 Best AI Character Design Prompts To Elevate Your Designs", "type": "blog" },
+    { "rank": 7, "domain": "toyhou.se", "title": "Character Design Prompt Generator/Challenge", "type": "traditional_art_community" },
+    { "rank": 8, "domain": "rangen.co.uk", "title": "Random Character Generators and Writing Prompts", "type": "traditional_writing" },
+    { "rank": 9, "domain": "pinterest.com", "title": "140 Best Character Prompts ideas", "type": "social" },
+    { "rank": 10, "domain": "facebook.com", "title": "What are the best prompts for detailed character designs", "type": "social" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 1,
+  "facebook_count": 1,
+  "tumblr_count": 1,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": [],
+  "midjourney_dominant": false,
+  "verdict": "REJECT",
+  "reason": "❌ 主词被传统手绘 character design / OC 社区占据（characterhub.com、toyhou.se、tumblr、rangen.co.uk 都是手绘 OC 圈），AI image 用户搜这个词不是我们的目标用户。3 席社交（tumblr/pinterest/facebook）+ 3 席传统手绘社区 = SERP 不友好。如果要做 character 方向，应该改用 'AI character design prompts' 或更具体的 'consistent character prompts'（已在 multi-image-consistency 里覆盖）。",
+  "recommended_h1": null,
+  "note": "WebSearch-only data; recommend reject this cluster, replace with 'consistent-character-prompts' or sub-scene under cinematic-portrait"
+}

@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "stickers",
+  "source_candidate_slug": "sticker-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-stickers/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Stickers",
+      "href": "/gpt-image-2-prompts/for-stickers/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Stickers: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for stickers with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Stickers"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 sticker prompts",
+    "query_variants": [
+      "chatgpt sticker prompt",
+      "chibi sticker prompt chatgpt",
+      "whatsapp sticker ai prompt",
+      "instagram sticker prompt"
+    ],
+    "related_searches": [
+      "chatgpt sticker prompt",
+      "chibi sticker prompt",
+      "whatsapp sticker prompt",
+      "sticker pack ai prompt",
+      "print ready sticker prompt"
+    ],
+    "intent_grade": "medium-viral",
+    "kd_estimate": 19,
+    "search_intent": "Create sticker packs, chibi characters, social stickers, and print-ready sticker sheets.",
+    "launch_batch": 2,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Stickers"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Stickers Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Stickers Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Stickers Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Stickers Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Stickers Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Stickers Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Stickers FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Generate chibi characters, mascot stickers, reaction packs, and die-cut sticker sheets with copy-paste prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "chibi",
+      "label": "Chibi Stickers",
+      "anchor": "#chibi",
+      "search_modifier": "chibi sticker prompt",
+      "user_intent": "Create cute compact characters with expressive poses and clean outlines.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for chibi stickers with clear before/copy/use affordance."
+    },
+    {
+      "slug": "mascot",
+      "label": "Mascot Stickers",
+      "anchor": "#mascot",
+      "search_modifier": "chatgpt sticker prompt",
+      "user_intent": "Turn a brand character, pet, or object into a sticker-ready mascot.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for mascot stickers with clear before/copy/use affordance."
+    },
+    {
+      "slug": "reaction-pack",
+      "label": "Reaction Sticker Packs",
+      "anchor": "#reaction-pack",
+      "search_modifier": "sticker pack ai prompt",
+      "user_intent": "Build emotions, gestures, and meme-ready reaction variants.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for reaction sticker packs with clear before/copy/use affordance."
+    },
+    {
+      "slug": "messenger",
+      "label": "WhatsApp and Telegram Stickers",
+      "anchor": "#messenger",
+      "search_modifier": "whatsapp sticker prompt",
+      "user_intent": "Make simple high-contrast stickers for chat apps.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for whatsapp and telegram stickers with clear before/copy/use affordance."
+    },
+    {
+      "slug": "print-ready",
+      "label": "Print-Ready Die-Cut Stickers",
+      "anchor": "#print-ready",
+      "search_modifier": "print ready sticker prompt",
+      "user_intent": "Use borders, transparent-background intent, and bold silhouettes.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for print-ready die-cut stickers with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Stickers Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "chibi",
+        "mascot",
+        "reaction-pack"
+      ]
+    },
+    {
+      "label": "Stickers Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "messenger",
+        "print-ready"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Pick the sticker subject",
+      "body": "Define mascot, object, pet, face, phrase, or character before style."
+    },
+    {
+      "heading": "Control cutout readability",
+      "body": "Ask for clean silhouette, thick outline, simple pose, and minimal background."
+    },
+    {
+      "heading": "Create pack variations",
+      "body": "Request consistent character design across emotions, gestures, and captions."
+    }
+  ],
+  "variations": [
+    {
+      "label": "chibi",
+      "instruction": "Add \"chibi\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "mascot",
+      "instruction": "Add \"mascot\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "reaction pack",
+      "instruction": "Add \"reaction pack\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "die-cut sticker",
+      "instruction": "Add \"die-cut sticker\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "chat sticker",
+      "instruction": "Add \"chat sticker\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "sticker sheet",
+      "instruction": "Add \"sticker sheet\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The sticker has a busy background",
+      "fix": "Ask for isolated subject, transparent-background intent, and no scene elements."
+    },
+    {
+      "problem": "The pack is inconsistent",
+      "fix": "Repeat the same character traits, palette, outline, and pose vocabulary."
+    },
+    {
+      "problem": "Small details disappear",
+      "fix": "Use bold shapes, high contrast, and limited accessories."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I make stickers with ChatGPT?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Stickers examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What prompt creates chibi stickers?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Stickers examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I create a sticker pack with AI?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Stickers examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can GPT Image 2 make transparent stickers?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Stickers examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for stickers?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Stickers examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "character-design",
+      "label": "Character Design",
+      "href": "/gpt-image-2-prompts/for-character-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "action-figure",
+      "label": "Action Figure",
+      "href": "/gpt-image-2-prompts/for-action-figure/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 sticker prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

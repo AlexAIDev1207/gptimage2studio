@@ -1,0 +1,214 @@
+{
+  "slug": "product-photography-prompts",
+  "priority": "P0-7",
+  "tier": "commercial",
+  "h1": "GPT Image 2 Product Photography Prompts",
+  "meta_title": "Product Photography Prompts for GPT Image 2 — Studio & Lifestyle",
+  "meta_description": "Copy-paste product photography prompts for GPT Image 2. White studio, gradient, lifestyle, hands-only, model try-on. Upload product, generate catalog-ready shots.",
+  "intro_long": "14 tested GPT Image 2 prompts that generate catalog-ready product shots — white studio packshots, gradient hero frames, and lifestyle scenes with hands-only usage.",
+  "how_it_works": [
+    {
+      "title": "Upload your product photo",
+      "body": "Use a clean front-shot, 1024px+, sharp focus on the SKU. Phone shots work — we regenerate the scene, not the product."
+    },
+    {
+      "title": "Pick a scene type",
+      "body": "Choose white studio for Amazon listings, gradient for social ads, lifestyle for storytelling, or on-model for apparel."
+    },
+    {
+      "title": "Customize and generate at 2K",
+      "body": "Edit background, lighting, and props in the JSON template — one click runs GPT Image 2 with SKU lock enabled."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Pixel-clean labels and packaging text",
+      "body": "GPT Image 2 renders logos, ingredient lists, and SKU codes without garbled letters — the only AI image model that survives a zoom-in on the label."
+    },
+    {
+      "title": "Material accuracy across surfaces",
+      "body": "Glass refraction, fabric weave, leather grain, and metal reflections all render with photographic realism — no plastic-looking renders."
+    },
+    {
+      "title": "Multi-image consistency for SKU variants",
+      "body": "Generate color, size, and angle variations of the same product with locked branding — perfect for Shopify variant galleries and Amazon A+ content."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "DTC founders and Shopify sellers",
+      "body": "Skip the photo studio. Generate hero shots, lifestyle scenes, and variant galleries for under $1 per SKU."
+    },
+    {
+      "title": "Amazon marketplace listings",
+      "body": "White-background packshots that pass Amazon's image guidelines — 2K square output, accurate color, soft natural shadow."
+    },
+    {
+      "title": "Pitch decks and brand portfolios",
+      "body": "Polished product visuals for investor decks, lookbooks, and PR kits — no photographer or set rental required."
+    },
+    {
+      "title": "Packaging and concept mockups",
+      "body": "Test packaging designs, label variations, and shelf presence before going to print or production."
+    }
+  ],
+  "tips": [
+    {
+      "q": "How do you write a product photography prompt for GPT Image 2?",
+      "a": "Use the JSON template on this page: specify type, subject, scene (background/surface/props), lighting (key/fill/shadow), camera (angle/lens/framing), and output. Add `preserve product details, branding, proportions exactly` to lock the SKU. Avoid vague words like 'beautiful' — use specific lighting keywords."
+    },
+    {
+      "q": "How do I create white background product photos with AI?",
+      "a": "Set background to `pure white seamless`, lighting to `soft diffused studio light from upper left` with `subtle bounce fill from right`, shadow to `natural soft shadow directly under product`. Output at 2K square. This matches Amazon listing guidelines and works for 90% of e-commerce SKUs."
+    },
+    {
+      "q": "Can GPT Image 2 create ecommerce product images?",
+      "a": "Yes — image-to-image mode preserves shape, color, branding, and label text from your reference. Use the `studio-product-photography` JSON pattern for packshots, or switch to `lifestyle-scene` and `on-model` patterns for context shots. All output is catalog-ready at 2K."
+    },
+    {
+      "q": "How do I keep product labels readable in AI product photos?",
+      "a": "Quote exact label strings in the prompt (`label_text: \"VITAMIN C SERUM 30ML\"`), generate at 2K resolution (10 credits) not 1K, keep the product centered with the label facing camera, and add `pixel-sharp label text, all printed copy legible` to the style field."
+    }
+  ],
+  "related_articles": [
+    "fix-gpt-image-2-artifacting-lighting-details",
+    "is-gpt-image-2-free-pricing-access"
+  ],
+  "search_intent": "卖家 / SMB / 摄影师：要快速出商品图给电商 listing 或 social ad。GPT Image 2 image-to-image 保持产品 SKU + 换场景 = 比 Midjourney 更实用。",
+  "primary_query": "product photography prompts",
+  "search_volume_signal": "commercial_high",
+  "competitor_to_outrank": ["medium.com (Hamza M)", "claid.ai (specialist hub, top 2 + top 6)", "letsenhance.io", "media.io", "logoai.com", "godofprompt.ai"],
+  "sub_scenes": [
+    {
+      "name": "White Studio Packshot",
+      "slug_anchor": "white-studio",
+      "description": "Pure white BG, soft light, listing-ready",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Gradient & Color Background",
+      "slug_anchor": "gradient",
+      "description": "Color gradient, dramatic light, social ads",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Lifestyle Scene",
+      "slug_anchor": "lifestyle",
+      "description": "Real-life scene, natural light, props",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Hands-Only Usage",
+      "slug_anchor": "hands-only",
+      "description": "Hands holding product, no full model needed",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Flat Lay Top-Down",
+      "slug_anchor": "flat-lay",
+      "description": "Top-down view, flat layout with accessories",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "On-Model / Try-On",
+      "slug_anchor": "on-model",
+      "description": "Model wearing apparel, accessories, eyewear",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "How do I make professional product photos with AI?",
+      "a": "Upload a clean front-shot of your product, paste a prompt specifying (1) background style, (2) lighting type, (3) shadow/reflection rules, (4) composition. GPT Image 2 keeps the product SKU accurate while regenerating the entire scene. Output is catalog-ready in 30 seconds."
+    },
+    {
+      "q": "What's the best AI prompt for e-commerce product photos?",
+      "a": "Reliable template: 'Place the [product] in [setting] with [lighting], soft natural shadow, [angle], realistic [material] texture, e-commerce ready, no extra props.' Specify your platform (Amazon / Shopify) for resolution and aspect ratio (1:1 square is standard)."
+    },
+    {
+      "q": "Can GPT Image 2 keep my product SKU exactly the same?",
+      "a": "Yes — image-to-image mode preserves shape, color, and branding of the uploaded product. To lock in details, add 'preserve product details, branding, and proportions exactly' to your prompt. Avoid words like 'redesign' or 'modify' which override the reference."
+    },
+    {
+      "q": "What size for AI-generated product photos?",
+      "a": "Amazon listing: 2000×2000 (square, white BG). Shopify: 2048×2048 (square or 4:5). Instagram ad: 1080×1080. Use 2K resolution mode (10 credits) for any printed catalog or website hero. 1K (6 credits) is fine for social previews."
+    },
+    {
+      "q": "Difference between 'product photography' and 'e-commerce product photo' prompts?",
+      "a": "Product photography (this page) = creative / studio / hero shots / brand storytelling. E-commerce product photo = listing-ready / on-model / SKU consistency / Amazon-Shopify compliant. Both share core templates — start here for general use, switch to ecommerce cluster for marketplace-specific compliance."
+    }
+  ],
+  "related_searches_inferred": [
+    "Product photography prompts ChatGPT",
+    "Product photography prompts free",
+    "Amazon product photo prompts",
+    "Product photo prompts Nano Banana",
+    "AI product photography prompt generator",
+    "White background product photo prompt",
+    "Lifestyle product photo prompt",
+    "Best product photography AI"
+  ],
+  "page_structure_notes": "首屏：① H1 + 1 张极致 product shot（推荐 lifestyle 或 packshot 高品质对比）② Workbench CTA『Upload product → Generate catalog shot』 + before/after demo（用户上传简陋手机拍的→输出工作室级）③ 子场景 grid（6 styles）。**关键卖点**：突出 SKU 一致性 + 30 秒出图 + 比真实摄影便宜 100x。",
+  "internal_links": [
+    { "to": "social-media-ad-prompts", "anchor_text": "Social media ad prompts (turn product shots into ads)" },
+    { "to": "food-photography-prompts", "anchor_text": "Food photography prompts (similar studio techniques)" },
+    { "to": "infographic-prompts", "anchor_text": "Infographic prompts (product feature breakdowns)" }
+  ],
+  "estimated_prompt_count": 14,
+  "image_count_target": 14,
+  "kie_credits_estimate": 140,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "product 必须 2K 出图保证 SKU 细节清晰可放大",
+  "json_template": {
+    "_note": "Product photography 推荐 JSON 结构化 prompt 锁定 SKU 一致性。{argument} 工作台解析为表单。Image-to-image 模式必填 reference 字段。",
+    "_pattern": "studio-product-photography",
+    "template": {
+      "type": "product photograph",
+      "subject": "{argument name=\"product_name\" default=\"reference image attached\"}",
+      "preserve": "product details, branding, proportions, color, material exactly",
+      "scene": {
+        "background": "{argument name=\"background\" default=\"pure white seamless\"}",
+        "surface": "{argument name=\"surface\" default=\"\"}",
+        "props": "{argument name=\"props\" default=\"\"}"
+      },
+      "lighting": {
+        "key": "{argument name=\"key_light\" default=\"soft diffused studio light from upper left\"}",
+        "fill": "{argument name=\"fill_light\" default=\"subtle bounce from right\"}",
+        "shadow": "{argument name=\"shadow\" default=\"natural soft shadow under product\"}"
+      },
+      "camera": {
+        "angle": "{argument name=\"angle\" default=\"front 3/4 view, slight elevation\"}",
+        "lens": "{argument name=\"lens\" default=\"85mm equivalent, f/8 sharp throughout\"}",
+        "framing": "{argument name=\"framing\" default=\"centered with negative space\"}"
+      },
+      "style": "{argument name=\"style\" default=\"premium e-commerce packshot\"}",
+      "post_processing": {
+        "color_grade": "true to product color, no over-saturation",
+        "sharpness": "edge-sharp, tactile material texture preserved"
+      },
+      "output": "{argument name=\"aspect\" default=\"1:1 square\"} 2K resolution, color accurate"
+    },
+    "alternative_patterns": [
+      {
+        "name": "lifestyle-scene",
+        "use_when": "生活场景产品图",
+        "schema": "{type, subject, scene: {environment, time_of_day, mood}, props: [items], model_presence: hands_only|none|full, story}"
+      },
+      {
+        "name": "flat-lay",
+        "use_when": "俯拍平铺",
+        "schema": "{type, layout: 'top-down 90-degree', surface, items: [{name, position}], composition: grid|circular|asymmetric, palette}"
+      },
+      {
+        "name": "on-model",
+        "use_when": "模特穿戴产品",
+        "schema": "{type, model: {gender, ethnicity, pose, framing}, product: {item, position_on_body}, scene, lighting}"
+      },
+      {
+        "name": "exploded-view",
+        "use_when": "产品分解展示（结合 infographic）",
+        "schema": "{type, subject, layers: [{component, label, callout}], style: technical|3d_render, background}"
+      }
+    ]
+  }
+}

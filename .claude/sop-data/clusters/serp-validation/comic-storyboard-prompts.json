@@ -1,0 +1,47 @@
+{
+  "slug": "comic-storyboard-prompts",
+  "candidate_score": null,
+  "candidate_source": "awesome-gpt-image-2 (P1 candidate, 18 ready prompts)",
+  "query": "comic storyboard prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "pixa.com", "title": "Free Comic Storyboard Generator", "type": "competitor_specialist" },
+    { "rank": 2, "domain": "dashtoon.com", "title": "AI Comic Generator: Create AI-Driven Comics and Manga", "type": "competitor_specialist" },
+    { "rank": 3, "domain": "app.artificialstudio.ai", "title": "Storyboard Comic Generator", "type": "competitor_specialist" },
+    { "rank": 4, "domain": "nanobanana.fans", "title": "Comic Storyboard - Creative Nano Banana AI Prompt", "type": "competitor_hub" },
+    { "rank": 5, "domain": "canva.com", "title": "Free AI Comic Generator", "type": "tool" },
+    { "rank": 6, "domain": "storyboarder.ai", "title": "AI Storyboard Generator | From Script to Storyboard", "type": "competitor_specialist" },
+    { "rank": 7, "domain": "katalist.ai", "title": "Mastering Comic Storyboarding: A Complete Guide", "type": "competitor_specialist" },
+    { "rank": 8, "domain": "aicomicgenerator.net", "title": "AI Comic Generator", "type": "competitor_specialist" },
+    { "rank": 9, "domain": "cutout.pro", "title": "AI Image Series Generator - Create Sequential Art", "type": "tool" },
+    { "rank": 10, "domain": "imagine.art", "title": "AI Comic Generator - High-Resolution Output", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["pixa.com", "dashtoon.com", "app.artificialstudio.ai", "nanobanana.fans", "storyboarder.ai", "katalist.ai", "aicomicgenerator.net"],
+  "midjourney_dominant": false,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康（10 unique，0 UGC）但 7 个 specialist 林立。意图分裂：(a) 一键生成完整漫画工具（dashtoon / pixa / canva / storyboarder.ai —— 占主导）；(b) prompt template 参考（nanobanana.fans / katalist.ai 教程）。我们做 prompt cluster hub 抢 (b) 流量，不是和 generator 工具抢 (a)。awesome-gpt-image-2 已提供 18 条手工精选 Comic/Storyboard prompt，数据基础好。建议 P1 候选。",
+  "recommended_h1": "Comic Storyboard Prompts for GPT Image 2",
+  "differentiation": [
+    "GPT Image 2 跨图一致性优势 → 同一角色多 panel 不变形（specialist 工具难做到）",
+    "JSON 结构化 prompt 模板（Panel 1 / Panel 2 / 角色描述 / 镜头）",
+    "image-to-image 模式：上传角色 reference → 生成多 panel 漫画"
+  ],
+  "p1_recommendation": {
+    "decision": "PROMOTE_TO_P1",
+    "rationale": "awesome-gpt-image-2 提供 18 条精选 ready-to-use prompt，搜索意图清晰，与我们 multi-image-consistency 角度（character consistency）天然契合。可作为我们 P0 之后的第 11 个 cluster 候选，在 P0 上线 2-4 周后视 GSC 表现决定是否上线。",
+    "search_volume_signal": "creative_medium",
+    "estimated_kd": "中等偏低（specialist 多但 KD 不高，新站可冲）",
+    "sub_scenes_proposal": [
+      "Panel Sequence (Action)",
+      "Manga Style",
+      "Character Sheet (Multi-pose)",
+      "Comic Cover Page",
+      "Webtoon Vertical",
+      "Storyboard for Film Pitch"
+    ]
+  },
+  "note": "WebSearch-only data; specialist crowded but prompt-template angle viable; awesome-gpt-image-2 provides 18 starter prompts"
+}

@@ -21,8 +21,10 @@ const navItems = [
   { label: 'Generator', href: '/#workbench', match: (pathname: string) => pathname === '/' },
   {
     label: 'Prompts',
-    href: '/prompts',
-    match: (pathname: string) => pathname.startsWith('/prompts'),
+    href: '/gpt-image-2-prompts',
+    match: (pathname: string) =>
+      pathname.startsWith('/gpt-image-2-prompts') ||
+      pathname.startsWith('/prompts'),
   },
   {
     label: 'Blog',

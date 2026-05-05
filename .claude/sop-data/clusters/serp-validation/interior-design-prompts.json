@@ -1,0 +1,27 @@
+{
+  "slug": "interior-design-prompts",
+  "candidate_score": 0.370,
+  "query": "interior design prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "decor8.ai", "title": "AI Interior Design Prompt Generator", "type": "competitor_specialist" },
+    { "rank": 2, "domain": "fenestra.app", "title": "5 AI Interior Design Prompts That Actually Work", "type": "competitor_specialist" },
+    { "rank": 3, "domain": "apartmenttherapy.com", "title": "I Tried 13 Free AI Interior Design Tools", "type": "blog" },
+    { "rank": 4, "domain": "openart.ai", "title": "Best 25 Midjourney Prompts for Interior Design", "type": "blog/tool" },
+    { "rank": 5, "domain": "akhileshjoshi.medium.com", "title": "How to Write Elaborate Prompts For Interior Decoration", "type": "blog" },
+    { "rank": 6, "domain": "promptomania.com", "title": "Best Architecture & Interior Design Prompts", "type": "competitor_hub" },
+    { "rank": 7, "domain": "aesthetics.tours", "title": "100 AI Prompts for 20 Interior Design Styles", "type": "blog" },
+    { "rank": 8, "domain": "aiforinteriordesigners.com", "title": "100 AI Prompts for Interior Designers", "type": "competitor_specialist" },
+    { "rank": 9, "domain": "spacely.ai", "title": "AI Interior Design Generator", "type": "competitor_specialist" },
+    { "rank": 10, "domain": "chatgpt.com", "title": "ChatGPT - Interior Designer", "type": "official_tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["decor8.ai", "fenestra.app", "promptomania.com", "aiforinteriordesigners.com", "spacely.ai"],
+  "midjourney_dominant": false,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康但 specialist 林立（5 个 interior AI 专门站在 top 10），新站很难短期突围。GPT Image 2 在 interior 上不是首选模型（用户更信任 Stable Diffusion 的 photorealistic 渲染）。如果要做，建议聚焦小众玩法：『家具 try-on / 房间 staging before-after』而不是通用 interior prompts。建议 P1 备选，不进首批 P0。",
+  "recommended_h1": "Interior Design Prompts for GPT Image 2",
+  "note": "WebSearch-only data; specialist competition heavy, recommend P1 not P0"
+}

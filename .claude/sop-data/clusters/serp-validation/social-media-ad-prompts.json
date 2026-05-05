@@ -1,0 +1,28 @@
+{
+  "slug": "social-media-ad-prompts",
+  "candidate_score": 0.428,
+  "query": "social media ad prompts AI image",
+  "top10": [
+    { "rank": 1, "domain": "sprinklr.com", "title": "40 Actionable Social Media Prompts for Marketers", "type": "blog" },
+    { "rank": 2, "domain": "typeface.ai", "title": "AI Image Prompts for Eye-Catching Marketing Creatives", "type": "tool/blog" },
+    { "rank": 3, "domain": "krumzi.com", "title": "50+ AI Image Prompts for Marketing That Actually Convert", "type": "blog" },
+    { "rank": 4, "domain": "wordstream.com", "title": "44 AI Image Prompts to Elevate Your Marketing Creative", "type": "blog" },
+    { "rank": 5, "domain": "mindstudio.ai", "title": "GPT Image 2: 10 Practical Use Cases for Businesses and Creators", "type": "competitor_hub" },
+    { "rank": 6, "domain": "metricool.com", "title": "40+ AI Prompts for Social Media Success", "type": "blog" },
+    { "rank": 7, "domain": "linkedin.com", "title": "My favorite AI Prompts right now", "type": "social" },
+    { "rank": 8, "domain": "typeface.ai", "title": "Instagram Prompt Examples for Captivating Posts", "type": "blog" },
+    { "rank": 9, "domain": "buffer.com", "title": "50 AI Prompts for Better Social Posts", "type": "blog" },
+    { "rank": 10, "domain": "adenslab.com", "title": "The Best AI Prompts for Generating Meta Ads That Convert", "type": "blog" }
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "linkedin_count": 1,
+  "competitor_hubs_in_top10": ["mindstudio.ai"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：9 unique，0 UGC（LinkedIn 1 不算 UGC，是 KOL 帖）。竞争主要是营销 SaaS 博客（Sprinklr/Buffer/WordStream），mindstudio 已有 'GPT Image 2 use cases' 角度是直接竞品。营销人 commercial intent 强，GPT Image 2 + 文字渲染优势是关键卖点。",
+  "recommended_h1": "Social Media Ad Prompts for GPT Image 2",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

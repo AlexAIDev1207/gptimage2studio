@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "old-photo-restoration",
+  "source_candidate_slug": "old-photo-restore-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-old-photo-restoration/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Old Photo Restoration",
+      "href": "/gpt-image-2-prompts/for-old-photo-restoration/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Old Photo Restoration: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for old photo restoration with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Old Photo Restoration"
+  },
+  "seo": {
+    "primary_query": "old photo restoration ai prompt chatgpt preserve identity",
+    "query_variants": [
+      "old photo restoration ai prompt",
+      "old photo restoration prompt chatgpt",
+      "old photo restoration prompt gemini",
+      "ai photo restoration prompt keeps faces the same"
+    ],
+    "related_searches": [
+      "old photo restoration ai prompt",
+      "old damaged photo restoration prompt",
+      "old photo colorize prompt",
+      "preserve identity photo restoration prompt",
+      "restore blurry old photo prompt"
+    ],
+    "intent_grade": "strong-problem",
+    "kd_estimate": 20,
+    "search_intent": "Restore, colorize, deblur, and repair old photos while preserving identity.",
+    "launch_batch": 1,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Old Photo Restoration"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Old Photo Restoration Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Old Photo Restoration Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Old Photo Restoration Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Old Photo Restoration Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Old Photo Restoration Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Old Photo Restoration Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Old Photo Restoration FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Restore scratches, colorize black-and-white images, and preserve faces with prompt templates built for careful photo repair.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "scratch-repair",
+      "label": "Scratch and Tear Repair",
+      "anchor": "#scratch-repair",
+      "search_modifier": "old damaged photo restoration prompt",
+      "user_intent": "Remove cracks, dust, stains, and paper damage without changing the subject.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for scratch and tear repair with clear before/copy/use affordance."
+    },
+    {
+      "slug": "colorize",
+      "label": "Black and White Colorization",
+      "anchor": "#colorize",
+      "search_modifier": "old photo colorize prompt",
+      "user_intent": "Add natural skin tones, clothing color, and period-appropriate environments.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for black and white colorization with clear before/copy/use affordance."
+    },
+    {
+      "slug": "face-preservation",
+      "label": "Preserve Identity",
+      "anchor": "#face-preservation",
+      "search_modifier": "preserve identity photo restoration prompt",
+      "user_intent": "Improve clarity while keeping the same face structure, expression, and age.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for preserve identity with clear before/copy/use affordance."
+    },
+    {
+      "slug": "sharpen-blur",
+      "label": "Sharpen Blurry Photos",
+      "anchor": "#sharpen-blur",
+      "search_modifier": "restore blurry old photo prompt",
+      "user_intent": "Recover softness, motion blur, and low-resolution family photos carefully.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for sharpen blurry photos with clear before/copy/use affordance."
+    },
+    {
+      "slug": "historical-archive",
+      "label": "Historical Archive Style",
+      "anchor": "#historical-archive",
+      "search_modifier": "historical photo restoration prompt",
+      "user_intent": "Restore documentary and archival photos while respecting the original context.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for historical archive style with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Old Photo Restoration Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "scratch-repair",
+        "colorize",
+        "face-preservation"
+      ]
+    },
+    {
+      "label": "Old Photo Restoration Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "sharpen-blur",
+        "historical-archive"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Tell the model what must not change",
+      "body": "Preserve identity, age, pose, clothing, background layout, and original composition."
+    },
+    {
+      "heading": "Separate repair from enhancement",
+      "body": "Request scratch removal, color correction, and clarity improvements before asking for stylized output."
+    },
+    {
+      "heading": "Use conservative language",
+      "body": "Prefer \"natural restoration\" and \"historically plausible color\" over dramatic makeover wording."
+    }
+  ],
+  "variations": [
+    {
+      "label": "scratch repair",
+      "instruction": "Add \"scratch repair\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "colorize black and white",
+      "instruction": "Add \"colorize black and white\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "family portrait restore",
+      "instruction": "Add \"family portrait restore\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "wedding photo repair",
+      "instruction": "Add \"wedding photo repair\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "archive restoration",
+      "instruction": "Add \"archive restoration\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "soft sharpening",
+      "instruction": "Add \"soft sharpening\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The face changes too much",
+      "fix": "Use \"do not beautify, do not alter facial structure, preserve original likeness\"."
+    },
+    {
+      "problem": "The photo becomes too modern",
+      "fix": "Ask for period-accurate colors, original clothing, and no modern accessories."
+    },
+    {
+      "problem": "Details look invented",
+      "fix": "Use \"repair visible damage only; avoid adding new people, objects, or background elements\"."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What prompt restores old photos without changing the face?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Old Photo Restoration examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can ChatGPT restore and colorize old photos?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Old Photo Restoration examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I preserve identity in AI photo restoration?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Old Photo Restoration examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I avoid when restoring old family photos with AI?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Old Photo Restoration examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for old photo restoration?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Old Photo Restoration examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "character-design",
+      "label": "Character Design",
+      "href": "/gpt-image-2-prompts/for-character-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "infographics",
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "old photo restoration ai prompt chatgpt preserve identity",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

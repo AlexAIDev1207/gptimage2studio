@@ -1,0 +1,28 @@
+{
+  "slug": "instagram-photo-edit-prompts",
+  "candidate_score": 0.216,
+  "query": "instagram photo edit prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "media.io", "title": "Instagram Trending Photo Prompts (Copy & Paste)", "type": "tool/blog" },
+    { "rank": 2, "domain": "gouravdigitalclub.com", "title": "Trending Instagram Photo Editing Prompts Using Gemini", "type": "low_quality_seo" },
+    { "rank": 3, "domain": "24fbr.com", "title": "ChatGPT Photo Editing Prompts for Instagram 2026", "type": "low_quality_seo" },
+    { "rank": 4, "domain": "gouravdigitalclub.com", "title": "Trending Photo Editing Prompts For Instagram Boys Using Gemini", "type": "low_quality_seo" },
+    { "rank": 5, "domain": "24fbr.com", "title": "Top ChatGPT Photo Editing Prompts (2026)", "type": "low_quality_seo" },
+    { "rank": 6, "domain": "sushilprompt.com", "title": "Instagram Trending Photo Prompts 2026", "type": "low_quality_seo" },
+    { "rank": 7, "domain": "apnotak.com", "title": "Butterfly Effect AI Photo Editing Prompts", "type": "low_quality_seo" },
+    { "rank": 8, "domain": "rajantemplate.com", "title": "Instagram Flash Filter AI Photo Editing Prompts", "type": "low_quality_seo" },
+    { "rank": 9, "domain": "media.io", "title": "ChatGPT Trending Prompts for Photo Editing", "type": "blog" },
+    { "rank": 10, "domain": "editingprompt.com", "title": "Editing Prompt", "type": "tool" }
+  ],
+  "domain_diversity": 7,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["media.io"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 是『高 viral intent + 低质印度 SEO 博客』组合（gouravdigitalclub / 24fbr / apnotak / rajantemplate / sushilprompt 都是低质内容农场，专门吃这个词）。我们做高质量 hub + GPT Image 2 specific + 真实 viral 案例图很容易超过他们。这是个可以快速冲到前 5 的低 KD cluster。",
+  "recommended_h1": "Instagram Trending Photo Edit Prompts for GPT Image 2",
+  "page_structure_note": "首屏：『Upload your selfie → Apply trending edit』工作台 CTA + 当前 viral 趋势卡片（butterfly / flash / Y2K / aura / saree / couple 等子场景）。每张卡片要 before/after 对比。",
+  "note": "WebSearch-only data; low-KD cluster, easy win"
+}

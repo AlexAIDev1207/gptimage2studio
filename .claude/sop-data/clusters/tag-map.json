@@ -1,0 +1,296 @@
+[
+  {
+    "slug": "product-photography-prompts",
+    "display_name": "Product Photography Prompts",
+    "tags": [
+      "product-photo",
+      "photography"
+    ],
+    "keywords_pattern": "\\b(product\\s+(photo|shot|photography)|white\\s+background|catalog\\s+(photo|shot)|on\\s+(white|gradient)|studio\\s+lighting)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Photography",
+      "Product & Brand"
+    ],
+    "reddit_use_cases": [
+      "Product / E-commerce"
+    ]
+  },
+  {
+    "slug": "ecommerce-product-photo-prompts",
+    "display_name": "E-commerce Product Photo Prompts",
+    "tags": [
+      "ecommerce-listing",
+      "product-photo"
+    ],
+    "keywords_pattern": "\\b(amazon|shopify|etsy|ecommerce|listing|sku|on\\s+model|model\\s+try\\s?on|catalog|lifestyle\\s+shot)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Product & Brand"
+    ],
+    "reddit_use_cases": [
+      "Product / E-commerce"
+    ]
+  },
+  {
+    "slug": "poster-design-prompts",
+    "display_name": "Poster Design Prompts",
+    "tags": [
+      "poster",
+      "graphic-design"
+    ],
+    "keywords_pattern": "\\b(poster|movie\\s+poster|concert\\s+poster|propaganda|retro\\s+poster|minimal\\s+poster)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Poster Design"
+    ],
+    "reddit_use_cases": [
+      "Poster / Print"
+    ]
+  },
+  {
+    "slug": "ui-mockup-prompts",
+    "display_name": "UI Mockup Prompts",
+    "tags": [
+      "ui-mockup",
+      "ui-design"
+    ],
+    "keywords_pattern": "\\b(ui\\s+mockup|app\\s+mockup|website\\s+mockup|wireframe|app\\s+screen|landing\\s+page|saas\\s+ui|dashboard\\s+design)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "UI & Graphic"
+    ],
+    "reddit_use_cases": [
+      "UI Design / Mockup"
+    ]
+  },
+  {
+    "slug": "infographic-prompts",
+    "display_name": "Infographic Prompts",
+    "tags": [
+      "infographic"
+    ],
+    "keywords_pattern": "\\b(infographic|chart|diagram|data\\s+visualization|step\\s+by\\s+step\\s+diagram|process\\s+diagram|venn\\s+diagram)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "UI & Graphic"
+    ],
+    "reddit_use_cases": [
+      "Infographic / Layout"
+    ]
+  },
+  {
+    "slug": "action-figure-prompts",
+    "display_name": "Action Figure Prompts",
+    "tags": [
+      "action-figure"
+    ],
+    "keywords_pattern": "\\b(action\\s+figure|figurine|funko|toy\\s+packaging|collectible)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": [
+      "Action Figure / Figurine"
+    ]
+  },
+  {
+    "slug": "old-photo-restore-prompts",
+    "display_name": "Old Photo Restore Prompts",
+    "tags": [
+      "old-photo-restore",
+      "photo-edit"
+    ],
+    "keywords_pattern": "\\b(restore|colorize|colorise|old\\s+photo|vintage\\s+photo|black[\\s-]?and[\\s-]?white\\s+photo|grandparent|grandma|grandfather)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": [
+      "Old Photo Restore / Colorize"
+    ]
+  },
+  {
+    "slug": "sticker-prompts",
+    "display_name": "Sticker Prompts",
+    "tags": [
+      "sticker",
+      "illustration"
+    ],
+    "keywords_pattern": "\\b(sticker|emoji\\s+sticker|chibi|kawaii\\s+sticker|cute\\s+sticker|line\\s+sticker|telegram\\s+sticker|whatsapp\\s+sticker)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": [
+      "Sticker / Cartoon"
+    ]
+  },
+  {
+    "slug": "instagram-photo-edit-prompts",
+    "display_name": "Instagram Photo Edit Prompts",
+    "tags": [
+      "photo-edit",
+      "social-trend"
+    ],
+    "keywords_pattern": "\\b(instagram\\s+(filter|edit|reel|story)|tiktok\\s+trend|viral\\s+edit|aesthetic\\s+filter|reels?\\b)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": [
+      "Social Photo Edit / Collage"
+    ]
+  },
+  {
+    "slug": "character-design-prompts",
+    "display_name": "Character Design Prompts",
+    "tags": [
+      "character-design",
+      "illustration"
+    ],
+    "keywords_pattern": "\\b(character\\s+(design|sheet|reference)|original\\s+character|game\\s+character|hero\\s+character|villain)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Illustration & 3D"
+    ],
+    "reddit_use_cases": [
+      "Style Transfer / Character"
+    ]
+  },
+  {
+    "slug": "logo-design-prompts",
+    "display_name": "Logo Design Prompts",
+    "tags": [
+      "logo",
+      "graphic-design"
+    ],
+    "keywords_pattern": "\\b(logo|brand\\s?mark|wordmark|monogram|emblem)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Product & Brand"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "food-photography-prompts",
+    "display_name": "Food Photography Prompts",
+    "tags": [
+      "food-photo",
+      "photography"
+    ],
+    "keywords_pattern": "\\b(food\\s+(photo|photography|shot)|dish\\s+photo|restaurant\\s+menu|recipe\\s+photo|drink\\s+photo|coffee\\s+art|cocktail|dessert\\s+photo)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Food & Drink"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "text-rendering-prompts",
+    "display_name": "Text Rendering Prompts",
+    "tags": [
+      "text-render",
+      "typography"
+    ],
+    "keywords_pattern": "\\b(typography|lettering|calligraphy|hand[\\s-]?written\\s+text|text\\s+effect|3d\\s+text|chrome\\s+text|neon\\s+text|glowing\\s+text|metallic\\s+text)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "UI & Graphic"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "multi-image-consistency-prompts",
+    "display_name": "Multi-Image Consistency Prompts",
+    "tags": [
+      "multi-image-consistency"
+    ],
+    "keywords_pattern": "\\b(consistent\\s+character|same\\s+character|multi[\\s-]?image|character\\s+consistency|series\\s+of\\s+(images|panels)|comic\\s+panel)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "anime-style-prompts",
+    "display_name": "Anime Style Prompts",
+    "tags": [
+      "anime"
+    ],
+    "keywords_pattern": "\\b(anime|manga|ghibli|shounen|shoujo|kawaii\\s+anime|jujutsu|naruto|demon\\s+slayer)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Illustration & 3D"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "portrait-prompts",
+    "display_name": "Portrait Prompts",
+    "tags": [
+      "portrait"
+    ],
+    "keywords_pattern": "\\b(portrait|headshot|self[\\s-]?portrait|profile\\s+photo|linkedin\\s+headshot|professional\\s+photo)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Photography"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "cinematic-portrait-prompts",
+    "display_name": "Cinematic Portrait Prompts",
+    "tags": [
+      "portrait",
+      "cinematic"
+    ],
+    "keywords_pattern": "\\b(cinematic\\s+portrait|dramatic\\s+(image|portrait|lighting)|editorial\\s+portrait|fashion\\s+editorial|mirror\\s+selfie|instagram\\s+portrait|profile\\s+picture|headshot)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Photography"
+    ],
+    "reddit_use_cases": [
+      "Social Photo Edit / Collage"
+    ]
+  },
+  {
+    "slug": "interior-design-prompts",
+    "display_name": "Interior Design Prompts",
+    "tags": [
+      "interior"
+    ],
+    "keywords_pattern": "\\b(interior\\s+design|room\\s+design|home\\s+decor|living\\s+room|bedroom|kitchen\\s+design|bathroom\\s+design|office\\s+space)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "3d-render-prompts",
+    "display_name": "3D Render Prompts",
+    "tags": [
+      "3d-render"
+    ],
+    "keywords_pattern": "\\b(3d\\s+render|cinema\\s?4d|blender\\s+render|claymation|claymorphic|isometric|low[\\s-]?poly|pixar\\s+style|disney\\s+style)\\b",
+    "keywords_flags": "i",
+    "github_categories": [
+      "Illustration & 3D"
+    ],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "social-media-ad-prompts",
+    "display_name": "Social Media Ad Prompts",
+    "tags": [
+      "ad-creative",
+      "social-card"
+    ],
+    "keywords_pattern": "\\b(facebook\\s+ad|instagram\\s+ad|social\\s+(ad|banner)|ad\\s+creative|banner\\s+ad|sponsored\\s+post|google\\s+ad)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": []
+  },
+  {
+    "slug": "thumbnail-prompts",
+    "display_name": "YouTube Thumbnail Prompts",
+    "tags": [
+      "thumbnail",
+      "social-card"
+    ],
+    "keywords_pattern": "\\b(youtube\\s+thumbnail|thumbnail|click[\\s-]?bait\\s+thumbnail|video\\s+thumbnail)\\b",
+    "keywords_flags": "i",
+    "github_categories": [],
+    "reddit_use_cases": []
+  }
+]

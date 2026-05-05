@@ -51,5 +51,6 @@ export const localeMessagesPaths = [
   'pages/index',
   'pages/pricing',
   'pages/prompts',
+  'pages/gpt-image-2-prompts',
   'pages/blog',
 ];

@@ -1,0 +1,28 @@
+{
+  "slug": "multi-image-consistency-prompts",
+  "candidate_score": 0.307,
+  "query": "character consistency prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "leonardo.ai", "title": "How To Create Consistent Characters With AI", "type": "tool/blog" },
+    { "rank": 2, "domain": "glibatree.com", "title": "Proven Consistent Character Method", "type": "blog" },
+    { "rank": 3, "domain": "medium.com", "title": "How to Design Consistent AI Characters", "type": "blog" },
+    { "rank": 4, "domain": "artlist.io", "title": "Consistent Character AI: Pro Tips & Workflow", "type": "blog" },
+    { "rank": 5, "domain": "prompting.systems", "title": "Creating Consistent Characters in AI Art: 2026 Guide", "type": "blog" },
+    { "rank": 6, "domain": "ideogram.ai", "title": "Ideogram Character: AI Character Generator with Consistent Results", "type": "competitor_specialist" },
+    { "rank": 7, "domain": "aiconsistentcharacter.com", "title": "Free Consistent Character AI Generator", "type": "competitor_specialist" },
+    { "rank": 8, "domain": "jenova.ai", "title": "AI Character Prompts: Mastering Persona Creation", "type": "blog" },
+    { "rank": 9, "domain": "youtube.com", "title": "This One Prompt Fixes AI Character Consistency", "type": "video" },
+    { "rank": 10, "domain": "getimg.ai", "title": "Create Consistent AI Characters", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["ideogram.ai", "aiconsistentcharacter.com"],
+  "midjourney_dominant": false,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康但 specialist 强（Ideogram Character、aiconsistentcharacter.com、Leonardo character reference）。这是技术性主题，搜索量小但搜的人意图非常清晰。GPT Image 2 的多图 reference 能力是直接卖点，hub 页要重点演示『上传一张人脸 → 生成 5 张不同场景的同一人物』的玩法。建议 P1 备选。",
+  "recommended_h1": "Character Consistency Prompts for GPT Image 2",
+  "alternative_slug_used": "considered 'consistent-character-prompts' as alt",
+  "note": "WebSearch-only data; smaller search volume but high intent clarity"
+}

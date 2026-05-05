@@ -77,3 +77,12 @@ research/
 # OpenAI Codex / 其它 Agent 工具的本地配置
 .agents/
 AGENTS.md
+# 构建期源 PNG 不入库（webp 已在 public/ 下入库）
+.claude/sop-data/clusters/*/images/
+.claude/sop-data/generated-images/
+
+# codex 工作目录
+.codex/
+
+# 旧 prompt-clusters 落地图（已被 /imgs/gpt-image-2-prompts/ 取代，未引用）
+public/imgs/gptimage2studio/prompt-clusters/

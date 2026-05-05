@@ -186,7 +186,7 @@ export function PromptDetailDialog({
               }
             >
               <Wand2 className="size-6" />
-              Use This Prompt
+              Try in Workbench
             </button>
             <button
               type="button"

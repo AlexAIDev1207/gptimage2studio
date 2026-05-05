@@ -1,0 +1,37 @@
+{
+  "slug": "anime-style-prompts",
+  "candidate_score": 0.601,
+  "query": "anime style prompts",
+  "search_url": "https://www.google.com/search?q=anime+style+prompts&hl=en",
+  "top10": [
+    { "rank": 1, "domain": "promptomania.com", "title": "Best Anime & Manga Art Prompts", "type": "tool" },
+    { "rank": 2, "domain": "openart.ai", "title": "Best 25 Midjourney Prompts for Anime", "type": "blog/tool" },
+    { "rank": 3, "domain": "reddit.com", "title": "25+ AI Prompts for Stunning Anime-Style", "type": "social", "has_sitelinks": true },
+    { "rank": 4, "domain": "deviantart.com", "title": "Sora/Chatgpt anime style prompts with results", "type": "social" },
+    { "rank": 5, "domain": "spaceprompts.com", "title": "Anime Art Style Prompts for AI Image Generators", "type": "blog" },
+    { "rank": 6, "domain": "facebook.com", "title": "Anime prompt ideas for specific shows or styles", "type": "social", "has_sitelinks": true },
+    { "rank": 7, "domain": "gbti.network", "title": "25+ AI Prompts for Stunning Anime-Style Illustrations", "type": "blog" },
+    { "rank": 8, "domain": "university.tenten.co", "title": "Top 50 Japanese Anime Style Midjourney Prompts", "type": "blog" }
+  ],
+  "paa": [],
+  "related_searches": [
+    "Anime style prompts generator",
+    "AI anime prompt generator",
+    "Anime style prompts aesthetic",
+    "Anime style prompts reddit",
+    "Anime style prompts ChatGPT",
+    "Photo to anime prompt",
+    "ChatGPT anime prompt generator",
+    "Midjourney anime style prompts"
+  ],
+  "domain_diversity": 8,
+  "reddit_count": 1,
+  "reddit_has_sitelinks": true,
+  "facebook_count": 1,
+  "facebook_has_sitelinks": true,
+  "midjourney_dominant": true,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 偏社区（Reddit + Facebook 都带 sitelinks）且竞争被 Midjourney/Leonardo 占据。但 related 暴露了关键差异化角度：'Photo to anime prompt' — 这正是 GPT Image 2 强项（image-to-image）。建议把 hub 重点放在『照片转动漫』玩法。",
+  "recommended_h1": "Anime Style Prompts for GPT Image 2 (Photo-to-Anime)",
+  "sub_scenes_from_related": ["photo-to-anime", "generator", "aesthetic", "ChatGPT", "Japanese style", "shounen action"]
+}

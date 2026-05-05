@@ -1,0 +1,38 @@
+{
+  "slug": "logo-design-prompts",
+  "candidate_score": 0.588,
+  "query": "logo design prompts",
+  "search_url": "https://www.google.com/search?q=logo+design+prompts&hl=en",
+  "top10": [
+    { "rank": 1, "domain": "andacademy.com", "title": "14 Best AI Prompts for Logo Design for 2026", "type": "blog" },
+    { "rank": 2, "domain": "promptbase.com", "title": "AI Prompts for Logo Design", "type": "marketplace" },
+    { "rank": 3, "domain": "behance.net", "title": "DAILY LOGO CHALLENGE", "type": "social" },
+    { "rank": 4, "domain": "superside.com", "title": "20 Best AI Prompts for Logo Design (Midjourney)", "type": "blog" },
+    { "rank": 5, "domain": "openart.ai", "title": "Best 25 Midjourney Prompts for Logos", "type": "tool/blog" },
+    { "rank": 6, "domain": "reddit.com", "title": "Guidance with AI prompts (r/logodesign)", "type": "social", "has_sitelinks": true },
+    { "rank": 7, "domain": "pinterest.com", "title": "320 Logo Prompts and logo design ideas", "type": "social" },
+    { "rank": 8, "domain": "app.gravitywrite.com", "title": "Free AI logo design prompt generator", "type": "tool" },
+    { "rank": 9, "domain": "logodiffusion.com", "title": "Ultimate Guide to Leonardo AI Logo Prompts", "type": "competitor_specialist" }
+  ],
+  "paa": [],
+  "related_searches": [
+    "Logo design prompts generator",
+    "Free AI logo prompts",
+    "Free logo design prompts",
+    "Logo design prompts reddit",
+    "Logo design prompts for AI",
+    "Best logo design prompts",
+    "3D logo prompt",
+    "ChatGPT logo prompt generator"
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 1,
+  "reddit_has_sitelinks": true,
+  "pinterest_count": 1,
+  "midjourney_dominant": true,
+  "competitor_hubs_in_top10": ["logodiffusion.com"],
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 偏 Midjourney/Leonardo 教程博客，Reddit 1 席带 sitelinks。logodiffusion.com 是 logo specialist 直接竞品。GPT Image 2 在 logo 上比 Midjourney 文字渲染更强，这是差异化点。Related 提示用户偏好 'generator'、'free'、'3D logo'。",
+  "recommended_h1": "Logo Design Prompts for GPT Image 2",
+  "sub_scenes_from_related": ["generator", "free", "3D logo", "ChatGPT", "minimal", "tech startup", "luxury brand"]
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "action-figure-prompts",
+  "candidate_score": 0.368,
+  "query": "action figure prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "quillbot.com", "title": "ChatGPT Action Figure Prompts", "type": "blog" },
+    { "rank": 2, "domain": "actionfiguregenerator.ai", "title": "AI Action Figure Generator Powered by Nano Banana", "type": "competitor_specialist" },
+    { "rank": 3, "domain": "chatgpt.com", "title": "Action Figure Prompt Bot", "type": "official_tool" },
+    { "rank": 4, "domain": "tech.yahoo.com", "title": "ChatGPT Action Figure Prompt Explained: Make Your Own AI Doll", "type": "news" },
+    { "rank": 5, "domain": "openart.ai", "title": "Best Text to Action Figure AI Generator", "type": "tool" },
+    { "rank": 6, "domain": "medium.com", "title": "Are You an Action Figure?", "type": "blog" },
+    { "rank": 7, "domain": "3dactions.com", "title": "How AI art becomes a real 3D action figure", "type": "blog" },
+    { "rank": 8, "domain": "media.io", "title": "How to Turn Yourself into an Action Figure with ChatGPT-4o", "type": "blog" },
+    { "rank": 9, "domain": "thetab.com", "title": "Best AI action figure prompts to turn yourself into a doll", "type": "news" },
+    { "rank": 10, "domain": "easyaibeginner.com", "title": "ChatGPT Action Figure Prompt", "type": "blog" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["actionfiguregenerator.ai"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 极健康：10 unique，0 UGC。这是典型的 viral 玩法搜索（用户上传照片→变成 action figure 装在透明盒里）。actionfiguregenerator.ai 是直接竞品，但他们用 Nano Banana 我们用 GPT Image 2 是清晰差异化。意图明确（用户立即想试），转化率高。",
+  "recommended_h1": "Action Figure Prompts for GPT Image 2",
+  "page_structure_note": "首屏必须放：① 工作台 'Upload your photo + Action Figure prompt' 大 CTA ② 多个 viral 案例对比图 ③ 然后才是 prompt cards 子场景（funko style / blister packaging / collector edition / movie hero / etc.）",
+  "note": "WebSearch-only data; viral trend cluster, high conversion"
+}

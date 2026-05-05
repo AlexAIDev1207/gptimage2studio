@@ -1,0 +1,28 @@
+{
+  "slug": "text-rendering-prompts",
+  "candidate_score": 0.535,
+  "query": "text rendering prompts",
+  "top10": [
+    { "rank": 1, "domain": "ideogram.ai", "title": "Text Rendering — Ideogram", "type": "competitor_specialist" },
+    { "rank": 2, "domain": "blog.comfy.org", "title": "ERNIE-Image Day-0 Support: Precise Text Rendering", "type": "blog" },
+    { "rank": 3, "domain": "developers.openai.com", "title": "GPT Image Generation Models Prompting Guide", "type": "official_doc" },
+    { "rank": 4, "domain": "picsart.com", "title": "Seedream Prompts: A Guide to Better AI Images", "type": "tool/blog" },
+    { "rank": 5, "domain": "imagine.art", "title": "What is Text Rendering in AI Image Generation?", "type": "blog" },
+    { "rank": 6, "domain": "felo.ai", "title": "GPT Image 2 Prompts - Pixel-level Text Rendering & Production-grade AI Images", "type": "competitor_hub" },
+    { "rank": 7, "domain": "docsbot.ai", "title": "Best Rendering AI Prompts", "type": "tool" },
+    { "rank": 8, "domain": "cloud.google.com", "title": "Ultimate prompting guide for Nano Banana", "type": "official_doc" },
+    { "rank": 9, "domain": "leonardo.ai", "title": "Nano Banana Prompt Guide: How to Prompt for Best Results", "type": "blog" },
+    { "rank": 10, "domain": "leonardo.ai", "title": "How to Write Effective AI Image Prompts", "type": "blog" }
+  ],
+  "domain_diversity": 9,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["ideogram.ai", "felo.ai"],
+  "midjourney_dominant": false,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康但 query 偏技术术语，搜索意图多元（部分用户搜的是模型对比，部分搜 prompt 写法）。felo.ai 已经有 GPT Image 2 + text rendering 的页面，是直接竞品。Ideogram 是文字渲染品类领导者。如果做这个 cluster，建议 H1 偏向具体玩法：'Text Effect / Typography Poster Prompts' 比单纯 'Text Rendering Prompts' 更有意图。",
+  "recommended_h1": "Text Effect & Typography Prompts for GPT Image 2",
+  "alternative_slug": "text-effect-prompts",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

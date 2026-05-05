@@ -1,0 +1,164 @@
+{
+  "slug": "old-photo-restore-prompts",
+  "priority": "P0-2",
+  "tier": "viral",
+  "h1": "Old Photo Restoration Prompts for GPT Image 2",
+  "meta_title": "Old Photo Restore Prompts for GPT Image 2 — Bring Memories Back",
+  "meta_description": "Restore old, damaged, or faded photos with GPT Image 2 prompts. Upload a scan, paste a prompt, recover scratches, colorize black & white photos, preserve faces.",
+  "intro_long": "12 tested GPT Image 2 prompts that bring faded family photos back to life — natural colorization, scratch repair, and 4K upscale workflows.",
+  "how_it_works": [
+    {
+      "title": "Upload your scanned old photo",
+      "body": "Best results: flatbed scan at 600dpi+, no glass glare, single subject or family group framed clearly."
+    },
+    {
+      "title": "Pick a restoration style",
+      "body": "Choose colorize for B&W, scratch repair for damaged prints, or 4K upscale for low-res phone scans."
+    },
+    {
+      "title": "Customize and generate in Workbench",
+      "body": "Tweak era cues, skin tone hints, and identity-preserve flags — one click runs GPT Image 2 instantly."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Face identity stays locked",
+      "body": "GPT Image 2 preserves facial geometry across faded scans and torn prints — your grandmother still looks like your grandmother, not a generic AI portrait."
+    },
+    {
+      "title": "Dates and imprints stay readable",
+      "body": "Pixel-level text rendering keeps studio stamps, handwritten dates, and back-of-photo imprints sharp instead of smudging them into noise."
+    },
+    {
+      "title": "Consistent across album batches",
+      "body": "Run a whole family album through the same prompt and skin tones, lighting, and color grading match — perfect for archival or printed memory books."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Family heritage albums",
+      "body": "Restore grandparent and childhood photos into a shared digital album for reunions and anniversaries."
+    },
+    {
+      "title": "Genealogy research",
+      "body": "Sharpen ancestor portraits and read faded studio stamps to confirm dates and locations on family trees."
+    },
+    {
+      "title": "Personalized photo gifts",
+      "body": "Turn a damaged wedding photo into a clean print for parents, in-laws, or milestone birthdays."
+    },
+    {
+      "title": "Archival and museum prep",
+      "body": "Prepare estate, church, or community photo archives for digital catalogs without losing period feel."
+    }
+  ],
+  "tips": [
+    {
+      "q": "What prompt restores old photos without changing the face?",
+      "a": "Use `restore this old photo to modern clarity, preserve original identity, facial structure, and proportions exactly`. Avoid words like `modernize the face` or `beautify` alone — they push the model toward a generic AI look instead of your real ancestor."
+    },
+    {
+      "q": "Can ChatGPT restore and colorize old photos?",
+      "a": "Yes — GPT Image 2 (the image model behind ChatGPT) handles both in one pass. Add `colorize naturally with realistic skin tones, era-accurate colors for [decade]` to your restore prompt. It works best for 1900s-1980s photos with clear lighting cues."
+    },
+    {
+      "q": "How do I preserve identity in AI photo restoration?",
+      "a": "Three rules: (1) upload the highest-resolution scan you have, no phone-of-photo glare; (2) include `preserve facial features, hairstyle, and proportions exactly`; (3) skip stylization words like `cinematic` or `anime` that override likeness."
+    },
+    {
+      "q": "What should I avoid when restoring old family photos with AI?",
+      "a": "Avoid generic prompts like `make this beautiful`, heavy stylization tags (`HDR`, `dramatic`), and over-aggressive upscaling on already-blurry scans. Also skip `young again` modifiers — they invent a face that never existed instead of restoring the real one."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-consistent-characters",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "情感驱动 + 实用工具：用户想修复祖辈/童年老照片。AI Overview + 大量 Instagram/Threads/Facebook 病毒帖（一条 517K+ likes）证明 viral 现象级，且需求长青。",
+  "primary_query": "old photo restore prompt",
+  "search_volume_signal": "viral_evergreen",
+  "competitor_to_outrank": ["medium.com (Jangachary)", "ruben.substack.com (Hassid)", "Reddit r/AIPrompt_Exchange + r/FluxAI", "Facebook Rich DeMuro post", "Canva photo restoration", "geminiguru.in"],
+  "sub_scenes": [
+    {
+      "name": "Colorize Black & White",
+      "slug_anchor": "colorize",
+      "description": "Period-accurate color on B&W portraits",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Scratch & Damage Repair",
+      "slug_anchor": "scratch-damage",
+      "description": "Remove scratches, tears, dust, creases",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Family Portrait Revival",
+      "slug_anchor": "family-portrait",
+      "description": "Studio-quality revival, likeness intact",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "4K Upscale & Sharpen",
+      "slug_anchor": "upscale-4k",
+      "description": "Phone-scanned low-res photos to 4K",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Period Tone Preserve",
+      "slug_anchor": "period-tone",
+      "description": "Sepia, faded color, film grain kept",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "What's the best prompt to restore old photos with GPT Image 2?",
+      "a": "Start with: 'Restore this old photo to modern professional quality. Preserve facial features, hairstyle, and clothing exactly. Remove scratches, dust, fading, and color casts. Output ultra-high clarity with realistic skin tones and natural lighting.' Then layer in colorize / period-accurate / upscale modifiers depending on the source."
+    },
+    {
+      "q": "How do I keep the face looking like the original person?",
+      "a": "Always include 'preserve original identity, facial structure, and proportions' in your prompt. Avoid words like 'modernize' alone — pair them with 'while keeping likeness exact'. Upload at the highest resolution scan you have (avoid camera-of-photo glare)."
+    },
+    {
+      "q": "GPT Image 2 vs Gemini Nano Banana for photo restoration — which is better?",
+      "a": "GPT Image 2 wins on detail preservation and skin texture realism. Gemini wins on speed and free tier availability. For high-stakes family photos use GPT Image 2; for quick previews use Gemini. Many users compare both — see our side-by-side test."
+    },
+    {
+      "q": "Can GPT Image 2 colorize black-and-white photos?",
+      "a": "Yes — it does period-accurate colorization based on era cues (clothing, lighting, decade). Add 'colorize naturally with realistic skin tones, era-accurate colors for [decade]' to your prompt. Works best for 1900s-1980s photos."
+    },
+    {
+      "q": "Do I need a paid plan to restore photos?",
+      "a": "GPT Image 2 Studio offers free starter credits (1K resolution restore = 6 credits per attempt). One restored photo typically takes 1-2 generations to dial in. For high-volume archival projects, see our pricing — credits scale economically vs paid services like VanceAI or MyHeritage."
+    }
+  ],
+  "related_searches_raw": [
+    "Old photo restoration prompt Gemini",
+    "Old photo restoration prompt ChatGPT",
+    "Old photo restore prompt reddit",
+    "Old photo restore prompt free",
+    "Old photo restore prompt iphone",
+    "ChatGPT old photo restoration prompt free",
+    "Best old photo restore prompt",
+    "Gemini prompt to restore old photos reddit"
+  ],
+  "viral_signals": [
+    "Instagram techcm_ post: 517.6K+ likes",
+    "Instagram editologer_official: 34.4K+ likes",
+    "Threads promptsx: 610+ likes",
+    "Facebook Rich DeMuro: 2K+ reactions",
+    "Reddit r/AIPrompt_Exchange: 17 posts",
+    "Reddit r/GeminiAI 'stunning result': 330+ comments"
+  ],
+  "page_structure_notes": "首屏布局：① H1 + 1 句情感主张（'Bring family memories back to life with GPT Image 2'）② **大号 Workbench CTA『Upload your old photo → Restore now』 (核心转化入口，必须在第一屏 above-the-fold)** ③ 3 张极致 before/after 对比图（黑白→彩色 / 撕裂→修复 / 模糊→4K）。第二屏：sub_scenes 锚点 + masonry。每张 prompt 卡片必有 before/after 缩略图。SEO 文案区放在 below-the-fold，登录后客户端折叠（按 brand-cleanup 规则）。",
+  "internal_links": [
+    { "to": "cinematic-portrait-prompts", "anchor_text": "Cinematic portrait prompts (modern portrait makeover)" },
+    { "to": "instagram-photo-edit-prompts", "anchor_text": "Instagram photo edit prompts (trending edits for restored photos)" },
+    { "to": "product-photography-prompts", "anchor_text": "Product photography prompts (restored vintage product catalogs)" }
+  ],
+  "estimated_prompt_count": 12,
+  "image_count_target": 12,
+  "kie_credits_estimate": 96,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "需要 before/after 各 1 张 → 12 prompt × 2 张 × 4 credits (preview) = 96 credits"
+}

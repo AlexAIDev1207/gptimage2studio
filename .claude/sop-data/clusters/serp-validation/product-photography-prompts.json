@@ -1,0 +1,27 @@
+{
+  "slug": "product-photography-prompts",
+  "candidate_score": 0.571,
+  "query": "product photography prompts",
+  "top10": [
+    { "rank": 1, "domain": "medium.com", "title": "3 ChatGPT's Product Photography Prompts (for eCommerce Stores)", "type": "blog" },
+    { "rank": 2, "domain": "claid.ai", "title": "Discover product photography ideas in our AI prompt gallery", "type": "tool/competitor_hub" },
+    { "rank": 3, "domain": "logoai.com", "title": "Nano Banana Prompts for stunning Product Photos", "type": "blog" },
+    { "rank": 4, "domain": "letsenhance.io", "title": "20 AI image editing prompts for ecommerce product photos", "type": "tool" },
+    { "rank": 5, "domain": "pinterest.com", "title": "8 Product Photography Prompts ideas", "type": "social" },
+    { "rank": 6, "domain": "claid.ai", "title": "How to write prompts for AI product photos [2026]", "type": "tool" },
+    { "rank": 7, "domain": "media.io", "title": "AI Product Photography Prompt | 25+ Copy-Paste Examples", "type": "tool/competitor_hub" },
+    { "rank": 8, "domain": "medium.com", "title": "Ultimate Guide to Product Photography Prompts for ChatGPT and Nano Banana Pro", "type": "blog" },
+    { "rank": 9, "domain": "godofprompt.ai", "title": "Best Midjourney Prompts for Product Photography", "type": "blog" },
+    { "rank": 10, "domain": "medium.com", "title": "20+ Midjourney Prompts for Creative Advertising Product Photographs", "type": "blog" }
+  ],
+  "domain_diversity": 7,
+  "reddit_count": 0,
+  "pinterest_count": 1,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["claid.ai", "media.io"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：7 unique domains，无 Reddit/Quora，Pinterest 仅 1 席。竞品都是同类 AI prompt 教程站（claid.ai 是主要 specialist）。GPT Image 2 的 image-to-image 在 product photo 上比 Midjourney 强，差异化角度清晰。",
+  "recommended_h1": "GPT Image 2 Product Photography Prompts",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

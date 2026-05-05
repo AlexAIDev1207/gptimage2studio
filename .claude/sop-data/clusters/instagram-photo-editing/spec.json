@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "instagram-photo-editing",
+  "source_candidate_slug": "instagram-photo-edit-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Instagram Photo Editing: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for instagram photo editing with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Instagram Photo Editing"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 instagram photo editing prompts",
+    "query_variants": [
+      "instagram ai photo editing prompt",
+      "viral ai photo editing prompt",
+      "chatgpt photo editing prompts trending",
+      "instagram restyle ai prompt"
+    ],
+    "related_searches": [
+      "instagram ai photo editing prompt",
+      "viral photo editing prompt",
+      "chatgpt photo editing prompts",
+      "cinematic portrait edit prompt",
+      "instagram restyle prompt"
+    ],
+    "intent_grade": "trend-medium",
+    "kd_estimate": 27,
+    "search_intent": "Create viral profile edits, cinematic portraits, collage-style posts, and social photo transformations.",
+    "launch_batch": 2,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Instagram Photo Editing"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Instagram Photo Editing Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Instagram Photo Editing Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Instagram Photo Editing Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Instagram Photo Editing Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Instagram Photo Editing Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Instagram Photo Editing Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Instagram Photo Editing FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Create viral photo edits, collages, cinematic portraits, and feed-ready transformations with GPT Image 2 prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "viral-collage",
+      "label": "Viral Photo Collages",
+      "anchor": "#viral-collage",
+      "search_modifier": "instagram ai photo editing prompt",
+      "user_intent": "Create multi-frame edits, scrapbook layouts, and trending collage looks.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for viral photo collages with clear before/copy/use affordance."
+    },
+    {
+      "slug": "cinematic-portrait",
+      "label": "Cinematic Portrait Edits",
+      "anchor": "#cinematic-portrait",
+      "search_modifier": "cinematic portrait edit prompt",
+      "user_intent": "Add dramatic lighting, editorial tone, and social-profile polish.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for cinematic portrait edits with clear before/copy/use affordance."
+    },
+    {
+      "slug": "fashion-lifestyle",
+      "label": "Fashion and Lifestyle Edits",
+      "anchor": "#fashion-lifestyle",
+      "search_modifier": "viral photo editing prompt",
+      "user_intent": "Transform outfit shots, travel photos, and creator portraits.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for fashion and lifestyle edits with clear before/copy/use affordance."
+    },
+    {
+      "slug": "retro-film",
+      "label": "Retro Film Looks",
+      "anchor": "#retro-film",
+      "search_modifier": "instagram restyle prompt",
+      "user_intent": "Use flash, disposable camera, grain, Y2K, or Polaroid aesthetics.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for retro film looks with clear before/copy/use affordance."
+    },
+    {
+      "slug": "cover-image",
+      "label": "Carousel Cover Images",
+      "anchor": "#cover-image",
+      "search_modifier": "chatgpt photo editing prompts",
+      "user_intent": "Design first-slide visuals that work as Instagram thumbnails.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for carousel cover images with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Instagram Photo Editing Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "viral-collage",
+        "cinematic-portrait",
+        "fashion-lifestyle"
+      ]
+    },
+    {
+      "label": "Instagram Photo Editing Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "retro-film",
+        "cover-image"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Start with the source photo role",
+      "body": "Say whether the input is a selfie, couple photo, travel shot, outfit photo, or product-person image."
+    },
+    {
+      "heading": "Name the trend format",
+      "body": "Use collage, cinematic portrait, film flash, editorial cover, or carousel opener."
+    },
+    {
+      "heading": "Preserve identity and composition",
+      "body": "Ask for unchanged face, body shape, pose, clothing, and important background details."
+    }
+  ],
+  "variations": [
+    {
+      "label": "viral collage",
+      "instruction": "Add \"viral collage\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "cinematic portrait",
+      "instruction": "Add \"cinematic portrait\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "retro flash",
+      "instruction": "Add \"retro flash\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "editorial cover",
+      "instruction": "Add \"editorial cover\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "travel postcard",
+      "instruction": "Add \"travel postcard\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "fashion feed edit",
+      "instruction": "Add \"fashion feed edit\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The person no longer looks the same",
+      "fix": "Use explicit preserve-identity wording and avoid beauty makeover terms."
+    },
+    {
+      "problem": "The edit is over-stylized",
+      "fix": "Ask for natural skin, realistic lighting, and subtle grade instead of surreal effects."
+    },
+    {
+      "problem": "The composition does not fit Instagram",
+      "fix": "Specify square, 4:5 portrait, or carousel cover crop."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is the trending AI photo editing prompt?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Instagram Photo Editing examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I make Instagram AI photo edits?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Instagram Photo Editing examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can GPT Image 2 restyle a portrait?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Instagram Photo Editing examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I keep the face recognizable in photo edits?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Instagram Photo Editing examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for instagram photo editing?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Instagram Photo Editing examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "old-photo-restoration",
+      "label": "Old Photo Restoration",
+      "href": "/gpt-image-2-prompts/for-old-photo-restoration/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "stickers",
+      "label": "Stickers",
+      "href": "/gpt-image-2-prompts/for-stickers/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "action-figure",
+      "label": "Action Figure",
+      "href": "/gpt-image-2-prompts/for-action-figure/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 instagram photo editing prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

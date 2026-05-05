@@ -1,0 +1,27 @@
+{
+  "slug": "3d-render-prompts",
+  "candidate_score": 0.498,
+  "query": "3d render prompts AI image",
+  "top10": [
+    { "rank": 1, "domain": "rendair.ai", "title": "5 Prompts For One 3D Model", "type": "competitor_specialist" },
+    { "rank": 2, "domain": "promptomania.com", "title": "Best 3D Renders & CGI Prompts", "type": "competitor_hub" },
+    { "rank": 3, "domain": "kalon.ai", "title": "3D Character AI Prompts | Animated Renders & Clay Art", "type": "competitor_specialist" },
+    { "rank": 4, "domain": "maket.ai", "title": "Create Renders Using AI and a Text Prompt", "type": "competitor_specialist" },
+    { "rank": 5, "domain": "archivinci.com", "title": "Prompt-to-Render Workflow", "type": "competitor_specialist" },
+    { "rank": 6, "domain": "spacely.ai", "title": "Crafting Perfect Prompts for Stunning 3D Renders", "type": "competitor_specialist" },
+    { "rank": 7, "domain": "prompthero.com", "title": "3D / Renders prompts", "type": "competitor_hub" },
+    { "rank": 8, "domain": "medium.com", "title": "Turn Basic 3D Screenshots into Realistic Architectural Renderings", "type": "blog" },
+    { "rank": 9, "domain": "promeai.pro", "title": "Trending Sketch Rendering of prompts images", "type": "tool" },
+    { "rank": 10, "domain": "canva.com", "title": "Free AI 3D Model Generator", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["rendair.ai", "promptomania.com", "kalon.ai", "maket.ai", "archivinci.com", "spacely.ai", "prompthero.com"],
+  "midjourney_dominant": false,
+  "verdict": "SOFT-PASS",
+  "reason": "SERP 健康但 7 个 specialist hub 占 top 10，这是 Stable Diffusion / Octane render 主流领域。GPT Image 2 不是 3D 渲染首选模型（用户更信 SD/Blender 工作流），差异化弱。建议 P1 备选不进 P0，或者细分为更具体玩法（如『3D character / claymation / isometric icons』）做小词。",
+  "recommended_h1": "3D Render Prompts for GPT Image 2",
+  "note": "WebSearch-only data; specialist hub overcrowded, recommend P1"
+}

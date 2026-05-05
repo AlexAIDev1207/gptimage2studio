@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-05-02T18:09:59.275Z",
+  "mode": "dry-run",
+  "clusters": 10,
+  "total_images": 140,
+  "resolution": "1K",
+  "aspect_ratio": "4:3",
+  "live_command_example": "node .claude/sop-data/tools/regen-cluster-images.mjs --env-file ../gptimage2studio/.env.local --live --poll --mirror-r2 --cluster product-photography --limit 2"
+}

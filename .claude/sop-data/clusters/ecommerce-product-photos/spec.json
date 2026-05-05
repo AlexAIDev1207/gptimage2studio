@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "ecommerce-product-photos",
+  "source_candidate_slug": "ecommerce-product-photo-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-ecommerce-product-photos/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Ecommerce Product Photos",
+      "href": "/gpt-image-2-prompts/for-ecommerce-product-photos/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Ecommerce Product Photos: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for ecommerce product photos with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Ecommerce Product Photos"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 ecommerce product photo prompts",
+    "query_variants": [
+      "ecommerce product photo ai prompt",
+      "amazon listing image prompt",
+      "shopify product image prompt",
+      "gpt image 2 ecommerce product photography"
+    ],
+    "related_searches": [
+      "ecommerce product photo prompt",
+      "amazon listing image prompt",
+      "shopify product photography ai",
+      "product detail page prompt",
+      "bulk product image prompt"
+    ],
+    "intent_grade": "strong-commercial",
+    "kd_estimate": 23,
+    "search_intent": "Create product listing images, lifestyle scenes, product detail pages, and batch SKU visuals.",
+    "launch_batch": 2,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Ecommerce Product Photos"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Ecommerce Product Photos Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Ecommerce Product Photos Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Ecommerce Product Photos Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Ecommerce Product Photos Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Ecommerce Product Photos Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Ecommerce Product Photos Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Ecommerce Product Photos FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Create Amazon, Shopify, and product-detail-page visuals with prompts tuned for listings, bundles, and conversion assets.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "amazon-main",
+      "label": "Amazon Main Images",
+      "anchor": "#amazon-main",
+      "search_modifier": "amazon listing image prompt",
+      "user_intent": "Generate clean primary images with product centered and marketplace-safe composition.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for amazon main images with clear before/copy/use affordance."
+    },
+    {
+      "slug": "shopify-hero",
+      "label": "Shopify Hero Images",
+      "anchor": "#shopify-hero",
+      "search_modifier": "shopify product photography ai",
+      "user_intent": "Create brand-forward ecommerce banners and PDP hero visuals.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for shopify hero images with clear before/copy/use affordance."
+    },
+    {
+      "slug": "detail-callouts",
+      "label": "Product Detail Callouts",
+      "anchor": "#detail-callouts",
+      "search_modifier": "product detail page prompt",
+      "user_intent": "Show features, materials, scale, ingredients, and usage in clear visual frames.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for product detail callouts with clear before/copy/use affordance."
+    },
+    {
+      "slug": "bundle-sets",
+      "label": "Bundles and Variants",
+      "anchor": "#bundle-sets",
+      "search_modifier": "bulk product image prompt",
+      "user_intent": "Arrange multi-SKU kits, colors, sizes, or starter packs.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for bundles and variants with clear before/copy/use affordance."
+    },
+    {
+      "slug": "ad-placement",
+      "label": "Paid Social Product Ads",
+      "anchor": "#ad-placement",
+      "search_modifier": "ecommerce product photo prompt",
+      "user_intent": "Turn listing assets into Meta/TikTok-ready creative variations.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for paid social product ads with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Ecommerce Product Photos Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "amazon-main",
+        "shopify-hero",
+        "detail-callouts"
+      ]
+    },
+    {
+      "label": "Ecommerce Product Photos Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "bundle-sets",
+        "ad-placement"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Match the sales channel",
+      "body": "State Amazon main image, Shopify PDP, social ad, email banner, or marketplace gallery."
+    },
+    {
+      "heading": "List conversion details",
+      "body": "Mention scale, use case, ingredients, texture, included accessories, or benefit callouts."
+    },
+    {
+      "heading": "Control compliance and clarity",
+      "body": "Use clean backgrounds, simple props, no misleading claims, and readable label areas."
+    }
+  ],
+  "variations": [
+    {
+      "label": "Amazon listing",
+      "instruction": "Add \"Amazon listing\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "Shopify hero",
+      "instruction": "Add \"Shopify hero\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "PDP detail image",
+      "instruction": "Add \"PDP detail image\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "bundle kit",
+      "instruction": "Add \"bundle kit\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "lifestyle ecommerce",
+      "instruction": "Add \"lifestyle ecommerce\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "paid social ad",
+      "instruction": "Add \"paid social ad\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The image violates marketplace style",
+      "fix": "Ask for a pure white background, centered product, no extra props, and simple shadow."
+    },
+    {
+      "problem": "The product benefit is unclear",
+      "fix": "Add one benefit-focused scene and one close-up detail callout."
+    },
+    {
+      "problem": "Variants get mixed together",
+      "fix": "Describe each SKU color, quantity, and arrangement explicitly."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I use GPT Image 2 for ecommerce product photography?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Ecommerce Product Photos examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can AI create Amazon listing images?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Ecommerce Product Photos examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I generate multiple product scenes?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Ecommerce Product Photos examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I keep product details consistent across images?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Ecommerce Product Photos examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for ecommerce product photos?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Ecommerce Product Photos examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "product-photography",
+      "label": "Product Photography",
+      "href": "/gpt-image-2-prompts/for-product-photography/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "infographics",
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 ecommerce product photo prompts",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

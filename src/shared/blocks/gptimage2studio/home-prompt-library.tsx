@@ -146,7 +146,7 @@ export function HomePromptLibrary({
             </button>
           )}
           <Link
-            href="/prompts"
+            href="/gpt-image-2-prompts"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
           >
             Explore All Prompts

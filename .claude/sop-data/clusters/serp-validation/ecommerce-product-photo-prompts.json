@@ -1,0 +1,29 @@
+{
+  "slug": "ecommerce-product-photo-prompts",
+  "candidate_score": 0.513,
+  "query": "ecommerce product photo prompts",
+  "top10": [
+    { "rank": 1, "domain": "letsenhance.io", "title": "20 AI image editing prompts for ecommerce product photos", "type": "tool/blog" },
+    { "rank": 2, "domain": "godofprompt.ai", "title": "10 ChatGPT Prompts to Create Professional Product Images for Ecommerce", "type": "blog" },
+    { "rank": 3, "domain": "sider.ai", "title": "30 Prompt Templates to Make E-Commerce Product Photos Pop", "type": "blog/tool" },
+    { "rank": 4, "domain": "photoroom.com", "title": "50 AI image prompts to create visuals for e-commerce", "type": "tool/competitor_hub" },
+    { "rank": 5, "domain": "medium.com", "title": "3 ChatGPT's Product Photography Prompts (for eCommerce Stores)", "type": "blog" },
+    { "rank": 6, "domain": "zsky.ai", "title": "30+ AI Image Prompts for E-Commerce Product Photos", "type": "blog" },
+    { "rank": 7, "domain": "logoai.com", "title": "Nano Banana Prompts for stunning Product Photos (E-commerce Ready)", "type": "blog" },
+    { "rank": 8, "domain": "stockimg.ai", "title": "20 AI Product Photoshoot Samples", "type": "tool" },
+    { "rank": 9, "domain": "selldone.com", "title": "10 ChatGPT Prompts to Create Professional Product Images", "type": "blog" },
+    { "rank": 10, "domain": "tools.eq4c.com", "title": "30 Game-Changing Gemini Nano Banana Prompts to Transform Product Photos", "type": "blog" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["photoroom.com"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 极健康：10 unique，0 UGC，commercial intent 极强（卖家用户）。竞争都是 prompt 教程文章 + photoroom.com (生成器+教程)。GPT Image 2 在保持产品 SKU 一致性方面优于纯 text-to-image，差异化清晰。但与 product-photography-prompts 高度重叠（letsenhance/medium 都同时出现），需要在 IA 上明确两个 cluster 的分工：product-photography 偏 studio shot 创作，ecommerce-product-photo 偏 lifestyle/on-model/listing-ready 改写。",
+  "recommended_h1": "E-commerce Product Photo Prompts for GPT Image 2",
+  "overlap_with": ["product-photography-prompts"],
+  "differentiation": "ecommerce 版强调：on-model / lifestyle / Amazon listing-ready / SKU consistency；product-photography 版强调：studio / packshot / creative",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

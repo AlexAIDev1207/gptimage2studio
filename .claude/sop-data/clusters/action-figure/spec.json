@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "action-figure",
+  "source_candidate_slug": "action-figure-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-action-figure/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Action Figure",
+      "href": "/gpt-image-2-prompts/for-action-figure/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Action Figure Prompts: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 action figure prompts with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Action Figure Prompts"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 action figure prompt",
+    "query_variants": [
+      "action figure ai prompt template",
+      "chatgpt action figure prompt copy paste",
+      "ai action figure prompt generator",
+      "action figure prompt trend"
+    ],
+    "related_searches": [
+      "action figure ai prompt template",
+      "chatgpt action figure prompt copy paste",
+      "toy box ai prompt",
+      "figurine prompt from photo",
+      "action figure prompt not working"
+    ],
+    "intent_grade": "strong-viral",
+    "kd_estimate": 18,
+    "search_intent": "Turn a person, pet, or character into a collectible toy box / blister-pack figure.",
+    "launch_batch": 1,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Action Figure Prompts"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Action Figure Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Action Figure Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Action Figure Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Action Figure Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Action Figure Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Action Figure Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Action Figure FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Turn a person, character, or mascot idea into collectible toy packaging, figurines, and viral action figure edits.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "blister-pack",
+      "label": "Blister Pack Figures",
+      "anchor": "#blister-pack",
+      "search_modifier": "action figure ai prompt template",
+      "user_intent": "Create retail-style toy packaging with figure, accessories, and product card.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for blister pack figures with clear before/copy/use affordance."
+    },
+    {
+      "slug": "from-photo",
+      "label": "From Photo to Figure",
+      "anchor": "#from-photo",
+      "search_modifier": "figurine prompt from photo",
+      "user_intent": "Transform a selfie or portrait into a toy-like collectible while preserving identity cues.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for from photo to figure with clear before/copy/use affordance."
+    },
+    {
+      "slug": "desk-toy",
+      "label": "Desk Toy Figurines",
+      "anchor": "#desk-toy",
+      "search_modifier": "chatgpt action figure prompt copy paste",
+      "user_intent": "Generate small premium figurines for creator avatars, founders, or mascots.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for desk toy figurines with clear before/copy/use affordance."
+    },
+    {
+      "slug": "retro-toy-box",
+      "label": "Retro Toy Box",
+      "anchor": "#retro-toy-box",
+      "search_modifier": "toy box ai prompt",
+      "user_intent": "Use nostalgic package layouts, bold headers, and accessory callouts.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for retro toy box with clear before/copy/use affordance."
+    },
+    {
+      "slug": "accessory-set",
+      "label": "Accessory Sets",
+      "anchor": "#accessory-set",
+      "search_modifier": "action figure accessories prompt",
+      "user_intent": "Add tools, props, alternate hands, badges, and character-specific extras.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for accessory sets with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Action Figure Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "blister-pack",
+        "from-photo",
+        "desk-toy"
+      ]
+    },
+    {
+      "label": "Action Figure Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "retro-toy-box",
+        "accessory-set"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Start with the figure identity",
+      "body": "Describe the subject, clothing, pose, facial expression, and recognizable traits."
+    },
+    {
+      "heading": "Add packaging constraints",
+      "body": "Specify blister pack, cardboard backing, product name, accessory slots, and display angle."
+    },
+    {
+      "heading": "Make it collectible",
+      "body": "Include scale, plastic texture, studio lighting, premium toy photography, and limited-edition details."
+    }
+  ],
+  "variations": [
+    {
+      "label": "blister pack",
+      "instruction": "Add \"blister pack\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "boxed collector edition",
+      "instruction": "Add \"boxed collector edition\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "mini figurine",
+      "instruction": "Add \"mini figurine\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "desk toy",
+      "instruction": "Add \"desk toy\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "retro toy card",
+      "instruction": "Add \"retro toy card\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "mascot figure",
+      "instruction": "Add \"mascot figure\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The result is too realistic",
+      "fix": "Ask for molded plastic texture, visible joints, toy-scale proportions, and packaging photography."
+    },
+    {
+      "problem": "The packaging text is messy",
+      "fix": "Keep package copy short: one title, two callouts, and simple label blocks."
+    },
+    {
+      "problem": "The likeness is weak",
+      "fix": "Name specific identity cues such as hairstyle, glasses, outfit colors, and pose."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is the ChatGPT action figure prompt?",
+      "answer_intent": "Answer directly using GPT Image 2 Action Figure Prompts examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I turn myself into an action figure with AI?",
+      "answer_intent": "Answer directly using GPT Image 2 Action Figure Prompts examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What photo works best for an AI action figure?",
+      "answer_intent": "Answer directly using GPT Image 2 Action Figure Prompts examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I make the toy package text readable?",
+      "answer_intent": "Answer directly using GPT Image 2 Action Figure Prompts examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for action figure?",
+      "answer_intent": "Answer directly using GPT Image 2 Action Figure Prompts examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "character-design",
+      "label": "Character Design",
+      "href": "/gpt-image-2-prompts/for-character-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "stickers",
+      "label": "Stickers",
+      "href": "/gpt-image-2-prompts/for-stickers/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 action figure prompt",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

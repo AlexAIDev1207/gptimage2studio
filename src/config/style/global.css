@@ -71,7 +71,12 @@ html:not(.dark) .gpt-studio-page [class*='bg-[#151821]'],
 html:not(.dark) .gpt-studio-page [class*='bg-[#17181D]'],
 html:not(.dark) .gpt-studio-page [class*='bg-[#111827]'],
 html:not(.dark) .gpt-studio-page [class*='bg-[#080B10]'],
-html:not(.dark) .gpt-studio-page [class*='bg-[#050507]'] {
+html:not(.dark) .gpt-studio-page [class*='bg-[#050507]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#050606]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#0d1320]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#090e1a]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#0b2517]'],
+html:not(.dark) .gpt-studio-page [class*='bg-[#081915]'] {
   background-color: #ffffff;
 }
 
@@ -82,6 +87,28 @@ html:not(.dark) .gpt-studio-page [class*='bg-white/[0.07]'],
 html:not(.dark) .gpt-studio-page [class*='bg-white/10'],
 html:not(.dark) .gpt-studio-page [class*='bg-white/15'] {
   background-color: rgb(15 23 42 / 0.045);
+}
+
+/* zinc-900 / zinc-950 透明度变体 → 浅色卡背景 */
+html:not(.dark) .gpt-studio-page [class*='bg-zinc-900/'],
+html:not(.dark) .gpt-studio-page [class*='bg-zinc-950/'] {
+  background-color: #ffffff;
+}
+
+/* 纯 bg-zinc-900 / bg-zinc-950（无透明度） → 浅灰 */
+html:not(.dark) .gpt-studio-page [class*='bg-zinc-900']:not([class*='bg-zinc-900/']),
+html:not(.dark) .gpt-studio-page [class*='bg-zinc-950']:not([class*='bg-zinc-950/']) {
+  background-color: rgb(241 245 249);
+}
+
+/* bg-black（dialog 图片区背景） → 浅灰 */
+html:not(.dark) .gpt-studio-page [class*='bg-black']:not([class*='bg-black/']) {
+  background-color: rgb(241 245 249);
+}
+
+/* 半透明黑遮罩（如 dialog 外壳） → 半透明深色 */
+html:not(.dark) .gpt-studio-page [class*='bg-black/80'] {
+  background-color: rgb(15 23 42 / 0.55);
 }
 
 html:not(.dark) .gpt-studio-page [class*='border-white/5'],
@@ -103,6 +130,28 @@ html:not(.dark) .gpt-studio-page [class*='text-zinc-400'],
 html:not(.dark) .gpt-studio-page [class*='text-zinc-500'],
 html:not(.dark) .gpt-studio-page [class*='text-zinc-600'] {
   color: #475569;
+}
+
+/* tier / accent 系列亮色文本 → 浅色模式用同色系深色调 */
+html:not(.dark) .gpt-studio-page [class*='text-emerald-200'],
+html:not(.dark) .gpt-studio-page [class*='text-emerald-300'] {
+  color: rgb(4 120 87); /* emerald-700 */
+}
+html:not(.dark) .gpt-studio-page [class*='text-rose-200'],
+html:not(.dark) .gpt-studio-page [class*='text-rose-300'] {
+  color: rgb(190 18 60); /* rose-700 */
+}
+html:not(.dark) .gpt-studio-page [class*='text-violet-200'],
+html:not(.dark) .gpt-studio-page [class*='text-violet-300'] {
+  color: rgb(91 33 182); /* violet-800 */
+}
+html:not(.dark) .gpt-studio-page [class*='text-amber-200'],
+html:not(.dark) .gpt-studio-page [class*='text-amber-300'] {
+  color: rgb(180 83 9); /* amber-700 */
+}
+html:not(.dark) .gpt-studio-page [class*='text-cyan-200'],
+html:not(.dark) .gpt-studio-page [class*='text-cyan-300'] {
+  color: rgb(14 116 144); /* cyan-700 */
 }
 
 html:not(.dark) .gpt-studio-page [class*='from-black'] .text-white,

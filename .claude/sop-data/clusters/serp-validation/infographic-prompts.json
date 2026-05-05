@@ -1,0 +1,27 @@
+{
+  "slug": "infographic-prompts",
+  "candidate_score": 0.524,
+  "query": "infographic prompts AI image",
+  "top10": [
+    { "rank": 1, "domain": "venngage.com", "title": "Free AI Infographic Generator", "type": "tool" },
+    { "rank": 2, "domain": "piktochart.com", "title": "Free AI Infographic Maker—Piktochart AI", "type": "tool" },
+    { "rank": 3, "domain": "napkin.ai", "title": "Napkin AI - The visual AI for business storytelling", "type": "tool" },
+    { "rank": 4, "domain": "infografix.app", "title": "Free Infographics Generator with AI", "type": "tool" },
+    { "rank": 5, "domain": "godofprompt.ai", "title": "10 ChatGPT Prompts for Professional Infographics", "type": "blog" },
+    { "rank": 6, "domain": "tenorshare.ai", "title": "ChatGPT Images 2.0 Infographic Prompts Tested 2026", "type": "blog" },
+    { "rank": 7, "domain": "ezygraph.com", "title": "Free AI Infographic Generator", "type": "tool" },
+    { "rank": 8, "domain": "linkedin.com", "title": "Create AI-Generated Infographics with Gemini", "type": "social" },
+    { "rank": 9, "domain": "mindstudio.ai", "title": "AI Infographic Generator Templates", "type": "tool" },
+    { "rank": 10, "domain": "atlabs.ai", "title": "30 Nano Banana Prompts for Perfect Infographics", "type": "competitor_hub" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["atlabs.ai"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：10 unique domains，0 UGC。竞争主要是 infographic 生成器（Venngage/Piktochart/Napkin），它们做的是 'data → chart 直接生成'。我们做 prompt cluster + GPT Image 2 specific（pixel-level text rendering 是它强项），差异化清晰。atlabs.ai 已有 Nano Banana 角度，直接竞品。",
+  "recommended_h1": "Infographic Prompts for GPT Image 2",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

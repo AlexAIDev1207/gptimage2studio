@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "page_type": "prompt_cluster_hub",
+  "slug": "product-photography",
+  "source_candidate_slug": "product-photography-prompts",
+  "parent_url": "/gpt-image-2-prompts/",
+  "url_path": "/gpt-image-2-prompts/for-product-photography/",
+  "breadcrumb": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "GPT Image 2 Prompts",
+      "href": "/gpt-image-2-prompts/"
+    },
+    {
+      "label": "Product Photography",
+      "href": "/gpt-image-2-prompts/for-product-photography/"
+    }
+  ],
+  "tdh": {
+    "title": "GPT Image 2 Prompts for Product Photography: Copy-Paste Templates and Examples",
+    "description": "Copy gpt image 2 prompts for product photography with visual examples, editable prompt templates, how-to steps, troubleshooting tips, variations, and related GPT Image 2 prompt ideas.",
+    "h1": "GPT Image 2 Prompts for Product Photography"
+  },
+  "seo": {
+    "primary_query": "gpt image 2 prompts for product photography",
+    "query_variants": [
+      "ai product photography prompts",
+      "chatgpt product photography prompt",
+      "gpt image 2 product photography prompt",
+      "product photography ai prompts ecommerce"
+    ],
+    "related_searches": [
+      "ai product photography prompts",
+      "ecommerce product photo prompt",
+      "amazon listing image prompt",
+      "white background product photo prompt",
+      "product ad image prompt"
+    ],
+    "intent_grade": "strong-commercial",
+    "kd_estimate": 24,
+    "search_intent": "Create product photos, packaging shots, studio lighting, and ad-ready product visuals.",
+    "launch_batch": 1,
+    "schema_types": [
+      "CollectionPage",
+      "WebApplication",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "indexable": true
+  },
+  "h_tree": [
+    {
+      "level": "H1",
+      "text": "GPT Image 2 Prompts for Product Photography"
+    },
+    {
+      "level": "Hero",
+      "text": "Hero with visual example, short value prop, Try in Workbench CTA, and anchor tabs."
+    },
+    {
+      "level": "H2",
+      "text": "Browse Product Photography Prompt Use Cases"
+    },
+    {
+      "level": "H2",
+      "text": "Copy-Paste Product Photography Prompt Examples"
+    },
+    {
+      "level": "H2",
+      "text": "Product Photography Prompt Pack"
+    },
+    {
+      "level": "H2",
+      "text": "How to Write Product Photography Prompts"
+    },
+    {
+      "level": "H2",
+      "text": "Product Photography Prompt Variations"
+    },
+    {
+      "level": "H2",
+      "text": "Product Photography Troubleshooting"
+    },
+    {
+      "level": "H2",
+      "text": "Product Photography FAQ"
+    },
+    {
+      "level": "H2",
+      "text": "Related GPT Image 2 Prompt Clusters"
+    }
+  ],
+  "hero": {
+    "eyebrow": "GPT Image 2 prompt collection",
+    "intro": "Generate clean studio shots, packaging details, and campaign-ready product visuals from copy-paste GPT Image 2 prompts.",
+    "primary_cta": {
+      "label": "Try in Workbench",
+      "href": "/#generator",
+      "behavior": "send_prompt_to_workbench"
+    },
+    "secondary_cta": {
+      "label": "Copy a prompt",
+      "href": "#prompt-examples"
+    },
+    "visual_strategy": "Use a regenerated R2-hosted example image from the highest-scoring prompt in this cluster."
+  },
+  "sub_scenes": [
+    {
+      "slug": "white-background",
+      "label": "White Background Product Photos",
+      "anchor": "#white-background",
+      "search_modifier": "white background product photo prompt",
+      "user_intent": "Create marketplace-ready product shots with clean shadows and readable labels.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for white background product photos with clear before/copy/use affordance."
+    },
+    {
+      "slug": "studio-lighting",
+      "label": "Studio Lighting",
+      "anchor": "#studio-lighting",
+      "search_modifier": "studio product photography prompt",
+      "user_intent": "Control softboxes, reflections, rim light, and product material texture.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for studio lighting with clear before/copy/use affordance."
+    },
+    {
+      "slug": "lifestyle-scene",
+      "label": "Lifestyle Product Scenes",
+      "anchor": "#lifestyle-scene",
+      "search_modifier": "lifestyle product image prompt",
+      "user_intent": "Place products in realistic rooms, outdoor scenes, or tabletop environments.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for lifestyle product scenes with clear before/copy/use affordance."
+    },
+    {
+      "slug": "packaging-labels",
+      "label": "Packaging and Labels",
+      "anchor": "#packaging-labels",
+      "search_modifier": "product label prompt",
+      "user_intent": "Keep box copy, labels, and ingredient panels as legible as possible.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for packaging and labels with clear before/copy/use affordance."
+    },
+    {
+      "slug": "ad-creatives",
+      "label": "Product Ad Creatives",
+      "anchor": "#ad-creatives",
+      "search_modifier": "product ad image prompt",
+      "user_intent": "Turn a product into scroll-stopping hero ads and social placements.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for product ad creatives with clear before/copy/use affordance."
+    },
+    {
+      "slug": "flat-lay",
+      "label": "Flat Lay and Bundles",
+      "anchor": "#flat-lay",
+      "search_modifier": "flat lay product prompt",
+      "user_intent": "Build overhead arrangements, kits, and bundles for catalog or launch pages.",
+      "prompt_count_target": 2,
+      "visual_brief": "Show a direct generated result for flat lay and bundles with clear before/copy/use affordance."
+    }
+  ],
+  "prompt_grid": {
+    "section_id": "prompt-examples",
+    "target_count": 14,
+    "minimum_count": 12,
+    "card_title_rule": "Use a short noun phrase under 80 characters derived from the first prompt sentence.",
+    "ssr_visibility": "Render prompt titles, excerpts, sub-scene labels, and full prompt text in HTML; dialog is only an interaction layer.",
+    "modal_features": [
+      "image",
+      "full_prompt",
+      "copy_prompt",
+      "try_in_workbench",
+      "variation_chips",
+      "related_prompts"
+    ]
+  },
+  "prompt_pack": [
+    {
+      "label": "Product Photography Starter Pack",
+      "prompt_count_target": 6,
+      "description": "Broad templates that match the main search query and work as first-copy examples.",
+      "sub_scene_slugs": [
+        "white-background",
+        "studio-lighting",
+        "lifestyle-scene"
+      ]
+    },
+    {
+      "label": "Product Photography Advanced Variations",
+      "prompt_count_target": 6,
+      "description": "More specific long-tail variations pulled from related searches and community use cases.",
+      "sub_scene_slugs": [
+        "packaging-labels",
+        "ad-creatives",
+        "flat-lay"
+      ]
+    }
+  ],
+  "how_to": [
+    {
+      "heading": "Define the product precisely",
+      "body": "Name the product type, material, color, label area, and any parts that must remain unchanged."
+    },
+    {
+      "heading": "Choose the selling context",
+      "body": "Specify white background, ecommerce listing, lifestyle scene, premium ad, or bundle layout."
+    },
+    {
+      "heading": "Lock lighting and camera language",
+      "body": "Add lens, angle, shadow, reflection, and surface details so the image feels photographed instead of generic."
+    }
+  ],
+  "variations": [
+    {
+      "label": "white background",
+      "instruction": "Add \"white background\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "premium studio lighting",
+      "instruction": "Add \"premium studio lighting\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "Amazon main image",
+      "instruction": "Add \"Amazon main image\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "Shopify hero banner",
+      "instruction": "Add \"Shopify hero banner\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "lifestyle scene",
+      "instruction": "Add \"lifestyle scene\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    },
+    {
+      "label": "social ad crop",
+      "instruction": "Add \"social ad crop\" to the base prompt and adjust composition, lighting, and aspect ratio for that use case."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The label text is distorted",
+      "fix": "Ask for large readable label areas, front-facing packaging, simple typography, and avoid tiny secondary copy."
+    },
+    {
+      "problem": "The product shape changes",
+      "fix": "Add \"preserve the exact silhouette, proportions, logo placement, and material finish\"."
+    },
+    {
+      "problem": "The scene looks like stock imagery",
+      "fix": "Use a concrete surface, props, lighting setup, camera angle, and commercial use context."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do you write a product photography prompt for GPT Image 2?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Product Photography examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I create white background product photos with AI?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Product Photography examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "Can GPT Image 2 create ecommerce product images?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Product Photography examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "How do I keep product labels readable in AI product photos?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Product Photography examples, then point to the most relevant prompt pack or troubleshooting note."
+    },
+    {
+      "question": "What should I include in a GPT Image 2 prompt for product photography?",
+      "answer_intent": "Answer directly using GPT Image 2 Prompts for Product Photography examples, then point to the most relevant prompt pack or troubleshooting note."
+    }
+  ],
+  "related_clusters": [
+    {
+      "slug": "ecommerce-product-photos",
+      "label": "Ecommerce Product Photos",
+      "href": "/gpt-image-2-prompts/for-ecommerce-product-photos/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "poster-design",
+      "label": "Poster Design",
+      "href": "/gpt-image-2-prompts/for-poster-design/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "infographics",
+      "label": "Infographics",
+      "href": "/gpt-image-2-prompts/for-infographics/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    },
+    {
+      "slug": "instagram-photo-editing",
+      "label": "Instagram Photo Editing",
+      "href": "/gpt-image-2-prompts/for-instagram-photo-editing/",
+      "relationship": "Use as an internal link from the related clusters section and contextual body copy."
+    }
+  ],
+  "content_requirements": {
+    "min_words": 1200,
+    "first_100_words_must_include": "gpt image 2 prompts for product photography",
+    "images_required": {
+      "minimum": 12,
+      "source": "Kie.ai regenerated, R2-hosted, no copied competitor/social images"
+    },
+    "visible_prompt_text": true,
+    "no_individual_prompt_detail_pages": true
+  }
+}

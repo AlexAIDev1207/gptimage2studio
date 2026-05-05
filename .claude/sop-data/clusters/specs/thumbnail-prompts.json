@@ -1,0 +1,217 @@
+{
+  "slug": "thumbnail-prompts",
+  "priority": "P0-5",
+  "tier": "viral",
+  "h1": "YouTube Thumbnail Prompts for GPT Image 2",
+  "meta_title": "YouTube Thumbnail Prompts for GPT Image 2 — Boost CTR with AI",
+  "meta_description": "Copy-paste YouTube thumbnail prompts for GPT Image 2. Gaming, tutorial, vlog, podcast, review templates. High-CTR clickbait designs with bold text rendering.",
+  "intro_long": "13 tested GPT Image 2 prompts that produce high-CTR YouTube thumbnails — bold gaming clickbait, podcast split layouts, and reaction-review designs with crisp headline text.",
+  "how_it_works": [
+    {
+      "title": "Upload your face or reference",
+      "body": "Use a sharp 1024px+ headshot. Clear expression beats lighting tricks for thumbnail recognition."
+    },
+    {
+      "title": "Pick a thumbnail template",
+      "body": "Choose gaming, vlog, podcast, tutorial, or review — each ships with proven layout and text styling."
+    },
+    {
+      "title": "Customize headline and generate at 16:9",
+      "body": "Edit the headline copy, accent color, and props — Workbench renders 1280×720 in one click."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Pixel-level text rendering",
+      "body": "Huge headlines like INSANE! or WORTH IT? render cleanly first try — no Photoshop overlay, no garbled letters that kill CTR."
+    },
+    {
+      "title": "Face locked across episodes",
+      "body": "Image-to-image preserves your face across gaming, vlog, and podcast variants so your channel stays visually recognizable in subscriber feeds."
+    },
+    {
+      "title": "2K output for sharp upload",
+      "body": "Native 2K resolution stays crisp on TVs and 4K monitors where YouTube re-encodes 1280×720 — no soft edges on bold text or product shots."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "YouTubers shipping weekly",
+      "body": "Generate 3-5 thumbnails per week across niches without hiring a designer or learning Photoshop."
+    },
+    {
+      "title": "Streamers and gaming creators",
+      "body": "Bold clickbait designs with shocked-face reactions and game assets in under a minute."
+    },
+    {
+      "title": "Podcast hosts and interviewers",
+      "body": "Two-person split layouts with guest photos, episode title, and consistent show branding."
+    },
+    {
+      "title": "Agency creators and course teachers",
+      "body": "Spin up tutorial, review, and vlog thumbnails for client channels at scale with reusable templates."
+    }
+  ],
+  "tips": [
+    {
+      "q": "What makes a high-CTR YouTube thumbnail prompt?",
+      "a": "Three ingredients: (1) a single dominant subject with exaggerated facial expression, (2) one bold sans-serif headline ≤ 4 words at high contrast, (3) one accent prop or arrow. Specify 1280×720, name the emotion, and quote the exact title text — vague prompts produce flat thumbnails that don't earn clicks."
+    },
+    {
+      "q": "How do I render large headline text without garbling?",
+      "a": "Wrap the exact string in double quotes (`title: \"INSANE STRATEGY\"`), keep it under 20 characters, and request `bold sans-serif, ultra-high contrast, black stroke`. Use the JSON template in this library — its title_text block fixes font weight, position, and color so GPT Image 2 doesn't improvise the typography."
+    },
+    {
+      "q": "What aspect ratio and resolution should YouTube thumbnails use?",
+      "a": "Standard videos: 1280×720 at 16:9. Shorts: 1080×1920 at 9:16. Always render at 2K (10 credits) so text stays sharp after YouTube re-encodes. Specify the resolution in your prompt — leaving it default produces 1024×1024 squares that get center-cropped on the watch page."
+    },
+    {
+      "q": "How do I keep my face recognizable across episodes?",
+      "a": "Upload the same well-lit reference photo every time and add `preserve facial features and hairstyle exactly` to each prompt. Reuse one JSON template and only swap the headline, expression, and background — that locks identity while letting the niche styling change between gaming, podcast, and review uploads."
+    }
+  ],
+  "related_articles": [
+    "fix-gpt-image-2-artifacting-lighting-details",
+    "gpt-image-2-seedance-2-workflow"
+  ],
+  "search_intent": "Creator commercial intent：YouTuber 想用 AI 快速生成高 CTR thumbnail。GPT Image 2 文字渲染优势是关键卖点（thumbnail 必须有可读文字）。",
+  "primary_query": "youtube thumbnail prompts",
+  "search_volume_signal": "commercial_high",
+  "competitor_to_outrank": ["miraflow.ai (top 1 specialist)", "youthumb.ai (specialist)", "stockimg.ai", "Reddit r/YouTubeCreators", "Notion template", "banana-prompts.net (新站)"],
+  "sub_scenes": [
+    {
+      "name": "Gaming Thumbnail",
+      "slug_anchor": "gaming",
+      "description": "High contrast, shocked face, game assets — top niche",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Tutorial / How-To",
+      "slug_anchor": "tutorial",
+      "description": "Clear subject, headline text, UI elements for teaching",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Vlog / Lifestyle",
+      "slug_anchor": "vlog",
+      "description": "Personal expression with scene background for vloggers",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Podcast / Interview",
+      "slug_anchor": "podcast",
+      "description": "Two-person split layout with guest photo and title",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Review / Reaction",
+      "slug_anchor": "review-reaction",
+      "description": "Exaggerated reaction, product, bold WORTH IT? text",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Shorts / Vertical",
+      "slug_anchor": "shorts",
+      "description": "9:16 vertical thumbnail, close-up, big headline",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "What's the best AI prompt for a YouTube thumbnail?",
+      "a": "Reliable template: 'Create a 1280×720 YouTube thumbnail. Subject: [you/topic] with [exaggerated emotion]. Background: [bold gradient / scene]. Add bold sans-serif text: \"[YOUR TITLE]\" in [color]. High contrast, sharp focus, clickbait composition.' GPT Image 2 renders the text correctly first try, which Midjourney/SDXL fail at."
+    },
+    {
+      "q": "Can GPT Image 2 add text to thumbnails?",
+      "a": "Yes — this is GPT Image 2's strongest advantage. Pixel-level text rendering means your thumbnail title shows up readable and styled, no Photoshop overlay needed. Use double quotes around the exact text you want."
+    },
+    {
+      "q": "How to make YouTube thumbnails for gaming with AI?",
+      "a": "Use this gaming template: 'YouTube gaming thumbnail, [game character/me] with shocked face, neon explosion background, dramatic lighting, bold red text \"INSANE [game] STRATEGY\", high contrast, 1280×720.' Layer in game-specific elements (Fortnite skin / Minecraft block / Valorant gun) for niche fit."
+    },
+    {
+      "q": "What size should AI-generated YouTube thumbnails be?",
+      "a": "Always 1280×720 (16:9) for standard videos, 1080×1920 (9:16) for Shorts. Specify the size explicitly in your prompt — GPT Image 2's 2K output mode is ideal for HD thumbnails. Smaller resolutions look blurry on TVs."
+    },
+    {
+      "q": "Is GPT Image 2 free for thumbnail creation?",
+      "a": "Studio offers free trial credits. 1 thumbnail at 2K = 10 credits. For high-volume creators (3 thumbnails/week), our credit packs are cheaper than Canva Pro / Photoshop subscriptions and faster than designer-on-demand."
+    }
+  ],
+  "related_searches_raw": [
+    "Youtube thumbnail prompts generator",
+    "Youtube thumbnail prompts reddit",
+    "Youtube thumbnail prompts copy and paste",
+    "Youtube thumbnail prompts free",
+    "ChatGPT prompt for YouTube thumbnail",
+    "Youtube thumbnail prompts for gaming",
+    "YouTube thumbnail size",
+    "Nano Banana YouTube thumbnail prompt"
+  ],
+  "page_structure_notes": "首屏：① H1 + 强调『text rendering 优势』(Photoshop 不再需要) ② Workbench CTA『Upload your face → Generate thumbnail』③ 6 张 niche-specific 案例对比（gaming / tutorial / vlog 等）。第二屏：sub_scenes anchor。每个 prompt 卡片 modal 显示 thumbnail（1280×720 真实比例）+ prompt 文本 + 'Open in Workbench'。**重点**：要演示『同一主体 + 不同 niche prompt』生成多张 thumbnail 的能力（YouTuber 一周需要多个不同 niche 的 thumbnail）。",
+  "internal_links": [
+    { "to": "cinematic-portrait-prompts", "anchor_text": "Cinematic portrait prompts (channel branding photos)" },
+    { "to": "poster-design-prompts", "anchor_text": "Poster design prompts (text-heavy designs)" },
+    { "to": "social-media-ad-prompts", "anchor_text": "Social media ad prompts (similar viral aesthetics)" }
+  ],
+  "estimated_prompt_count": 13,
+  "image_count_target": 13,
+  "kie_credits_estimate": 130,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "kie_credits_note": "thumbnail 必须 2K 出图（10 credits/张）保证文字清晰度",
+  "json_template": {
+    "_note": "Thumbnail 推荐 JSON 结构化 prompt（参考 awesome-gpt-image-2 Japanese GPT Image 2 Thumbnail 模式）。canvas 锁定 16:9。{argument} 工作台解析为表单。",
+    "_pattern": "youtube-thumbnail-collage",
+    "template": {
+      "type": "YouTube thumbnail",
+      "canvas": {
+        "aspect_ratio": "16:9",
+        "resolution": "1280x720"
+      },
+      "style": "{argument name=\"style\" default=\"high CTR clickbait, bold contrast, sharp focus\"}",
+      "background": {
+        "frame": "{argument name=\"frame\" default=\"\"}",
+        "main_scene": "{argument name=\"scene\" default=\"bold gradient with motion lines\"}",
+        "color": "{argument name=\"bg_color\" default=\"red and yellow gradient\"}"
+      },
+      "subject": {
+        "main": "{argument name=\"subject\" default=\"creator face with shocked expression\"}",
+        "position": "{argument name=\"subject_position\" default=\"left half, large scale\"}",
+        "expression": "{argument name=\"expression\" default=\"exaggerated surprise / awe / disgust\"}"
+      },
+      "title_text": {
+        "content": "{argument name=\"title\" default=\"INSANE!\"}",
+        "font": "bold sans-serif, ultra-high contrast",
+        "position": "{argument name=\"title_position\" default=\"right half / overlay\"}",
+        "color": "{argument name=\"title_color\" default=\"yellow with black stroke\"}"
+      },
+      "supporting_elements": [
+        "{argument name=\"prop_1\" default=\"product or game asset\"}",
+        "{argument name=\"prop_2\" default=\"red arrow or circle highlight\"}"
+      ],
+      "output": "1280x720, 2K resolution, vibrant colors, sharp text rendering"
+    },
+    "alternative_patterns": [
+      {
+        "name": "tutorial-howto",
+        "use_when": "教程类 thumbnail",
+        "schema": "{type, canvas, layout: {step_indicator: 'STEP 1' | numbered, before_image, after_image, arrow}, title_text: {content, position: top}}"
+      },
+      {
+        "name": "podcast-interview",
+        "use_when": "播客 / 访谈 thumbnail",
+        "schema": "{type, canvas, subjects: [{name, photo, side: left|right}], title, branding: podcast_logo}"
+      },
+      {
+        "name": "review-reaction",
+        "use_when": "评测 / 反应 thumbnail",
+        "schema": "{type, canvas, product: {image, position: right}, reactor: {face, expression, position: left}, verdict_text: 'WORTH IT?' | 'NEVER BUY'}"
+      },
+      {
+        "name": "shorts-vertical",
+        "use_when": "Shorts 竖屏 thumbnail",
+        "schema": "{type, canvas: {aspect_ratio: '9:16', resolution: '1080x1920'}, subject: full-body or face close-up, title: bold short copy}"
+      }
+    ]
+  }
+}

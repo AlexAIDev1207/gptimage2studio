@@ -1,0 +1,28 @@
+{
+  "slug": "old-photo-restore-prompts",
+  "candidate_score": 0.436,
+  "query": "old photo restore prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "ruben.substack.com", "title": "Restore. - by Ruben Hassid - How to AI", "type": "blog" },
+    { "rank": 2, "domain": "pixpretty.tenorshare.ai", "title": "Best AI Prompts for Old Photo Restoration", "type": "tool/blog" },
+    { "rank": 3, "domain": "jpghd.com", "title": "Lossless Restoration of Old Photos with AI", "type": "tool" },
+    { "rank": 4, "domain": "adobe.com", "title": "AI photo restorations: Fix damaged photos with Firefly", "type": "official_tool" },
+    { "rank": 5, "domain": "medium.com", "title": "Recover Your Old Photos With One Powerful Prompt", "type": "blog" },
+    { "rank": 6, "domain": "seaart.ai", "title": "12 Must-Try Gemini AI Prompts for Old Photo Restoration", "type": "blog/tool" },
+    { "rank": 7, "domain": "vanceai.com", "title": "AI Old Photo Restoration: Repair & Enhance Old Pictures", "type": "tool" },
+    { "rank": 8, "domain": "picsart.com", "title": "Photo Restoration - Restore Old Photos with AI Online", "type": "tool" },
+    { "rank": 9, "domain": "deep-image.ai", "title": "Photo restoration: How to repair an old photo with AI", "type": "tool/blog" },
+    { "rank": 10, "domain": "pixelbin.io", "title": "Free old photo restoration: Restore old photos online with AI", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": [],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 极健康：10 unique，0 UGC。但搜索意图主要是『直接修复工具』(Adobe / VanceAI / Picsart / jpghd.com)，少数是 prompts 教程 (ruben/medium/seaart)。GPT Image 2 修复旧照片是 viral 玩法（Reddit r/ChatGPTPromptGenius 有热帖）。我们的 hub 页要把 Workbench CTA + 上传旧照片入口放在第一屏（结合 cluster hub + 工具入口），这样满足两种意图。",
+  "recommended_h1": "Old Photo Restoration Prompts for GPT Image 2",
+  "page_structure_note": "首屏必须放：① 上传旧照片到 Workbench 的 CTA（直接转化）② Before/After 案例对比 ③ 然后才是 prompt cluster cards。否则用户跳出率会很高。",
+  "note": "WebSearch-only data; no related searches or PAA captured"
+}

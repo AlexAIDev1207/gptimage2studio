@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 Prompts — 130 Tested Templates Across 10 Use Cases",
+    "description": "Copy-paste GPT Image 2 prompts for action figures, old photo restoration, Instagram edits, stickers, YouTube thumbnails, posters, infographics and more. 130 tested templates ready to use."
+  },
+  "hero": {
+    "eyebrow": "Prompt Library",
+    "title": "GPT Image 2 Prompts",
+    "title_accent": "130 Tested Templates",
+    "title_suffix": "Across 10 Use Cases",
+    "subtitle": "Copy-paste prompts for action figures, posters, infographics, YouTube thumbnails, and more. Every template tested with the real GPT Image 2 model — paste, customize, generate.",
+    "primary_cta": "Try in Workbench",
+    "secondary_cta": "Browse Use Cases",
+    "stats_clusters": "{count} use cases",
+    "stats_prompts": "{count} prompts",
+    "stats_credits": "Free trial credits"
+  },
+  "usecase_section": {
+    "eyebrow": "Browse by Use Case",
+    "heading": "Pick a category to start",
+    "subheading": "Each cluster includes 12-14 tested prompts, full FAQ, and one-click Workbench integration.",
+    "tier_labels": {
+      "viral": "Viral Trends",
+      "commercial": "Commercial",
+      "creative": "Creative & Editorial"
+    },
+    "tier_descriptions": {
+      "viral": "High-CTR templates — turn yourself into action figures, stickers, or trending Instagram edits.",
+      "commercial": "For sellers, creators, and marketers — product, food, and cinematic portrait templates.",
+      "creative": "Designer-grade outputs leveraging GPT Image 2's pixel-perfect text rendering."
+    },
+    "card_count_label": "{count} prompts",
+    "card_view_button": "View prompts →"
+  },
+  "why_section": {
+    "eyebrow": "Why GPT Image 2?",
+    "heading": "Three things GPT Image 2 does better",
+    "items": [
+      {
+        "title": "Pixel-Perfect Text Rendering",
+        "body": "Posters, thumbnails, and infographics get readable headlines and labels in one shot. No more Photoshop overlays or garbled text."
+      },
+      {
+        "title": "Cross-Image Consistency",
+        "body": "The same character, product, or style holds across multiple panels. Build storyboards, product series, and IP characters that stay on model."
+      },
+      {
+        "title": "Image-to-Image That Preserves Identity",
+        "body": "Upload a reference photo and the model keeps the face, product SKU, or pose intact. Great for headshots, restoration, and on-model shots."
+      }
+    ]
+  },
+  "howto_section": {
+    "eyebrow": "How It Works",
+    "heading": "Three steps to your first generation",
+    "steps": [
+      {
+        "title": "1. Pick a use case",
+        "body": "Browse 10 clusters covering viral trends, commercial photography, and editorial design."
+      },
+      {
+        "title": "2. Copy a prompt",
+        "body": "Each card includes the full prompt, customizable arguments, and an example output."
+      },
+      {
+        "title": "3. Generate in Workbench",
+        "body": "One-click pre-fills the prompt in the Workbench. Add your photo (if needed) and hit generate."
+      }
+    ]
+  },
+  "faq_section": {
+    "eyebrow": "FAQ",
+    "heading": "Common questions",
+    "items": [
+      {
+        "q": "How is GPT Image 2 different from Midjourney or Stable Diffusion?",
+        "a": "GPT Image 2 has three clear advantages: (1) pixel-level text rendering — readable poster titles and infographic labels in one generation, (2) cross-image consistency — same character or product across multiple frames, (3) strong image-to-image identity preservation. Use Midjourney for pure aesthetic / illustration; use GPT Image 2 when text, identity, or product accuracy matters."
+      },
+      {
+        "q": "Can I use these prompts commercially?",
+        "a": "Yes — generated images are typically usable for commercial purposes (review your Studio plan terms for specifics). The prompt templates themselves are derived from community sources and curated. We replace any specific celebrity or brand names with placeholders so your output is unique to you."
+      },
+      {
+        "q": "What is the {argument} syntax I see in some prompts?",
+        "a": "Some prompts include placeholders like {argument name=\"product name\" default=\"laptop\"}. In the Workbench, these become editable input fields — change the value and the prompt updates automatically. This lets one template cover dozens of variations."
+      },
+      {
+        "q": "Are these prompts free to use?",
+        "a": "All prompt templates are free to copy and adapt. Generation requires Studio credits — new users get a free trial allowance. 1K resolution costs 6 credits per generation, 2K costs 10 credits."
+      },
+      {
+        "q": "What's the difference between text-to-image and image-to-image prompts?",
+        "a": "Text-to-image prompts (poster, infographic, food shot) generate from scratch using the description. Image-to-image prompts (action figure, sticker, photo restore, cinematic portrait) need you to upload a reference photo — the model preserves the identity while applying the new style."
+      },
+      {
+        "q": "Why are some prompts in JSON format and others in plain text?",
+        "a": "Complex compositions (infographics, posters, thumbnails, product shots) use a structured JSON format that gives the model clearer instructions for layout, text positioning, and components. Simpler prompts use natural language. Both formats work — pick whichever feels more natural for your edits."
+      }
+    ]
+  },
+  "related_section": {
+    "eyebrow": "Other Resources",
+    "heading": "Explore more",
+    "links": [
+      { "label": "Workbench", "href": "/", "description": "Generate images from any prompt" },
+      { "label": "Pricing", "href": "/pricing", "description": "Credit packs for high-volume creators" },
+      { "label": "Blog", "href": "/blog", "description": "Tutorials and viral prompt breakdowns" }
+    ]
+  },
+  "final_cta": {
+    "heading": "Ready to create?",
+    "subheading": "Open the Workbench and try any prompt in 30 seconds.",
+    "button": "Open Workbench"
+  }
+}

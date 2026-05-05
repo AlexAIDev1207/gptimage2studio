@@ -1,0 +1,170 @@
+{
+  "slug": "instagram-photo-edit-prompts",
+  "priority": "P0-3",
+  "tier": "viral",
+  "h1": "Instagram Trending Photo Edit Prompts for GPT Image 2",
+  "meta_title": "Instagram Trending Photo Edit Prompts for GPT Image 2 — Viral Looks",
+  "meta_description": "Copy-paste Instagram trending photo edit prompts for GPT Image 2. Aesthetic, cinematic, golden hour, collage, childhood-vs-now and more — generate viral edits.",
+  "intro_long": "14 tested GPT Image 2 prompts that turn any selfie into trending Instagram aesthetics — cinematic film looks, golden-hour glow, and childhood-vs-now collages.",
+  "how_it_works": [
+    {
+      "title": "Upload a clean selfie",
+      "body": "Best results: 1024px+, sharp focus on face, natural daylight, single subject — no heavy filters."
+    },
+    {
+      "title": "Pick a trending aesthetic",
+      "body": "Choose cinematic film, golden-hour glow, collage, or childhood-vs-now — each is a tested viral template."
+    },
+    {
+      "title": "Customize and generate",
+      "body": "Edit outfit, mood, and aspect ratio for stories or grid — one click pre-fills and runs GPT Image 2."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Identity stays locked across restyles",
+      "body": "GPT Image 2's image-to-image keeps your face geometry consistent across cinematic, golden-hour, and collage looks — viewers still recognize you."
+    },
+    {
+      "title": "Multi-aspect ratios for IG surfaces",
+      "body": "One prompt, three exports: 1:1 grid posts, 9:16 stories and reels, 4:5 portraits — sized natively without cropping faces out."
+    },
+    {
+      "title": "ChatGPT-native, not a filter app",
+      "body": "Prompt-driven edits beat preset filters: change lighting, lens, grain, and mood per shot instead of stacking generic LUTs over every photo."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Content creators",
+      "body": "Batch-generate week-of feed posts and reel covers in one trending aesthetic."
+    },
+    {
+      "title": "Influencers & personal feed",
+      "body": "Refresh your grid with cinematic edits when no new shoot is on the calendar."
+    },
+    {
+      "title": "Dating profile glow-up",
+      "body": "Restyle existing selfies into golden-hour or studio portraits without a new photographer."
+    },
+    {
+      "title": "Fashion mood boards",
+      "body": "Test outfit and lighting concepts on yourself before committing to a real shoot."
+    }
+  ],
+  "tips": [
+    {
+      "q": "What is the trending AI photo editing prompt?",
+      "a": "Right now the cinematic film look and the childhood-vs-now collage dominate Reels. Both pair a lighting cue (golden hour, key light), a lens cue (Portra 400, 50mm), and a grain cue. Combine all three in one prompt for instant viral aesthetic."
+    },
+    {
+      "q": "How do I make Instagram AI photo edits?",
+      "a": "Upload a clean selfie to GPT Image 2 Studio, paste a trending prompt from this library, edit outfit and mood, then export at 1:1 for grid or 9:16 for stories. Each 1K edit costs 6 credits, so you can preview multiple aesthetics before posting."
+    },
+    {
+      "q": "Can GPT Image 2 restyle a portrait?",
+      "a": "Yes — image-to-image is GPT Image 2's strongest mode. It preserves face geometry, hairstyle, and skin tone while restyling lighting, outfit, background, and lens treatment. Use prompts like 'restyle as cinematic film portrait, keep facial features exactly' for clean results."
+    },
+    {
+      "q": "How do I keep the face recognizable in photo edits?",
+      "a": "Upload a high-resolution close-up rather than a full-body shot, add 'preserve facial features and hairstyle exactly' to the prompt, and avoid heavy stylization keywords like 'cartoon' or 'anime' that override likeness in favor of generic style."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-consistent-characters",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "viral 极强：Instagram Reels 1.9M+ likes，Top 10 中 Instagram 直接占 3 席。用户每天搜新 trend，要『复制粘贴 prompt + 上传自照 → 生成 viral 编辑』",
+  "primary_query": "instagram photo edit prompts",
+  "search_volume_signal": "viral_high_velocity",
+  "competitor_to_outrank": ["media.io (top 3 fresh content)", "fotor.com", "Instagram popular pages (top 1-2-7)", "Jagran Josh", "印度低质 SEO blog 群 (gouravdigitalclub / 24fbr / sushilprompt / apnotak / rajantemplate)"],
+  "sub_scenes": [
+    {
+      "name": "Aesthetic & Golden Hour",
+      "slug_anchor": "aesthetic-golden",
+      "description": "Soft warm light, dreamy atmosphere, sunset filter, ig-grid-ready girl/boy aesthetic edits",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Cinematic Film Look",
+      "slug_anchor": "cinematic-film",
+      "description": "Movie-poster-style edits with film grain, deep shadows, color grading. From `Lucas O'Keefe` viral trend",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Collage / Multi-Frame",
+      "slug_anchor": "collage",
+      "description": "Multi-image collage with consistent character — currently #1 trending edit on YT (190K views/5 days)",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Childhood vs Now",
+      "slug_anchor": "childhood-now",
+      "description": "Side-by-side or single image of you with your child-self ('Me & My Little Version' trend)",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "College / Studio Portrait",
+      "slug_anchor": "college-studio",
+      "description": "Cinematic college photo trend (45.6K YT views) + studio film-look profile shots",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Saree / Cultural Looks",
+      "slug_anchor": "cultural",
+      "description": "Indian saree photos and traditional outfit transformations — viral in IN market",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the best Instagram trending photo edit prompt for ChatGPT / GPT Image 2 right now?",
+      "a": "The 'cinematic film look' and 'collage with little version of yourself' are top trending in 2026 — both rely on GPT Image 2's image-to-image strength. Upload a selfie, paste our prompt template (subject + lighting + lens + grain + mood), and the model returns a viral-ready edit in under 30 seconds."
+    },
+    {
+      "q": "Can GPT Image 2 do trending Instagram edits like ChatGPT?",
+      "a": "Yes — GPT Image 2 IS the image generation model behind these trends, but our Studio gives faster turnaround, no rate limits, and a credit system that's cheaper for high-volume creators. Same prompts, better infrastructure."
+    },
+    {
+      "q": "How do I make my Instagram photo look aesthetic with AI?",
+      "a": "Three things matter: (1) lighting cue ('golden hour' / 'soft window light' / 'cinematic key light'), (2) lens cue ('shot on Portra 400' / '50mm f/1.4'), (3) atmosphere cue ('film grain' / 'dreamy haze' / 'dust particles'). Combine all three in your prompt and you get aesthetic instantly."
+    },
+    {
+      "q": "Is GPT Image 2 free for Instagram photo editing?",
+      "a": "Yes — Studio offers free trial credits. Each edit at 1K resolution = 6 credits. Most viral edits look great at 1K (Instagram displays 1080×1080). Upgrade to 2K only when you want HD details for prints."
+    },
+    {
+      "q": "Why does my AI edit not match the viral version on Instagram?",
+      "a": "Three common fixes: (1) most viral creators chain prompts (first set the scene, then refine outfit, then refine lighting), (2) upload a clear close-up not a full-body shot, (3) avoid copying the exact phrasing — paraphrase to your own face/outfit. Our prompt library has tested templates that work first try."
+    }
+  ],
+  "related_searches_raw": [
+    "Instagram photo edit prompts aesthetic",
+    "ChatGPT photo editing prompts for boy",
+    "New trending photo editing prompt",
+    "ChatGPT photo prompt generator",
+    "ChatGPT prompts for pictures of yourself",
+    "Best ChatGPT prompts for image editing",
+    "ChatGPT photo editing prompts Free",
+    "Best ChatGPT image prompts"
+  ],
+  "viral_signals": [
+    "Instagram ui.johnson Reel: 1.9M+ likes (3 weeks ago)",
+    "Instagram lifestyle_with_kamal: 116.5K+ likes",
+    "Instagram photo_tvoritel: 59.3K+ likes",
+    "Instagram iam_grincy: 49.8K+ likes (5 days ago, ChatGPT cinematic trend)",
+    "YouTube Jayanta Bhai: 190.8K views (5 days ago, collage trend)",
+    "media.io 'Updated 2 hours ago' — Google rewards content velocity"
+  ],
+  "page_structure_notes": "首屏：① H1（强调 trending）② 实时『今日 viral edit』Carousel（3-5 张当前最热案例）③ Workbench CTA『Upload your selfie → Apply trending prompt』④ 子场景 anchor tabs。每张卡片必带 before/after 缩略图。**关键**：要做一个『trend feed』机制，每月更新 viral 新趋势，让 Google 看到内容更新（content velocity 是这个 cluster 的杀手锏，竞争对手都在更新）。",
+  "internal_links": [
+    { "to": "cinematic-portrait-prompts", "anchor_text": "Cinematic portrait prompts (high-quality movie-style headshots)" },
+    { "to": "sticker-prompts", "anchor_text": "Sticker prompts (turn selfie into chibi sticker for IG)" },
+    { "to": "old-photo-restore-prompts", "anchor_text": "Old photo restore prompts (revive grandparent photos for Reels)" }
+  ],
+  "estimated_prompt_count": 14,
+  "image_count_target": 14,
+  "kie_credits_estimate": 84,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"],
+  "content_velocity_note": "这个 cluster 内容必须每月更新一次（追新 viral trend），否则 Google 会把排名让给更新更快的低质印度博客"
+}

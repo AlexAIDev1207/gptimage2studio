@@ -1,0 +1,27 @@
+{
+  "slug": "food-photography-prompts",
+  "candidate_score": 0.435,
+  "query": "food photography prompts AI",
+  "top10": [
+    { "rank": 1, "domain": "promptomania.com", "title": "Best Food Photography Prompts", "type": "competitor_hub" },
+    { "rank": 2, "domain": "promptbase.com", "title": "AI Food Photography Prompts", "type": "marketplace" },
+    { "rank": 3, "domain": "media.io", "title": "Gemini AI Food Photography Prompt | 25+ Copy-Paste Looks", "type": "tool" },
+    { "rank": 4, "domain": "aiartrevolution.com", "title": "30 Prompts For Food Photography With AI", "type": "blog" },
+    { "rank": 5, "domain": "medium.com", "title": "16 AI Prompts for Food Photography", "type": "blog" },
+    { "rank": 6, "domain": "foodphoto.ai", "title": "Foodphoto", "type": "competitor_specialist" },
+    { "rank": 7, "domain": "openart.ai", "title": "Best 25 Midjourney Prompts for Food", "type": "tool/blog" },
+    { "rank": 8, "domain": "aimenuphoto.com", "title": "AI Prompts for Food Photography: 50+ Examples", "type": "competitor_specialist" },
+    { "rank": 9, "domain": "bestaiprompts.art", "title": "Midjourney Food Prompts", "type": "blog" },
+    { "rank": 10, "domain": "createvision.ai", "title": "Food Photography Menu - AI Prompt", "type": "tool" }
+  ],
+  "domain_diversity": 10,
+  "reddit_count": 0,
+  "pinterest_count": 0,
+  "quora_count": 0,
+  "competitor_hubs_in_top10": ["promptomania.com", "promptbase.com", "foodphoto.ai", "aimenuphoto.com"],
+  "midjourney_dominant": false,
+  "verdict": "PASS",
+  "reason": "SERP 健康：10 unique，0 UGC。竞争都是教程站和 specialist。foodphoto.ai 和 aimenuphoto.com 是直接竞品。Commercial intent 强（餐厅老板 + 美食博主 + Amazon 卖家）。GPT Image 2 在保持菜品色泽和真实纹理上有优势。可进 P0。",
+  "recommended_h1": "Food Photography Prompts for GPT Image 2",
+  "note": "WebSearch-only data; commercial intent, viable P0"
+}

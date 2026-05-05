@@ -1,0 +1,155 @@
+{
+  "slug": "action-figure-prompts",
+  "priority": "P0-1",
+  "tier": "viral",
+  "h1": "Action Figure Prompts for GPT Image 2",
+  "meta_title": "Action Figure Prompts for GPT Image 2 — Turn Yourself Into a Toy",
+  "meta_description": "Copy-paste action figure prompts for GPT Image 2. Upload a photo, generate yourself as a 3D toy in blister packaging. 12+ tested viral prompts ready to use.",
+  "intro_long": "12 tested GPT Image 2 prompts that turn any photo into a collectible 3D action figure — blister-pack classics, Funko-style chibis, and movie hero editions.",
+  "how_it_works": [
+    {
+      "title": "Upload a clean front-facing photo",
+      "body": "Best results: 1024px+, well-lit, single subject, no sunglasses or heavy filters."
+    },
+    {
+      "title": "Pick an action figure prompt",
+      "body": "Choose blister pack for the viral classic, Funko style for chibi cuteness, or movie hero for cinematic packaging."
+    },
+    {
+      "title": "Customize and generate in Workbench",
+      "body": "Edit your name, profession, accessories — one click pre-fills the prompt and runs GPT Image 2."
+    }
+  ],
+  "why_use": [
+    {
+      "title": "Identity stays locked",
+      "body": "GPT Image 2's image-to-image preserves face geometry across blister-pack, chibi, and cinematic styles — your action figure looks like you, not a generic doll."
+    },
+    {
+      "title": "Packaging text renders cleanly",
+      "body": "Pixel-level text rendering puts your name, edition number, and accessory labels on the package without garbled letters."
+    },
+    {
+      "title": "12 production-tested templates",
+      "body": "Every prompt here was generated and reviewed in our pipeline. Variants are organized by sub-style, not random combinations."
+    }
+  ],
+  "use_cases": [
+    {
+      "title": "Social viral posts",
+      "body": "Drop a Funko-style version of yourself on LinkedIn or X — the format is already trending."
+    },
+    {
+      "title": "Birthday & gift cards",
+      "body": "Turn a friend's photo into a custom 3D toy mockup for personalized gifts."
+    },
+    {
+      "title": "Creator merch concepts",
+      "body": "Test action figure variants for podcast hosts, streamers, or YouTubers before commissioning real toys."
+    },
+    {
+      "title": "Brand mascot exploration",
+      "body": "Visualize a brand persona as a collectible figure for marketing decks and pitch material."
+    }
+  ],
+  "tips": [
+    {
+      "q": "What photo works best for an AI action figure?",
+      "a": "Front-facing, full upper body, neutral background, sharp focus on the face. Group shots, side profiles, and sunglass selfies all hurt identity preservation. A casual phone selfie taken near a window in daylight beats a dim studio shot."
+    },
+    {
+      "q": "How do I make the toy package text readable?",
+      "a": "Quote your exact strings (`name: \"ALEX KIM\"`, `tagline: \"Limited Edition\"`) and limit to 3 text fields per package. JSON-format prompts in this library handle layout and font sizing automatically — pick those when packaging text matters."
+    },
+    {
+      "q": "Why doesn't my action figure look like me?",
+      "a": "Add `preserve facial features and hairstyle exactly` to the prompt, increase your reference photo resolution, or try a different sub-style — Funko Pop Style deliberately abstracts faces into chibi proportions and won't read as a 1:1 likeness."
+    },
+    {
+      "q": "Can I make an action figure of two people?",
+      "a": "Yes — upload one image with both subjects clearly visible and use the Couple / Family Set sub-scene templates. GPT Image 2 keeps both faces accurate in a shared collector box without merging the identities."
+    }
+  ],
+  "related_articles": [
+    "gpt-image-2-consistent-characters",
+    "fix-gpt-image-2-artifacting-lighting-details"
+  ],
+  "search_intent": "用户想拿到可复制的 prompt 文本 + 自己上传照片 → 生成『盒装手办』图。Reddit 90+ comments、Instagram 18K+ likes 已验证 viral。",
+  "primary_query": "action figure prompt",
+  "search_volume_signal": "viral_high",
+  "competitor_to_outrank": ["actionfiguregenerator.ai", "ChatGPT GPT bot", "Reddit r/dalle2 thread", "Medium Jeff Reeds"],
+  "sub_scenes": [
+    {
+      "name": "Classic Blister Pack",
+      "slug_anchor": "blister-pack",
+      "description": "Standard collectible toy in clear plastic blister packaging with cardboard backing — the OG viral format",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Funko Pop Style",
+      "slug_anchor": "funko-style",
+      "description": "Big-headed chibi character in branded box, oversized eyes, matte finish",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Movie Hero Edition",
+      "slug_anchor": "movie-hero",
+      "description": "Cinematic-themed action figure with movie title art, weapons/accessories, dramatic packaging",
+      "prompt_count_target": 2
+    },
+    {
+      "name": "Profession & Hobby",
+      "slug_anchor": "profession",
+      "description": "Action figure of yourself as your job/hobby (developer / chef / yoga instructor / artist), tools as accessories",
+      "prompt_count_target": 3
+    },
+    {
+      "name": "Couple / Family Set",
+      "slug_anchor": "couple-family",
+      "description": "Multi-figure box for couples, families, or friend groups in shared packaging",
+      "prompt_count_target": 2
+    }
+  ],
+  "faq": [
+    {
+      "q": "How do I turn my photo into an action figure with GPT Image 2?",
+      "a": "Upload a clear, full-body photo to GPT Image 2 Studio, paste the action figure prompt, customize your name, profession, and accessories — the model returns a 3D-toy-style image in blister packaging within 30 seconds."
+    },
+    {
+      "q": "What's the best action figure prompt for ChatGPT?",
+      "a": "The most reliable template is: 'Create a 3D action figure of [name], displayed in clear plastic blister packaging like a collectible toy. Include accessories: [list]. Style: realistic 3D render, full-body, dramatic lighting.' Adjust accessories to match the person's profession or hobby."
+    },
+    {
+      "q": "Can I use these prompts with the free version of GPT Image 2?",
+      "a": "Yes — GPT Image 2 Studio offers free trial credits (1K resolution = 6 credits per generation). Each action figure prompt typically requires 1 generation, so you can preview multiple variations before committing."
+    },
+    {
+      "q": "Why does my action figure not look like me?",
+      "a": "Three common fixes: (1) upload a higher-resolution close-up of your face, (2) add 'preserve facial features and hairstyle exactly' to the prompt, (3) avoid heavy stylization keywords like 'cartoon' or 'anime' which override likeness."
+    },
+    {
+      "q": "Can I make an action figure of two people (couple / friends)?",
+      "a": "Yes — upload a single image with both people clearly visible, then use a multi-figure prompt template like 'Create two action figures of the people in the photo in a shared collector box.' GPT Image 2's multi-image consistency keeps both faces accurate."
+    }
+  ],
+  "related_searches_raw": [
+    "Action figure prompt generator",
+    "ChatGPT action figure prompt",
+    "Action figure prompt template",
+    "Action figure prompt list",
+    "ChatGPT action figure prompt copy paste",
+    "ChatGPT action figure prompt text",
+    "AI action figure prompt",
+    "ChatGPT action figure prompt generator"
+  ],
+  "page_structure_notes": "首屏布局：① H1 + 1 句价值主张 ② 大号 Workbench CTA『Upload your photo → Generate action figure』③ 3-4 张顶级 viral 案例并排（前后对比：自拍 vs 盒装手办）。第二屏：sub_scenes 锚点 tab + masonry 卡片网格。每张卡片 click → modal: 大图 + prompt 全文 + Copy + 'Try in Workbench' 深链。",
+  "internal_links": [
+    { "to": "sticker-prompts", "anchor_text": "Sticker prompts (turn photo into chibi sticker)" },
+    { "to": "thumbnail-prompts", "anchor_text": "YouTube thumbnail prompts (creator branding)" },
+    { "to": "cinematic-portrait-prompts", "anchor_text": "Cinematic portrait prompts (movie-style headshot)" }
+  ],
+  "estimated_prompt_count": 12,
+  "image_count_target": 12,
+  "kie_credits_estimate": 72,
+  "schema_types": ["WebApplication", "FAQPage", "BreadcrumbList"]
+}
