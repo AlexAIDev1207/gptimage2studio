@@ -3,6 +3,7 @@ import { getSessionCookie } from 'better-auth/cookies';
 import createIntlMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/core/i18n/config';
+import { envConfigs } from '@/config';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -42,8 +43,31 @@ function getLegacyPromptRedirect(pathWithoutLocale: string) {
   return null;
 }
 
+function isLocalOrPreviewHost(host: string) {
+  return (
+    /^localhost(:\d+)?$/.test(host) ||
+    /^127\.0\.0\.1(:\d+)?$/.test(host) ||
+    host.endsWith('.pages.dev') ||
+    host.endsWith('.workers.dev')
+  );
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const canonicalUrl = new URL(envConfigs.app_url);
+  const requestHost = request.nextUrl.host.toLowerCase();
+  const canonicalHost = canonicalUrl.host.toLowerCase();
+
+  if (
+    canonicalHost &&
+    requestHost !== canonicalHost &&
+    !isLocalOrPreviewHost(requestHost)
+  ) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.protocol = canonicalUrl.protocol;
+    redirectUrl.host = canonicalHost;
+    return NextResponse.redirect(redirectUrl, 301);
+  }
 
   // Extract locale from pathname
   const locale = pathname.split('/')[1];
