@@ -1,3 +1,19 @@
+# Project CLAUDE.md
+
+## 文档体系（按需加载）
+
+LLM 处理任务前先读 `docs/`：
+
+- 项目定位 → `docs/product.md`
+- 技术选型 → `docs/tech-stack.md`
+- 架构 → `docs/architecture.md`
+- 项目级约定 → 直接在本 CLAUDE.md 内（按需加 `## 项目约定` 段；不用 docs/conventions.md）
+- 决策历史 → `docs/decisions.md`（ADR 累加）
+- 业务模块 → `docs/features/<name>.md`
+- 其他可选：roadmap / design-system / seo / monetization / operations / content-strategy
+
+完整 routing 表 + 实际文件列表见 `docs/README.md`。
+
 # CLAUDE.md
 
 ## 项目概述
